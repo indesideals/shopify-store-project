@@ -214,6 +214,8 @@
                   {% assign product_title_lower = product.title | downcase %}
                   {% if product_title_lower contains 'brazilian' and product_title_lower contains 'bamboo' %}
                     Brazilian Lucky Bamboo Live Plant
+                  {% elsif product_title_lower contains 'multifunctional' and product_title_lower contains 'shoe' and product_title_lower contains 'cleaning' %}
+                    Liquid Shoe Cleaning Brush with Soap Dispenser
                   {% else %}
                     {{ product.title }}
                   {% endif %}
@@ -222,7 +224,11 @@
                 <!-- Product Rating -->
                 <div class="product-rating">
                   <div class="stars">
-                    {% if product.title contains 'Oil' or product.title contains 'Dispenser' %}
+                    {% if product_title_lower contains 'multifunctional' and product_title_lower contains 'shoe' and product_title_lower contains 'cleaning' %}
+                      <span class="star filled" style="color: #fbbf24;">★</span><span class="star filled" style="color: #fbbf24;">★</span><span class="star filled" style="color: #fbbf24;">★</span><span class="star filled" style="color: #fbbf24;">★</span><span class="star partial" style="color: #fbbf24;">★</span>
+                      <span class="rating-text">4.1 stars</span>
+                      <span class="reviews-text">(5942 reviews)</span>
+                    {% elsif product.title contains 'Oil' or product.title contains 'Dispenser' %}
                       <span class="star filled" style="color: #fbbf24;">★</span><span class="star filled" style="color: #fbbf24;">★</span><span class="star filled" style="color: #fbbf24;">★</span><span class="star filled" style="color: #fbbf24;">★</span><span class="star filled" style="color: #fbbf24;">★</span>
                       <span class="rating-text">4.6 stars</span>
                       <span class="reviews-text">(2453 reviews)</span>

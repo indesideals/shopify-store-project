@@ -20,6 +20,7 @@
   {% assign faqs = "What size sink does this fit?|Fits most standard kitchen sink drains.,How do I clean it?|Simply remove and rinse under running water.,Is it dishwasher safe?|Yes, it's dishwasher safe for easy cleaning." | split: "," %}
 
 {% elsif product.handle == 'multifunctional-liquid-shoe-cleaning-brush-with-soap-dispenser' %}
+  {% assign product_title = "Liquid Shoe Cleaning Brush with Soap Dispenser" %}
   {% assign product_rating = 4.1 %}
   {% assign product_review_count = 5942 %}
   {% assign product_description = "The ultimate 2-in-1 cleaning tool for shoes, kitchen, bathroom, and more! Say goodbye to messy cleaning routines – this brush comes with a built-in liquid soap dispenser so you can scrub and wash in one go. With dense bristles, ergonomic design, and wide applications, it's a must-have for every household." %}
@@ -46,7 +47,7 @@
     <!-- Product Info Section -->
     <div class="product-info-section">
       <!-- Product Name -->
-      <h1 class="product-title">{{ product.title }}</h1>
+      <h1 class="product-title">{% if product_title %}{{ product_title }}{% else %}{{ product.title }}{% endif %}</h1>
       
       <!-- Rating -->
       <div class="product-rating">
