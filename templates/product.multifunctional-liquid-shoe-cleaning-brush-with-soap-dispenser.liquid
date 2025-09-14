@@ -19,9 +19,17 @@
   {% assign how_to_use = "Place in sink drain,Press down to secure,Clean regularly,Remove and rinse as needed" | split: "," %}
   {% assign faqs = "What size sink does this fit?|Fits most standard kitchen sink drains.,How do I clean it?|Simply remove and rinse under running water.,Is it dishwasher safe?|Yes, it's dishwasher safe for easy cleaning." | split: "," %}
 
+{% elsif product.handle == 'multifunctional-liquid-shoe-cleaning-brush-with-soap-dispenser' %}
+  {% assign product_rating = 4.1 %}
+  {% assign product_review_count = 5942 %}
+  {% assign product_description = "The ultimate 2-in-1 cleaning tool for shoes, kitchen, bathroom, and more! Say goodbye to messy cleaning routines – this brush comes with a built-in liquid soap dispenser so you can scrub and wash in one go. With dense bristles, ergonomic design, and wide applications, it's a must-have for every household." %}
+  {% assign product_key_features = "Material: High-quality plastic body with soft yet firm bristles||Size: 17 cm × 6.5 cm × 4.5 cm – portable & handy||Liquid Outlet Button – Easy push-button release||Multi-purpose – Shoes 👟 | Kitchen 🍳 | Bathroom 🚿 | Car 🚗 | Tiles 🏠||No Mess Cleaning – No need to carry soap bottle separately" | split: "||" %}
+  {% assign how_to_use = "Open the top cap and fill with liquid soap/detergent||Close the cap and press the orange button to release soap||Scrub surfaces gently using the dense bristles||Rinse with water and hang to dry" | split: "||" %}
+  {% assign faqs = "Q1. Can I use it for shoes only?|👉 No, it's multipurpose – works on utensils, sinks, bathroom tiles, and car mats too.|Q2. Is the brush safe for delicate surfaces?|👉 Yes, the bristles are soft yet strong, perfect for shoes & kitchenware.|Q3. How much liquid does it hold?|👉 Enough for multiple cleaning sessions (around 50–60 ml).|Q4. Can I fill it with any type of soap?|👉 Yes! Dishwashing liquid, detergent, or even mild floor cleaner.|Q5. Is it reusable?|👉 Absolutely! Durable plastic ensures long-lasting use." | split: "|" %}
+  {% assign product_highlights = "Built-in Soap Dispenser – Just press & release soap while scrubbing|Durable & Dense Bristles – Deep cleaning without damaging surfaces|Ergonomic Handle – Comfortable grip for long cleaning sessions|Wide Use – Perfect for shoes, tiles, sinks, pans, utensils, car mats & more|Compact Design – Easy to store & hang with loop hook" | split: "|" %}
 {% else %}
-  {% assign product_rating = 4.5 %}
-  {% assign product_review_count = 1500 %}
+  {% assign product_rating = 4.1 %}
+  {% assign product_review_count = 5942 %}
   {% assign product_description = product.description %}
   {% assign product_key_features = "Premium quality materials,Easy to use and maintain,Durable and long-lasting,Perfect for daily use" | split: "," %}
   {% assign how_to_use = "Follow product instructions,Use as intended,Clean after use,Store properly" | split: "," %}
@@ -110,10 +118,35 @@
         </button>
         <div id="description" class="accordion-content active">
           <div class="description-content">
-            {{ product_description | replace: '\n\n', '<br><br>' | replace: '\n', '<br>' }}
+            <p>The ultimate 2-in-1 cleaning tool for shoes, kitchen, bathroom, and more! Say goodbye to messy cleaning routines – this brush comes with a built-in liquid soap dispenser so you can scrub and wash in one go. With dense bristles, ergonomic design, and wide applications, it's a must-have for every household.</p>
+            
+            <div class="product-highlights">
+              <h3>✨ Product Highlights</h3>
+              <ul class="highlights-list">
+                <li><span class="highlight-title">Built-in Soap Dispenser</span> – Just press & release soap while scrubbing.</li>
+                <li><span class="highlight-title">Durable & Dense Bristles</span> – Deep cleaning without damaging surfaces.</li>
+                <li><span class="highlight-title">Ergonomic Handle</span> – Comfortable grip for long cleaning sessions.</li>
+                <li><span class="highlight-title">Wide Use</span> – Perfect for shoes, tiles, sinks, pans, utensils, car mats & more.</li>
+                <li><span class="highlight-title">Compact Design</span> – Easy to store & hang with loop hook.</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
+    
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion('highlights')">
+        <span>Product Highlights</span>
+        <span class="accordion-icon">+</span>
+      </button>
+      <div id="highlights" class="accordion-content">
+        <ul class="highlights-accordion-list">
+          {% for highlight in product_highlights %}
+            <li>{{ highlight }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
     
     <div class="accordion">
       <button class="accordion-header" onclick="toggleAccordion('features')">
@@ -1598,6 +1631,57 @@
   margin-bottom: 0;
 }
 
+/* Product Highlights Styling */
+.product-highlights {
+  margin-top: 20px;
+  padding: 15px;
+  background: #f8fafc;
+  border-radius: 8px;
+  border-left: 4px solid #6b46c1;
+}
+
+.product-highlights h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 12px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.highlights-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.highlights-list li {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 10px;
+  padding: 8px 0;
+  position: relative;
+  padding-left: 25px;
+}
+
+.highlights-list li:before {
+  content: "✅";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  font-size: 14px;
+}
+
+.highlights-list li:last-child {
+  margin-bottom: 0;
+}
+
+.highlight-title {
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-right: 8px;
+  font-family: 'Poppins', sans-serif;
+}
+
 .features-list {
   list-style: none;
   padding: 0;
@@ -2553,6 +2637,38 @@
     align-items: center;
   }
 }
+/* Highlights Accordion List Styling */
+.highlights-accordion-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.highlights-accordion-list li {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  padding: 10px 0;
+  position: relative;
+  padding-left: 30px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #1a1a1a;
+  font-family: 'Poppins', sans-serif;
+}
+
+.highlights-accordion-list li:before {
+  content: "✅";
+  position: absolute;
+  left: 0;
+  top: 10px;
+  font-size: 16px;
+}
+
+.highlights-accordion-list li:last-child {
+  margin-bottom: 0;
+}
+
 </style>
 
 <script>
