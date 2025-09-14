@@ -1,0 +1,27 @@
+{% comment %}
+  Custom Money Format Snippet for INR
+  Ensures proper Indian Rupee symbol display
+  Usage: {% render 'money-format', amount: product.price %}
+{% endcomment %}
+
+{% assign formatted_amount = amount | money %}
+{% assign inr_symbol = '₹' %}
+
+{% comment %} Handle various currency formats and replace with INR symbol {% endcomment %}
+{% if formatted_amount contains 'Rs.' %}
+  {{ formatted_amount | replace: 'Rs.', inr_symbol }}
+{% elsif formatted_amount contains '₹' %}
+  {{ formatted_amount }}
+{% elsif formatted_amount contains 'INR' %}
+  {{ formatted_amount | replace: 'INR', inr_symbol }}
+{% elsif formatted_amount contains 'Rs ' %}
+  {{ formatted_amount | replace: 'Rs ', inr_symbol }}
+{% elsif formatted_amount contains 'RS.' %}
+  {{ formatted_amount | replace: 'RS.', inr_symbol }}
+{% elsif formatted_amount contains 'RS ' %}
+  {{ formatted_amount | replace: 'RS ', inr_symbol }}
+{% else %}
+  {% comment %} Fallback: add INR symbol if no currency symbol found {% endcomment %}
+  {% assign amount_only = amount | money_without_currency %}
+  {{ inr_symbol }}{{ amount_only }}
+{% endif %} 

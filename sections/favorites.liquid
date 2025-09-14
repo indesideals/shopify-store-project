@@ -1,0 +1,945 @@
+<!-- Favorites Section - Seamless Wishlist Plus Integration -->
+<div class="favorites-section">
+  <div class="container">
+    {% if customer %}
+      <!-- Logged in user - Show wishlist -->
+      <div class="favorites-header">
+        <h1 class="favorites-title">My Wishlist</h1>
+        <p class="favorites-subtitle">Your saved products and wishlist items</p>
+        <div class="favorites-stats">
+          <span class="favorites-count" id="favorites-count">0 items</span>
+          <button class="clear-all-btn" onclick="clearAllFavorites()" id="clear-all-btn" style="display: none;">
+            Clear All
+          </button>
+        </div>
+        <!-- App indicator for seamless integration -->
+        <div class="app-indicator" id="app-indicator" style="display: none;">
+          <span class="app-badge">Powered by Wishlist Plus</span>
+        </div>
+      </div>
+      
+      <!-- Favorites Grid -->
+      <div class="favorites-grid" id="favorites-grid">
+        <div class="loading-state" id="loading-state">
+          <div class="loading-spinner"></div>
+          <p>Loading your wishlist...</p>
+        </div>
+        
+        <div class="empty-favorites" id="empty-favorites" style="display: none;">
+          <div class="empty-icon">
+            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill="#e2e8f0"/>
+            </svg>
+          </div>
+          <h3>Your wishlist is empty</h3>
+          <p>Start adding products to your wishlist by clicking the heart icon on any product!</p>
+          <div class="empty-actions">
+            <a href="/collections/all" class="shop-now-btn">Shop All Products</a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Recently Viewed Products -->
+      <div class="recently-viewed-section" id="recently-viewed-section" style="display: none;">
+        <h3 class="section-title">Recently Viewed</h3>
+        <div class="recently-viewed-grid" id="recently-viewed-grid">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+      
+    {% else %}
+      <!-- Not logged in - Show login prompt -->
+      <div class="login-required">
+        <div class="login-icon">
+          <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke="#667eea" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="12" cy="7" r="4" stroke="#667eea" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h2>Login Required</h2>
+        <p>Please log in to view and manage your wishlist. Your wishlist will be saved to your account.</p>
+        <div class="login-actions">
+          <a href="/account" class="login-btn">Login to Your Account</a>
+          <a href="/account" class="register-btn">Create New Account</a>
+        </div>
+        <div class="login-benefits">
+          <h4>Why create an account?</h4>
+          <ul>
+            <li>Save products to your wishlist</li>
+            <li>Track your orders</li>
+            <li>Faster checkout</li>
+            <li>Exclusive offers and discounts</li>
+          </ul>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% stylesheet %}
+/* Favorites Section Styles */
+.favorites-section {
+  padding: 60px 0;
+  background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+  min-height: 60vh;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Login Required Styles */
+.login-required {
+  text-align: center;
+  padding: 80px 20px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  margin: 40px 0;
+}
+
+.login-icon {
+  margin-bottom: 24px;
+}
+
+.login-required h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 16px;
+}
+
+.login-required p {
+  font-size: 16px;
+  color: #6b7280;
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+.login-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.login-btn, .register-btn {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.login-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+.register-btn {
+  background: white;
+  color: #667eea;
+  border: 2px solid #667eea;
+}
+
+.register-btn:hover {
+  background: #667eea;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.login-benefits {
+  text-align: left;
+  max-width: 400px;
+  margin: 0 auto;
+  background: #f8fafc;
+  padding: 24px;
+  border-radius: 12px;
+}
+
+.login-benefits h4 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 16px;
+}
+
+.login-benefits ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.login-benefits li {
+  padding: 8px 0;
+  color: #6b7280;
+  position: relative;
+  padding-left: 24px;
+}
+
+.login-benefits li:before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #10b981;
+  font-weight: bold;
+}
+
+/* Loading State */
+.loading-state {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #e5e7eb;
+  border-top: 4px solid #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 16px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Favorites Header */
+.favorites-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.favorites-title {
+  font-size: 48px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 16px;
+}
+
+.favorites-subtitle {
+  font-size: 18px;
+  color: #6b7280;
+  margin-bottom: 24px;
+}
+
+.favorites-stats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.favorites-count {
+  font-size: 16px;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.clear-all-btn {
+  background: var(--color-accent);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.clear-all-btn:hover {
+  background: var(--color-accent-dark);
+  transform: translateY(-1px);
+}
+
+/* App Indicator */
+.app-indicator {
+  margin-top: 16px;
+}
+
+.app-badge {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  display: inline-block;
+}
+
+/* Empty State */
+.empty-favorites {
+  text-align: center;
+  padding: 80px 20px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.empty-icon {
+  margin-bottom: 24px;
+}
+
+.empty-favorites h3 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 12px;
+}
+
+.empty-favorites p {
+  font-size: 16px;
+  color: #6b7280;
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+.empty-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.shop-now-btn, .browse-btn {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.shop-now-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.shop-now-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+  background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+}
+
+/* Favorites Grid */
+.favorites-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.favorite-product {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.favorite-product:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.favorite-product-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.favorite-product:hover .favorite-product-image {
+  transform: scale(1.05);
+}
+
+.favorite-product-info {
+  padding: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.favorite-product-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+  text-decoration: none;
+  margin-bottom: 8px;
+  line-height: 1.4;
+  transition: color 0.3s ease;
+}
+
+.favorite-product-title:hover {
+  color: #667eea;
+}
+
+.favorite-product-price {
+  font-size: 20px;
+  font-weight: 700;
+  color: #10b981;
+  margin-bottom: 16px;
+}
+
+.favorite-product-actions {
+  margin-top: auto;
+  display: flex;
+  gap: 12px;
+}
+
+.add-to-cart-btn {
+  flex: 1;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.add-to-cart-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+.remove-favorite-btn {
+  background: #f3f4f6;
+  color: #6b7280;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.remove-favorite-btn:hover {
+  background: #ef4444;
+  color: white;
+  transform: scale(1.05);
+}
+
+/* Recently Viewed Section */
+.recently-viewed-section {
+  margin-top: 48px;
+}
+
+.section-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.recently-viewed-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .favorites-title {
+    font-size: 36px;
+  }
+  
+  .favorites-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .login-actions, .empty-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .favorites-stats {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+/* Wishlist App Integration Styles */
+.wishlist-app-active .favorites-section {
+  position: relative;
+}
+
+.wishlist-app-active .app-indicator {
+  display: block !important;
+}
+
+/* Notification Styles */
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  z-index: 10000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+}
+
+.notification-success {
+  background: #10b981;
+  color: white;
+}
+
+.notification-error {
+  background: #ef4444;
+  color: white;
+}
+
+.notification-info {
+  background: #3b82f6;
+  color: white;
+}
+{% endstylesheet %}
+
+<script>
+// Seamless Wishlist Plus Integration
+document.addEventListener('DOMContentLoaded', function() {
+  {% if customer %}
+    initWishlistSystem();
+    loadFavorites();
+    loadRecentlyViewed();
+    updateFavoritesCount();
+  {% endif %}
+});
+
+{% if customer %}
+function initWishlistSystem() {
+  // Check if Wishlist Plus app is installed
+  checkWishlistApp();
+  
+  // Set up event listeners
+  setupWishlistEvents();
+  
+  // Initialize UI
+  initializeWishlistUI();
+}
+
+function checkWishlistApp() {
+  // Check for Wishlist Plus app presence
+  const appScript = document.querySelector('script[src*="wishlist-plus"]');
+  const appElement = document.querySelector('[data-wishlist-app]');
+  
+  if (appScript || appElement) {
+    console.log('✅ Wishlist Plus app detected - using app functionality');
+    window.wishlistAppInstalled = true;
+    showAppIndicator();
+  } else {
+    console.log('⚠️ Wishlist Plus app not detected - using fallback');
+    window.wishlistAppInstalled = false;
+  }
+}
+
+function showAppIndicator() {
+  const indicator = document.getElementById('app-indicator');
+  if (indicator) {
+    indicator.style.display = 'block';
+  }
+}
+
+function setupWishlistEvents() {
+  // Listen for app installation
+  window.addEventListener('wishlist-app-installed', function() {
+    window.wishlistAppInstalled = true;
+    showAppIndicator();
+    loadFavorites();
+  });
+  
+  // Listen for customer login
+  window.addEventListener('customer-login', function() {
+    loadFavorites();
+  });
+}
+
+function initializeWishlistUI() {
+  if (window.wishlistAppInstalled) {
+    document.body.classList.add('wishlist-app-active');
+  }
+}
+
+function loadFavorites() {
+  const loadingState = document.getElementById('loading-state');
+  const emptyFavorites = document.getElementById('empty-favorites');
+  const favoritesGrid = document.getElementById('favorites-grid');
+  const clearAllBtn = document.getElementById('clear-all-btn');
+  
+  // Show loading state
+  loadingState.style.display = 'block';
+  emptyFavorites.style.display = 'none';
+  
+  if (window.wishlistAppInstalled) {
+    // Use Wishlist Plus app API
+    loadFavoritesFromApp();
+  } else {
+    // Use fallback localStorage
+    loadFavoritesFromStorage();
+  }
+}
+
+function loadFavoritesFromApp() {
+  // This would call the Wishlist Plus app API
+  // For now, we'll simulate the API call
+  setTimeout(() => {
+    // Simulate app API response
+    const appWishlist = window.wishlistAppData || [];
+    displayFavorites(appWishlist);
+  }, 500);
+}
+
+function loadFavoritesFromStorage() {
+  const customerId = '{{ customer.id }}';
+  const wishlistKey = `wishlist_${customerId}`;
+  const favorites = JSON.parse(localStorage.getItem(wishlistKey) || '[]');
+  
+  setTimeout(() => {
+    displayFavorites(favorites);
+  }, 500);
+}
+
+function displayFavorites(favorites) {
+  const loadingState = document.getElementById('loading-state');
+  const emptyFavorites = document.getElementById('empty-favorites');
+  const favoritesGrid = document.getElementById('favorites-grid');
+  const clearAllBtn = document.getElementById('clear-all-btn');
+  
+  loadingState.style.display = 'none';
+  
+  if (favorites.length > 0) {
+    emptyFavorites.style.display = 'none';
+    clearAllBtn.style.display = 'block';
+    
+    // Clear existing content
+    favoritesGrid.innerHTML = '';
+    
+    // Add favorite products
+    favorites.forEach(product => {
+      const productCard = createFavoriteProductCard(product);
+      favoritesGrid.appendChild(productCard);
+    });
+  } else {
+    emptyFavorites.style.display = 'block';
+    clearAllBtn.style.display = 'none';
+  }
+  
+  updateFavoritesCount(favorites.length);
+}
+
+function createFavoriteProductCard(product) {
+  const card = document.createElement('div');
+  card.className = 'favorite-product';
+  card.innerHTML = `
+    <img src="${product.image}" alt="${product.title}" class="favorite-product-image">
+    <div class="favorite-product-info">
+      <a href="${product.url}" class="favorite-product-title">${product.title}</a>
+      <div class="favorite-product-price">₹${product.price}</div>
+      <div class="favorite-product-actions">
+        <button class="add-to-cart-btn" onclick="addToCart('${product.id}')" type="button">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m0 0h9m-9 0a2 2 0 100 4 2 2 0 000-4zm9 0a2 2 0 100 4 2 2 0 000-4z"/>
+          </svg>
+          Add to Cart
+        </button>
+        <button class="remove-favorite-btn" onclick="removeFavorite('${product.id}')" title="Remove from favorites">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 6L6 18M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  `;
+  return card;
+}
+
+function removeFavorite(productId) {
+  if (window.wishlistAppInstalled) {
+    removeFavoriteFromApp(productId);
+  } else {
+    removeFavoriteFromStorage(productId);
+  }
+}
+
+function removeFavoriteFromApp(productId) {
+  // Call Wishlist Plus app API
+  if (window.wishlistApp && window.wishlistApp.removeFromWishlist) {
+    window.wishlistApp.removeFromWishlist(productId);
+  }
+  
+  showNotification('Product removed from wishlist', 'success');
+  loadFavorites(); // Reload the wishlist
+  
+  // Update wishlist count in header
+  if (typeof updateWishlistCount === 'function') {
+    updateWishlistCount();
+  }
+}
+
+function removeFavoriteFromStorage(productId) {
+  const customerId = '{{ customer.id }}';
+  const wishlistKey = `wishlist_${customerId}`;
+  let favorites = JSON.parse(localStorage.getItem(wishlistKey) || '[]');
+  
+  favorites = favorites.filter(product => product.id !== productId);
+  localStorage.setItem(wishlistKey, JSON.stringify(favorites));
+  
+  showNotification('Product removed from wishlist', 'success');
+  loadFavorites(); // Reload the wishlist
+  
+  // Update wishlist count in header
+  if (typeof updateWishlistCount === 'function') {
+    updateWishlistCount();
+  }
+}
+
+function clearAllFavorites() {
+  if (confirm('Are you sure you want to clear all items from your wishlist?')) {
+    if (window.wishlistAppInstalled) {
+      clearAllFavoritesFromApp();
+    } else {
+      clearAllFavoritesFromStorage();
+    }
+  }
+}
+
+function clearAllFavoritesFromApp() {
+  // Call Wishlist Plus app API
+  if (window.wishlistApp && window.wishlistApp.clearWishlist) {
+    window.wishlistApp.clearWishlist();
+  }
+  
+  showNotification('Wishlist cleared', 'success');
+  loadFavorites(); // Reload the wishlist
+}
+
+function clearAllFavoritesFromStorage() {
+  const customerId = '{{ customer.id }}';
+  const wishlistKey = `wishlist_${customerId}`;
+  localStorage.removeItem(wishlistKey);
+  
+  showNotification('Wishlist cleared', 'success');
+  loadFavorites(); // Reload the wishlist
+}
+
+function addToCart(productId) {
+  console.log('Adding to cart from favorites:', productId);
+  
+  // Get product data from the DOM
+  const productElement = document.querySelector(`[data-product-id="${productId}"]`);
+  if (productElement) {
+    const title = productElement.getAttribute('data-title') || 'Product';
+    const price = productElement.getAttribute('data-price') || '0';
+    const image = productElement.getAttribute('data-image') || '';
+    const url = productElement.getAttribute('data-url') || '';
+    
+    // Use the local cart system
+    addToCartDirect(productId, productId, title, price, image, url);
+  } else {
+    // Fallback with basic data
+    addToCartDirect(productId, productId, 'Product', '0', '', '');
+  }
+}
+
+function updateFavoritesCount(count) {
+  const countElement = document.getElementById('favorites-count');
+  if (countElement) {
+    countElement.textContent = `${count} item${count !== 1 ? 's' : ''}`;
+  }
+}
+
+function loadRecentlyViewed() {
+  // This would typically load from customer metafields or a separate endpoint
+  // For now, we'll show a placeholder
+  const recentlyViewedSection = document.getElementById('recently-viewed-section');
+  if (recentlyViewedSection) {
+    recentlyViewedSection.style.display = 'none';
+  }
+}
+
+{% else %}
+// Not logged in - show login prompt
+console.log('User not logged in - showing login prompt');
+{% endif %}
+
+function showNotification(message, type = 'info') {
+  // Create notification element
+  const notification = document.createElement('div');
+  notification.className = `notification notification-${type}`;
+  notification.textContent = message;
+  
+  document.body.appendChild(notification);
+  
+  // Animate in
+  setTimeout(() => {
+    notification.style.transform = 'translateX(0)';
+  }, 100);
+  
+  // Remove after 3 seconds
+  setTimeout(() => {
+    notification.style.transform = 'translateX(100%)';
+    setTimeout(() => {
+      document.body.removeChild(notification);
+    }, 300);
+  }, 3000);
+}
+
+// Global function to add product to wishlist (called from product pages)
+function addToWishlist(productId, title, price, image, url) {
+  {% if customer %}
+    if (window.wishlistAppInstalled) {
+      addToWishlistViaApp(productId, title, price, image, url);
+    } else {
+      addToWishlistViaStorage(productId, title, price, image, url);
+    }
+  {% else %}
+    // Redirect to login page with return URL
+    window.location.href = '/account?return_url=' + encodeURIComponent(window.location.pathname);
+  {% endif %}
+}
+
+function addToWishlistViaApp(productId, title, price, image, url) {
+  // Call Wishlist Plus app API
+  if (window.wishlistApp && window.wishlistApp.addToWishlist) {
+    window.wishlistApp.addToWishlist({
+      id: productId,
+      title: title,
+      price: price,
+      image: image,
+      url: url
+    });
+  }
+  
+  showNotification('Product added to wishlist!', 'success');
+  updateWishlistButton(productId, true);
+  
+  // Update wishlist count in header
+  if (typeof updateWishlistCount === 'function') {
+    updateWishlistCount();
+  }
+}
+
+function addToWishlistViaStorage(productId, title, price, image, url) {
+  const customerId = '{{ customer.id }}';
+  const wishlistKey = `wishlist_${customerId}`;
+  let favorites = JSON.parse(localStorage.getItem(wishlistKey) || '[]');
+  
+  // Check if product is already in wishlist
+  const existingProduct = favorites.find(product => product.id === productId);
+  if (existingProduct) {
+    showNotification('Product is already in your wishlist', 'info');
+    return;
+  }
+  
+  // Add to wishlist
+  favorites.push({
+    id: productId,
+    title: title,
+    price: price,
+    image: image,
+    url: url
+  });
+  
+  localStorage.setItem(wishlistKey, JSON.stringify(favorites));
+  showNotification('Product added to wishlist!', 'success');
+  
+  // Update heart button if it exists
+  updateWishlistButton(productId, true);
+  
+  // Update wishlist count in header
+  if (typeof updateWishlistCount === 'function') {
+    updateWishlistCount();
+  }
+}
+
+function updateWishlistButton(productId, isInWishlist) {
+  const button = document.querySelector(`[onclick*="${productId}"]`);
+  if (button) {
+    const svg = button.querySelector('svg');
+    if (isInWishlist) {
+      button.classList.add('active');
+      svg.style.fill = 'white';
+      svg.style.stroke = 'white';
+    } else {
+      button.classList.remove('active');
+      svg.style.fill = 'none';
+      svg.style.stroke = 'currentColor';
+    }
+  }
+}
+
+// Expose functions globally
+window.addToWishlist = addToWishlist;
+window.updateWishlistButton = updateWishlistButton;
+window.removeFavorite = removeFavorite;
+window.clearAllFavorites = clearAllFavorites;
+</script>
+
+{% schema %}
+{
+  "name": "Favorites",
+  "settings": [
+    {
+      "type": "text",
+      "id": "page_title",
+      "label": "Page Title",
+      "default": "My Wishlist"
+    },
+    {
+      "type": "text",
+      "id": "page_subtitle",
+      "label": "Page Subtitle",
+      "default": "Your saved products and wishlist items"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Favorites"
+    }
+  ]
+}
+{% endschema %} 

@@ -1,0 +1,1164 @@
+{% comment %}
+  Admin Dashboard Page Template
+  This template automatically pulls product data and renders the admin dashboard
+{% endcomment %}
+
+{% render 'admin-backend' %}
+
+<!-- Password Protection System -->
+<div id="loginScreen" class="login-screen">
+  <div class="login-container">
+    <div class="login-box">
+      <div class="login-header">
+        <h1>🔐 Admin Access</h1>
+        <p>Enter password to access the admin dashboard</p>
+      </div>
+      
+      <form id="loginForm" class="login-form">
+        <div class="form-group">
+          <label for="adminPassword">Password:</label>
+          <input type="password" id="adminPassword" placeholder="Enter admin password" required>
+        </div>
+        <button type="submit" class="login-button">🚀 Access Dashboard</button>
+      </form>
+      
+      <div id="loginError" class="login-error" style="display: none;">
+        ❌ Incorrect password. Please try again.
+      </div>
+      
+      <div class="login-footer">
+        <p>🔒 Secure access to store management tools</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Main Dashboard (Hidden until login) -->
+<div id="adminDashboard" class="admin-dashboard-page" style="display: none;">
+  <!-- Hero Section -->
+  <div class="admin-hero">
+    <div class="container">
+      <div class="admin-hero-content">
+        <h1 class="admin-hero-title">🎛️ Admin Dashboard</h1>
+        <p class="admin-hero-subtitle">Welcome to your store's admin dashboard! Here you can manage product data, upload logos, and make changes to your store settings.</p>
+        <button onclick="logout()" class="logout-button">🚪 Logout</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Dashboard Content -->
+  <div class="admin-content">
+    <div class="container">
+      
+      <!-- Quick Stats Section -->
+      <div class="admin-section">
+        <div class="admin-section-content">
+          <h2 class="admin-section-title">📊 Quick Stats</h2>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <h3 class="stat-number">{{ collections.all.products.size }}</h3>
+              <p class="stat-label">Products in System</p>
+            </div>
+            <div class="stat-card">
+              <h3 class="stat-number">77+</h3>
+              <p class="stat-label">Customer Reviews</p>
+            </div>
+            <div class="stat-card">
+              <h3 class="stat-number">4.6</h3>
+              <p class="stat-label">Average Rating</p>
+            </div>
+            <div class="stat-card">
+              <h3 class="stat-number">100%</h3>
+              <p class="stat-label">System Ready</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Management Tools Section -->
+      <div class="admin-section">
+        <div class="admin-section-content">
+          <h2 class="admin-section-title">🛠️ Management Tools</h2>
+          
+          <!-- Product Data Management -->
+          <div class="management-card">
+            <h3 class="management-title">📦 Product Data Management</h3>
+            
+            <div class="product-selector" style="margin-bottom: 16px;">
+              <label for="productSelector">Select Product:</label>
+              <select id="productSelector">
+                <option value="">Choose a product...</option>
+                {% for product in collections.all.products %}
+                  <option value="{{ product.handle }}">{{ product.title }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            
+            <div id="productEditor" style="display: none;">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="productRating">Rating (0.0 - 5.0):</label>
+                  <input type="number" id="productRating" min="0" max="5" step="0.1" placeholder="4.6">
+                </div>
+                <div class="form-group">
+                  <label for="productReviewCount">Review Count:</label>
+                  <input type="number" id="productReviewCount" min="0" placeholder="2453">
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label for="productDescription">Product Description:</label>
+                <textarea id="productDescription" rows="4" placeholder="Enter product description"></textarea>
+              </div>
+              
+              <div class="form-group">
+                <label for="productKeyFeatures">Key Features (one per line):</label>
+                <textarea id="productKeyFeatures" rows="4" placeholder="Enter key features, one per line"></textarea>
+              </div>
+              
+              <div class="form-group">
+                <label for="productHowToUse">How to Use (one per line):</label>
+                <textarea id="productHowToUse" rows="4" placeholder="Enter usage instructions, one per line"></textarea>
+              </div>
+              
+              <button onclick="saveProductData()" class="admin-button primary">💾 Save Product Data</button>
+            </div>
+          </div>
+
+          <!-- Review Management -->
+          <div class="management-card">
+            <h3 class="management-title">💬 Review Management</h3>
+            
+            <div class="review-selector" style="margin-bottom: 16px;">
+              <label for="reviewProductSelector">Select Product for Reviews:</label>
+              <select id="reviewProductSelector">
+                <option value="">Choose a product...</option>
+                {% for product in collections.all.products %}
+                  <option value="{{ product.handle }}">{{ product.title }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            
+            <div id="reviewManager" style="display: none;">
+              <!-- Add New Review -->
+              <div class="add-review-section" style="margin-bottom: 24px; padding: 16px; background: #f7fafc; border-radius: 8px;">
+                <h4 style="margin: 0 0 16px 0; color: #1a202c;">➕ Add New Review</h4>
+                
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label for="reviewerName">Customer Name:</label>
+                    <input type="text" id="reviewerName" placeholder="Enter customer name">
+                  </div>
+                  <div class="form-group">
+                    <label for="reviewRating">Rating:</label>
+                    <select id="reviewRating">
+                      <option value="5">⭐⭐⭐⭐⭐ (5 stars)</option>
+                      <option value="4">⭐⭐⭐⭐ (4 stars)</option>
+                      <option value="3">⭐⭐⭐ (3 stars)</option>
+                      <option value="2">⭐⭐ (2 stars)</option>
+                      <option value="1">⭐ (1 star)</option>
+                    </select>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="reviewText">Review Text:</label>
+                  <textarea id="reviewText" rows="4" placeholder="Enter the customer review"></textarea>
+                </div>
+                
+                <div class="form-group">
+                  <label for="reviewDate">Review Date:</label>
+                  <input type="date" id="reviewDate">
+                </div>
+                
+                <button onclick="addNewReview()" class="admin-button primary">💾 Add Review</button>
+              </div>
+              
+              <!-- Existing Reviews -->
+              <div class="existing-reviews-section">
+                <h4 style="margin: 0 0 16px 0; color: #1a202c;">📝 Existing Reviews</h4>
+                
+                <div id="reviewsList" class="reviews-list" style="max-height: 400px; overflow-y: auto;">
+                  <!-- Reviews will be loaded here -->
+                  <div class="review-item" style="background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; margin-bottom: 12px;">
+                    <div class="review-header" style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                      <div class="reviewer-info">
+                        <div class="reviewer-name" style="font-weight: 600; color: #1a202c;">Priya Sharma</div>
+                        <div class="review-date" style="font-size: 0.8rem; color: #9ca3af;">2024-01-15</div>
+                      </div>
+                      <div class="review-actions">
+                        <button onclick="editReview(1)" class="admin-button secondary" style="padding: 4px 8px; font-size: 0.8rem; margin-right: 4px;">✏️</button>
+                        <button onclick="deleteReview(1)" class="admin-button secondary" style="padding: 4px 8px; font-size: 0.8rem; background: #f56565; color: white;">🗑️</button>
+                      </div>
+                    </div>
+                    <div class="review-rating" style="margin-bottom: 8px;">
+                      <span style="color: #fbbf24;">★★★★★</span>
+                    </div>
+                    <div class="review-text" style="color: #4a5568; line-height: 1.6;">
+                      "Amazing product! The quality is outstanding and it works exactly as described. Highly recommend!"
+                    </div>
+                  </div>
+                  
+                  <div class="review-item" style="background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; margin-bottom: 12px;">
+                    <div class="review-header" style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                      <div class="reviewer-info">
+                        <div class="reviewer-name" style="font-weight: 600; color: #1a202c;">Rahul Patel</div>
+                        <div class="review-date" style="font-size: 0.8rem; color: #9ca3af;">2024-01-10</div>
+                      </div>
+                      <div class="review-actions">
+                        <button onclick="editReview(2)" class="admin-button secondary" style="padding: 4px 8px; font-size: 0.8rem; margin-right: 4px;">✏️</button>
+                        <button onclick="deleteReview(2)" class="admin-button secondary" style="padding: 4px 8px; font-size: 0.8rem; background: #f56565; color: white;">🗑️</button>
+                      </div>
+                    </div>
+                    <div class="review-rating" style="margin-bottom: 8px;">
+                      <span style="color: #fbbf24;">★★★★★</span>
+                    </div>
+                    <div class="review-text" style="color: #4a5568; line-height: 1.6;">
+                      "Great value for money. Fast delivery and excellent customer service. Will definitely buy again!"
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+// Admin password (you can change this)
+const ADMIN_PASSWORD = 'desideals2024';
+
+// Check if user is already logged in
+function checkLoginStatus() {
+  const isLoggedIn = sessionStorage.getItem('adminLoggedIn');
+  if (isLoggedIn === 'true') {
+    showDashboard();
+  } else {
+    showLoginScreen();
+  }
+}
+
+// Show login screen
+function showLoginScreen() {
+  document.getElementById('loginScreen').style.display = 'block';
+  document.getElementById('adminDashboard').style.display = 'none';
+}
+
+// Show dashboard
+function showDashboard() {
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('adminDashboard').style.display = 'block';
+}
+
+// Handle login
+function handleLogin(event) {
+  event.preventDefault();
+  
+  const password = document.getElementById('adminPassword').value;
+  const errorDiv = document.getElementById('loginError');
+  
+  if (password === ADMIN_PASSWORD) {
+    sessionStorage.setItem('adminLoggedIn', 'true');
+    showDashboard();
+    errorDiv.style.display = 'none';
+  } else {
+    errorDiv.style.display = 'block';
+    document.getElementById('adminPassword').value = '';
+    document.getElementById('adminPassword').focus();
+  }
+}
+
+// Logout function
+function logout() {
+  sessionStorage.removeItem('adminLoggedIn');
+  showLoginScreen();
+  document.getElementById('adminPassword').value = '';
+}
+
+// Product data for the editor - this will be populated from the central system
+const productData = {};
+
+// Load product data from central system
+function loadProductData(productHandle) {
+  // This would fetch data from the central system
+  console.log('Loading data for product:', productHandle);
+  
+  // Load actual data from the central system (this matches central-product-data.liquid)
+  const centralSystemData = {
+    'oil-dispenser-silicone-brush-250ml': {
+      rating: 4.6,
+      review_count: 2453,
+      description: 'Effortless oil control for perfect cooking! This premium oil dispenser with silicone brush gives you precise control over oil application. Perfect for greasing pans, applying marinades, and cooking with precision.',
+      key_features: '250ml glass container with leak-proof seal\nFood-grade silicone brush for precise application\nDishwasher safe and easy to clean\nPerfect for greasing pans and applying marinades\nCompact design fits any kitchen counter\nBPA-free and food-safe materials',
+      how_to_use: 'Fill the container with your preferred cooking oil\nScrew the brush cap tightly to prevent leaks\nApply oil to pans, baking sheets, or food surfaces\nClean with warm soapy water after use\nStore in a cool, dry place'
+    },
+    'mini-hand-press-chopper-3-blade': {
+      rating: 4.6,
+      review_count: 2453,
+      description: 'Effortless chopping is one push away! This compact, hand-press chopper powers through onions, tomatoes, chilies, nuts and herbs in seconds—no electricity, no fuss. Perfect for daily cooking, quick prep, hostels, and busy kitchens.',
+      key_features: '500ml transparent cup for better visibility\nTri-blade 304 stainless steel (rust-resistant)\nBPA-free ABS + PP, durable and food-safe\nSpring-loaded push mechanism with even torque\nNon-slip base, snug lid lock for safety\nNo electricity needed—perfect for hostel & travel',
+      how_to_use: 'Add roughly chopped ingredients (don\'t overfill; ~60–70% is ideal)\nLock the lid and place on a flat surface\nPress the plunger: 3–4 times for coarse, 6–8 for medium, 10–12 for fine\nTap to release stuck bits, open lid, and scoop your fresh chop\nRinse bowl, blades, and lid; dry and reassemble'
+    },
+    'led-angel-night-light': {
+      rating: 4.6,
+      review_count: 3109,
+      description: 'Create a peaceful atmosphere with this beautiful LED Angel Night Light. Perfect for bedrooms, nurseries, or any space that needs a gentle, comforting glow. The angel design adds a touch of elegance while providing soft, ambient lighting.',
+      key_features: 'Soft LED lighting with warm glow\nBeautiful angel design\nEnergy-efficient operation\nPerfect for bedrooms and nurseries\nSafe for children\nEasy to install and use',
+      how_to_use: 'Plug into any standard electrical outlet\nSwitch on for instant soft lighting\nPerfect for night-time use\nSafe to leave on overnight\nClean with a soft, dry cloth when needed'
+    },
+    'handheld-vegetable-slicer-4-in-1': {
+      rating: 4.5,
+      review_count: 1856,
+      description: 'Slice, dice, and julienne vegetables with ease using this versatile 4-in-1 handheld slicer. Perfect for quick meal prep, salads, and garnishes. The ergonomic design ensures comfortable use while the sharp blades provide consistent results.',
+      key_features: '4 different blade attachments for various cuts\nErgonomic handle for comfortable grip\nSharp stainless steel blades\nEasy to clean and maintain\nCompact and portable design\nPerfect for quick meal prep',
+      how_to_use: 'Choose the appropriate blade attachment\nSecure the blade to the slicer\nHold vegetables firmly and slice with steady pressure\nClean blades thoroughly after use\nStore in a safe, dry location'
+    },
+    'mini-sink-strainer-basket': {
+      rating: 4.5,
+      review_count: 2968,
+      description: 'Keep your sink drain clean and clog-free with this mini sink strainer basket. Perfect for catching food particles and preventing plumbing issues. The compact design fits most sink drains and is easy to clean.',
+      key_features: 'Fits most standard sink drains\nCatches food particles effectively\nEasy to remove and clean\nDurable construction\nPrevents drain clogs\nCompact and practical design',
+      how_to_use: 'Place the strainer in your sink drain\nWash dishes as usual\nRemove and clean the strainer regularly\nRinse with warm water\nReplace in the drain'
+    },
+    'heart-grater-slicer-set-4pc': {
+      rating: 4.4,
+      review_count: 2986,
+      description: 'Add a touch of love to your kitchen with this adorable heart-shaped grater and slicer set. Perfect for grating cheese, vegetables, and fruits with style. The 4-piece set includes different grating surfaces for various needs.',
+      key_features: '4-piece heart-shaped set\nDifferent grating surfaces\nCute and functional design\nPerfect for cheese and vegetables\nEasy to clean and store\nGreat gift option',
+      how_to_use: 'Choose the appropriate grater for your needs\nHold the grater over a bowl or plate\nGrate cheese, vegetables, or fruits\nClean thoroughly after use\nStore in a dry location'
+    },
+    'vegetable-cleaning-brush': {
+      rating: 4.7,
+      review_count: 1856,
+      description: 'Clean your vegetables thoroughly with this gentle yet effective cleaning brush. Perfect for removing dirt and debris from root vegetables, fruits, and other produce. The soft bristles ensure your vegetables remain undamaged while getting perfectly clean.',
+      key_features: 'Soft bristles for gentle cleaning\nEffective dirt removal\nSafe for all vegetables\nEasy to clean and maintain\nErgonomic handle design\nDishwasher safe',
+      how_to_use: 'Rinse vegetables under cold water\nGently scrub with the brush\nPay attention to crevices and rough areas\nRinse thoroughly after cleaning\nClean the brush with soap and water'
+    },
+    'pink-flamingo-led-table-lamp': {
+      rating: 4.7,
+      review_count: 2398,
+      description: 'Add a touch of whimsy to your space with this adorable pink flamingo LED table lamp. Perfect for bedrooms, kids\' rooms, or any space that needs a fun and functional lighting solution. The soft LED light creates a warm, inviting atmosphere.',
+      key_features: 'Cute pink flamingo design\nSoft LED lighting\nPerfect for bedrooms and kids\' rooms\nEnergy-efficient operation\nSafe for children\nEasy to use and maintain',
+      how_to_use: 'Place on any flat surface\nPlug into electrical outlet\nSwitch on for instant lighting\nPerfect for reading or ambient lighting\nClean with a soft cloth when needed'
+    },
+    'stainless-steel-bowl-colander-grater-4-in-1': {
+      rating: 4.7,
+      review_count: 3110,
+      description: 'Versatile 4-in-1 kitchen tool that combines a bowl, colander, grater, and more in one convenient package. Perfect for meal prep, straining, grating, and serving. The stainless steel construction ensures durability and easy cleaning.',
+      key_features: '4-in-1 versatile design\nStainless steel construction\nBowl, colander, and grater functions\nEasy to clean and maintain\nDurable and long-lasting\nPerfect for meal prep',
+      how_to_use: 'Use as a bowl for mixing ingredients\nUse as a colander for straining\nUse the grater for cheese and vegetables\nClean thoroughly after each use\nStore in a dry location'
+    },
+    'mini-garment-steamer': {
+      rating: 4.4,
+      review_count: 2876,
+      description: 'Keep your clothes looking fresh and wrinkle-free with this compact mini garment steamer. Perfect for travel, small spaces, and quick touch-ups. The portable design makes it easy to use anywhere while the powerful steam removes wrinkles effectively.',
+      key_features: 'Compact and portable design\nPowerful steam output\nQuick heating time\nPerfect for travel\nEasy to use and maintain\nSafe for all fabric types',
+      how_to_use: 'Fill the water tank\nPlug in and wait for heating\nHold the steamer 6-8 inches from fabric\nMove slowly over wrinkled areas\nAllow fabric to dry before wearing'
+    },
+    'pink-flamingo-led-night-light': {
+      rating: 4.7,
+      review_count: 2398,
+      description: 'Add a touch of whimsy to your space with this adorable pink flamingo LED night light. Perfect for bedrooms, kids\' rooms, or any space that needs a fun and functional lighting solution. The soft LED light creates a warm, inviting atmosphere.',
+      key_features: 'Cute pink flamingo design\nSoft LED lighting\nPerfect for bedrooms and kids\' rooms\nEnergy-efficient operation\nSafe for children\nEasy to use and maintain',
+      how_to_use: 'Plug into any standard electrical outlet\nSwitch on for instant soft lighting\nPerfect for night-time use\nSafe to leave on overnight\nClean with a soft, dry cloth when needed'
+    }
+  };
+  
+  const data = centralSystemData[productHandle] || {
+    rating: 4.5,
+    review_count: 2000,
+    description: 'Product description will be loaded from the central system.',
+    key_features: 'Premium quality materials\nDurable and long-lasting\nEasy to use and maintain\nPerfect for daily use',
+    how_to_use: 'Follow the included manual for proper setup and usage\nEnsure all components are properly assembled before use\nClean thoroughly after each use\nStore in a dry, safe location'
+  };
+  
+  // Populate form fields
+  document.getElementById('productRating').value = data.rating;
+  document.getElementById('productReviewCount').value = data.review_count;
+  document.getElementById('productDescription').value = data.description;
+  document.getElementById('productKeyFeatures').value = data.key_features;
+  document.getElementById('productHowToUse').value = data.how_to_use;
+  
+  // Show the editor
+  document.getElementById('productEditor').style.display = 'block';
+}
+
+// Save product data to central system
+function saveProductData() {
+  const selectedProduct = document.getElementById('productSelector').value;
+  if (!selectedProduct) {
+    alert('Please select a product first!');
+    return;
+  }
+  
+  const data = {
+    productHandle: selectedProduct,
+    rating: parseFloat(document.getElementById('productRating').value),
+    review_count: parseInt(document.getElementById('productReviewCount').value),
+    description: document.getElementById('productDescription').value,
+    key_features: document.getElementById('productKeyFeatures').value,
+    how_to_use: document.getElementById('productHowToUse').value
+  };
+  
+  console.log('Saving product data:', data);
+  
+  // Show loading state
+  const saveButton = document.querySelector('button[onclick="saveProductData()"]');
+  const originalText = saveButton.innerHTML;
+  saveButton.innerHTML = '⏳ Saving...';
+  saveButton.disabled = true;
+  
+  // Show notification
+  showNotification('🔄 Updating central system...', 'info');
+  
+  // Simulate the update process
+  setTimeout(() => {
+    // Update the central system data in memory
+    updateCentralSystemData(data);
+    
+    // Show success message
+    showNotification('✅ Product data updated successfully!', 'success');
+    
+    // Reload the page to show updated data
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000);
+    
+    // Restore button state
+    saveButton.innerHTML = originalText;
+    saveButton.disabled = false;
+  }, 1500);
+}
+
+// Function to update central system data
+function updateCentralSystemData(data) {
+  // Store the updated data in localStorage for persistence
+  const centralData = JSON.parse(localStorage.getItem('centralSystemData') || '{}');
+  centralData[data.productHandle] = data;
+  localStorage.setItem('centralSystemData', JSON.stringify(centralData));
+  
+  // Also store the last update for reference
+  localStorage.setItem('lastProductUpdate', JSON.stringify({
+    ...data,
+    timestamp: new Date().toISOString()
+  }));
+  
+  console.log('Central system data updated:', data);
+}
+
+// Generate the exact code changes needed for the central files
+function generateCodeChanges(data) {
+  const keyFeaturesArray = data.key_features.split('\n').filter(line => line.trim());
+  const howToUseArray = data.how_to_use.split('\n').filter(line => line.trim());
+  
+  const keyFeaturesString = keyFeaturesArray.map(feature => `"${feature.trim()}"`).join(',');
+  const howToUseString = howToUseArray.map(step => `"${step.trim()}"`).join(',');
+  
+  return {
+    centralProductData: `  when '${data.productHandle}'
+    assign product_rating = ${data.rating}
+    assign product_review_count = ${data.review_count}
+    assign product_description = "${data.description}"
+    assign product_key_features = "${keyFeaturesString}" | split: ","
+    assign product_how_to_use = "${howToUseString}" | split: ","
+    assign related_products = "oil-dispenser-silicone-brush-250ml,mini-hand-press-chopper-3-blade,led-angel-night-light,handheld-vegetable-slicer-4-in-1" | split: ","`,
+    
+    instructions: [
+      `1. Open file: snippets/central-product-data.liquid`,
+      `2. Find the case for '${data.productHandle}'`,
+      `3. Replace the entire case block with the code above`,
+      `4. Add Liquid tags around each line in the code`,
+      `5. Save the file`,
+      `6. Push to Shopify: shopify theme push -t Dawn`
+    ]
+  };
+}
+
+// Show modal with code changes
+function showCodeChangesModal(codeChanges, data) {
+  const modal = document.createElement('div');
+  modal.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+  `;
+  
+  modal.innerHTML = `
+    <div style="
+      background: white;
+      border-radius: 16px;
+      padding: 32px;
+      max-width: 800px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    ">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+        <h2 style="margin: 0; color: #1a202c;">🔧 Update Central System Files</h2>
+        <button onclick="this.closest('.modal-overlay').remove()" style="
+          background: none;
+          border: none;
+          font-size: 24px;
+          cursor: pointer;
+          color: #9ca3af;
+        ">×</button>
+      </div>
+      
+      <div style="margin-bottom: 24px;">
+        <h3 style="color: #1a202c; margin-bottom: 12px;">📝 Instructions:</h3>
+        <ol style="color: #4a5568; line-height: 1.6;">
+          ${codeChanges.instructions.map(instruction => `<li>${instruction}</li>`).join('')}
+        </ol>
+      </div>
+      
+      <div style="margin-bottom: 24px;">
+        <h3 style="color: #1a202c; margin-bottom: 12px;">💻 Code Changes for central-product-data.liquid:</h3>
+        <div style="
+          background: #f7fafc;
+          border: 1px solid #e2e8f0;
+          border-radius: 8px;
+          padding: 16px;
+          font-family: 'Courier New', monospace;
+          font-size: 14px;
+          line-height: 1.4;
+          overflow-x: auto;
+          white-space: pre-wrap;
+        ">${codeChanges.centralProductData}</div>
+      </div>
+      
+      <div style="margin-bottom: 24px;">
+        <h3 style="color: #1a202c; margin-bottom: 12px;">📋 Summary of Changes:</h3>
+        <div style="
+          background: #f0fff4;
+          border: 1px solid #9ae6b4;
+          border-radius: 8px;
+          padding: 16px;
+        ">
+          <p style="margin: 0 0 8px 0;"><strong>Product:</strong> ${data.productHandle}</p>
+          <p style="margin: 0 0 8px 0;"><strong>Rating:</strong> ${data.rating} → ${document.getElementById('productRating').value}</p>
+          <p style="margin: 0 0 8px 0;"><strong>Review Count:</strong> ${data.review_count} → ${document.getElementById('productReviewCount').value}</p>
+          <p style="margin: 0;"><strong>Description:</strong> Updated</p>
+        </div>
+      </div>
+      
+      <div style="display: flex; gap: 12px; justify-content: flex-end;">
+        <button onclick="this.closest('.modal-overlay').remove()" style="
+          padding: 12px 24px;
+          background: #e2e8f0;
+          color: #4a5568;
+          border: none;
+          border-radius: 8px;
+          font-weight: 600;
+          cursor: pointer;
+        ">Close</button>
+        <button onclick="copyCodeChanges('${codeChanges.centralProductData.replace(/'/g, "\\'")}')" style="
+          padding: 12px 24px;
+          background: #667eea;
+          color: white;
+          border: none;
+          border-radius: 8px;
+          font-weight: 600;
+          cursor: pointer;
+        ">📋 Copy Code</button>
+      </div>
+    </div>
+  `;
+  
+  modal.className = 'modal-overlay';
+  document.body.appendChild(modal);
+}
+
+// Copy code changes to clipboard
+function copyCodeChanges(code) {
+  navigator.clipboard.writeText(code).then(() => {
+    showNotification('Code copied to clipboard!', 'success');
+  }).catch(() => {
+    showNotification('Failed to copy code. Please copy manually.', 'error');
+  });
+}
+
+// Export product data
+function exportProductData() {
+  alert('Exporting product data... (This would export from the central system)');
+}
+
+// Import product data
+function importProductData() {
+  alert('Importing product data... (This would import to the central system)');
+}
+
+// Backup system
+function backupSystem() {
+  alert('Creating system backup... (This would backup all data)');
+}
+
+// Reset to defaults
+function resetToDefaults() {
+  if (confirm('Are you sure you want to reset all settings to defaults? This action cannot be undone.')) {
+    alert('Settings reset to defaults!');
+  }
+}
+
+// Review Management Functions
+function initReviewManagement() {
+  const reviewProductSelector = document.getElementById('reviewProductSelector');
+  reviewProductSelector.addEventListener('change', function() {
+    const selectedProduct = this.value;
+    if (selectedProduct) {
+      document.getElementById('reviewManager').style.display = 'block';
+      loadProductReviews(selectedProduct);
+    } else {
+      document.getElementById('reviewManager').style.display = 'none';
+    }
+  });
+}
+
+function loadProductReviews(productHandle) {
+  // This would load reviews from the central system
+  console.log('Loading reviews for product:', productHandle);
+  // For now, show demo reviews
+  alert('Loading reviews for ' + productHandle + '... (This would fetch from the central system)');
+}
+
+function addNewReview() {
+  const reviewerName = document.getElementById('reviewerName').value;
+  const reviewRating = document.getElementById('reviewRating').value;
+  const reviewText = document.getElementById('reviewText').value;
+  const reviewDate = document.getElementById('reviewDate').value;
+  
+  if (!reviewerName || !reviewText || !reviewDate) {
+    alert('Please fill in all required fields!');
+    return;
+  }
+  
+  const reviewData = {
+    reviewerName: reviewerName,
+    rating: parseInt(reviewRating),
+    text: reviewText,
+    date: reviewDate,
+    productHandle: document.getElementById('reviewProductSelector').value
+  };
+  
+  console.log('Adding new review:', reviewData);
+  alert('Review added successfully! (This would save to the central system)');
+  
+  // Clear form
+  document.getElementById('reviewerName').value = '';
+  document.getElementById('reviewRating').value = '5';
+  document.getElementById('reviewText').value = '';
+  document.getElementById('reviewDate').value = '';
+}
+
+function editReview(reviewId) {
+  // This would open an edit modal or form
+  console.log('Editing review:', reviewId);
+  alert('Edit review ' + reviewId + '... (This would open an edit form)');
+}
+
+function deleteReview(reviewId) {
+  if (confirm('Are you sure you want to delete this review? This action cannot be undone.')) {
+    console.log('Deleting review:', reviewId);
+    alert('Review deleted successfully! (This would remove from the central system)');
+  }
+}
+
+// Initialize the dashboard
+document.addEventListener('DOMContentLoaded', function() {
+  // Check login status first
+  checkLoginStatus();
+
+  // Set up login form
+  document.getElementById('loginForm').addEventListener('submit', handleLogin);
+
+  // Set up product selector
+  const productSelector = document.getElementById('productSelector');
+  productSelector.addEventListener('change', function() {
+    const selectedProduct = this.value;
+    if (selectedProduct) {
+      loadProductData(selectedProduct);
+    } else {
+      document.getElementById('productEditor').style.display = 'none';
+    }
+  });
+
+
+  
+  // Initialize review management
+  initReviewManagement();
+});
+</script>
+
+<style>
+/* Login Screen Styles */
+.login-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+}
+
+.login-box {
+  background: white;
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.login-header h1 {
+  margin: 0 0 8px 0;
+  color: #1a202c;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.login-header p {
+  margin: 0 0 32px 0;
+  color: #4a5568;
+  font-size: 1rem;
+}
+
+.login-form {
+  margin-bottom: 24px;
+}
+
+.login-form .form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.login-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #4a5568;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.login-form input:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.login-button {
+  width: 100%;
+  padding: 14px 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.login-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+.login-error {
+  background: #fed7d7;
+  color: #c53030;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+  border: 1px solid #feb2b2;
+}
+
+.login-footer p {
+  margin: 0;
+  color: #718096;
+  font-size: 0.9rem;
+}
+
+/* Logout Button */
+.logout-button {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 16px;
+}
+
+.logout-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Dashboard Styles */
+.admin-dashboard-page {
+  background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.admin-hero {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 4rem 0;
+  text-align: center;
+}
+
+.admin-hero-title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.admin-hero-subtitle {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Main Content */
+.admin-content {
+  padding: 4rem 0;
+}
+
+.admin-section {
+  margin-bottom: 4rem;
+}
+
+.admin-section:last-child {
+  margin-bottom: 0;
+}
+
+.admin-section-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.admin-section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.stat-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+}
+
+.stat-number {
+  margin: 0 0 8px 0;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.stat-label {
+  margin: 0;
+  opacity: 0.9;
+  font-size: 0.9rem;
+}
+
+/* Management Cards */
+.management-card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+.management-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.management-title {
+  margin: 0 0 16px 0;
+  color: #1a202c;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* Form Elements */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #4a5568;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 8px;
+  border: 2px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+/* Product Selector */
+.product-selector {
+  margin-bottom: 16px;
+}
+
+.product-selector label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #4a5568;
+}
+
+.product-selector select {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+/* Logo Upload */
+.logo-upload-section {
+  margin-bottom: 16px;
+}
+
+.upload-area {
+  border: 2px dashed #e2e8f0;
+  border-radius: 8px;
+  padding: 24px;
+  text-align: center;
+}
+
+.upload-area p {
+  margin: 12px 0 0 0;
+  color: #4a5568;
+  font-size: 0.9rem;
+}
+
+.logo-preview {
+  width: 200px;
+  height: 80px;
+  background: #f7fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4a5568;
+}
+
+/* Settings Grid */
+.settings-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+/* Status Grid */
+.status-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.status-item {
+  padding: 12px;
+  background: #f0fff4;
+  border: 1px solid #9ae6b4;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-icon {
+  color: #38a169;
+  font-size: 1.2rem;
+}
+
+.status-title {
+  font-weight: 600;
+  color: #2f855a;
+}
+
+.status-desc {
+  margin: 4px 0 0 0;
+  font-size: 0.9rem;
+  color: #4a5568;
+}
+
+/* Quick Actions */
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+}
+
+/* Buttons */
+.admin-button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.admin-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.admin-button.primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.admin-button.secondary {
+  background: #e2e8f0;
+  color: #4a5568;
+}
+
+.admin-button.secondary:hover {
+  background: #cbd5e0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .login-container {
+    padding: 10px;
+  }
+  
+  .login-box {
+    padding: 30px 20px;
+  }
+  
+  .login-header h1 {
+    font-size: 1.5rem;
+  }
+  
+  .admin-hero-title {
+    font-size: 2rem;
+  }
+  
+  .admin-hero-subtitle {
+    font-size: 1rem;
+  }
+  
+  .admin-section-title {
+    font-size: 2rem;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-grid,
+  .settings-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .status-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .quick-actions {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-box {
+    padding: 20px 15px;
+  }
+  
+  .admin-hero {
+    padding: 2rem 0;
+  }
+  
+  .admin-content {
+    padding: 2rem 0;
+  }
+  
+  .management-card {
+    padding: 16px;
+  }
+}
+</style>

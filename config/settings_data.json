@@ -1,0 +1,145 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "current": {
+    "logo": "shopify://shop_images/Desi_Deals_transperent_BG_Logo.png",
+    "color_primary": "#000000",
+    "color_secondary": "#ffffff",
+    "color_accent": "#ff6b35",
+    "type_header_font": "helvetica_n4",
+    "type_body_font": "helvetica_n4",
+    "page_width": 1200,
+    "sections": {
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "facebook_url": "https://www.facebook.com/people/Desi-Deals/61579363773141/",
+          "twitter_url": "https://x.com/DesidealsIn",
+          "youtube_url": "https://www.youtube.com/channel/UCIfIQKSvc2JEST9-RshTXaA",
+          "instagram_url": "https://www.instagram.com/desideals_in/"
+        }
+      },
+      "hero-banner": {
+        "type": "hero-banner",
+        "settings": {
+          "hero_image_1": "shopify://shop_images/ONE_STOP_For_all_HOME_ESSENTIALS_5.png",
+          "hero_link_1": "https://desideals.app/collections/all",
+          "hero_link_text_1": "",
+          "hero_link_2": "https://desideals.app/collections/all",
+          "hero_link_text_2": "",
+          "hero_link_3": "https://desideals.app/collections/all",
+          "hero_link_text_3": "",
+          "hero_link_4": "https://desideals.app/collections/all",
+          "hero_link_text_4": "",
+          "hero_image_1_mobile": "shopify://shop_images/ONE_STOP_For_all_HOME_ESSENTIALS_5.png",
+          "slide_duration": 4,
+          "callout_subtitle": "🌟 PREMIUM QUALITY",
+          "callout_title": "Discover Amazing Products at Unbeatable Prices",
+          "icon_1_text": "Fast Shipping",
+          "icon_2_text": "Quality\nAssured",
+          "icon_3_text": "Cash on\nDelivery"
+        }
+      },
+      "best-sellers": {
+        "type": "best-sellers",
+        "settings": {
+          "callout_title": "Shop Our Best Sellers",
+          "show_stock_indicators": true,
+          "product_1": "vegetable-cleaning-brush",
+          "stock_text_1": "BEST SELLER",
+          "rating_1": 4.7,
+          "review_count_1": 3847,
+          "product_2": "brazilian-lucky-bamboo-live-plant-pack-of-1",
+          "stock_text_2": "Best Seller",
+          "rating_2": 4.5,
+          "review_count_2": 5938,
+          "product_3": "shri-yantra-gomti-chakra-laxmi-pyramid",
+          "stock_text_3": "TRENDING TODAY",
+          "rating_3": 4.8,
+          "review_count_3": 3292,
+          "product_4": "pink-flamingo-led-night-light",
+          "stock_text_4": "HOT DEAL",
+          "rating_4": 4.6,
+          "review_count_4": 4567
+        }
+      },
+      "trending-products": {
+        "type": "trending-products",
+        "settings": {
+          "section_title": "Today's Trending Products",
+          "section_subtitle": "Most sold products today - Add to cart directly!",
+          "featured_product": "kitchen-sink-strainer-basket",
+          "love_text": "LOVED BY OUR CUSTOMERS",
+          "shipping_text": "Shipping and taxes included.",
+          "manual_rating": 4.6,
+          "manual_review_count": 2453,
+          "show_badge": true,
+          "badge_text": "🔥 HOT",
+          "product_details": "Premium quality product with durable construction. Made from high-grade materials for long-lasting performance.",
+          "shipping_info": "Free shipping above ₹299. Delivery: 3-5 days. Express available.",
+          "how_to_use": "Follow included manual. Ensure proper setup for best results."
+        }
+      },
+      "customer-testimonials": {
+        "type": "customer-testimonials",
+        "settings": {
+          "section_title": "Real Customers, Real Reviews",
+          "section_subtitle": "See what our customers are saying about their shopping experience",
+          "testimonial_1_image": "shopify://shop_images/amitav-hira-6e3Zbp3ADOY-unsplash.jpg",
+          "testimonial_1_name": "Rajesh Kumar",
+          "testimonial_1_location": "Delhi, NCR",
+          "testimonial_1_text": "The product quality exceeded my expectations! The fabric feels premium and the fit is perfect. Delivery was super fast and the packaging was excellent. Will definitely shop here again!",
+          "testimonial_1_rating": 5,
+          "testimonial_2_image": "shopify://shop_images/ins-vikrant-BQ6syrQ0yYY-unsplash.jpg",
+          "testimonial_2_name": "Anjali Patel",
+          "testimonial_2_location": "Ahmedabad, Gujarat",
+          "testimonial_2_text": "Amazing customer service! When I had a question about sizing, they responded within minutes. The return process was hassle-free and they even helped me find the perfect alternative. Highly recommend!",
+          "testimonial_2_rating": 5,
+          "testimonial_3_image": "shopify://shop_images/dollar-gill-X0iNZ0UZIrI-unsplash.jpg",
+          "testimonial_3_name": "Amit Singh",
+          "testimonial_3_location": "Pune, Maharashtra",
+          "testimonial_3_text": "Best online shopping experience ever! The website is so intuitive and the search filters are amazing. Found exactly what I was looking for in seconds. Order tracking kept me updated every step!",
+          "testimonial_3_rating": 5,
+          "testimonial_4_image": "shopify://shop_images/ins-vikrant-CJQpmfO5BJk-unsplash.jpg",
+          "testimonial_4_name": "Meera Reddy",
+          "testimonial_4_location": "Hyderabad, Telangana",
+          "testimonial_4_text": "The payment options are fantastic! I love that they accept all major cards and UPI. The checkout process was smooth and secure. Plus, they sent me a discount code for my next purchase!",
+          "testimonial_4_rating": 5,
+          "testimonial_5_image": "shopify://shop_images/himanshu-dewangan-k9tUQNeOfx0-unsplash.jpg",
+          "testimonial_5_name": "Vikram Malhotra",
+          "testimonial_5_location": "Bangalore, Karnataka",
+          "testimonial_5_text": "Incredible value for money! The products are priced competitively but the quality is premium. I've compared with other sites and this is definitely the best deal. My friends are now shopping here too!",
+          "testimonial_5_rating": 5,
+          "testimonial_6_image": "shopify://shop_images/ins-vikrant-cNAYKqCcxdg-unsplash.jpg",
+          "testimonial_6_name": "Priya Sharma",
+          "testimonial_6_location": "Mumbai, Maharashtra",
+          "testimonial_6_text": "The mobile app is brilliant! I can shop on the go and the notifications are perfect. When my order was delayed, they proactively reached out with updates. That's real customer care!",
+          "testimonial_6_rating": 5,
+          "testimonial_7_image": "shopify://shop_images/naim-ahmed-8BcVHmAHtlw-unsplash.jpg",
+          "testimonial_7_name": "Suresh Kumar",
+          "testimonial_7_location": "Chennai, Tamil Nadu",
+          "testimonial_7_text": "Fastest delivery I've ever experienced! Ordered in the morning and received by evening. The packaging was eco-friendly and the product was in perfect condition. This is how online shopping should be!",
+          "testimonial_7_rating": 5,
+          "testimonial_8_image": "shopify://shop_images/ravi-sharma-e0CldfN99pM-unsplash.jpg",
+          "testimonial_8_name": "Kavya Iyer",
+          "testimonial_8_location": "Kochi, Kerala",
+          "testimonial_8_text": "The product recommendations are spot-on! They suggested items that perfectly matched my style. The size guide was accurate and the color options are exactly as shown. Love shopping here!",
+          "testimonial_8_rating": 5,
+          "testimonial_9_image": "shopify://shop_images/amitav-hira-EtsLfXeia7Q-unsplash.jpg",
+          "testimonial_9_name": "Rahul Verma",
+          "testimonial_9_location": "Lucknow, Uttar Pradesh",
+          "testimonial_9_text": "Outstanding after-sales support! When I had an issue with my order, they resolved it immediately and even offered a discount on my next purchase. This level of service is rare these days!",
+          "testimonial_9_rating": 5
+        }
+      }
+    },
+    "content_for_index": []
+  }
+}

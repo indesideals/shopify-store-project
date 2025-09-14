@@ -1,0 +1,1349 @@
+<!-- Customer Testimonials Section -->
+<div class="testimonials-section">
+  <div class="container">
+    <!-- Section Header -->
+    <div class="testimonials-header">
+      <h2 class="testimonials-title">{{ section.settings.section_title | default: "Real Customers, Real Reviews" }}</h2>
+      <p class="testimonials-subtitle">{{ section.settings.section_subtitle | default: "See what our customers are saying about their shopping experience" }}</p>
+    </div>
+
+    <!-- Testimonials Carousel -->
+    <div class="testimonials-carousel">
+      <!-- Testimonials Container -->
+      <div class="testimonials-container">
+        <!-- Testimonial 1 -->
+        <div class="testimonial-card" data-slide="0">
+          <div class="testimonial-rating">
+            <div class="stars">
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+            </div>
+          </div>
+          <div class="testimonial-text">
+            "The kitchen sink drain strainer is absolutely amazing! It's made of high-quality stainless steel and fits perfectly. No more clogged drains! The website was so easy to navigate and the UPI payment was super convenient. Love supporting Indian entrepreneurs!"
+          </div>
+          <div class="testimonial-author">
+            <div class="author-image">
+              {% if section.settings.testimonial_1_image %}
+                <img src="{{ section.settings.testimonial_1_image | image_url: width: 100 }}" alt="{{ section.settings.testimonial_1_name }}">
+              {% else %}
+                <div class="author-placeholder">R</div>
+              {% endif %}
+            </div>
+            <div class="author-info">
+              <div class="author-name">{{ section.settings.testimonial_1_name | default: "Rajesh Kumar" }}</div>
+              <div class="author-location">{{ section.settings.testimonial_1_location | default: "Delhi, NCR" }}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="testimonial-card" data-slide="1">
+          <div class="testimonial-rating">
+            <div class="stars">
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+            </div>
+          </div>
+          <div class="testimonial-text">
+            "Incredible customer service! When I had questions about the Easy-Press kitchen sink installation, they responded within minutes. The support team was so helpful and knowledgeable. The return process was hassle-free. Highly recommend this Indian brand!"
+          </div>
+          <div class="testimonial-author">
+            <div class="author-image">
+              {% if section.settings.testimonial_2_image %}
+                <img src="{{ section.settings.testimonial_2_image | image_url: width: 100 }}" alt="{{ section.settings.testimonial_2_name }}">
+              {% else %}
+                <div class="author-placeholder">A</div>
+              {% endif %}
+            </div>
+            <div class="author-info">
+              <div class="author-name">{{ section.settings.testimonial_2_name | default: "Anjali Patel" }}</div>
+              <div class="author-location">{{ section.settings.testimonial_2_location | default: "Ahmedabad, Gujarat" }}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="testimonial-card" data-slide="2">
+          <div class="testimonial-rating">
+            <div class="stars">
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+            </div>
+          </div>
+          <div class="testimonial-text">
+            "Best online shopping experience ever! The website is so intuitive and the search filters are amazing. Found the perfect kitchen accessories in seconds. Order tracking kept me updated every step! The UPI payment option made checkout super smooth."
+          </div>
+          <div class="testimonial-author">
+            <div class="author-image">
+              {% if section.settings.testimonial_3_image %}
+                <img src="{{ section.settings.testimonial_3_image | image_url: width: 100 }}" alt="{{ section.settings.testimonial_3_name }}">
+              {% else %}
+                <div class="author-placeholder">A</div>
+              {% endif %}
+            </div>
+            <div class="author-info">
+              <div class="author-name">{{ section.settings.testimonial_3_name | default: "Amit Singh" }}</div>
+              <div class="author-location">{{ section.settings.testimonial_3_location | default: "Pune, Maharashtra" }}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 4 -->
+        <div class="testimonial-card" data-slide="3">
+          <div class="testimonial-rating">
+            <div class="stars">
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+            </div>
+          </div>
+          <div class="testimonial-text">
+            "The payment options are fantastic! I love that they accept UPI, cards, and all major payment methods. The checkout process was smooth and secure. Plus, they sent me a discount code for my next purchase! Great to support Indian entrepreneurs."
+          </div>
+          <div class="testimonial-author">
+            <div class="author-image">
+              {% if section.settings.testimonial_4_image %}
+                <img src="{{ section.settings.testimonial_4_image | image_url: width: 100 }}" alt="{{ section.settings.testimonial_4_name }}">
+              {% else %}
+                <div class="author-placeholder">M</div>
+              {% endif %}
+            </div>
+            <div class="author-info">
+              <div class="author-name">{{ section.settings.testimonial_4_name | default: "Meera Reddy" }}</div>
+              <div class="author-location">{{ section.settings.testimonial_4_location | default: "Hyderabad, Telangana" }}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 5 -->
+        <div class="testimonial-card" data-slide="4">
+          <div class="testimonial-rating">
+            <div class="stars">
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+            </div>
+          </div>
+          <div class="testimonial-text">
+            "Incredible value for money! The kitchen products are priced competitively but the quality is premium. I've compared with other sites and this is definitely the best deal. The stainless steel quality is excellent. My friends are now shopping here too!"
+          </div>
+          <div class="testimonial-author">
+            <div class="author-image">
+              {% if section.settings.testimonial_5_image %}
+                <img src="{{ section.settings.testimonial_5_image | image_url: width: 100 }}" alt="{{ section.settings.testimonial_5_name }}">
+              {% else %}
+                <div class="author-placeholder">V</div>
+              {% endif %}
+            </div>
+            <div class="author-info">
+              <div class="author-name">{{ section.settings.testimonial_5_name | default: "Vikram Malhotra" }}</div>
+              <div class="author-location">{{ section.settings.testimonial_5_location | default: "Bangalore, Karnataka" }}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 6 -->
+        <div class="testimonial-card" data-slide="5">
+          <div class="testimonial-rating">
+            <div class="stars">
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+            </div>
+          </div>
+          <div class="testimonial-text">
+            "The website is brilliant! I can shop easily and the notifications are perfect. When my order was delayed, they proactively reached out with updates. That's real customer care! Love supporting Indian businesses."
+          </div>
+          <div class="testimonial-author">
+            <div class="author-image">
+              {% if section.settings.testimonial_6_image %}
+                <img src="{{ section.settings.testimonial_6_image | image_url: width: 100 }}" alt="{{ section.settings.testimonial_6_name }}">
+              {% else %}
+                <div class="author-placeholder">P</div>
+              {% endif %}
+            </div>
+            <div class="author-info">
+              <div class="author-name">{{ section.settings.testimonial_6_name | default: "Priya Sharma" }}</div>
+              <div class="author-location">{{ section.settings.testimonial_6_location | default: "Mumbai, Maharashtra" }}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 7 -->
+        <div class="testimonial-card" data-slide="6">
+          <div class="testimonial-rating">
+            <div class="stars">
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+            </div>
+          </div>
+          <div class="testimonial-text">
+            "Fastest delivery I've ever experienced! Ordered the kitchen sink accessories in the morning and received by evening. The packaging was eco-friendly and the products were in perfect condition. This is how online shopping should be!"
+          </div>
+          <div class="testimonial-author">
+            <div class="author-image">
+              {% if section.settings.testimonial_7_image %}
+                <img src="{{ section.settings.testimonial_7_image | image_url: width: 100 }}" alt="{{ section.settings.testimonial_7_name }}">
+              {% else %}
+                <div class="author-placeholder">S</div>
+              {% endif %}
+            </div>
+            <div class="author-info">
+              <div class="author-name">{{ section.settings.testimonial_7_name | default: "Suresh Kumar" }}</div>
+              <div class="author-location">{{ section.settings.testimonial_7_location | default: "Chennai, Tamil Nadu" }}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 8 -->
+        <div class="testimonial-card" data-slide="7">
+          <div class="testimonial-rating">
+            <div class="stars">
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+            </div>
+          </div>
+          <div class="testimonial-text">
+            "The product recommendations are spot-on! They suggested kitchen accessories that perfectly matched my needs. The product descriptions were accurate and the quality is exactly as shown. Love shopping here! Great Indian brand."
+          </div>
+          <div class="testimonial-author">
+            <div class="author-image">
+              {% if section.settings.testimonial_8_image %}
+                <img src="{{ section.settings.testimonial_8_image | image_url: width: 100 }}" alt="{{ section.settings.testimonial_8_name }}">
+              {% else %}
+                <div class="author-placeholder">K</div>
+              {% endif %}
+            </div>
+            <div class="author-info">
+              <div class="author-name">{{ section.settings.testimonial_8_name | default: "Kavya Iyer" }}</div>
+              <div class="author-location">{{ section.settings.testimonial_8_location | default: "Kochi, Kerala" }}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 9 -->
+        <div class="testimonial-card" data-slide="8">
+          <div class="testimonial-rating">
+            <div class="stars">
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+            </div>
+          </div>
+          <div class="testimonial-text">
+            "Outstanding after-sales support! When I had an issue with my kitchen sink order, they resolved it immediately and even offered a discount on my next purchase. This level of service is rare these days! Proud to support Indian entrepreneurs."
+          </div>
+          <div class="testimonial-author">
+            <div class="author-image">
+              {% if section.settings.testimonial_9_image %}
+                <img src="{{ section.settings.testimonial_9_image | image_url: width: 100 }}" alt="{{ section.settings.testimonial_9_name }}">
+              {% else %}
+                <div class="author-placeholder">R</div>
+              {% endif %}
+            </div>
+            <div class="author-info">
+              <div class="author-name">{{ section.settings.testimonial_9_name | default: "Rahul Verma" }}</div>
+              <div class="author-location">{{ section.settings.testimonial_9_location | default: "Lucknow, Uttar Pradesh" }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Dots and Arrows -->
+      <div class="testimonial-navigation">
+        <button class="testimonial-carousel-nav testimonial-prev-btn" onclick="testimonialChangeSlide(-1)" aria-label="Previous testimonials">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        
+        <div class="testimonial-dots">
+          <button class="testimonial-dot active" onclick="testimonialGoToSlide(0)"></button>
+          <button class="testimonial-dot" onclick="testimonialGoToSlide(1)"></button>
+          <button class="testimonial-dot" onclick="testimonialGoToSlide(2)"></button>
+        </div>
+        
+        <button class="testimonial-carousel-nav testimonial-next-btn" onclick="testimonialChangeSlide(1)" aria-label="Next testimonials">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+.testimonials-section {
+  padding: 24px 0 0 0;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 0 !important;
+  margin-top: 0 !important;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.testimonials-header {
+  text-align: center !important;
+  margin-bottom: 30px !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.testimonials-title {
+  font-size: 2rem !important;
+  font-weight: 800 !important;
+  color: #1a202c !important;
+  margin-bottom: 12px !important;
+  text-align: center !important;
+  display: block !important;
+  letter-spacing: -0.5px !important;
+  text-transform: uppercase !important;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+.testimonials-subtitle {
+  font-size: 0.9rem; /* Reduced from 1rem */
+  color: #4a5568;
+  font-weight: 400;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.testimonials-carousel {
+  position: relative;
+  overflow: visible;
+  padding: 6px 0; /* Reduced from 10px */
+}
+
+.testimonial-carousel-nav {
+  position: relative;
+  background: white;
+  border-radius: 50%;
+  width: 24px !important;
+  height: 24px !important;
+  min-width: 24px !important;
+  min-height: 24px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  z-index: 10;
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+}
+
+.testimonial-carousel-nav:hover {
+  background-color: #f7fafc;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-color: #6366f1;
+  transform: scale(1.1);
+}
+
+.testimonial-carousel-nav svg {
+  width: 16px;
+  height: 16px;
+  color: #4a5568;
+}
+
+.testimonial-prev-btn {
+  left: -100px !important;
+}
+
+.testimonial-next-btn {
+  right: -100px !important;
+}
+
+.testimonials-container {
+  display: flex;
+  gap: 20px;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 15px; /* Reduced from 20px */
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+.testimonial-card {
+  flex: 0 0 350px;
+  background: white;
+  border-radius: 16px;
+  padding: 20px; /* Reduced from 30px */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(99, 102, 241, 0.1);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 144px; /* Reduced from 240px (40% reduction) */
+  margin: 0;
+}
+
+.testimonial-card::before {
+  content: '"';
+  position: absolute;
+  top: 12px; /* Reduced from 20px */
+  right: 18px; /* Reduced from 25px */
+  font-size: 2.2rem; /* Reduced from 3rem */
+  color: #e2e8f0;
+  font-family: 'Poppins', sans-serif;
+  line-height: 1;
+  opacity: 0.6;
+}
+
+.testimonial-card:hover {
+  box-shadow: 0 12px 32px rgba(102, 126, 234, 0.12);
+  border-color: rgba(102, 126, 234, 0.15);
+}
+
+.testimonial-rating {
+  margin-bottom: 12px; /* Reduced from 18px */
+}
+
+.stars {
+  display: flex;
+  gap: 3px;
+}
+
+.star {
+  font-size: 16px; /* Reduced from 18px */
+  color: #6366f1;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.star.filled {
+  color: #6366f1;
+}
+
+.testimonial-text {
+  font-size: 0.95rem; /* Reduced from 1.05rem */
+  line-height: 1.6; /* Reduced from 1.7 */
+  color: #2d3748;
+  margin-bottom: 15px; /* Reduced from 25px */
+  font-style: italic;
+  flex-grow: 1;
+  font-weight: 400;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* Reduced from 15px */
+  margin-top: auto;
+}
+
+.author-image {
+  width: 40px; /* Reduced from 50px */
+  height: 40px; /* Reduced from 50px */
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 2px solid rgba(99, 102, 241, 0.1);
+}
+
+.author-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.author-placeholder {
+  width: 100%;
+  height: 100%;
+  background: var(--color-gradient-primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px; /* Reduced from 22px */
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.author-info {
+  flex-grow: 1;
+}
+
+.author-name {
+  font-size: 1rem; /* Reduced from 1.1rem */
+  font-weight: 600;
+  color: #1a202c;
+  margin: 0 0 3px 0; /* Reduced from 4px */
+}
+
+.author-location {
+  font-size: 0.85rem; /* Reduced from 0.9rem */
+  color: #718096;
+  margin: 0;
+  font-weight: 400;
+}
+
+  .testimonial-navigation {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 15px !important;
+  margin-top: 20px !important;
+  position: relative !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.testimonial-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  position: relative;
+}
+
+.testimonial-dot {
+  width: 12px !important;
+  height: 12px !important;
+  min-width: 12px !important;
+  min-height: 12px !important;
+  border-radius: 50%;
+  background-color: rgba(226, 232, 240, 0.6);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  margin: 0 4px;
+  padding: 0 !important;
+}
+
+.testimonial-dot::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 50%;
+  transform: scale(0);
+  transition: transform 0.3s ease;
+}
+
+.testimonial-dot:hover {
+  background-color: rgba(102, 126, 234, 0.3);
+  transform: scale(1.2);
+}
+
+.testimonial-dot.active {
+  background-color: transparent;
+  transform: scale(1.3);
+  box-shadow: 0 0 8px rgba(102, 126, 234, 0.4);
+}
+
+.testimonial-dot.active::before {
+  transform: scale(1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .testimonials-section {
+    padding: 18px 0; /* Reduced from 30px */
+  }
+  
+  .container {
+    padding: 0 15px;
+  }
+  
+  .testimonials-title {
+    font-size: 1.5rem !important;
+    margin-bottom: 8px !important;
+    color: #1a202c !important;
+    text-align: center !important;
+    display: block !important;
+  }
+  
+  .testimonials-subtitle {
+    font-size: 0.9rem !important;
+    color: #4a5568 !important;
+    text-align: center !important;
+    display: block !important;
+    margin-bottom: 16px !important;
+  }
+  
+  .testimonials-carousel {
+    padding: 3px 0; /* Reduced from 5px */
+  }
+
+  .testimonial-carousel-nav {
+    width: 40px;
+    height: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.9) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+    z-index: 10;
+  }
+
+  .testimonial-carousel-nav:hover {
+    transform: translateY(-50%) scale(1.1);
+    background: rgba(255, 255, 255, 1) !important;
+  }
+
+  .testimonial-carousel-nav svg {
+    width: 16px;
+    height: 16px;
+    color: #6366f1 !important;
+  }
+
+
+
+  .testimonials-container {
+    gap: 15px;
+  }
+
+  .testimonial-card {
+    flex: 0 0 300px;
+    padding: 18px; /* Reduced from 25px */
+    min-height: 132px; /* Reduced from 220px */
+    border-radius: 14px;
+  }
+  
+  .testimonial-card::before {
+    font-size: 2rem; /* Reduced from 2.5rem */
+    top: 10px; /* Reduced from 15px */
+    right: 15px; /* Reduced from 20px */
+  }
+
+  .testimonial-text {
+    font-size: 0.9rem; /* Reduced from 1rem */
+  }
+
+  .author-image {
+    width: 36px; /* Reduced from 45px */
+    height: 36px; /* Reduced from 45px */
+  }
+  
+  .author-placeholder {
+    font-size: 16px; /* Reduced from 20px */
+  }
+  
+  .author-name {
+    font-size: 0.95rem; /* Reduced from 1rem */
+  }
+  
+  .author-location {
+    font-size: 0.8rem; /* Reduced from 0.85rem */
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 10px;
+  }
+  
+  .testimonials-title {
+    font-size: 1.3rem !important;
+    margin-bottom: 6px !important;
+    color: #1a202c !important;
+    text-align: center !important;
+    display: block !important;
+  }
+  
+  .testimonials-subtitle {
+    font-size: 0.85rem !important;
+    color: #4a5568 !important;
+    text-align: center !important;
+    display: block !important;
+    margin-bottom: 12px !important;
+  }
+  
+  .testimonial-carousel-nav {
+    width: 36px;
+    height: 36px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.9) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+    z-index: 10;
+  }
+
+  .testimonial-carousel-nav:hover {
+    transform: translateY(-50%) scale(1.1);
+    background: rgba(255, 255, 255, 1) !important;
+  }
+
+  .testimonial-carousel-nav svg {
+    width: 14px;
+    height: 14px;
+    color: #6366f1 !important;
+  }
+
+
+
+  .testimonials-container {
+    gap: 0; /* No gap on mobile for full-width cards */
+    scroll-snap-type: x mandatory; /* Snap to cards */
+  }
+  
+  .testimonial-card {
+    flex: 0 0 100%; /* Full width on mobile */
+    padding: 20px; /* Slightly more padding for mobile */
+    min-height: 160px; /* Better height for mobile */
+    border-radius: 12px;
+    scroll-snap-align: start; /* Snap to start of card */
+    margin: 0; /* No margin */
+  }
+  
+  .testimonial-card::before {
+    font-size: 1.8rem; /* Reduced from 2rem */
+    top: 8px; /* Reduced from 12px */
+    right: 12px; /* Reduced from 15px */
+  }
+
+  .testimonial-text {
+    font-size: 0.9rem; /* Slightly larger for mobile readability */
+    line-height: 1.5;
+  }
+  
+  .author-image {
+    width: 40px; /* Slightly larger for mobile */
+    height: 40px; /* Slightly larger for mobile */
+  }
+  
+  .author-placeholder {
+    font-size: 16px; /* Reduced from 18px */
+  }
+  
+  .author-name {
+    font-size: 0.95rem; /* Reduced from 0.9rem */
+  }
+  
+  .author-location {
+    font-size: 0.8rem; /* Reduced from 0.75rem */
+  }
+  
+  /* Mobile-specific navigation overrides */
+  .testimonial-navigation {
+    gap: 12px !important;
+    margin-top: 12px !important;
+  }
+  
+  .testimonial-dot {
+    width: 9px !important;
+    height: 9px !important;
+    min-width: 9px !important;
+    min-height: 9px !important;
+    margin: 0 3px !important;
+  }
+  
+  .testimonial-dots {
+    gap: 4px !important;
+  }
+  
+  .testimonial-carousel-nav {
+    width: 18px !important;
+    height: 18px !important;
+    min-width: 18px !important;
+    min-height: 18px !important;
+  }
+  
+  .testimonial-carousel-nav svg {
+    width: 12px !important;
+    height: 12px !important;
+  }
+}
+{% endstylesheet %}
+
+<script>
+// Testimonial Carousel Functionality
+let currentTestimonialSlide = 0;
+const totalTestimonials = 9;
+let testimonialsPerView = 3; // Default for desktop
+
+function getTestimonialsPerView() {
+  // Check if we're on mobile (480px and below)
+  if (window.innerWidth <= 480) {
+    return 1; // 1 card per view on mobile
+  } else if (window.innerWidth <= 768) {
+    return 2; // 2 cards per view on tablet
+  } else {
+    return 3; // 3 cards per view on desktop
+  }
+}
+
+function testimonialChangeSlide(direction) {
+  const container = document.querySelector('.testimonials-container');
+  const cards = document.querySelectorAll('.testimonial-card');
+  const dots = document.querySelectorAll('.testimonial-dot');
+  
+  // Check if elements exist
+  if (!container || !cards.length || !dots.length) {
+    console.log('Carousel elements not found for slide change');
+    return;
+  }
+  
+  // Update testimonials per view based on screen size
+  testimonialsPerView = getTestimonialsPerView();
+  
+  // Calculate new slide position
+  currentTestimonialSlide += direction;
+  
+  // Handle wrap-around
+  if (currentTestimonialSlide < 0) {
+    currentTestimonialSlide = totalTestimonials - testimonialsPerView;
+  } else if (currentTestimonialSlide > totalTestimonials - testimonialsPerView) {
+    currentTestimonialSlide = 0;
+  }
+  
+  updateCarousel(container, cards, dots);
+}
+
+function testimonialGoToSlide(dotIndex) {
+  const container = document.querySelector('.testimonials-container');
+  const cards = document.querySelectorAll('.testimonial-card');
+  const dots = document.querySelectorAll('.testimonial-dot');
+  
+  // Check if elements exist
+  if (!container || !cards.length || !dots.length) {
+    console.log('Carousel elements not found for go to slide');
+    return;
+  }
+  
+  // Update testimonials per view based on screen size
+  testimonialsPerView = getTestimonialsPerView();
+  
+  // Calculate which testimonials to show based on dot index
+  currentTestimonialSlide = dotIndex * testimonialsPerView;
+  
+  // Ensure we don't go beyond available slides
+  if (currentTestimonialSlide > totalTestimonials - testimonialsPerView) {
+    currentTestimonialSlide = totalTestimonials - testimonialsPerView;
+  }
+  
+  updateCarousel(container, cards, dots);
+}
+
+function updateCarousel(container, cards, dots) {
+  // Check if all required elements exist
+  if (!container || !cards || !dots) {
+    console.log('Carousel elements not found:', { container: !!container, cards: !!cards, dots: !!dots });
+    return;
+  }
+  
+  // Update testimonials per view based on screen size
+  testimonialsPerView = getTestimonialsPerView();
+  
+  // Update active states for cards
+  cards.forEach((card, index) => {
+    if (index >= currentTestimonialSlide && index < currentTestimonialSlide + testimonialsPerView) {
+      card.classList.add('active');
+    } else {
+      card.classList.remove('active');
+    }
+  });
+  
+  // Update dots - each dot represents testimonialsPerView testimonials
+  const currentDotIndex = Math.floor(currentTestimonialSlide / testimonialsPerView);
+  dots.forEach((dot, index) => {
+    if (index === currentDotIndex) {
+      dot.classList.add('active');
+    } else {
+      dot.classList.remove('active');
+    }
+  });
+  
+  // Scroll to show active testimonials - using responsive card width + gap
+  let cardWidth, gap;
+  
+  if (window.innerWidth <= 480) {
+    // Mobile: full width cards
+    cardWidth = container.offsetWidth;
+    gap = 0;
+  } else if (window.innerWidth <= 768) {
+    // Tablet: 300px cards with 15px gap
+    cardWidth = 300;
+    gap = 15;
+  } else {
+    // Desktop: 350px cards with 20px gap
+    cardWidth = 350;
+    gap = 20;
+  }
+  
+  const scrollPosition = currentTestimonialSlide * (cardWidth + gap);
+  
+  // Check if scrollTo method exists before calling it
+  if (container && typeof container.scrollTo === 'function') {
+    container.scrollTo({
+      left: scrollPosition,
+      behavior: 'smooth'
+    });
+  } else {
+    // Fallback for older browsers
+    container.scrollLeft = scrollPosition;
+  }
+  
+  // Debug logging
+  console.log('Carousel updated:', {
+    currentSlide: currentTestimonialSlide,
+    currentDotIndex: currentDotIndex,
+    testimonialsPerView: testimonialsPerView,
+    screenWidth: window.innerWidth,
+    activeCards: Array.from(cards).filter(card => card.classList.contains('active')).length,
+    activeDots: Array.from(dots).filter(dot => dot.classList.contains('active')).length
+  });
+}
+
+// Auto-advance carousel every 10 seconds
+let autoAdvanceInterval = setInterval(() => {
+  testimonialChangeSlide(1);
+}, 10000);
+
+// Pause auto-advance on hover
+document.addEventListener('DOMContentLoaded', function() {
+  const carousel = document.querySelector('.testimonials-carousel');
+  
+  if (carousel) {
+    carousel.addEventListener('mouseenter', () => {
+      clearInterval(autoAdvanceInterval);
+    });
+    
+    carousel.addEventListener('mouseleave', () => {
+      autoAdvanceInterval = setInterval(() => {
+        testimonialChangeSlide(1);
+      }, 10000);
+    });
+  }
+  
+  // Set initial active states
+  const cards = document.querySelectorAll('.testimonial-card');
+  const dots = document.querySelectorAll('.testimonial-dot');
+  
+  // Update testimonials per view based on screen size
+  testimonialsPerView = getTestimonialsPerView();
+  
+  // Show first testimonialsPerView testimonials
+  cards.forEach((card, index) => {
+    if (index < testimonialsPerView) {
+      card.classList.add('active');
+    }
+  });
+  
+  // Activate first dot
+  if (dots.length > 0) {
+    dots[0].classList.add('active');
+  }
+  
+  // Log for debugging
+  console.log('Testimonials initialized:', {
+    totalTestimonials,
+    testimonialsPerView,
+    screenWidth: window.innerWidth,
+    currentSlide: currentTestimonialSlide,
+    activeCards: Array.from(cards).filter(card => card.classList.contains('active')).length,
+    activeDots: Array.from(dots).filter(dot => dot.classList.contains('active')).length,
+    autoAdvanceInterval: '10 seconds'
+  });
+});
+
+// Handle window resize
+window.addEventListener('resize', function() {
+  const container = document.querySelector('.testimonials-container');
+  const cards = document.querySelectorAll('.testimonial-card');
+  const dots = document.querySelectorAll('.testimonial-dot');
+  
+  // Update testimonials per view
+  testimonialsPerView = getTestimonialsPerView();
+  
+  // Reset to first slide when resizing
+  currentTestimonialSlide = 0;
+  
+  // Update carousel
+  updateCarousel(container, cards, dots);
+});
+</script>
+
+{% schema %}
+{
+  "name": "Customer Testimonials",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Header"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Real Customers, Real Reviews"
+    },
+    {
+      "type": "text",
+      "id": "section_subtitle",
+      "label": "Section Subtitle",
+      "default": "See what our customers are saying about their shopping experience"
+    },
+    {
+      "type": "header",
+      "content": "Testimonial 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "testimonial_1_image",
+      "label": "Customer Image"
+    },
+    {
+      "type": "text",
+      "id": "testimonial_1_name",
+      "label": "Customer Name",
+      "default": "Rajesh Kumar"
+    },
+    {
+      "type": "text",
+      "id": "testimonial_1_location",
+      "label": "Customer Location",
+      "default": "Delhi, NCR"
+    },
+    {
+      "type": "textarea",
+      "id": "testimonial_1_text",
+      "label": "Testimonial Text",
+      "default": "The product quality exceeded my expectations! The fabric feels premium and the fit is perfect. Delivery was super fast and the packaging was excellent. Will definitely shop here again!"
+    },
+    {
+      "type": "range",
+      "id": "testimonial_1_rating",
+      "label": "Rating",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "header",
+      "content": "Testimonial 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "testimonial_2_image",
+      "label": "Customer Image"
+    },
+    {
+      "type": "text",
+      "id": "testimonial_2_name",
+      "label": "Customer Name",
+      "default": "Anjali Patel"
+    },
+    {
+      "type": "text",
+      "id": "testimonial_2_location",
+      "label": "Customer Location",
+      "default": "Ahmedabad, Gujarat"
+    },
+    {
+      "type": "textarea",
+      "id": "testimonial_2_text",
+      "label": "Testimonial Text",
+      "default": "Amazing customer service! When I had a question about sizing, they responded within minutes. The return process was hassle-free and they even helped me find the perfect alternative. Highly recommend!"
+    },
+    {
+      "type": "range",
+      "id": "testimonial_2_rating",
+      "label": "Rating",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "header",
+      "content": "Testimonial 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "testimonial_3_image",
+      "label": "Customer Image"
+    },
+    {
+      "type": "text",
+      "id": "testimonial_3_name",
+      "label": "Customer Name",
+      "default": "Amit Singh"
+    },
+    {
+      "type": "text",
+      "id": "testimonial_3_location",
+      "label": "Customer Location",
+      "default": "Pune, Maharashtra"
+    },
+    {
+      "type": "textarea",
+      "id": "testimonial_3_text",
+      "label": "Testimonial Text",
+      "default": "Best online shopping experience ever! The website is so intuitive and the search filters are amazing. Found exactly what I was looking for in seconds. Order tracking kept me updated every step!"
+    },
+    {
+      "type": "range",
+      "id": "testimonial_3_rating",
+      "label": "Rating",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "header",
+      "content": "Testimonial 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "testimonial_4_image",
+      "label": "Customer Image"
+    },
+    {
+      "type": "text",
+      "id": "testimonial_4_name",
+      "label": "Customer Name",
+      "default": "Meera Reddy"
+    },
+    {
+      "type": "text",
+      "id": "testimonial_4_location",
+      "label": "Customer Location",
+      "default": "Hyderabad, Telangana"
+    },
+    {
+      "type": "textarea",
+      "id": "testimonial_4_text",
+      "label": "Testimonial Text",
+      "default": "The payment options are fantastic! I love that they accept all major cards and UPI. The checkout process was smooth and secure. Plus, they sent me a discount code for my next purchase!"
+    },
+    {
+      "type": "range",
+      "id": "testimonial_4_rating",
+      "label": "Rating",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "header",
+      "content": "Testimonial 5"
+    },
+    {
+      "type": "image_picker",
+      "id": "testimonial_5_image",
+      "label": "Customer Image"
+    },
+    {
+      "type": "text",
+      "id": "testimonial_5_name",
+      "label": "Customer Name",
+      "default": "Vikram Malhotra"
+    },
+    {
+      "type": "text",
+      "id": "testimonial_5_location",
+      "label": "Customer Location",
+      "default": "Bangalore, Karnataka"
+    },
+    {
+      "type": "textarea",
+      "id": "testimonial_5_text",
+      "label": "Testimonial Text",
+      "default": "Incredible value for money! The products are priced competitively but the quality is premium. I've compared with other sites and this is definitely the best deal. My friends are now shopping here too!"
+    },
+    {
+      "type": "range",
+      "id": "testimonial_5_rating",
+      "label": "Rating",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "header",
+      "content": "Testimonial 6"
+    },
+    {
+      "type": "image_picker",
+      "id": "testimonial_6_image",
+      "label": "Customer Image"
+    },
+    {
+      "type": "text",
+      "id": "testimonial_6_name",
+      "label": "Customer Name",
+      "default": "Priya Sharma"
+    },
+    {
+      "type": "text",
+      "id": "testimonial_6_location",
+      "label": "Customer Location",
+      "default": "Mumbai, Maharashtra"
+    },
+    {
+      "type": "textarea",
+      "id": "testimonial_6_text",
+      "label": "Testimonial Text",
+      "default": "The mobile app is brilliant! I can shop on the go and the notifications are perfect. When my order was delayed, they proactively reached out with updates. That's real customer care!"
+    },
+    {
+      "type": "range",
+      "id": "testimonial_6_rating",
+      "label": "Rating",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "header",
+      "content": "Testimonial 7"
+    },
+    {
+      "type": "image_picker",
+      "id": "testimonial_7_image",
+      "label": "Customer Image"
+    },
+    {
+      "type": "text",
+      "id": "testimonial_7_name",
+      "label": "Customer Name",
+      "default": "Suresh Kumar"
+    },
+    {
+      "type": "text",
+      "id": "testimonial_7_location",
+      "label": "Customer Location",
+      "default": "Chennai, Tamil Nadu"
+    },
+    {
+      "type": "textarea",
+      "id": "testimonial_7_text",
+      "label": "Testimonial Text",
+      "default": "Fastest delivery I've ever experienced! Ordered in the morning and received by evening. The packaging was eco-friendly and the product was in perfect condition. This is how online shopping should be!"
+    },
+    {
+      "type": "range",
+      "id": "testimonial_7_rating",
+      "label": "Rating",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "header",
+      "content": "Testimonial 8"
+    },
+    {
+      "type": "image_picker",
+      "id": "testimonial_8_image",
+      "label": "Customer Image"
+    },
+    {
+      "type": "text",
+      "id": "testimonial_8_name",
+      "label": "Customer Name",
+      "default": "Kavya Iyer"
+    },
+    {
+      "type": "text",
+      "id": "testimonial_8_location",
+      "label": "Customer Location",
+      "default": "Kochi, Kerala"
+    },
+    {
+      "type": "textarea",
+      "id": "testimonial_8_text",
+      "label": "Testimonial Text",
+      "default": "The product recommendations are spot-on! They suggested items that perfectly matched my style. The size guide was accurate and the color options are exactly as shown. Love shopping here!"
+    },
+    {
+      "type": "range",
+      "id": "testimonial_8_rating",
+      "label": "Rating",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "header",
+      "content": "Testimonial 9"
+    },
+    {
+      "type": "image_picker",
+      "id": "testimonial_9_image",
+      "label": "Customer Image"
+    },
+    {
+      "type": "text",
+      "id": "testimonial_9_name",
+      "label": "Customer Name",
+      "default": "Rahul Verma"
+    },
+    {
+      "type": "text",
+      "id": "testimonial_9_location",
+      "label": "Customer Location",
+      "default": "Lucknow, Uttar Pradesh"
+    },
+    {
+      "type": "textarea",
+      "id": "testimonial_9_text",
+      "label": "Testimonial Text",
+      "default": "Outstanding after-sales support! When I had an issue with my order, they resolved it immediately and even offered a discount on my next purchase. This level of service is rare these days!"
+    },
+    {
+      "type": "range",
+      "id": "testimonial_9_rating",
+      "label": "Rating",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 5
+    }
+  ],
+  "presets": [
+    {
+      "name": "Customer Testimonials"
+    }
+  ]
+}
+{% endschema %} 

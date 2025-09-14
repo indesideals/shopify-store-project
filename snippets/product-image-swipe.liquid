@@ -1,0 +1,905 @@
+{% comment %}
+  Swipe-enabled Product Image Gallery
+  Adds touch/swipe functionality to product images
+{% endcomment %}
+
+<div class="swipe-image-gallery">
+  <div class="main-image-container" id="swipe-main-image-container">
+    <div class="image-slider" id="image-slider">
+      {% for image in product.images %}
+        <div class="image-slide {% if forloop.first %}active{% endif %}" data-index="{{ forloop.index0 }}">
+          <img src="{{ image | img_url: '800x' }}" alt="{{ product.title }} - Image {{ forloop.index }}" data-image-index="{{ forloop.index0 }}">
+        </div>
+      {% endfor %}
+    </div>
+    
+    <div class="enlarge-hint" data-enlarge-hint="true">Click to enlarge</div>
+    
+    
+    <!-- Loading Skeleton -->
+    <div id="image-loading-skeleton" class="image-loading-skeleton">
+      <div class="skeleton-shimmer"></div>
+    </div>
+    
+    <!-- Navigation Arrows -->
+    {% if product.images.size > 1 %}
+      <button class="main-image-arrow main-image-prev" onclick="changeMainImage(-1)">‹</button>
+      <button class="main-image-arrow main-image-next" onclick="changeMainImage(1)">›</button>
+    {% endif %}
+    
+    <!-- Image Indicators -->
+    {% if product.images.size > 1 %}
+      <div class="image-indicators">
+        {% for image in product.images %}
+          <span class="indicator {% if forloop.first %}active{% endif %}" data-index="{{ forloop.index0 }}"></span>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+  
+  <!-- Thumbnail Gallery -->
+  {% if product.images.size > 1 %}
+    <div class="thumbnail-gallery">
+      <div class="thumbnails-container">
+        {% for image in product.images limit: 6 %}
+          <div class="thumbnail" onclick="setMainImage({{ forloop.index0 }})" data-index="{{ forloop.index0 }}">
+            <img src="{{ image | img_url: '150x' }}" alt="{{ product.title }} - Image {{ forloop.index }}">
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+</div>
+
+<style>
+.swipe-image-gallery {
+  position: relative;
+  width: 100%;
+}
+
+.main-image-container {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+  border-radius: 8px;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.2s ease;
+}
+
+.main-image-container:hover {
+  transform: scale(1.02);
+}
+
+.main-image-container:active {
+  cursor: grabbing;
+}
+
+.image-slider {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease;
+}
+
+.image-slide {
+  min-width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.image-slide.active {
+  opacity: 1;
+}
+
+.image-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.image-indicators {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.indicator.active {
+  background: #fff;
+}
+
+.main-image-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease;
+}
+
+.main-image-arrow:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.main-image-prev {
+  left: 15px;
+}
+
+.main-image-next {
+  right: 15px;
+}
+
+.enlarge-hint {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  z-index: 10;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  user-select: none;
+}
+
+.enlarge-hint:hover {
+  background: rgba(0, 0, 0, 0.9);
+  transform: scale(1.05);
+}
+
+
+/* Thumbnail Gallery */
+.thumbnail-gallery {
+  margin-top: 12px;
+  width: 100%;
+}
+
+.thumbnails-container {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 100%;
+}
+
+.thumbnail {
+  width: 60px;
+  height: 60px;
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  background: #f8f9fa;
+  flex-shrink: 0;
+}
+
+.thumbnail.active {
+  border-color: #6b46c1;
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(107, 70, 193, 0.3);
+}
+
+.thumbnail:hover {
+  border-color: #6b46c1;
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(107, 70, 193, 0.2);
+}
+
+.thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .main-image-container {
+    height: 300px;
+  }
+  
+  .main-image-arrow {
+    width: 35px;
+    height: 35px;
+    font-size: 16px;
+  }
+  
+  .main-image-prev {
+    left: 10px;
+  }
+  
+  .main-image-next {
+    right: 10px;
+  }
+  
+  .enlarge-hint {
+    top: 10px;
+    right: 10px;
+    font-size: 11px;
+    padding: 4px 8px;
+    cursor: pointer;
+  }
+  
+  .thumbnail {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .thumbnails-container {
+    gap: 6px;
+  }
+  
+  .close-x {
+    font-size: 20px;
+  }
+  
+  .close-text {
+    font-size: 9px;
+  }
+}
+</style>
+
+<script>
+// Swipe functionality for product images
+class ProductImageSwipe {
+  constructor() {
+    this.currentIndex = 0;
+    this.totalImages = {{ product.images.size }};
+    this.startX = null;
+    this.startY = null;
+    this.currentX = null;
+    this.currentY = null;
+    this.isDragging = false;
+    this.startTime = 0;
+    this.threshold = 50; // Minimum distance for swipe
+    this.clickTimeout = null;
+    this.touchMoved = false; // Track if touch actually moved
+    this.minSwipeDistance = 20; // Minimum distance to consider it a swipe
+    this.maxClickDistance = 10; // Maximum distance to consider it a click
+    
+    this.init();
+  }
+  
+  init() {
+    if (this.totalImages <= 1) return;
+    
+    const container = document.getElementById('swipe-main-image-container');
+    if (!container) return;
+    
+    // Touch events
+    container.addEventListener('touchstart', this.handleTouchStart.bind(this), { passive: false });
+    container.addEventListener('touchmove', this.handleTouchMove.bind(this), { passive: false });
+    container.addEventListener('touchend', this.handleTouchEnd.bind(this), { passive: false });
+    
+    // Mouse events for desktop
+    container.addEventListener('mousedown', this.handleMouseDown.bind(this));
+    container.addEventListener('mousemove', this.handleMouseMove.bind(this));
+    container.addEventListener('mouseup', this.handleMouseUp.bind(this));
+    container.addEventListener('mouseleave', this.handleMouseUp.bind(this));
+    
+    // Prevent context menu on long press
+    container.addEventListener('contextmenu', (e) => e.preventDefault());
+    
+    // Add click handler with proper touch/click distinction
+    // BULLETPROOF CLICK HANDLER - Always opens the clicked image
+    container.addEventListener('click', (e) => {
+      console.log('=== CLICK EVENT ===');
+      console.log('Click target:', e.target);
+      
+      // Find the clicked image
+      const img = e.target.closest('.image-slide img');
+      const enlargeHint = e.target.closest('.enlarge-hint');
+      
+      if (img) {
+        console.log('IMAGE CLICKED:', img.src);
+        console.log('Image alt:', img.alt);
+        
+        // Get the clicked image's source directly
+        const clickedImageSrc = img.src;
+        const clickedImageAlt = img.alt;
+        
+        // Find this image in the product images array
+        const allImages = document.querySelectorAll('.image-slide img');
+        let clickedImageIndex = -1;
+        
+        for (let i = 0; i < allImages.length; i++) {
+          if (allImages[i].src === clickedImageSrc) {
+            clickedImageIndex = i;
+            break;
+          }
+        }
+        
+        console.log('FOUND CLICKED IMAGE AT INDEX:', clickedImageIndex);
+        
+        if (clickedImageIndex !== -1) {
+          // Open lightbox with the clicked image
+          window.currentSlide = clickedImageIndex;
+          this.currentIndex = clickedImageIndex;
+          
+          console.log('OPENING LIGHTBOX WITH IMAGE:', clickedImageIndex);
+          openLightbox(clickedImageIndex);
+        } else {
+          console.error('Could not find clicked image in gallery');
+        }
+      } else if (enlargeHint) {
+        console.log('Enlarge hint clicked');
+        openLightbox(this.currentIndex);
+      }
+    });
+  }
+  
+  handleTouchStart(e) {
+    this.startX = e.touches[0].clientX;
+    this.startY = e.touches[0].clientY;
+    this.isDragging = false;
+    this.touchMoved = false;
+    this.startTime = Date.now();
+  }
+  
+  handleTouchMove(e) {
+    if (!this.startX) return;
+    
+    this.currentX = e.touches[0].clientX;
+    this.currentY = e.touches[0].clientY;
+    const diffX = this.startX - this.currentX;
+    const diffY = this.startY - this.currentY;
+    const distance = Math.sqrt(diffX * diffX + diffY * diffY);
+    
+    // Mark as moved if distance is significant
+    if (distance > this.maxClickDistance) {
+      this.touchMoved = true;
+    }
+    
+    // Only consider it a swipe if horizontal movement is greater than vertical
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > this.minSwipeDistance) {
+      this.isDragging = true;
+      
+      // Add visual feedback during swipe
+      const container = document.getElementById('swipe-main-image-container');
+      container.style.transform = `translateX(${-diffX * 0.1}px)`;
+      
+      e.preventDefault();
+    }
+  }
+  
+  handleTouchEnd(e) {
+    if (!this.startX) return;
+    
+    const diffX = this.startX - this.currentX;
+    const diffY = this.startY - this.currentY;
+    const timeDiff = Date.now() - this.startTime;
+    const container = document.getElementById('swipe-main-image-container');
+    
+    console.log('=== handleTouchEnd ===');
+    console.log('diffX:', diffX, 'diffY:', diffY);
+    console.log('isDragging:', this.isDragging, 'threshold:', this.threshold);
+    console.log('Math.abs(diffX):', Math.abs(diffX));
+    
+    // Reset transform
+    container.style.transform = '';
+    
+    // Perform swipe if horizontal movement exceeded threshold
+    if (this.isDragging && Math.abs(diffX) > this.threshold) {
+      console.log('SWIPE DETECTED - calling nextImage/prevImage');
+      if (diffX > 0) {
+        // Swipe left - next image
+        this.nextImage();
+      } else {
+        // Swipe right - previous image
+        this.prevImage();
+      }
+      e.preventDefault();
+    } else {
+      console.log('Touch movement too small - ignoring to prevent interference with clicks');
+    }
+    
+    // Reset state
+    this.isDragging = false;
+    this.touchMoved = false;
+    this.startX = null;
+    this.startY = null;
+    this.currentX = null;
+    this.currentY = null;
+  }
+  
+  handleMouseDown(e) {
+    this.startX = e.clientX;
+    this.isDragging = true;
+    e.preventDefault();
+  }
+  
+  handleMouseMove(e) {
+    if (!this.isDragging) return;
+    
+    this.currentX = e.clientX;
+    const diffX = this.startX - this.currentX;
+    
+    // Add visual feedback during drag
+    const container = document.getElementById('swipe-main-image-container');
+    if (Math.abs(diffX) > 10) {
+      container.style.transform = `translateX(${-diffX * 0.1}px)`;
+    }
+  }
+  
+  handleMouseUp(e) {
+    if (!this.isDragging) return;
+    
+    this.isDragging = false;
+    const diffX = this.startX - this.currentX;
+    const container = document.getElementById('swipe-main-image-container');
+    
+    console.log('=== handleMouseUp ===');
+    console.log('diffX:', diffX, 'threshold:', this.threshold);
+    console.log('Math.abs(diffX):', Math.abs(diffX));
+    
+    // Reset transform
+    container.style.transform = '';
+    
+    // Perform drag swipe if exceeded threshold
+    if (Math.abs(diffX) > 80) {
+      console.log('MOUSE DRAG DETECTED - calling nextImage/prevImage');
+      if (diffX > 0) {
+        // Drag left - next image
+        this.nextImage();
+      } else {
+        // Drag right - previous image
+        this.prevImage();
+      }
+    } else {
+      console.log('Mouse drag too small - ignoring to prevent interference with clicks');
+    }
+  }
+  
+  nextImage() {
+    console.log('Next image called, current:', this.currentIndex, 'total:', this.totalImages);
+    this.currentIndex = (this.currentIndex + 1 + this.totalImages) % this.totalImages;
+    this.updateImage();
+  }
+  
+  prevImage() {
+    console.log('Prev image called, current:', this.currentIndex, 'total:', this.totalImages);
+    this.currentIndex = (this.currentIndex - 1 + this.totalImages) % this.totalImages;
+    this.updateImage();
+  }
+  
+  updateImage() {
+    console.log('=== updateImage called ===');
+    console.log('this.currentIndex:', this.currentIndex);
+    
+    // Update active slide
+    const slides = document.querySelectorAll('.image-slide');
+    console.log('Total slides found:', slides.length);
+    
+    slides.forEach((slide, index) => {
+      const isActive = index === this.currentIndex;
+      slide.classList.toggle('active', isActive);
+      console.log(`Slide ${index}: active=${isActive}, classes=${slide.className}`);
+    });
+    
+    // Update indicators
+    const indicators = document.querySelectorAll('.indicator');
+    indicators.forEach((indicator, index) => {
+      indicator.classList.toggle('active', index === this.currentIndex);
+    });
+    
+    // Update thumbnails
+    const thumbnails = document.querySelectorAll('.thumbnail');
+    thumbnails.forEach((thumbnail, index) => {
+      thumbnail.classList.toggle('active', index === this.currentIndex);
+    });
+    
+    // Update global currentSlide for lightbox
+    window.currentSlide = this.currentIndex;
+    
+    // Debug log
+    console.log('Updated to image index:', this.currentIndex);
+    console.log('Active slide should be:', this.currentIndex);
+  }
+  
+  setImage(index) {
+    if (index >= 0 && index < this.totalImages) {
+      this.currentIndex = index;
+      this.updateImage();
+    }
+  }
+}
+
+// Store reference globally and initialize
+let productImageSwipeInstance = null;
+let lightboxSwipeInstance = null;
+
+// Initialize swipe functionality when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+  // Prevent multiple initializations
+  if (productImageSwipeInstance) {
+    console.log('Gallery already initialized, skipping...');
+    return;
+  }
+  
+  console.log('=== INITIALIZING GALLERY ===');
+  productImageSwipeInstance = new ProductImageSwipe();
+  lightboxSwipeInstance = new LightboxSwipe();
+  
+  // Store references globally
+  window.productImageSwipe = productImageSwipeInstance;
+  window.lightboxSwipe = lightboxSwipeInstance;
+  
+  // Debug: Check initial state
+  console.log('Initial currentIndex:', productImageSwipeInstance.currentIndex);
+  console.log('Total images:', productImageSwipeInstance.totalImages);
+  
+  // Check which slide is initially active
+  const slides = document.querySelectorAll('.image-slide');
+  slides.forEach((slide, index) => {
+    console.log(`Initial slide ${index}: active=${slide.classList.contains('active')}, classes=${slide.className}`);
+  });
+});
+
+// Global functions for compatibility with existing code
+window.changeMainImage = function(direction) {
+  console.log('=== changeMainImage called ===');
+  console.log('Direction:', direction);
+  console.log('Call stack:', new Error().stack);
+  
+  if (productImageSwipeInstance) {
+    if (direction > 0) {
+      console.log('Calling nextImage()');
+      productImageSwipeInstance.nextImage();
+    } else {
+      console.log('Calling prevImage()');
+      productImageSwipeInstance.prevImage();
+    }
+  } else {
+    console.log('productImageSwipeInstance not available');
+  }
+};
+
+window.setMainImage = function(index) {
+  if (productImageSwipeInstance) {
+    productImageSwipeInstance.setImage(index);
+  }
+  // Also update global currentSlide for lightbox
+  window.currentSlide = index;
+};
+
+// Lightbox swipe functionality
+class LightboxSwipe {
+  constructor() {
+    this.startX = null;
+    this.startY = null;
+    this.currentX = null;
+    this.currentY = null;
+    this.isDragging = false;
+    this.startTime = 0;
+    this.threshold = 50;
+    
+    this.init();
+  }
+  
+  init() {
+    const lightbox = document.getElementById('lightbox');
+    if (!lightbox) return;
+    
+    // Touch events for lightbox
+    lightbox.addEventListener('touchstart', this.handleTouchStart.bind(this), { passive: false });
+    lightbox.addEventListener('touchmove', this.handleTouchMove.bind(this), { passive: false });
+    lightbox.addEventListener('touchend', this.handleTouchEnd.bind(this), { passive: false });
+    
+    // Mouse events for lightbox
+    lightbox.addEventListener('mousedown', this.handleMouseDown.bind(this));
+    lightbox.addEventListener('mousemove', this.handleMouseMove.bind(this));
+    lightbox.addEventListener('mouseup', this.handleMouseUp.bind(this));
+    lightbox.addEventListener('mouseleave', this.handleMouseUp.bind(this));
+    
+    // Add click handler for closing lightbox
+    lightbox.addEventListener('click', this.handleLightboxClick.bind(this));
+    
+    // Add close button handler
+    const closeBtn = lightbox.querySelector('.lightbox-close');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closeLightbox();
+      });
+    }
+    
+    // Add keyboard support (ESC key to close)
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox.style.display === 'flex') {
+        closeLightbox();
+      }
+    });
+  }
+  
+  handleTouchStart(e) {
+    this.startX = e.touches[0].clientX;
+    this.startY = e.touches[0].clientY;
+    this.isDragging = false;
+    this.touchMoved = false;
+    this.startTime = Date.now();
+  }
+  
+  handleTouchMove(e) {
+    if (!this.startX) return;
+    
+    this.currentX = e.touches[0].clientX;
+    this.currentY = e.touches[0].clientY;
+    const diffX = this.startX - this.currentX;
+    const diffY = this.startY - this.currentY;
+    
+    // Only consider it a swipe if horizontal movement is greater than vertical
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 10) {
+      this.isDragging = true;
+      e.preventDefault();
+    }
+  }
+  
+  handleTouchEnd(e) {
+    if (!this.startX) return;
+    
+    const diffX = this.startX - this.currentX;
+    const diffY = this.startY - this.currentY;
+    const timeDiff = Date.now() - this.startTime;
+    
+    // Only prevent default if it was actually a swipe
+    if (this.isDragging && Math.abs(diffX) > this.threshold) {
+      // Show loading skeleton before swipe
+      const lightboxLoadingSkeleton = document.getElementById('lightbox-loading-skeleton');
+      if (lightboxLoadingSkeleton) {
+        lightboxLoadingSkeleton.classList.add('loading');
+      }
+      
+      if (diffX > 0) {
+        // Swipe left - next image
+        changeLightboxSlide(1);
+      } else {
+        // Swipe right - previous image
+        changeLightboxSlide(-1);
+      }
+      e.preventDefault();
+    }
+    
+    // Reset state
+    this.isDragging = false;
+    this.startX = null;
+    this.startY = null;
+    this.currentX = null;
+    this.currentY = null;
+  }
+  
+  handleMouseDown(e) {
+    this.startX = e.clientX;
+    this.startY = e.clientY;
+    this.isDragging = false;
+    this.startTime = Date.now();
+  }
+  
+  handleMouseMove(e) {
+    if (!this.startX) return;
+    
+    this.currentX = e.clientX;
+    this.currentY = e.clientY;
+    const diffX = this.startX - this.currentX;
+    const diffY = this.startY - this.currentY;
+    
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 10) {
+      this.isDragging = true;
+    }
+  }
+  
+  handleMouseUp(e) {
+    if (!this.startX) return;
+    
+    const diffX = this.startX - this.currentX;
+    const diffY = this.startY - this.currentY;
+    const timeDiff = Date.now() - this.startTime;
+    
+    if (this.isDragging && Math.abs(diffX) > this.threshold) {
+      // Show loading skeleton before swipe
+      const lightboxLoadingSkeleton = document.getElementById('lightbox-loading-skeleton');
+      if (lightboxLoadingSkeleton) {
+        lightboxLoadingSkeleton.classList.add('loading');
+      }
+      
+      if (diffX > 0) {
+        changeLightboxSlide(1);
+      } else {
+        changeLightboxSlide(-1);
+      }
+    }
+    
+    // Reset state
+    this.isDragging = false;
+    this.startX = null;
+    this.startY = null;
+    this.currentX = null;
+    this.currentY = null;
+  }
+  
+  handleLightboxClick(e) {
+    // Only close if clicking outside the image and it wasn't a swipe
+    if (!this.isDragging) {
+      const lightboxImage = document.getElementById('lightbox-image');
+      const lightboxContent = document.querySelector('.lightbox-content');
+      
+      // Close if clicking on the lightbox background (not on image or content)
+      if (e.target.id === 'lightbox' || 
+          (lightboxContent && !lightboxContent.contains(e.target))) {
+        closeLightbox();
+      }
+    }
+  }
+}
+
+
+// Lightbox functionality
+function openLightbox(index = 0) {
+  console.log('=== openLightbox called ===');
+  console.log('openLightbox called with index:', index);
+  console.log('window.currentSlide before:', window.currentSlide);
+  
+  const lightbox = document.getElementById('lightbox');
+  const closeBtn = document.querySelector('.lightbox-close');
+  console.log('Lightbox element:', lightbox);
+  console.log('Close button element:', closeBtn);
+  
+  if (lightbox) {
+    // Ensure index is within bounds
+    const productImages = document.querySelectorAll('.image-slide img');
+    const maxIndex = productImages.length - 1;
+    const validIndex = Math.max(0, Math.min(index, maxIndex));
+    
+    console.log('Product images found:', productImages.length);
+    console.log('Max index:', maxIndex);
+    console.log('Valid index:', validIndex);
+    
+    lightbox.style.display = 'flex';
+    console.log('Lightbox display set to flex');
+    if (closeBtn) {
+      closeBtn.style.display = 'flex';
+      console.log('Close button display set to flex');
+    }
+    
+    // Set the current slide to the clicked image index
+    window.currentSlide = validIndex;
+    console.log('Set window.currentSlide to:', validIndex);
+    console.log('Total images available:', productImages.length);
+    
+    // Log all available images
+    productImages.forEach((img, i) => {
+      console.log(`Image ${i}:`, img.src, img.alt);
+    });
+    
+    updateLightboxImage();
+  } else {
+    console.log('Lightbox element not found!');
+  }
+}
+
+function closeLightbox() {
+  const lightbox = document.getElementById('lightbox');
+  const closeBtn = document.querySelector('.lightbox-close');
+  if (lightbox) {
+    lightbox.style.display = 'none';
+    if (closeBtn) {
+      closeBtn.style.display = 'flex';
+    }
+  }
+}
+
+function updateLightboxImage() {
+  const lightboxImage = document.getElementById('lightbox-image');
+  const lightboxIndicators = document.querySelectorAll('.lightbox-indicator');
+  const lightboxLoadingSkeleton = document.getElementById('lightbox-loading-skeleton');
+  
+  console.log('updateLightboxImage called, currentSlide:', window.currentSlide);
+  
+  if (lightboxImage && window.currentSlide !== undefined) {
+    // Get all product images from the gallery
+    const productImages = document.querySelectorAll('.image-slide img');
+    const currentImage = productImages[window.currentSlide];
+    
+    if (currentImage) {
+      const newImageSrc = currentImage.src.replace('_800x', '_1200x');
+      console.log('Updating lightbox image to:', newImageSrc);
+      console.log('Current image alt:', currentImage.alt);
+      
+      // Show loading skeleton
+      if (lightboxLoadingSkeleton) {
+        lightboxLoadingSkeleton.classList.add('loading');
+      }
+      
+        // Preload the new image
+        const newImage = new Image();
+        newImage.onload = function() {
+          lightboxImage.src = newImageSrc;
+          lightboxImage.alt = currentImage.alt;
+          console.log('Lightbox image loaded successfully');
+          console.log('✅ DISPLAYING IMAGE INDEX:', window.currentSlide, 'OF', productImages.length);
+          
+          // Hide loading skeleton after image loads
+          if (lightboxLoadingSkeleton) {
+            lightboxLoadingSkeleton.classList.remove('loading');
+          }
+        };
+      newImage.onerror = function() {
+        console.error('Failed to load lightbox image:', newImageSrc);
+        // Hide loading skeleton even if image fails to load
+        if (lightboxLoadingSkeleton) {
+          lightboxLoadingSkeleton.classList.remove('loading');
+        }
+      };
+      newImage.src = newImageSrc;
+    } else {
+      console.error('No image found at index:', window.currentSlide);
+    }
+    
+    // Update indicators
+    lightboxIndicators.forEach((indicator, index) => {
+      indicator.classList.toggle('active', index === window.currentSlide);
+    });
+  } else {
+    console.error('Lightbox image or currentSlide not found');
+  }
+}
+
+// Lightbox navigation functions
+function changeLightboxSlide(direction) {
+  const swipe = window.productImageSwipe;
+  if (swipe) {
+    if (direction > 0) {
+      swipe.nextImage();
+    } else {
+      swipe.prevImage();
+    }
+    
+    // Update lightbox image after swipe changes (loading handled in updateLightboxImage)
+    setTimeout(() => {
+      updateLightboxImage();
+    }, 100);
+  }
+}
+
+// Make functions globally available
+window.openLightbox = openLightbox;
+window.closeLightbox = closeLightbox;
+window.updateLightboxImage = updateLightboxImage;
+window.changeLightboxSlide = changeLightboxSlide;
+</script>
