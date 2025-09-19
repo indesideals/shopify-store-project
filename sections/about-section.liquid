@@ -1,0 +1,57 @@
+<div class="about-section" style="padding: 4rem 0;">
+  <div class="container">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
+      <div>
+        <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">About Our Store</h2>
+        <p style="font-size: 1.1rem; line-height: 1.8; color: #666; margin-bottom: 2rem;">
+          We are passionate about providing high-quality products that enhance your daily life. 
+          Our carefully curated selection ensures you get the best value for your money.
+        </p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+          <div style="text-align: center;">
+            <div style="font-size: 2rem; font-weight: bold; color: var(--color-accent);">100%</div>
+            <div style="color: #666;">Quality Guaranteed</div>
+          </div>
+          <div style="text-align: center;">
+            <div style="font-size: 2rem; font-weight: bold; color: var(--color-accent);">24/7</div>
+            <div style="color: #666;">Customer Support</div>
+          </div>
+        </div>
+      </div>
+      
+      <div style="background: #f8f9fa; height: 300px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+        <span style="color: #999; font-size: 1.2rem;">Store Image</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "About Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "About Our Store"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "We are passionate about providing high-quality products that enhance your daily life."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Section"
+    }
+  ]
+}
+{% endschema %}

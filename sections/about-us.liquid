@@ -1,0 +1,181 @@
+<!-- About Us Section -->
+<div class="about-us-section">
+  <div class="container">
+    <!-- About Desi Deals -->
+    <div class="about-content">
+      <h2 class="about-title">About DESI DEALS</h2>
+      <p class="about-text">
+        We're your trusted destination for authentic Indian products and incredible deals. 
+        From traditional spices to modern gadgets, we bring you the best of both worlds. 
+        Our carefully curated collection ensures quality meets affordability, making premium 
+        products accessible to everyone.
+      </p>
+    </div>
+    
+    <!-- Why Us -->
+    <div class="why-us-content">
+      <h2 class="why-us-title">Why Us</h2>
+      <p class="why-us-text">
+        With years of experience in sourcing and delivering quality products, we've built 
+        a reputation for reliability and customer satisfaction. Our direct partnerships 
+        with manufacturers allow us to offer unbeatable prices while maintaining the highest 
+        standards of quality and authenticity.
+      </p>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+/* Modern About Us Section */
+.about-us-section {
+  padding: 80px 0;
+  background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.about-us-section .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.about-content {
+  margin-bottom: 80px;
+  text-align: center;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.about-title {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #1a202c;
+  margin: 0 0 32px 0;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.about-text {
+  font-size: 1.25rem;
+  line-height: 1.7;
+  color: #4a5568;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  font-weight: 400;
+}
+
+.why-us-content {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.why-us-title {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #1a202c;
+  margin: 0 0 32px 0;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.why-us-text {
+  font-size: 1.25rem;
+  line-height: 1.7;
+  color: #4a5568;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  font-weight: 400;
+}
+
+@media (max-width: 768px) {
+  .about-us-section {
+    padding: 60px 0;
+  }
+  
+  .about-content {
+    margin-bottom: 60px;
+  }
+  
+  .about-title,
+  .why-us-title {
+    font-size: 2.5rem;
+    margin-bottom: 24px;
+  }
+  
+  .about-text,
+  .why-us-text {
+    font-size: 1.125rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-us-section {
+    padding: 40px 0;
+  }
+  
+  .about-content {
+    margin-bottom: 40px;
+  }
+  
+  .about-title,
+  .why-us-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .about-text,
+  .why-us-text {
+    font-size: 1rem;
+  }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "About Us",
+  "settings": [
+    {
+      "type": "text",
+      "id": "about_title",
+      "label": "About Title",
+      "default": "About DESI DEALS"
+    },
+    {
+      "type": "textarea",
+      "id": "about_text",
+      "label": "About Text",
+      "default": "We're your trusted destination for authentic Indian products and incredible deals. From traditional spices to modern gadgets, we bring you the best of both worlds. Our carefully curated collection ensures quality meets affordability, making premium products accessible to everyone."
+    },
+    {
+      "type": "text",
+      "id": "why_us_title",
+      "label": "Why Us Title",
+      "default": "Why Us"
+    },
+    {
+      "type": "textarea",
+      "id": "why_us_text",
+      "label": "Why Us Text",
+      "default": "With years of experience in sourcing and delivering quality products, we've built a reputation for reliability and customer satisfaction. Our direct partnerships with manufacturers allow us to offer unbeatable prices while maintaining the highest standards of quality and authenticity."
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Us"
+    }
+  ]
+}
+{% endschema %} 

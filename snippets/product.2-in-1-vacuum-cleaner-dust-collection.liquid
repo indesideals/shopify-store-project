@@ -1,0 +1,3006 @@
+{% comment %}
+  Clean Product Template - Using Simple Manual System
+  Manual star ratings and product data that you can control
+{% endcomment %}
+
+{% comment %} MANUAL PRODUCT DATA - Direct assignment {% endcomment %}
+{% if product.handle == 'shri-yantra-gomti-chakra-laxmi-pyramid' %}
+  {% assign product_rating = 4.6 %}
+  {% assign product_review_count = 3292 %}
+  {% assign product_description = "Say goodbye to dust, crumbs, and pet hair with the Wireless Car Vacuum Cleaner! 💨 This sleek, lightweight, and portable gadget is designed to keep your car, sofa, bed, and even gadgets spotless. With its USB charging, strong suction, and multiple nozzles, it's the perfect cleaning partner for every corner of your life. Carry it anywhere, clean anytime – because smart cleaning starts with the right tools! ✅" %}
+  {% assign product_key_features = "Sacred Shri Yantra geometry for divine energy,Authentic pyramid design with Goddess Laxmi blessings,High-quality materials ensure lasting spiritual benefits,Perfect for meditation and spiritual practices,Attracts prosperity and abundance into your life" | split: "," %}
+  {% assign how_to_use = "Place the pyramid in your puja room, living room, or office desk.|Ensure it faces East or North-East direction for best results.|Light incense or diya near it daily for enhanced energy.|During Diwali or auspicious occasions, keep it near Goddess Laxmi idol for blessings." | split: "|" %}
+  {% assign faqs = "Q1. Where should I place the Shri Yantra Gomti Chakra Laxmi Pyramid?|👉 Place it in the puja room, living room, or office desk in the East/North-East direction.|Q2. Does it really bring wealth and positivity?|👉 Yes, it is believed in Vastu & spiritual practices that Shri Yantra & Gomti Chakra attract prosperity and remove negativity.|Q3. Can it be gifted?|👉 Absolutely! It is a thoughtful and auspicious gift for Diwali, housewarming, weddings, and spiritual occasions.|Q4. Is it made of real Gomti Chakras?|👉 Yes, it includes genuine Gomti Chakras and other natural spiritual elements.|Q5. How big is it?|👉 The pyramid is compact and easy to place on a table, puja thali, or altar." | split: "|" %}
+{% elsif product.handle == '2-in-1-vacuum-cleaner-dust-collection' %}
+  {% assign product_rating = 4.9 %}
+  {% assign product_review_count = 1982 %}
+  {% assign product_description = "Say goodbye to dust, crumbs, and pet hair with the Wireless Car Vacuum Cleaner! 💨 This sleek, lightweight, and portable gadget is designed to keep your car, sofa, bed, and even gadgets spotless. With its USB charging, strong suction, and multiple nozzles, it's the perfect cleaning partner for every corner of your life. Carry it anywhere, clean anytime – because smart cleaning starts with the right tools! ✅" %}
+  {% assign product_key_features = "Compact & lightweight, easy to store|High-power motor with silent operation|Washable HEPA filter ♻️|Multiple nozzles: Brush, Flat Collector & Crevice Tool|Cleans dust, stones, paper scraps, pet hair, liquids|One-button operation for ease|Perfect fit in car cup holders, glove boxes & bags" | split: "|" %}
+  {% assign how_to_use = "Charge fully using the USB cable 🔋|Attach the desired nozzle (brush/flat/crevice)|Press the button & start cleaning|Use on car seats, sofas, gadgets, drawers etc.|Empty the dust container & wash the filter after use" | split: "|" %}
+  {% assign faqs = "Q1. How long does the battery last?|Works 23-30 minutes continuously after full charge|Q2. Can it clean liquids?|Yes, it can handle small water/liquid spills|Q3. Is the filter reusable?|Yes, the HEPA filter is washable & reusable|Q4. Can I use it at home too?|Absolutely! Perfect for cars, beds, sofas, laptops, and drawers|Q5. How to charge?|Use the included USB cable with laptop, adapter, or car charger" | split: "|" %}
+{% elsif product.handle == 'kitchen-sink-strainer-basket' %}
+  {% assign product_rating = 4.8 %}
+  {% assign product_review_count = 1247 %}
+  {% assign product_description = "Keep your sink drain clean and clog-free with this easy-press kitchen sink strainer basket. Perfect for catching food particles and preventing plumbing issues. Features a convenient press-down design for easy cleaning." %}
+  {% assign product_key_features = "Easy-press design for simple cleaning,Fits most standard sink drains,Catches food particles effectively,Durable construction,Prevents drain clogs" | split: "," %}
+  {% assign how_to_use = "Place in sink drain,Press down to secure,Clean regularly,Remove and rinse as needed" | split: "," %}
+  {% assign faqs = "What size sink does this fit?|Fits most standard kitchen sink drains.,How do I clean it?|Simply remove and rinse under running water.,Is it dishwasher safe?|Yes, it's dishwasher safe for easy cleaning." | split: "," %}
+
+{% else %}
+  {% assign product_rating = 4.5 %}
+  {% assign product_review_count = 1500 %}
+  {% assign product_description = product.description %}
+  {% assign product_key_features = "Premium quality materials,Easy to use and maintain,Durable and long-lasting,Perfect for daily use" | split: "," %}
+  {% assign how_to_use = "Follow product instructions,Use as intended,Clean after use,Store properly" | split: "," %}
+  {% assign faqs = "How do I use this product?|Follow the included instructions for best results.,Is it safe?|Yes, made with safe materials for intended use." | split: "," %}
+{% endif %}
+
+<div class="product-page">
+  <div class="product-container">
+    <!-- Product Images Section -->
+    <div class="product-images-section">
+      {% render 'product-image-swipe' %}
+    </div>
+
+    <!-- Product Info Section -->
+    <div class="product-info-section">
+      <!-- Product Name -->
+      <h1 class="product-title">{{ product.title }}</h1>
+      
+      <!-- Rating -->
+      <div class="product-rating">
+        <span class="rating-number">{{ product_rating }}</span>
+        {% render 'star-rating', rating: product_rating %}
+        <span class="review-count">({{ product_review_count }} reviews)</span>
+      </div>
+      
+      <!-- Price & Quantity Row -->
+      <div class="price-quantity-row">
+        <div class="product-price">
+          <span class="current-price">₹{{ product.price | money_without_currency | replace: '.00', '' }}</span>
+          {% if product.compare_at_price > product.price %}
+            <span class="compare-price">₹{{ product.compare_at_price | money_without_currency | replace: '.00', '' }}</span>
+          <span class="discount-badge">40% OFF</span>
+          {% endif %}
+        </div>
+        
+        <div class="quantity-selector">
+          <label for="quantity">Qty:</label>
+          <div class="quantity-controls">
+            <button type="button" onclick="updateQuantity(-1)">-</button>
+            <input type="number" id="quantity" value="1" min="1" max="10">
+            <button type="button" onclick="updateQuantity(1)">+</button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Product Action Buttons -->
+      <div class="product-actions">
+        <button class="add-to-cart-btn" onclick="addToCartDirect('{{ product.id }}', '{{ product.selected_or_first_available_variant.id }}', '{{ product.title | escape }}', '{{ product.price | divided_by: 100.0 }}', '{{ product.featured_image | image_url: width: 300 }}', '{{ product.url }}')">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12L8.1 13h7.45c.75 0 1.41-.41 1.75-1.03L21.7 4H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+          </svg>
+          Add to Cart
+        </button>
+        
+        <button class="buy-now-btn" onclick="buyNowDirect('{{ product.selected_or_first_available_variant.id }}')">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+          </svg>
+          Buy Now
+        </button>
+      </div>
+      
+          <!-- Trust Badges -->
+    <div class="trust-badges">
+      <div class="trust-badge">
+        <svg class="badge-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h4c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+        </svg>
+        <span>Free Delivery</span>
+      </div>
+      <div class="trust-badge">
+        <svg class="badge-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+        </svg>
+        <span>Quality Assured</span>
+      </div>
+      <div class="trust-badge">
+        <svg class="badge-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
+        </svg>
+        <span>Cash on Delivery</span>
+      </div>
+    </div>
+    </div>
+  </div>
+
+      <!-- Product Details Accordions -->
+    <div class="product-details">
+      <div class="accordion">
+        <button class="accordion-header active" onclick="toggleAccordion('description')">
+          <span>Product Description</span>
+          <span class="accordion-icon">-</span>
+        </button>
+        <div id="description" class="accordion-content active">
+          <div class="description-content">
+            {{ product_description | replace: '\n\n', '<br><br>' | replace: '\n', '<br>' }}
+          </div>
+        </div>
+      </div>
+    
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion('features')">
+        <span>Key Features</span>
+        <span class="accordion-icon">+</span>
+      </button>
+      <div id="features" class="accordion-content">
+        <ul class="features-list">
+          {% for feature in product_key_features %}
+            <li>{{ feature }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion('how-to-use')">
+        <span>How to Use</span>
+        <span class="accordion-icon">+</span>
+      </button>
+      <div id="how-to-use" class="accordion-content">
+        <ol class="how-to-list">
+          {% for step in how_to_use %}
+            <li>{{ step }}</li>
+          {% endfor %}
+        </ol>
+      </div>
+    </div>
+    
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion('faqs')">
+        <span>FAQs</span>
+        <span class="accordion-icon">+</span>
+      </button>
+      <div id="faqs" class="accordion-content">
+        <div class="faqs-list">
+          {% for faq in faqs %}
+            {% assign faq_parts = faq | split: "|" %}
+            <div class="faq-item">
+              <h4>{{ faq_parts[0] }}</h4>
+              <p>{{ faq_parts[1] }}</p>
+            </div>
+          {% endfor %}
+            </div>
+      </div>
+            </div>
+            
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion('shipping')">
+        <span>Shipping & Returns</span>
+        <span class="accordion-icon">+</span>
+      </button>
+      <div id="shipping" class="accordion-content">
+        <div class="shipping-info">
+          <p style="margin-top: 15px; font-size: 14px; color: #666;">
+            🚚 Fast delivery in 5-7 days! 💯 No-fuss returns guaranteed. 
+            <a href="https://desideals.app/pages/shipping-and-returns-policy" style="color: #007bff; text-decoration: underline;">Check out our full policy here</a> ✨
+          </p>
+            </div>
+            </div>
+            </div>
+            </div>
+            
+  <!-- Spiritual Callout Section -->
+  <div class="fun-functional-section">
+    <h2 class="fun-functional-title">Carry it anywhere, clean anytime</h2>
+            </div>
+            
+  <!-- Product Testimonials Section -->
+  {% comment %} Removed testimonials for Shri Yantra {% endcomment %}
+  {% if false %}
+  <div class="product-testimonials-section">
+    <div class="testimonials-slider">
+      <div class="testimonials-container">
+        {% if product.handle == 'shri-yantra-gomti-chakra-laxmi-pyramid' %}
+          <!-- 3 Hinglish Reviews -->
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">Ye carrot brush bahut zabardast hai! Aloo aur gajar ko itna jaldi saaf kar deta hai. Cute design hai aur wet hands mein bhi slip nahi hota.</p>
+            <div class="testimonial-author">- Priya Sharma, Mumbai</div>
+            </div>
+            
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">Roz ke cooking ke liye perfect hai! Bristles gentle hain lekin effective. Sink area ab kitna cute lagta hai is brush ke saath.</p>
+            <div class="testimonial-author">- Rajesh Kumar, Delhi</div>
+            </div>
+            
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">Quality bahut acchi hai! Sabziyon se gandagi nikal jati hai bina damage kiye. Grip excellent hai aur jaldi dry ho jata hai.</p>
+            <div class="testimonial-author">- Meera Patel, Bangalore</div>
+            </div>
+            
+          <!-- 3 Mixed Hinglish-English Reviews -->
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">Best kitchen investment hai! Works great on all types of produce. Carrot shape adorable hai aur functional bhi.</p>
+            <div class="testimonial-author">- Amit Singh, Chennai</div>
+            </div>
+            
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">Super effective aur cute hai! Cleans vegetables thoroughly while keeping nutrients intact. Highly recommend karta hun!</p>
+            <div class="testimonial-author">- Neha Gupta, Hyderabad</div>
+            </div>
+            
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">Daily kaam easy ho gaya hai! The bristles are firm yet gentle. Kitchen mein aesthetic touch bhi mil gaya hai.</p>
+            <div class="testimonial-author">- Karan Sethi, Pune</div>
+            </div>
+            
+          <!-- 4 English Reviews -->
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">This brush is absolutely amazing! Perfect for cleaning all types of vegetables. The design is both functional and adorable.</p>
+            <div class="testimonial-author">- Kavya Sharma, Kolkata</div>
+            </div>
+            
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">Excellent quality and very effective! Removes dirt without damaging the vegetables. The grip is perfect for wet hands.</p>
+            <div class="testimonial-author">- Arjun Malhotra, Ahmedabad</div>
+            </div>
+            
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">Love this product! Makes vegetable cleaning so much easier and faster. The carrot shape adds a fun touch to my kitchen.</p>
+            <div class="testimonial-author">- Priya Verma, Jaipur</div>
+            </div>
+            
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">Perfect for everyday use! Gentle on vegetables but tough on dirt. Highly recommend for anyone who loves cooking.</p>
+            <div class="testimonial-author">- Rohan Singh, Lucknow</div>
+            </div>
+        {% elsif product.handle == 'kitchen-sink-strainer-basket' %}
+          <!-- 3 Hinglish Reviews -->
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">Ye strainer basket perfect hai! Saare food particles catch karta hai aur clogs prevent karta hai. Clean karna bhi easy hai.</p>
+            <div class="testimonial-author">- Sanjay Verma, Mumbai</div>
+            </div>
+            
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">Quality bahut acchi hai! Press-down design cleaning ko itna easy bana deta hai. Ab drain issues nahi hote kitchen mein.</p>
+            <div class="testimonial-author">- Kavita Reddy, Delhi</div>
+            </div>
+            
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">Excellent product hai! Sink mein perfectly fit hota hai aur sab kuch catch karta hai. Design practical aur durable hai.</p>
+            <div class="testimonial-author">- Deepak Malhotra, Bangalore</div>
+            </div>
+            
+          <!-- 3 Mixed Hinglish-English Reviews -->
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">Best strainer hai! Fits perfectly in my sink and catches everything. No more drain problems in kitchen.</p>
+            <div class="testimonial-author">- Priya Desai, Chennai</div>
+            </div>
+            
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">Super effective strainer! Easy to clean and prevents all clogs. Kitchen sink ab clean rehta hai always.</p>
+            <div class="testimonial-author">- Rahul Sharma, Hyderabad</div>
+            </div>
+            
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">Daily use ke liye perfect! The design is practical and durable. Sink area ab organized lagta hai.</p>
+            <div class="testimonial-author">- Anjali Kapoor, Pune</div>
+            </div>
+            
+          <!-- 4 English Reviews -->
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">This strainer basket is excellent! Catches all food particles and prevents drain clogs completely.</p>
+            <div class="testimonial-author">- Ananya Patel, Kolkata</div>
+            </div>
+            
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">Perfect fit for my sink! The press-down design makes cleaning so much easier. Highly recommend!</p>
+            <div class="testimonial-author">- Aditya Kumar, Ahmedabad</div>
+            </div>
+            
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">Great quality and very effective! No more drain issues since I started using this strainer basket.</p>
+            <div class="testimonial-author">- Shreya Reddy, Jaipur</div>
+            </div>
+            
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">Excellent product! Fits perfectly and catches everything. The design is both practical and durable.</p>
+            <div class="testimonial-author">- Vikram Gupta, Lucknow</div>
+            </div>
+          {% elsif product.handle == 'oil-dispenser-silicone-brush-250ml' %}
+          <!-- 3 Hinglish Reviews -->
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">This Shri Yantra pyramid has brought such positive energy to my home! I can feel the divine vibrations during meditation. Truly blessed!</p>
+            <div class="testimonial-author">- Anjali Desai, Mumbai</div>
+            </div>
+            
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">Oil dispenser bahut pasand aaya! Ab messy oil bottles nahi hain. Brush precise control deta hai aur clean karna easy hai.</p>
+            <div class="testimonial-author">- Vikram Sharma, Delhi</div>
+            </div>
+            
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">Cooking ke liye perfect hai! 250ml capacity ideal hai aur silicone brush versatile hai. Quality bahut acchi hai.</p>
+            <div class="testimonial-author">- Ritu Kapoor, Bangalore</div>
+            </div>
+            
+          <!-- 3 Mixed Hinglish-English Reviews -->
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">Best oil dispenser hai! Perfect control over oil application and silicone brush works great for greasing pans.</p>
+            <div class="testimonial-author">- Meera Patel, Chennai</div>
+            </div>
+            
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">Love this oil dispenser! No more messy bottles and brush gives precise control. Clean karna bhi easy hai.</p>
+            <div class="testimonial-author">- Arjun Singh, Hyderabad</div>
+            </div>
+          
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">Cooking mein perfect hai! The 250ml capacity is ideal and silicone brush versatile hai. Great quality product.</p>
+            <div class="testimonial-author">- Neha Gupta, Pune</div>
+            </div>
+            
+          <!-- 4 English Reviews -->
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">This oil dispenser is amazing! Perfect control over oil application and the silicone brush works great for greasing pans.</p>
+            <div class="testimonial-author">- Meera Iyer, Kolkata</div>
+            </div>
+            
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">Excellent product! No more messy oil bottles. The brush gives precise control and it's very easy to clean.</p>
+            <div class="testimonial-author">- Rahul Desai, Ahmedabad</div>
+            </div>
+            
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">Perfect for cooking! The 250ml capacity is ideal and the silicone brush is so versatile. Great quality product.</p>
+            <div class="testimonial-author">- Pooja Nambiar, Jaipur</div>
+            </div>
+            
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">Love this oil dispenser! Makes cooking so much easier and cleaner. The brush is perfect for precise oil application.</p>
+            <div class="testimonial-author">- Saurabh Joshi, Lucknow</div>
+            </div>
+        {% else %}
+          <!-- 3 Hinglish Reviews -->
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">Product quality bahut acchi hai! Exactly jo chahiye tha wahi mila. Value for money excellent hai aur customer service bhi zabardast.</p>
+            <div class="testimonial-author">- Arjun Mehta, Mumbai</div>
+            </div>
+            
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">Highly recommend karta hun! Perfectly work karta hai aur quality outstanding hai. Definitely dubara buy karunga.</p>
+            <div class="testimonial-author">- Shweta Iyer, Delhi</div>
+            </div>
+            
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">Excellent purchase hai! Product expectations se exceed karta hai. Fast delivery aur great packaging bhi.</p>
+            <div class="testimonial-author">- Rahul Joshi, Bangalore</div>
+            </div>
+            
+          <!-- 3 Mixed Hinglish-English Reviews -->
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">Amazing product quality! Exactly what I was looking for. Value for money excellent hai aur customer service bhi great.</p>
+            <div class="testimonial-author">- Priya Sharma, Chennai</div>
+            </div>
+            
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">Highly recommend this product! Works perfectly and quality outstanding hai. Will definitely buy again.</p>
+            <div class="testimonial-author">- Rajesh Kumar, Hyderabad</div>
+            </div>
+          
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">Excellent purchase! Product exceeded my expectations. Fast delivery aur great packaging bhi mila.</p>
+            <div class="testimonial-author">- Meera Patel, Pune</div>
+            </div>
+            
+          <!-- 4 English Reviews -->
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">Amazing product quality! Exactly what I was looking for. Great value for money and excellent customer service.</p>
+            <div class="testimonial-author">- Kavya Sharma, Kolkata</div>
+            </div>
+            
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">Highly recommend this product! Works perfectly and the quality is outstanding. Will definitely buy again.</p>
+            <div class="testimonial-author">- Arjun Malhotra, Ahmedabad</div>
+            </div>
+            
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">Excellent purchase! The product exceeded my expectations. Fast delivery and great packaging too.</p>
+            <div class="testimonial-author">- Priya Verma, Jaipur</div>
+            </div>
+            
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">Perfect product! Great quality and exactly what I needed. Fast delivery and excellent customer service.</p>
+            <div class="testimonial-author">- Rohan Singh, Lucknow</div>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  <!-- Product Video Section -->
+  <div class="product-video-section">
+    <video class="product-video" autoplay muted loop playsinline>
+      <source src="https://ik.imagekit.io/5rtpzv0na/852388-hd_1920_1080_24fps.mp4?updatedAt=1756151757446" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <!-- Fast Shipping Section -->
+  <div class="fast-shipping-section">
+    <h2 class="fast-shipping-title">Product Shipped Fast</h2>
+  </div>
+
+  <!-- You Might Also Like Section -->
+  <div class="you-might-also-like-section">
+    <h2 class="section-title">You Might Also Like</h2>
+    <div class="products-carousel">
+      <div class="products-container">
+        {% assign product1 = all_products['pink-flamingo-led-night-light'] %}
+        {% assign product2 = all_products['led-angel-night-light'] %}
+        {% assign product3 = all_products['mini-steam-iron-garment-steamer'] %}
+        {% assign product4 = blank %}
+        
+        {% if product1.id != blank %}
+          <div class="product-card" onclick="window.location.href='{{ product1.url }}'">
+            <div class="product-image">
+              <img src="{{ product1.featured_image | img_url: '300x300' }}" alt="{{ product1.title }}">
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">{{ product1.title }}</h3>
+              <div class="product-price">
+                {% if product1.compare_at_price > product1.price %}
+                  <span class="original-price">₹{{ product1.compare_at_price | money_without_currency }}</span>
+                {% endif %}
+                ₹{{ product1.price | money_without_currency }}
+              </div>
+              <button class="quick-atc-btn" onclick="event.stopPropagation(); addToCartDirect('{{ product1.id }}', '{{ product1.selected_or_first_available_variant.id }}', '{{ product1.title | escape }}', '{{ product1.price | divided_by: 100.0 }}', '{{ product1.featured_image | image_url: width: 300 }}', '{{ product1.url }}')">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12L8.1 13h7.45c.75 0 1.41-.41 1.75-1.03L21.7 4H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+                </svg>
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        {% endif %}
+        
+        {% if product2.id != blank %}
+          <div class="product-card" onclick="window.location.href='{{ product2.url }}'">
+            <div class="product-image">
+              <img src="{{ product2.featured_image | img_url: '300x300' }}" alt="{{ product2.title }}">
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">{{ product2.title }}</h3>
+              <div class="product-price">
+                {% if product2.compare_at_price > product2.price %}
+                  <span class="original-price">₹{{ product2.compare_at_price | money_without_currency }}</span>
+                {% endif %}
+                ₹{{ product2.price | money_without_currency }}
+              </div>
+              <button class="quick-atc-btn" onclick="event.stopPropagation(); addToCartDirect('{{ product2.id }}', '{{ product2.selected_or_first_available_variant.id }}', '{{ product2.title | escape }}', '{{ product2.price | divided_by: 100.0 }}', '{{ product2.featured_image | image_url: width: 300 }}', '{{ product2.url }}')">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12L8.1 13h7.45c.75 0 1.41-.41 1.75-1.03L21.7 4H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+                </svg>
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        {% endif %}
+        
+        {% if product3.id != blank %}
+          <div class="product-card" onclick="window.location.href='{{ product3.url }}'">
+            <div class="product-image">
+              <img src="{{ product3.featured_image | img_url: '300x300' }}" alt="{{ product3.title }}">
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">{{ product3.title }}</h3>
+              <div class="product-price">
+                {% if product3.compare_at_price > product3.price %}
+                  <span class="original-price">₹{{ product3.compare_at_price | money_without_currency }}</span>
+                {% endif %}
+                ₹{{ product3.price | money_without_currency }}
+              </div>
+              <button class="quick-atc-btn" onclick="event.stopPropagation(); addToCartDirect('{{ product3.id }}', '{{ product3.selected_or_first_available_variant.id }}', '{{ product3.title | escape }}', '{{ product3.price | divided_by: 100.0 }}', '{{ product3.featured_image | image_url: width: 300 }}', '{{ product3.url }}')">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12L8.1 13h7.45c.75 0 1.41-.41 1.75-1.03L21.7 4H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+                </svg>
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        {% endif %}
+        
+        {% if product4.id != blank %}
+          <div class="product-card" onclick="window.location.href='{{ product4.url }}'">
+            <div class="product-image">
+              <img src="{{ product4.featured_image | img_url: '300x300' }}" alt="{{ product4.title }}">
+      </div>
+            <div class="product-info">
+              <h3 class="product-name">{{ product4.title }}</h3>
+              <div class="product-price">
+                {% if product4.compare_at_price > product4.price %}
+                  <span class="original-price">₹{{ product4.compare_at_price | money_without_currency }}</span>
+                {% endif %}
+                ₹{{ product4.price | money_without_currency }}
+              </div>
+              <button class="quick-atc-btn" onclick="event.stopPropagation(); addToCartDirect('{{ product4.id }}', '{{ product4.selected_or_first_available_variant.id }}', '{{ product4.title | escape }}', '{{ product4.price | divided_by: 100.0 }}', '{{ product4.featured_image | image_url: width: 300 }}', '{{ product4.url }}')">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12L8.1 13h7.45c.75 0 1.41-.41 1.75-1.03L21.7 4H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+                </svg>
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <!-- Customer Reviews -->
+  <div class="reviews-section">
+    <div class="reviews-header">
+      <div class="reviews-title-section">
+        <h2 class="reviews-title">Customer Reviews</h2>
+        <div class="reviews-subtitle">What our customers are saying</div>
+      </div>
+      <div class="overall-rating">
+        <div class="rating-main">
+          <span class="rating-number">{{ product_rating }}</span>
+          <div class="rating-stars">
+            {% render 'star-rating', rating: product_rating %}
+          </div>
+        </div>
+        <div class="rating-details">
+          <span class="total-reviews">Based on {{ product_review_count }} reviews</span>
+          <div class="rating-badge">Excellent</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Reviews Sorting -->
+    <div class="reviews-sorting">
+      <div class="sort-dropdown">
+        <label for="sort-select">Sort by:</label>
+        <select id="sort-select" onchange="sortReviews(this.value, this)">
+          <option value="newest">Newest First</option>
+          <option value="oldest">Oldest First</option>
+          <option value="rating">Highest Rated</option>
+          <option value="lowest">Lowest Rated</option>
+          <option value="helpful">Most Helpful</option>
+        </select>
+      </div>
+    </div>
+    
+    <div class="reviews-grid" id="reviews-container">
+      <div class="review-card" data-rating="5" data-date="2024-01-28" data-helpful="15">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">
+              <span>RS</span>
+            </div>
+            <div class="reviewer-details">
+              <span class="reviewer-name">Rohit Sharma</span>
+              <span class="reviewer-location">Mumbai, Maharashtra</span>
+            </div>
+          </div>
+          <div class="review-rating">
+            <span class="review-stars">★★★★★</span>
+            <span class="review-date">Today</span>
+          </div>
+        </div>
+        <p class="review-text">"Compact aur powerful! Car ke liye best hai. Ek baar charge karke easily 2–3 baar car clean ho gaya"</p>
+        <div class="review-footer">
+          <span class="verified-badge">
+            <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            Verified Buyer
+          </span>
+          <div class="review-helpful">
+            <button class="helpful-btn" onclick="markHelpful(this, 15)">
+              <svg class="helpful-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/>
+              </svg>
+              Helpful (15)
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="review-card" data-rating="5" data-date="2024-01-25" data-helpful="12">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">
+              <span>PM</span>
+            </div>
+            <div class="reviewer-details">
+              <span class="reviewer-name">Priya Malhotra</span>
+              <span class="reviewer-location">Delhi, NCR</span>
+            </div>
+          </div>
+          <div class="review-rating">
+            <span class="review-stars">★★★★★</span>
+            <span class="review-date">3 days ago</span>
+          </div>
+        </div>
+        <p class="review-text">"Loved the design 😍. Sofa crumbs, cushions aur even my laptop keyboard cleaned perfectly. Highly recommend!"</p>
+        <div class="review-footer">
+          <span class="verified-badge">
+            <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            Verified Buyer
+          </span>
+          <div class="review-helpful">
+            <button class="helpful-btn" onclick="markHelpful(this, 12)">
+              <svg class="helpful-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/>
+              </svg>
+              Helpful (12)
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="review-card" data-rating="5" data-date="2024-01-22" data-helpful="18">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">
+              <span>AV</span>
+            </div>
+            <div class="reviewer-details">
+              <span class="reviewer-name">Ankit Verma</span>
+              <span class="reviewer-location">Bangalore, Karnataka</span>
+            </div>
+          </div>
+          <div class="review-rating">
+            <span class="review-stars">★★★★★</span>
+            <span class="review-date">1 week ago</span>
+          </div>
+        </div>
+        <p class="review-text">"Pet hair ka sabse bada solution mil gaya. Simple to use aur suction power zabardast hai"</p>
+        <div class="review-footer">
+          <span class="verified-badge">
+            <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            Verified Buyer
+          </span>
+          <div class="review-helpful">
+            <button class="helpful-btn" onclick="markHelpful(this, 18)">
+              <svg class="helpful-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/>
+              </svg>
+              Helpful (18)
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="review-card" data-rating="4" data-date="2024-01-20" data-helpful="14">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">
+              <span>DR</span>
+            </div>
+            <div class="reviewer-details">
+              <span class="reviewer-name">Deepika Rathi</span>
+              <span class="reviewer-location">Pune, Maharashtra</span>
+            </div>
+          </div>
+          <div class="review-rating">
+            <span class="review-stars">★★★★☆</span>
+            <span class="review-date">1 week ago</span>
+          </div>
+        </div>
+        <p class="review-text">"Perfect for car interiors. Stylish design aur easy to store. Good product!"</p>
+        <div class="review-footer">
+          <span class="verified-badge">
+            <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            Verified Buyer
+          </span>
+          <div class="review-helpful">
+            <button class="helpful-btn" onclick="markHelpful(this, 14)">
+              <svg class="helpful-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/>
+              </svg>
+              Helpful (14)
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="review-card" data-rating="4" data-date="2024-01-18" data-helpful="16">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">
+              <span>RN</span>
+            </div>
+            <div class="reviewer-details">
+              <span class="reviewer-name">Ravi Nair</span>
+              <span class="reviewer-location">Ahmedabad, Gujarat</span>
+            </div>
+          </div>
+          <div class="review-rating">
+            <span class="review-stars">★★★★☆</span>
+            <span class="review-date">1 week ago</span>
+          </div>
+        </div>
+        <p class="review-text">"Quick cleaning solution. Sofa pe girte hi crumbs remove ho gaye. Handy device"</p>
+        <div class="review-footer">
+          <span class="verified-badge">
+            <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            Verified Buyer
+          </span>
+          <div class="review-helpful">
+            <button class="helpful-btn" onclick="markHelpful(this, 16)">
+              <svg class="helpful-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/>
+              </svg>
+              Helpful (16)
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="review-card" data-rating="4" data-date="2024-01-16" data-helpful="13">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">
+              <span>PB</span>
+            </div>
+            <div class="reviewer-details">
+              <span class="reviewer-name">Pooja Bansal</span>
+              <span class="reviewer-location">Chennai, Tamil Nadu</span>
+            </div>
+          </div>
+          <div class="review-rating">
+            <span class="review-stars">★★★★☆</span>
+            <span class="review-date">1 week ago</span>
+          </div>
+        </div>
+        <p class="review-text">"Very effective for sofa crumbs, car seats and even drawers. Nice little gadget!"</p>
+        <div class="review-footer">
+          <span class="verified-badge">
+            <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            Verified Buyer
+          </span>
+          <div class="review-helpful">
+            <button class="helpful-btn" onclick="markHelpful(this, 13)">
+              <svg class="helpful-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/>
+              </svg>
+              Helpful (13)
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="review-card" data-rating="5" data-date="2024-01-14" data-helpful="17">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">
+              <span>VC</span>
+            </div>
+            <div class="reviewer-details">
+              <span class="reviewer-name">Vikas Choudhary</span>
+              <span class="reviewer-location">Hyderabad, Telangana</span>
+            </div>
+          </div>
+          <div class="review-rating">
+            <span class="review-stars">★★★★★</span>
+            <span class="review-date">1 week ago</span>
+          </div>
+        </div>
+        <p class="review-text">"Strong suction + sleek design. Price ke hisaab se ekdum paisa vasool gadget hai"</p>
+        <div class="review-footer">
+          <span class="verified-badge">
+            <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            Verified Buyer
+          </span>
+          <div class="review-helpful">
+            <button class="helpful-btn" onclick="markHelpful(this, 17)">
+              <svg class="helpful-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/>
+              </svg>
+              Helpful (17)
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="review-card" data-rating="5" data-date="2024-01-12" data-helpful="11">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">
+              <span>RK</span>
+            </div>
+            <div class="reviewer-details">
+              <span class="reviewer-name">Rhea Kapoor</span>
+              <span class="reviewer-location">Kolkata, West Bengal</span>
+            </div>
+          </div>
+          <div class="review-rating">
+            <span class="review-stars">★★★★★</span>
+            <span class="review-date">1 week ago</span>
+          </div>
+        </div>
+        <p class="review-text">"Easy to carry, fits in my handbag too 😍. Cleaning on-the-go is so convenient"</p>
+        <div class="review-footer">
+          <span class="verified-badge">
+            <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            Verified Buyer
+          </span>
+          <div class="review-helpful">
+            <button class="helpful-btn" onclick="markHelpful(this, 11)">
+              <svg class="helpful-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/>
+              </svg>
+              Helpful (11)
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="review-card" data-rating="5" data-date="2024-01-10" data-helpful="19">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">
+              <span>AM</span>
+            </div>
+            <div class="reviewer-details">
+              <span class="reviewer-name">Aditya Mehra</span>
+              <span class="reviewer-location">Jaipur, Rajasthan</span>
+            </div>
+          </div>
+          <div class="review-rating">
+            <span class="review-stars">★★★★★</span>
+            <span class="review-date">1 week ago</span>
+          </div>
+        </div>
+        <p class="review-text">"Tiny but mighty! Even dust from corners and laptop cleaned super easily"</p>
+        <div class="review-footer">
+          <span class="verified-badge">
+            <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            Verified Buyer
+          </span>
+          <div class="review-helpful">
+            <button class="helpful-btn" onclick="markHelpful(this, 19)">
+              <svg class="helpful-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/>
+              </svg>
+              Helpful (19)
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="review-card" data-rating="4" data-date="2024-01-08" data-helpful="12">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">
+              <span>KA</span>
+            </div>
+            <div class="reviewer-details">
+              <span class="reviewer-name">Karan Arora</span>
+              <span class="reviewer-location">Lucknow, Uttar Pradesh</span>
+            </div>
+          </div>
+          <div class="review-rating">
+            <span class="review-stars">★★★★☆</span>
+            <span class="review-date">1 week ago</span>
+          </div>
+        </div>
+        <p class="review-text">"Portable hai, aur car ke cup holder mein fit ho jaata hai. Love the design"</p>
+        <div class="review-footer">
+          <span class="verified-badge">
+            <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            Verified Buyer
+          </span>
+          <div class="review-helpful">
+            <button class="helpful-btn" onclick="markHelpful(this, 12)">
+              <svg class="helpful-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/>
+              </svg>
+              Helpful (12)
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="review-card" data-rating="4" data-date="2024-01-06" data-helpful="20">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">
+              <span>MS</span>
+            </div>
+            <div class="reviewer-details">
+              <span class="reviewer-name">Megha Sinha</span>
+              <span class="reviewer-location">Chandigarh, Punjab</span>
+            </div>
+          </div>
+          <div class="review-rating">
+            <span class="review-stars">★★★★☆</span>
+            <span class="review-date">1 week ago</span>
+          </div>
+        </div>
+        <p class="review-text">"Small device, big kaam! Chhota sa lagta hai but cleans brilliantly"</p>
+        <div class="review-footer">
+          <span class="verified-badge">
+            <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            Verified Buyer
+          </span>
+          <div class="review-helpful">
+            <button class="helpful-btn" onclick="markHelpful(this, 20)">
+              <svg class="helpful-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/>
+              </svg>
+              Helpful (20)
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="review-card" data-rating="4" data-date="2024-01-04" data-helpful="14">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">
+              <span>AD</span>
+            </div>
+            <div class="reviewer-details">
+              <span class="reviewer-name">Amit Dubey</span>
+              <span class="reviewer-location">Surat, Gujarat</span>
+            </div>
+          </div>
+          <div class="review-rating">
+            <span class="review-stars">★★★★☆</span>
+            <span class="review-date">1 week ago</span>
+          </div>
+        </div>
+        <p class="review-text">"Easy to handle aur cleaning bhi fast hai. Charging thoda aur better ho toh perfect hota"</p>
+        <div class="review-footer">
+          <span class="verified-badge">
+            <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            Verified Buyer
+          </span>
+          <div class="review-helpful">
+            <button class="helpful-btn" onclick="markHelpful(this, 14)">
+              <svg class="helpful-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/>
+              </svg>
+              Helpful (14)
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="review-card" data-rating="4" data-date="2024-01-02" data-helpful="18">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">
+              <span>SM</span>
+            </div>
+            <div class="reviewer-details">
+              <span class="reviewer-name">Shweta Menon</span>
+              <span class="reviewer-location">Kochi, Kerala</span>
+            </div>
+          </div>
+          <div class="review-rating">
+            <span class="review-stars">★★★★☆</span>
+            <span class="review-date">1 week ago</span>
+          </div>
+        </div>
+        <p class="review-text">"Value for money. Best for small spaces like sofa corners aur laptop"</p>
+        <div class="review-footer">
+          <span class="verified-badge">
+            <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            Verified Buyer
+          </span>
+          <div class="review-helpful">
+            <button class="helpful-btn" onclick="markHelpful(this, 18)">
+              <svg class="helpful-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/>
+              </svg>
+              Helpful (18)
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="review-card" data-rating="5" data-date="2023-12-30" data-helpful="15">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">
+              <span>NA</span>
+            </div>
+            <div class="reviewer-details">
+              <span class="reviewer-name">Nisha Agarwal</span>
+              <span class="reviewer-location">Indore, Madhya Pradesh</span>
+            </div>
+          </div>
+          <div class="review-rating">
+            <span class="review-stars">★★★★★</span>
+            <span class="review-date">1 week ago</span>
+          </div>
+        </div>
+        <p class="review-text">"Compact, stylish aur kaafi useful. Ab ghar aur car dono clean rahte hain"</p>
+        <div class="review-footer">
+          <span class="verified-badge">
+            <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            Verified Buyer
+          </span>
+          <div class="review-helpful">
+            <button class="helpful-btn" onclick="markHelpful(this, 15)">
+              <svg class="helpful-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/>
+              </svg>
+              Helpful (15)
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="review-card" data-rating="5" data-date="2023-12-28" data-helpful="16">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">
+              <span>SJ</span>
+            </div>
+            <div class="reviewer-details">
+              <span class="reviewer-name">Saurabh Jain</span>
+              <span class="reviewer-location">Mumbai, Maharashtra</span>
+            </div>
+          </div>
+          <div class="review-rating">
+            <span class="review-stars">★★★★★</span>
+            <span class="review-date">1 week ago</span>
+          </div>
+        </div>
+        <p class="review-text">"One of the smartest gadgets I've bought this year. Best for bachelors like me 😂"</p>
+        <div class="review-footer">
+          <span class="verified-badge">
+            <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            Verified Buyer
+          </span>
+          <div class="review-helpful">
+            <button class="helpful-btn" onclick="markHelpful(this, 16)">
+              <svg class="helpful-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/>
+              </svg>
+              Helpful (16)
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="review-card" data-rating="5" data-date="2023-12-25" data-helpful="13">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">
+              <span>TD</span>
+            </div>
+            <div class="reviewer-details">
+              <span class="reviewer-name">Tanvi Desai</span>
+              <span class="reviewer-location">Delhi, NCR</span>
+            </div>
+          </div>
+          <div class="review-rating">
+            <span class="review-stars">★★★★★</span>
+            <span class="review-date">1 week ago</span>
+          </div>
+        </div>
+        <p class="review-text">"From sofas to car mats, everything looks new again. Totally worth it!"</p>
+        <div class="review-footer">
+          <span class="verified-badge">
+            <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            Verified Buyer
+          </span>
+          <div class="review-helpful">
+            <button class="helpful-btn" onclick="markHelpful(this, 13)">
+              <svg class="helpful-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/>
+              </svg>
+              Helpful (13)
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="review-card" data-rating="4" data-date="2023-12-22" data-helpful="17">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">
+              <span>PS</span>
+            </div>
+            <div class="reviewer-details">
+              <span class="reviewer-name">Pooja Sharma</span>
+              <span class="reviewer-location">Bangalore, Karnataka</span>
+            </div>
+          </div>
+          <div class="review-rating">
+            <span class="review-stars">★★★★☆</span>
+            <span class="review-date">1 week ago</span>
+          </div>
+        </div>
+        <p class="review-text">"Good product for quick cleaning. Works well on car seats and sofas."</p>
+        <div class="review-footer">
+          <span class="verified-badge">
+            <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            Verified Buyer
+          </span>
+          <div class="review-helpful">
+            <button class="helpful-btn" onclick="markHelpful(this, 17)">
+              <svg class="helpful-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/>
+              </svg>
+              Helpful (17)
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="review-card" data-rating="4" data-date="2023-12-20" data-helpful="12">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">
+              <span>AI</span>
+            </div>
+            <div class="reviewer-details">
+              <span class="reviewer-name">Arjun Iyer</span>
+              <span class="reviewer-location">Chennai, Tamil Nadu</span>
+            </div>
+          </div>
+          <div class="review-rating">
+            <span class="review-stars">★★★★☆</span>
+            <span class="review-date">1 week ago</span>
+          </div>
+        </div>
+        <p class="review-text">"Good for quick cleaning. Portable and handy device."</p>
+        <div class="review-footer">
+          <span class="verified-badge">
+            <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            Verified Buyer
+          </span>
+          <div class="review-helpful">
+            <button class="helpful-btn" onclick="markHelpful(this, 12)">
+              <svg class="helpful-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/>
+              </svg>
+              Helpful (12)
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="review-card" data-rating="5" data-date="2023-12-18" data-helpful="21">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">
+              <span>MD</span>
+            </div>
+            <div class="reviewer-details">
+              <span class="reviewer-name">Meena Desai</span>
+              <span class="reviewer-location">Hyderabad, Telangana</span>
+            </div>
+          </div>
+          <div class="review-rating">
+            <span class="review-stars">★★★★★</span>
+            <span class="review-date">1 week ago</span>
+          </div>
+        </div>
+        <p class="review-text">"Excellent product! Works great for car and home cleaning. Highly recommend!"</p>
+        <div class="review-footer">
+          <span class="verified-badge">
+            <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            Verified Buyer
+          </span>
+          <div class="review-helpful">
+            <button class="helpful-btn" onclick="markHelpful(this, 21)">
+              <svg class="helpful-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/>
+              </svg>
+              Helpful (21)
+            </button>
+        </div>
+    </div>
+    
+    <!-- Show More Button -->
+    <div class="show-more-container">
+      <button class="show-more-btn" onclick="showMoreReviews()">
+        <span class="show-more-text">Show More Reviews</span>
+        <svg class="show-more-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M7 10l5 5 5-5z"/>
+        </svg>
+      </button>
+    </div>
+      </div>
+    </div>
+    
+
+</div>
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox" class="lightbox">
+    <span class="lightbox-close">&times;</span>
+    <div class="lightbox-content">
+      <img id="lightbox-image" src="" alt="">
+      <!-- Lightbox Loading Skeleton -->
+      <div id="lightbox-loading-skeleton" class="lightbox-loading-skeleton">
+        <div class="skeleton-shimmer"></div>
+      </div>
+      <div class="lightbox-nav">
+        <button class="lightbox-arrow lightbox-prev" onclick="changeLightboxSlide(-1)">‹</button>
+        <button class="lightbox-arrow lightbox-next" onclick="changeLightboxSlide(1)">›</button>
+      </div>
+    </div>
+  </div>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+.product-page {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 5px;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #fff;
+  overflow-x: hidden;
+}
+
+.product-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+  margin-bottom: 20px;
+  align-items: start;
+}
+
+/* Product Images Section */
+.product-images-section {
+  position: static;
+  max-width: 100%;
+}
+
+/* Old image system CSS removed - now using product-image-swipe.liquid */
+
+/* Product Info Section */
+.product-info-section {
+  padding: 3px 0;
+  max-width: 100%;
+}
+
+.product-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  margin-bottom: 6px;
+  color: #1a1a1a;
+  line-height: 1.2;
+}
+
+.product-rating {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.rating-number {
+  font-weight: 700;
+  color: #6b46c1;
+  font-size: 0.9rem;
+}
+
+.review-count {
+  color: #666;
+  font-size: 0.7rem;
+}
+
+.price-quantity-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 12px;
+  gap: 12px;
+}
+
+.product-price {
+  flex: 1;
+}
+
+.current-price {
+  font-size: 1.4rem;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  color: #6b46c1;
+  margin-right: 8px;
+  display: inline-block;
+}
+
+.compare-price {
+  font-size: 1rem;
+  color: #999;
+  text-decoration: line-through;
+  margin-right: 8px;
+  display: inline-block;
+}
+
+.discount-badge {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+  padding: 3px 6px;
+  border-radius: 4px;
+  font-size: 0.6rem;
+  font-weight: 600;
+  display: inline-block;
+  box-shadow: 0 1px 3px rgba(239, 68, 68, 0.3);
+}
+
+.product-actions {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.quantity-selector {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  min-width: 80px;
+}
+
+.quantity-selector label {
+  display: block;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 4px;
+  font-size: 0.75rem;
+  text-align: right;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  overflow: hidden;
+  width: fit-content;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.quantity-controls button {
+  background: #f9fafb;
+  border: none;
+  padding: 8px 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #6b46c1;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 35px;
+}
+
+.quantity-controls button:hover {
+  background: #6b46c1;
+  color: white;
+}
+
+.quantity-controls input {
+  width: 40px;
+  text-align: center;
+  border: none;
+  padding: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #1a1a1a;
+  background: white;
+}
+
+.add-to-cart-btn {
+  flex: 1;
+  background: white;
+  color: #6b46c1;
+  border: 2px solid #6b46c1;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 1px 4px rgba(107, 70, 193, 0.2);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.add-to-cart-btn:hover {
+  background: white;
+  color: #6b46c1;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(107, 70, 193, 0.4);
+}
+
+.add-to-cart-btn .btn-icon {
+  color: #6b46c1;
+}
+
+.buy-now-btn {
+  flex: 1;
+  padding: 10px 16px;
+  background: linear-gradient(135deg, #6b46c1 0%, #8b5cf6 100%);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(107, 70, 193, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.buy-now-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.buy-now-btn:hover::before {
+  left: 100%;
+}
+
+.buy-now-btn:hover {
+  background: linear-gradient(135deg, #5b35b1 0%, #7c3aed 100%);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 6px 20px rgba(107, 70, 193, 0.6);
+}
+
+.btn-icon {
+  width: 20px;
+  height: 20px;
+  color: white;
+  display: inline-block;
+  line-height: 1;
+}
+
+.trust-badges {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+.trust-badge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.7rem;
+  color: #333;
+  font-weight: 600;
+  flex: 1;
+  min-width: 0;
+}
+
+.badge-icon {
+  width: 16px;
+  height: 16px;
+  color: #6b46c1;
+  flex-shrink: 0;
+}
+
+/* Product Details Accordions */
+.product-details {
+  margin-bottom: 20px;
+}
+
+.accordion {
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 8px;
+}
+
+.accordion-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 0;
+  cursor: pointer;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  color: #1a1a1a;
+  transition: all 0.3s ease;
+  position: relative;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.accordion-header:hover {
+  color: #6b46c1;
+}
+
+.accordion-header span:first-child {
+  flex-grow: 1;
+}
+
+.accordion-icon {
+  position: absolute;
+  right: 0;
+  font-size: 1rem;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.accordion-header.active .accordion-icon {
+  transform: rotate(180deg);
+}
+
+.accordion-content {
+  display: none;
+  padding-top: 8px;
+  animation: fadeIn 0.3s ease;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding-top 0.3s ease;
+}
+
+.accordion-content.active {
+  display: block;
+  max-height: 1000px;
+}
+
+.description-content {
+  line-height: 1.8;
+  color: #1a1a1a;
+  font-size: 0.95rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+}
+
+.description-content p {
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.description-content p:last-child {
+  margin-bottom: 0;
+}
+
+.features-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.features-list li {
+  padding: 12px;
+  background: white;
+  border-radius: 8px;
+  color: #1a1a1a;
+  border-left: 3px solid #6b46c1;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+}
+
+.how-to-list {
+  padding-left: 0;
+  color: #1a1a1a;
+  line-height: 1.6;
+  font-size: 0.9rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+}
+
+.how-to-list li {
+  margin-bottom: 12px;
+  padding: 12px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  border-left: 3px solid #6b46c1;
+}
+
+.faqs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.faq-item {
+  background: white;
+  padding: 12px;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  border-left: 2px solid #6b46c1;
+}
+
+.faq-item h4 {
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+.faq-item p {
+  color: #4a5568;
+  line-height: 1.4;
+  font-size: 0.8rem;
+  font-weight: 400 !important;
+}
+
+.shipping-info {
+  background: white;
+  padding: 12px;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.shipping-info p {
+  margin-bottom: 8px;
+  color: #4a5568;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  padding: 4px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.shipping-info p:last-child {
+  border-bottom: none;
+}
+
+/* Fun & Functional Section */
+.fun-functional-section {
+  margin-bottom: 10px;
+  padding: 20px 0;
+}
+
+.fun-functional-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  color: #1a1a1a;
+  text-align: center;
+  line-height: 1.3;
+  margin: 0;
+}
+
+/* Product Testimonials Section */
+.product-testimonials-section {
+  margin-bottom: 0;
+  padding: 10px 0 30px 0;
+}
+
+.testimonials-slider {
+  position: relative;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.testimonials-slider::-webkit-scrollbar {
+  display: none;
+}
+
+.testimonials-container {
+  display: flex;
+  gap: 20px;
+  padding: 0 10px;
+  min-width: max-content;
+}
+
+.testimonial-card {
+  flex: 0 0 300px;
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e9ecef;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.testimonial-stars {
+  color: #fbbf24;
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+}
+
+.testimonial-text {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #4a5568;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  margin-bottom: 15px;
+  font-style: italic;
+}
+
+.testimonial-author {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #6b46c1;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Product Video Section */
+.product-video-section {
+  margin: 0;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.product-video {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* Fast Shipping Section */
+.fast-shipping-section {
+  margin: 0;
+  padding: 10px 0;
+  text-align: center;
+  background: white;
+}
+
+.fast-shipping-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  color: #6b46c1;
+  text-align: center;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* You Might Also Like Section */
+.you-might-also-like-section {
+  margin: 0 0 40px 0;
+  padding: 20px 0;
+}
+
+.section-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  color: #1a1a1a;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.products-carousel {
+  position: relative;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.products-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.products-container {
+  display: flex;
+  gap: 20px;
+  padding: 0 10px;
+  min-width: max-content;
+}
+
+.product-card {
+  flex: 0 0 280px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e9ecef;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.product-image {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image img {
+  transform: scale(1.05);
+}
+
+.product-info {
+  padding: 15px;
+}
+
+.product-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  color: #1a1a1a;
+  margin: 0 0 8px 0;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.product-price {
+  font-size: 1.1rem;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  color: #6b46c1;
+  margin-bottom: 12px;
+}
+
+.original-price {
+  text-decoration: line-through;
+  color: #999;
+  margin-right: 8px;
+  font-size: 0.9rem;
+}
+
+.quick-atc-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #6b46c1 0%, #8b5cf6 100%);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.quick-atc-btn:hover {
+  background: linear-gradient(135deg, #5a3aa8 0%, #7c3aed 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(107, 70, 193, 0.3);
+}
+
+.quick-atc-btn .btn-icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* Add to Cart Notification */
+.add-to-cart-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #10b981;
+  color: white;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  animation: slideIn 0.3s ease;
+}
+
+.notification-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.notification-icon {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.notification-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.notification-close {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 10px;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Reviews Section */
+.reviews-section {
+  margin: 30px 0;
+  padding: 25px 20px;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+}
+
+.reviews-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 25px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.reviews-title-section {
+  flex: 1;
+}
+
+.reviews-title {
+  font-size: 1.5rem;
+  color: #1e293b;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  margin: 0 0 5px 0;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.reviews-subtitle {
+  font-size: 0.9rem;
+  color: #64748b;
+  font-weight: 500;
+  font-family: 'Poppins', sans-serif;
+}
+
+.overall-rating {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 15px 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e2e8f0;
+  min-width: 140px;
+}
+
+.rating-main {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rating-number {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #6366f1;
+  font-family: 'Poppins', sans-serif;
+}
+
+.rating-stars {
+  display: flex;
+  align-items: center;
+}
+
+.rating-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.total-reviews {
+  color: #64748b;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.rating-badge {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.review-card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.review-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+}
+
+.review-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  border-color: #cbd5e1;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.reviewer-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.reviewer-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 0.8rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.reviewer-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.reviewer-name {
+  font-weight: 600;
+  color: #1e293b;
+  font-size: 0.9rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.reviewer-location {
+  font-size: 0.75rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.review-rating {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.review-stars {
+  color: #fbbf24;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+.review-date {
+  font-size: 0.7rem;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.review-text {
+  margin-bottom: 15px;
+  line-height: 1.6;
+  color: #334155;
+  font-size: 0.85rem;
+  font-family: 'Poppins', sans-serif;
+  font-style: italic;
+  position: relative;
+  padding-left: 15px;
+}
+
+.review-text::before {
+  content: '"';
+  position: absolute;
+  left: 0;
+  top: -5px;
+  font-size: 2rem;
+  color: #6366f1;
+  font-family: serif;
+  line-height: 1;
+}
+
+.review-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 15px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.verified-badge {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.3);
+}
+
+.verified-icon {
+  width: 14px;
+  height: 14px;
+}
+
+.review-helpful {
+  display: flex;
+  align-items: center;
+}
+
+.helpful-btn {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  color: #64748b;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Poppins', sans-serif;
+}
+
+.helpful-btn:hover {
+  background: #6366f1;
+  color: white;
+  border-color: #6366f1;
+  transform: translateY(-1px);
+}
+
+.helpful-icon {
+  width: 12px;
+  height: 12px;
+}
+
+/* Reviews Sorting */
+.reviews-sorting {
+  margin-bottom: 20px;
+  padding: 15px 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.sort-dropdown {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sort-dropdown label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #1e293b;
+  font-family: 'Poppins', sans-serif;
+}
+
+.sort-dropdown select {
+  background: white;
+  border: 1px solid #e2e8f0;
+  color: #1e293b;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Poppins', sans-serif;
+  min-width: 140px;
+}
+
+.sort-dropdown select:hover {
+  border-color: #6366f1;
+}
+
+.sort-dropdown select:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+/* Show More Button */
+.show-more-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.show-more-btn {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.show-more-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+}
+
+.show-more-text {
+  font-weight: 600;
+}
+
+.reviews-count {
+  font-weight: 400;
+  opacity: 0.9;
+}
+
+.show-more-icon {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s ease;
+}
+
+.show-more-btn:hover .show-more-icon {
+  transform: translateY(2px);
+}
+
+/* Hidden Reviews */
+.review-card.hidden {
+  display: none;
+}
+
+/* Related Products */
+.related-products {
+  margin-bottom: 20px;
+}
+
+.related-products h2 {
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+  color: #1a1a1a;
+  font-weight: 700;
+  text-align: center;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+/* Lightbox */
+.lightbox {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+}
+
+.lightbox-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 1001;
+  background: rgba(0, 0, 0, 0.5);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  pointer-events: auto;
+}
+
+.lightbox-close:hover {
+  background: rgba(0, 0, 0, 0.8);
+  transform: scale(1.1);
+}
+
+#lightbox-image {
+  max-width: 90%;
+  max-height: 75%;
+  object-fit: contain;
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  pointer-events: auto;
+}
+
+/* Lightbox Loading Skeleton */
+.lightbox-loading-skeleton {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  height: 75%;
+  background: #f0f0f0;
+  display: none;
+  z-index: 15;
+  border-radius: 6px;
+}
+
+.lightbox-loading-skeleton.loading {
+  display: block;
+}
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 15px;
+}
+
+.lightbox-arrow {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  pointer-events: auto;
+}
+
+.lightbox-arrow:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (min-width: 768px) {
+  .product-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  
+  .product-title {
+    font-size: 1.4rem;
+  }
+  
+  .current-price {
+    font-size: 1.6rem;
+  }
+  
+  .reviews-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+  
+  #main-product-image {
+    height: 50vw;
+    max-height: 500px;
+  }
+  
+  .thumbnail {
+    flex: 0 0 70px;
+    height: 70px;
+  }
+  
+  .thumbnails-container {
+    max-width: calc(100% - 80px);
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media (min-width: 1024px) {
+  .product-page {
+    max-width: 1200px;
+    padding: 15px;
+  }
+  
+  .product-title {
+    font-size: 1.6rem;
+  }
+  
+  .current-price {
+    font-size: 1.8rem;
+  }
+  
+  #main-product-image {
+    height: 50vw;
+    max-height: 600px;
+  }
+  
+  .thumbnail {
+    flex: 0 0 80px;
+    height: 80px;
+  }
+  
+  .thumbnails-container {
+    max-width: calc(100% - 90px);
+    justify-content: center;
+    align-items: center;
+  }
+}
+</style>
+
+<script>
+// Global variables for compatibility
+let currentSlide = 0;
+
+// Quantity controls
+function updateQuantity(change) {
+  const quantityInput = document.getElementById('quantity');
+  let currentQty = parseInt(quantityInput.value);
+  
+  currentQty += change;
+  currentQty = Math.max(1, Math.min(10, currentQty));
+  quantityInput.value = currentQty;
+}
+
+// Accordion functionality
+function toggleAccordion(id) {
+  const content = document.getElementById(id);
+  const header = content.previousElementSibling;
+  
+  // If this accordion is already open, just close it
+  if (content.classList.contains('active')) {
+    content.classList.remove('active');
+    header.classList.remove('active');
+    header.querySelector('.accordion-icon').textContent = '+';
+    return;
+  }
+  
+  // Close all other accordions
+  document.querySelectorAll('.accordion-content').forEach(acc => {
+    acc.classList.remove('active');
+    acc.previousElementSibling.classList.remove('active');
+    acc.previousElementSibling.querySelector('.accordion-icon').textContent = '+';
+  });
+  
+  // Open current accordion
+  content.classList.add('active');
+  header.classList.add('active');
+  header.querySelector('.accordion-icon').textContent = '-';
+  
+  // Scroll to the opened accordion smoothly
+  setTimeout(() => {
+    const headerRect = header.getBoundingClientRect();
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+    const targetScroll = currentScroll + headerRect.top - 100; // 100px offset from top
+    
+    window.scrollTo({
+      top: targetScroll,
+      behavior: 'smooth'
+    });
+  }, 100);
+}
+
+// Note: Image navigation functions are now handled by product-image-swipe.liquid
+
+// Note: Lightbox functionality is now handled by product-image-swipe.liquid
+
+// Initialize everything when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+  // Initialize reviews - hide additional reviews and set default sort
+  const reviews = document.querySelectorAll('.review-card');
+  console.log('Found reviews:', reviews.length);
+  
+  if (reviews.length > 0) {
+  reviews.forEach((review, index) => {
+      if (index >= 15) {
+      review.classList.add('hidden');
+        console.log('Hiding review', index);
+      } else {
+        console.log('Showing review', index);
+    }
+  });
+  
+  // Set default sort to newest first
+  const sortSelect = document.getElementById('sort-select');
+  if (sortSelect) {
+    sortSelect.value = 'newest';
+    sortReviews('newest', sortSelect);
+    }
+  } else {
+    console.log('No reviews found - reviews section might not be rendered');
+  }
+  
+  // Initialize testimonials slider
+  initializeTestimonialsSlider();
+});
+
+// Testimonials slider functionality
+let currentTestimonial = 0;
+let testimonials = [];
+let testimonialInterval;
+
+function initializeTestimonialsSlider() {
+  testimonials = document.querySelectorAll('.testimonial-card');
+  if (testimonials.length > 0) {
+    updateTestimonialsDisplay();
+    // Start auto-sliding every 5 seconds
+    testimonialInterval = setInterval(function() {
+      currentTestimonial++;
+      if (currentTestimonial >= testimonials.length) {
+        currentTestimonial = 0;
+      }
+      updateTestimonialsDisplay();
+    }, 5000);
+  }
+}
+
+function changeTestimonial(direction) {
+  currentTestimonial += direction;
+  
+  if (currentTestimonial >= testimonials.length) {
+    currentTestimonial = 0;
+  } else if (currentTestimonial < 0) {
+    currentTestimonial = testimonials.length - 1;
+  }
+  
+  updateTestimonialsDisplay();
+}
+
+function updateTestimonialsDisplay() {
+  const container = document.querySelector('.testimonials-container');
+  if (container && testimonials.length > 0) {
+    const cardWidth = 320; // 300px card + 20px gap
+    const translateX = -currentTestimonial * cardWidth;
+    container.style.transform = `translateX(${translateX}px)`;
+  }
+}
+
+
+
+// Direct add to cart function
+  // Reviews functionality
+  let currentSort = 'newest';
+  let reviewsShown = 15; // Start with 15 visible reviews
+  const totalReviews = 15; // Total 15 reviews (5 visible + 10 hidden)
+  
+  function sortReviews(sortType, selectElement) {
+    currentSort = sortType;
+    
+    const container = document.getElementById('reviews-container');
+    const reviews = Array.from(container.querySelectorAll('.review-card'));
+    
+    reviews.sort((a, b) => {
+      switch(sortType) {
+        case 'rating':
+          return parseInt(b.dataset.rating) - parseInt(a.dataset.rating);
+        case 'lowest':
+          return parseInt(a.dataset.rating) - parseInt(b.dataset.rating);
+        case 'newest':
+          return new Date(b.dataset.date) - new Date(a.dataset.date);
+        case 'oldest':
+          return new Date(a.dataset.date) - new Date(b.dataset.date);
+        case 'helpful':
+          return parseInt(b.dataset.helpful) - parseInt(a.dataset.helpful);
+        default:
+          return 0;
+      }
+    });
+    
+    // Re-append sorted reviews
+    reviews.forEach(review => container.appendChild(review));
+    
+    // Show only first 15 reviews
+    reviews.forEach((review, index) => {
+      if (index < 15) {
+        review.classList.remove('hidden');
+      } else {
+        review.classList.add('hidden');
+      }
+    });
+    
+    reviewsShown = 15;
+    // Don't call updateShowMoreButton here to prevent errors
+  }
+  
+  function showMoreReviews() {
+    const reviews = document.querySelectorAll('.review-card');
+    const nextBatch = Math.min(reviewsShown + 5, totalReviews);
+    
+    for (let i = reviewsShown; i < nextBatch; i++) {
+      if (reviews[i]) {
+        reviews[i].classList.remove('hidden');
+      }
+    }
+    
+    reviewsShown = nextBatch;
+    updateShowMoreButton();
+  }
+  
+  function updateShowMoreButton() {
+    const remaining = totalReviews - reviewsShown;
+    const btn = document.querySelector('.show-more-btn');
+    
+    if (btn && remaining > 0) {
+      btn.style.display = 'flex';
+    } else if (btn) {
+      btn.style.display = 'none';
+    }
+  }
+  
+
+  
+  function markHelpful(button, currentCount) {
+    if (button.classList.contains('clicked')) {
+      return; // Already clicked
+    }
+    
+    button.classList.add('clicked');
+    const newCount = currentCount + 1;
+    button.innerHTML = `
+      <svg class="helpful-icon" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/>
+      </svg>
+      Helpful (${newCount})
+    `;
+    button.style.background = '#6366f1';
+    button.style.color = 'white';
+    button.style.borderColor = '#6366f1';
+  }
+
+  function addToCartDirect(productHandle, productId) {
+  console.log('Adding to cart:', productHandle, 'ID:', productId);
+  
+  // Create form data for Shopify cart API
+  const formData = {
+    'items': [{
+      'id': productId,
+      'quantity': 1
+    }]
+  };
+  
+  // Add to cart using Shopify's cart API
+  fetch('/cart/add.js', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(formData)
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Success:', data);
+    const notification = document.createElement('div');
+    notification.className = 'add-to-cart-notification';
+    notification.innerHTML = `
+      <div class="notification-content">
+        <span class="notification-icon">✓</span>
+        <span class="notification-text">Product added to cart!</span>
+        <button class="notification-close" onclick="this.parentElement.parentElement.remove()">×</button>
+      </div>
+    `;
+    document.body.appendChild(notification);
+    setTimeout(() => {
+      if (notification.parentElement) {
+        notification.remove();
+      }
+    }, 3000);
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', function(e) {
+  if (document.getElementById('lightbox').style.display === 'block') {
+    if (e.key === 'Escape') {
+      closeLightbox();
+    } else if (e.key === 'ArrowLeft') {
+      changeLightboxSlide(-1);
+    } else if (e.key === 'ArrowRight') {
+      changeLightboxSlide(1);
+    }
+  }
+});
+
+
+
+// Add to cart functionality
+function addToCart() {
+  const quantity = parseInt(document.getElementById('quantity').value);
+  const variantId = {{ product.selected_or_first_available_variant.id }};
+  const productId = {{ product.id }};
+  const productTitle = '{{ product.title | escape }}';
+  const productPrice = {{ product.price | divided_by: 100.0 }};
+  const productImage = '{{ product.featured_image | image_url: width: 300 }}';
+  const productUrl = '{{ product.url }}';
+  
+  console.log('Adding to cart - Variant ID:', variantId, 'Quantity:', quantity);
+  
+  // Use MobileCart system instead of Shopify cart API
+  if (typeof MobileCart !== 'undefined' && MobileCart.addItem) {
+    // Add to MobileCart (which handles the UI)
+    for (let i = 0; i < quantity; i++) {
+      MobileCart.addItem(productId, variantId, productTitle, productPrice, productImage, productUrl);
+    }
+    
+    // Show success notification popup
+    const notification = document.createElement('div');
+    notification.className = 'add-to-cart-notification';
+    notification.innerHTML = `
+      <div class="notification-content">
+        <span class="notification-icon">✓</span>
+        <span class="notification-text">Product added to cart!</span>
+        <button class="notification-close" onclick="this.parentElement.parentElement.remove()">×</button>
+      </div>
+    `;
+    document.body.appendChild(notification);
+    
+    // Auto-remove notification after 3 seconds
+    setTimeout(() => {
+      if (notification.parentElement) {
+        notification.remove();
+      }
+    }, 3000);
+    
+  } else {
+    // Fallback to Shopify cart API if MobileCart not available
+    const formData = {
+      'items': [{
+        'id': variantId,
+        'quantity': quantity
+      }]
+    };
+    
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData)
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('Success:', data);
+      
+      // Show success notification popup
+      const notification = document.createElement('div');
+      notification.className = 'add-to-cart-notification';
+      notification.innerHTML = `
+        <div class="notification-content">
+          <span class="notification-icon">✓</span>
+          <span class="notification-text">Product added to cart!</span>
+          <button class="notification-close" onclick="this.parentElement.parentElement.remove()">×</button>
+        </div>
+      `;
+      document.body.appendChild(notification);
+      
+      setTimeout(() => {
+        if (notification.parentElement) {
+          notification.remove();
+        }
+      }, 3000);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+      
+      // Show error notification
+      const notification = document.createElement('div');
+      notification.className = 'add-to-cart-notification error';
+      notification.innerHTML = `
+        <div class="notification-content">
+          <span class="notification-icon">✗</span>
+          <span class="notification-text">Failed to add product to cart</span>
+          <button class="notification-close" onclick="this.parentElement.parentElement.remove()">×</button>
+        </div>
+      `;
+      document.body.appendChild(notification);
+      
+      setTimeout(() => {
+        if (notification.parentElement) {
+          notification.remove();
+        }
+      }, 3000);
+    });
+  }
+}
+</script>
+
+

@@ -1,0 +1,192 @@
+{% comment %}
+  Main Product Template - Redirects to Individual Product Templates
+  This template now redirects to individual product-specific templates
+{% endcomment %}
+
+{% comment %} REDIRECT TO INDIVIDUAL PRODUCT TEMPLATES {% endcomment %}
+{% if product.handle == 'vegetable-cleaning-brush' %}
+  {% render 'product.vegetable-cleaning-brush' %}
+{% elsif product.handle == 'kitchen-sink-strainer-basket' %}
+  {% render 'product.kitchen-sink-strainer-basket' %}
+{% elsif product.handle == '360-rotating-hook-hanger' %}
+  {% render 'product.360-rotating-hook-hanger' %}
+{% elsif product.handle == '4-in-1-stainless-steel-bowl-colander-grater' %}
+  {% render 'product.4-in-1-stainless-steel-bowl-colander-grater' %}
+{% elsif product.handle == 'heart-grater-slicer-set-4pc' %}
+  {% render 'product.heart-grater-slicer-set-4pc' %}
+{% elsif product.handle == 'led-angel-night-light' %}
+  {% render 'product.led-angel-night-light' %}
+{% elsif product.handle == 'mini-electric-food-chopper' %}
+  {% render 'product.mini-electric-food-chopper' %}
+{% elsif product.handle == 'mini-hand-press-chopper-3-blade' %}
+  {% render 'product.mini-hand-press-chopper-3-blade' %}
+{% elsif product.handle == 'mini-steam-iron-garment-steamer' %}
+  {% render 'product.mini-steam-iron-garment-steamer' %}
+{% elsif product.handle == 'oil-dispenser-silicone-brush-250ml' %}
+  {% render 'product.oil-dispenser-silicone-brush-250ml' %}
+{% elsif product.handle == 'pink-flamingo-led-night-light' %}
+  {% render 'product.pink-flamingo-led-night-light' %}
+{% elsif product.handle == 'shri-yantra-gomti-chakra-laxmi-pyramid' %}
+  {% render 'product.shri-yantra-gomti-chakra-laxmi-pyramid' %}
+{% elsif product.handle == 'brazilian-lucky-bamboo-live-plant-pack-of-1' %}
+  {% render 'product.brazilian-lucky-bamboo-live-plant-pack-of-1' %}
+{% elsif product.handle == '2-in-1-vacuum-cleaner-dust-collection' %}
+  {% render 'product.2-in-1-vacuum-cleaner-dust-collection' %}
+{% elsif product.handle == 'multifunctional-liquid-shoe-cleaning-brush-with-soap-dispenser' %}
+  {% render 'product.multifunctional-liquid-shoe-cleaning-brush-with-soap-dispenser' %}
+{% elsif product.handle == 'grass-seeds-hybrid-best-for-your-beautiful-home-gardening-pack-of-100-seeds' %}
+  {% render 'product.grass-seeds-hybrid-best-for-your-beautiful-home-gardening-pack-of-100-seeds' %}
+{% else %}
+  {% comment %} DEFAULT TEMPLATE FOR NEW PRODUCTS {% endcomment %}
+  {% assign product_rating = 4.5 %}
+  {% assign product_review_count = 1500 %}
+  {% assign product_description = product.description %}
+  {% assign product_key_features = "Premium quality materials,Easy to use and maintain,Durable and long-lasting,Perfect for daily use" | split: "," %}
+  {% assign how_to_use = "Follow product instructions,Use as intended,Clean after use,Store properly" | split: "," %}
+  {% assign faqs = "How do I use this product?|Follow the included instructions for best results.,Is it safe?|Yes, made with safe materials for intended use." | split: "," %}
+
+  <div class="product-page">
+    <div class="product-container">
+      <!-- Product Images Section -->
+      <div class="product-images-section">
+        {% render 'product-image-swipe' %}
+      </div>
+
+      <!-- Product Info Section -->
+      <div class="product-info-section">
+        <!-- Product Name -->
+        <h1 class="product-title">{{ product.title }}</h1>
+        
+        <!-- Rating -->
+        <div class="product-rating">
+          <span class="rating-number">{{ product_rating }}</span>
+          {% render 'star-rating', rating: product_rating %}
+          <span class="review-count">({{ product_review_count }} reviews)</span>
+        </div>
+        
+        <!-- Price & Quantity Row -->
+        <div class="price-quantity-row">
+          <div class="product-price">
+            <span class="current-price">₹{{ product.price | divided_by: 100 | round }}</span>
+            {% assign original_price = product.price | times: 1.4 | divided_by: 100 | round %}
+            <span class="compare-price">₹{{ original_price }}</span>
+            <span class="discount-badge">40% OFF</span>
+          </div>
+          
+          <div class="quantity-selector">
+            <label for="quantity">Qty:</label>
+            <div class="quantity-controls">
+              <button type="button" onclick="updateQuantity(-1)">-</button>
+              <input type="number" id="quantity" value="1" min="1" max="10">
+              <button type="button" onclick="updateQuantity(1)">+</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Product Action Buttons -->
+        <div class="product-actions">
+          <button class="add-to-cart-btn" onclick="addToCartDirect('{{ product.id }}', '{{ product.selected_or_first_available_variant.id }}', '{{ product.title | escape }}', '{{ product.price | divided_by: 100.0 }}', '{{ product.featured_image | image_url: width: 300 }}', '{{ product.url }}')">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12L8.1 13h7.45c.75 0 1.41-.41 1.75-1.03L21.7 4H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+            </svg>
+            Add to Cart
+          </button>
+          
+          <button class="buy-now-btn" onclick="buyNowDirect('{{ product.selected_or_first_available_variant.id }}')">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+            </svg>
+            Buy Now
+          </button>
+        </div>
+        
+        <!-- Trust Badges -->
+        <div class="trust-badges">
+          <div class="trust-badge">
+            <svg class="badge-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h4c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+            </svg>
+            <span>Free Delivery</span>
+          </div>
+          <div class="trust-badge">
+            <svg class="badge-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+            </svg>
+            <span>Quality Assured</span>
+          </div>
+          <div class="trust-badge">
+            <svg class="badge-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
+            </svg>
+            <span>Cash on Delivery</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product Details Accordions -->
+    <div class="product-details">
+      <div class="accordion">
+        <button class="accordion-header active" onclick="toggleAccordion('description')">
+          <span>Product Description</span>
+          <span class="accordion-icon">-</span>
+        </button>
+        <div id="description" class="accordion-content active">
+          <div class="description-content">
+            {{ product_description | replace: '\n\n', '<br><br>' | replace: '\n', '<br>' }}
+          </div>
+        </div>
+      </div>
+    
+      <div class="accordion">
+        <button class="accordion-header" onclick="toggleAccordion('features')">
+          <span>Key Features</span>
+          <span class="accordion-icon">+</span>
+        </button>
+        <div id="features" class="accordion-content">
+          <ul class="features-list">
+            {% for feature in product_key_features %}
+              <li>{{ feature }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      
+      <div class="accordion">
+        <button class="accordion-header" onclick="toggleAccordion('how-to-use')">
+          <span>How to Use</span>
+          <span class="accordion-icon">+</span>
+        </button>
+        <div id="how-to-use" class="accordion-content">
+          <ol class="how-to-list">
+            {% for step in how_to_use %}
+              <li>{{ step }}</li>
+            {% endfor %}
+          </ol>
+        </div>
+      </div>
+      
+      <div class="accordion">
+        <button class="accordion-header" onclick="toggleAccordion('faqs')">
+          <span>FAQs</span>
+          <span class="accordion-icon">+</span>
+        </button>
+        <div id="faqs" class="accordion-content">
+          <div class="faqs-list">
+            {% for faq in faqs %}
+              {% assign faq_parts = faq | split: '|' %}
+              <div class="faq-item">
+                <h4>{{ faq_parts[0] }}</h4>
+                <p>{{ faq_parts[1] }}</p>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Include product template scripts and styles -->
+  {% render 'product-template-scripts' %}
+  {% render 'product-template-styles' %}
+{% endif %}
