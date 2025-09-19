@@ -754,20 +754,19 @@ body.mobile-experience .hero-pause-btn .play-icon {
 }
 
 .hot-tag {
-  background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+  background: #ff0000;
 }
 
 .trending-tag {
-  background: linear-gradient(135deg, #4ecdc4, #44a08d);
+  background: #ff0000;
 }
 
 .limited-tag {
-  background: linear-gradient(135deg, #a8e6cf, #7fcdcd);
-  color: #2d3748;
+  background: #ff0000;
 }
 
 .new-tag {
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: #ff0000;
 }
 
 /* Touch Optimizations */
