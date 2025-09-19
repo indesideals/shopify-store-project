@@ -74,7 +74,7 @@
             
             <div class="product-price">
               {% assign selling_price = section.settings.product_1.price | divided_by: 100 | round %}
-              {% assign compare_price = selling_price | times: 1.4 | round %}
+              {% assign compare_price = selling_price | divided_by: 0.6 | round %}
               <span class="original-price">₹{{ compare_price }}</span>
               <span class="sale-price">₹{{ selling_price }}</span>
               <span class="discount-pill">40% OFF</span>
@@ -152,7 +152,7 @@
             
             <div class="product-price">
               {% assign selling_price = section.settings.product_2.price | divided_by: 100 | round %}
-              {% assign compare_price = selling_price | times: 1.4 | round %}
+              {% assign compare_price = selling_price | divided_by: 0.6 | round %}
               <span class="original-price">₹{{ compare_price }}</span>
               <span class="sale-price">₹{{ selling_price }}</span>
               <span class="discount-pill">40% OFF</span>
@@ -230,7 +230,7 @@
             
             <div class="product-price">
               {% assign selling_price = section.settings.product_3.price | divided_by: 100 | round %}
-              {% assign compare_price = selling_price | times: 1.4 | round %}
+              {% assign compare_price = selling_price | divided_by: 0.6 | round %}
               <span class="original-price">₹{{ compare_price }}</span>
               <span class="sale-price">₹{{ selling_price }}</span>
               <span class="discount-pill">40% OFF</span>
@@ -308,7 +308,7 @@
             
             <div class="product-price">
               {% assign selling_price = section.settings.product_4.price | divided_by: 100 | round %}
-              {% assign compare_price = selling_price | times: 1.4 | round %}
+              {% assign compare_price = selling_price | divided_by: 0.6 | round %}
               <span class="original-price">₹{{ compare_price }}</span>
               <span class="sale-price">₹{{ selling_price }}</span>
               <span class="discount-pill">40% OFF</span>

@@ -85,7 +85,7 @@
             
             <div class="trending-product-price">
               {% assign selling_price = section.settings.featured_product.price | divided_by: 100 | round %}
-              {% assign compare_price = selling_price | times: 1.4 | round %}
+              {% assign compare_price = selling_price | divided_by: 0.6 | round %}
               <span class="trending-original-price">₹{{ compare_price }}</span>
               <span class="trending-sale-price">₹{{ selling_price }}</span>
               <span class="sale-badge">40% OFF</span>

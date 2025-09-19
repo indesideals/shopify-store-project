@@ -60,10 +60,9 @@
       <div class="price-quantity-row">
         <div class="product-price">
           <span class="current-price">₹{{ product.price | money_without_currency | replace: '.00', '' }}</span>
-          {% if product.compare_at_price > product.price %}
-            <span class="compare-price">₹{{ product.compare_at_price | money_without_currency | replace: '.00', '' }}</span>
+          {% assign original_price = product.price | divided_by: 0.6 | money_without_currency | replace: '.00', '' %}
+          <span class="compare-price">₹{{ original_price }}</span>
           <span class="discount-badge">40% OFF</span>
-          {% endif %}
         </div>
         
         <div class="quantity-selector">

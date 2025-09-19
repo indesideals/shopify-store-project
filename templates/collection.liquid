@@ -138,7 +138,7 @@
                 <!-- Product Price -->
                 <div class="product-price">
                   {% assign selling_price = shri_yantra_product.price | divided_by: 100 | round %}
-                  {% assign compare_price = shri_yantra_product.price | times: 1.4 | divided_by: 100 | round %}
+                  {% assign compare_price = shri_yantra_product.price | divided_by: 0.6 | divided_by: 100 | round %}
                   <span class="original-price">₹{{ compare_price }}</span>
                   <span class="sale-price">₹{{ selling_price }}</span>
                   <span class="discount-pill">40% OFF</span>
@@ -319,7 +319,7 @@
                 <!-- Product Price -->
                 <div class="product-price">
                   {% assign selling_price = product.price | divided_by: 100 | round %}
-                  {% assign compare_price = product.price | times: 1.4 | divided_by: 100 | round %}
+                  {% assign compare_price = product.price | divided_by: 0.6 | divided_by: 100 | round %}
                   <span class="original-price">₹{{ compare_price }}</span>
                   <span class="sale-price">₹{{ selling_price }}</span>
                   <span class="discount-pill">40% OFF</span>

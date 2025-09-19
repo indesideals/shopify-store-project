@@ -136,7 +136,7 @@ Rinse produce & brush, then hang to dry" | split: "
       <div class="price-quantity-row">
         <div class="product-price">
           <span class="current-price">₹{{ product.price | divided_by: 100 | round }}</span>
-          {% assign original_price = product.price | times: 1.4 | divided_by: 100 | round %}
+          {% assign original_price = product.price | divided_by: 0.6 | divided_by: 100 | round %}
           <span class="compare-price">₹{{ original_price }}</span>
           <span class="discount-badge">40% OFF</span>
         </div>
@@ -573,7 +573,7 @@ Rinse produce & brush, then hang to dry" | split: "
             <div class="product-info">
               <h3 class="product-name">{{ product1.title }}</h3>
               <div class="product-price">
-                {% assign original_price1 = product1.price | times: 1.4 | divided_by: 100 | round %}
+                {% assign original_price1 = product1.price | divided_by: 0.6 | divided_by: 100 | round %}
                 <span class="original-price">₹{{ original_price1 }}</span>
                 ₹{{ product1.price | divided_by: 100 | round }}
               </div>
@@ -595,7 +595,7 @@ Rinse produce & brush, then hang to dry" | split: "
             <div class="product-info">
               <h3 class="product-name">{{ product2.title }}</h3>
               <div class="product-price">
-                {% assign original_price2 = product2.price | times: 1.4 | divided_by: 100 | round %}
+                {% assign original_price2 = product2.price | divided_by: 0.6 | divided_by: 100 | round %}
                 <span class="original-price">₹{{ original_price2 }}</span>
                 ₹{{ product2.price | divided_by: 100 | round }}
               </div>
@@ -617,7 +617,7 @@ Rinse produce & brush, then hang to dry" | split: "
             <div class="product-info">
               <h3 class="product-name">{{ product3.title }}</h3>
               <div class="product-price">
-                {% assign original_price3 = product3.price | times: 1.4 | divided_by: 100 | round %}
+                {% assign original_price3 = product3.price | divided_by: 0.6 | divided_by: 100 | round %}
                 <span class="original-price">₹{{ original_price3 }}</span>
                 ₹{{ product3.price | divided_by: 100 | round }}
               </div>
