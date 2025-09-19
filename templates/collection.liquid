@@ -118,6 +118,11 @@
                     <span>40% OFF</span>
                   </div>
                 {% endif %}
+                
+                <!-- Dynamic Product Tags -->
+                <div class="product-tags">
+                  <span class="product-tag trending-tag">Trending</span>
+                </div>
               </div>
 
               <!-- Product Info -->
@@ -178,6 +183,27 @@
                     </svg>
                   </div>
                 {% endif %}
+                
+                <!-- Dynamic Product Tags -->
+                <div class="product-tags">
+                  {% comment %} Assign tags based on product characteristics {% endcomment %}
+                  {% assign product_title_lower = product.title | downcase %}
+                  {% assign product_handle_lower = product.handle | downcase %}
+                  
+                  {% comment %} HOT tag for popular products {% endcomment %}
+                  {% if product_title_lower contains 'vacuum' or product_title_lower contains 'chopper' or product_title_lower contains 'steamer' or product_title_lower contains 'flamingo' %}
+                    <span class="product-tag hot-tag">🔥HOT</span>
+                  {% comment %} Trending tag for lifestyle products {% endcomment %}
+                  {% elsif product_title_lower contains 'bamboo' or product_title_lower contains 'yantra' or product_title_lower contains 'diya' or product_title_lower contains 'led' %}
+                    <span class="product-tag trending-tag">Trending</span>
+                  {% comment %} Limited Stocks for kitchen/utility items {% endcomment %}
+                  {% elsif product_title_lower contains 'strainer' or product_title_lower contains 'brush' or product_title_lower contains 'grater' or product_title_lower contains 'hook' or product_title_lower contains 'seeds' %}
+                    <span class="product-tag limited-tag">Limited Stocks</span>
+                  {% comment %} New tag for other products {% endcomment %}
+                  {% else %}
+                    <span class="product-tag new-tag">New</span>
+                  {% endif %}
+                </div>
                 
                 <!-- Quick Actions -->
                 <div class="product-actions">

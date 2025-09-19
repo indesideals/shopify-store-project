@@ -724,6 +724,52 @@ body.mobile-experience .hero-pause-btn .play-icon {
   box-shadow: var(--mobile-shadow-lg);
 }
 
+/* Mobile Product Tags */
+.product-tags {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.product-tag {
+  display: inline-block;
+  padding: 3px 6px;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  animation: mobileTagPulse 2s infinite;
+}
+
+@keyframes mobileTagPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+
+.hot-tag {
+  background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+}
+
+.trending-tag {
+  background: linear-gradient(135deg, #4ecdc4, #44a08d);
+}
+
+.limited-tag {
+  background: linear-gradient(135deg, #a8e6cf, #7fcdcd);
+  color: #2d3748;
+}
+
+.new-tag {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
 /* Touch Optimizations */
 button:not(.hero-dot):not(.hero-pause-btn), .btn, [role="button"] {
   min-height: var(--mobile-touch-target);
