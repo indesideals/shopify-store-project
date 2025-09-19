@@ -1,0 +1,140 @@
+{% comment %}
+  CENTRAL PRODUCT DATA MANAGEMENT SYSTEM - SIMPLIFIED
+  This snippet contains all product data, reviews, ratings, descriptions, and related products
+  Usage: {% render 'central-product-data', product: product %}
+  
+  TO UPDATE PRODUCT DATA: Edit this file directly and push to Shopify
+  LAST UPDATED: 2024-08-25
+{% endcomment %}
+
+{% comment %} PRODUCT DATA DEFINITIONS {% endcomment %}
+{% case product.handle %}
+  
+  {% when 'oil-dispenser-silicone-brush-250ml' %}
+    {% assign product_rating = 5.0 %}
+    {% assign product_review_count = 100 %}
+    {% assign product_description = "Test" %}
+    {% assign product_key_features = "Test" | split: "," %}
+    {% assign product_how_to_use = "Test" | split: "," %}
+    {% assign product_reviews = "pulkit,5,Verified Purchase,2024-01-15,test" | split: "," %}
+    {% assign related_products = "mini-hand-press-chopper-3-blade,handheld-vegetable-slicer-4-in-1,mini-sink-strainer-basket,vegetable-cleaning-brush" | split: "," %}
+
+  {% when 'vegetable-cleaning-brush' %}
+    {% assign product_rating = 4.8 %}
+    {% assign product_review_count = 3221 %}
+    {% assign product_description = "🥕 Meet your veggie-scrub MVP. This carrot-shaped brush lifts mud and wax from potatoes, carrots, cucumbers, and fruit—fast and gentle." %}
+    {% assign product_key_features = "🥕 Gentle, effective scrubbing,✋ Ergonomic & non-slip,🚿 Hygienic & quick-clean,😊 Compact & cute,🍎 Multi-use" | split: "," %}
+    {% assign product_how_to_use = "Wet produce and the brush,Scrub in light circular motions,Rinse produce & brush, then hang to dry" | split: "," %}
+    {% assign product_reviews = "Rhea Malhotra,5,Verified Purchase,2024-01-15,Scrubs potatoes and carrots super fast. Great grip, no slipping. Cute carrot design!" | split: "," %}
+    {% assign related_products = "mini-sink-strainer-basket,oil-dispenser-silicone-brush-250ml,handheld-vegetable-slicer-4-in-1,mini-hand-press-chopper-3-blade" | split: "," %}
+
+  {% when 'mini-hand-press-chopper-3-blade' %}
+    {% assign product_rating = 4.9 %}
+    {% assign product_review_count = 2109 %}
+    {% assign product_description = "🧄 Fast, even chopping. Press to chop and you're done—stainless-steel blades mince garlic, onions, chilies, nuts, and herbs in seconds." %}
+    {% assign product_key_features = "🗡️ 3 stainless-steel blades,👊 One-press mechanism,🛡️ Splash-guard lid,🧴 Food-grade ABS body,✋ Anti-slip handle" | split: "," %}
+    {% assign product_how_to_use = "Prep & load: Cut veggies/nuts into chunks,Secure the lid: Align and lock,Press to chop: Short, firm presses,Empty & serve: Twist open and pour,Clean & store: Rinse blades carefully" | split: "," %}
+    {% assign product_reviews = "Ankit Tandon,5,Verified Purchase,2024-01-15,Press–chop–done; onions, garlic, nuts prepped in seconds. Super handy for daily cooking." | split: "," %}
+    {% assign related_products = "oil-dispenser-silicone-brush-250ml,handheld-vegetable-slicer-4-in-1,heart-grater-slicer-set-4pc,vegetable-cleaning-brush" | split: "," %}
+
+  {% when 'handheld-vegetable-slicer-4-in-1' %}
+    {% assign product_rating = 4.5 %}
+    {% assign product_review_count = 1856 %}
+    {% assign product_description = "Slice, dice, and julienne vegetables with ease using this versatile 4-in-1 handheld slicer. Perfect for quick meal prep, salads, and garnishes." %}
+    {% assign product_key_features = "4 different blade attachments,Ergonomic handle for comfortable grip,Sharp stainless steel blades,Easy to clean and maintain,Compact and portable design" | split: "," %}
+    {% assign product_how_to_use = "Choose the appropriate blade attachment,Secure the blade to the slicer,Hold vegetables firmly and slice with steady pressure,Clean blades thoroughly after use,Store in a safe, dry location" | split: "," %}
+    {% assign product_reviews = "Chris M.,4,Verified Purchase,2024-01-11,Very useful tool for meal prep. The different blades give great variety in cuts." | split: "," %}
+    {% assign related_products = "mini-hand-press-chopper-3-blade,heart-grater-slicer-set-4pc,vegetable-cleaning-brush,oil-dispenser-silicone-brush-250ml" | split: "," %}
+
+  {% when 'mini-sink-strainer-basket' %}
+    {% assign product_rating = 4.5 %}
+    {% assign product_review_count = 2968 %}
+    {% assign product_description = "Keep your sink drain clean and clog-free with this mini sink strainer basket. Perfect for catching food particles and preventing plumbing issues." %}
+    {% assign product_key_features = "Fits most standard sink drains,Catches food particles effectively,Easy to remove and clean,Durable construction,Prevents drain clogs" | split: "," %}
+    {% assign product_how_to_use = "Place the strainer in your sink drain,Wash dishes as usual,Remove and clean the strainer regularly,Rinse with warm water,Replace in the drain" | split: "," %}
+    {% assign product_reviews = "Jennifer H.,5,Verified Purchase,2024-01-13,This strainer is perfect! Fits my sink perfectly and catches everything." | split: "," %}
+    {% assign related_products = "oil-dispenser-silicone-brush-250ml,vegetable-cleaning-brush,mini-hand-press-chopper-3-blade,handheld-vegetable-slicer-4-in-1" | split: "," %}
+
+  {% when 'heart-grater-slicer-set-4pc' %}
+    {% assign product_rating = 4.4 %}
+    {% assign product_review_count = 2986 %}
+    {% assign product_description = "Fall in love with prep time 💛 This cute, heart-shaped set packs four stainless-steel plates to grate, shred, and slice in seconds." %}
+    {% assign product_key_features = "💗 4-in-1 set: Fine grate, coarse grate, shred, and slice plates,🔪 Sharp 430 stainless-steel blades,✋ Ergonomic, non-slip handles,🧼 Easy to clean,🧲 Space-saving" | split: "," %}
+    {% assign product_how_to_use = "Pick the plate (fine, coarse, shred, or slice),Hold over a plate/bowl or cutting board,Glide in steady strokes,Rinse immediately or place on the top rack to wash,Hang or stack to store" | split: "," %}
+    {% assign product_reviews = "Aditi Narang,5,Verified Purchase,2024-01-15,Cute design, serious performance! Fine grater makes perfect lemon zest for baking. Love it." | split: "," %}
+    {% assign related_products = "handheld-vegetable-slicer-4-in-1,mini-hand-press-chopper-3-blade,stainless-steel-bowl-colander-grater-4-in-1,vegetable-cleaning-brush" | split: "," %}
+
+  {% when 'mini-garment-steamer' %}
+    {% assign product_rating = 4.4 %}
+    {% assign product_review_count = 2876 %}
+    {% assign product_description = "Meet your wrinkle-buster on the go! This compact Mini Steam Iron heats up fast and smooths shirts, kurtas, saree pleats, kids' uniforms." %}
+    {% assign product_key_features = "Compact handheld design,Steam burst helps relax fabric fibers,Even heat distribution,Works on multiple fabrics,Low-mess use" | split: "," %}
+    {% assign product_how_to_use = "Place the iron on a flat, heat-safe surface,Plug in and select Dry or Steam mode,For steam, hold the iron upright and press the steam button,Glide the soleplate smoothly over fabric,Turn off, unplug, and let it cool completely" | split: "," %}
+    {% assign product_reviews = "Priya Menon,5,Verified Purchase,2024-01-15,Tiny powerhouse! Heats up fast and the steam really smooths out cotton kurtas." | split: "," %}
+    {% assign related_products = "led-angel-night-light,pink-flamingo-led-table-lamp,pink-flamingo-led-night-light,oil-dispenser-silicone-brush-250ml" | split: "," %}
+
+  {% when 'led-angel-night-light' %}
+    {% assign product_rating = 4.6 %}
+    {% assign product_review_count = 3109 %}
+    {% assign product_description = "Bring a little magic to your space ✨. This angel-shaped LED marquee light glows with a warm, cozy shine—perfect for bedside tables." %}
+    {% assign product_key_features = "🌟 Angel silhouette with soft, warm LED glow,🛋️ Freestanding design,🔋 Battery-powered,🕹️ One-touch on/off switch,🎁 Gift-ready" | split: "," %}
+    {% assign product_how_to_use = "Open the battery compartment,Insert AA batteries,Close the cover securely,Place on a flat surface,Switch ON/OFF" | split: "," %}
+    {% assign product_reviews = "Tanya Malhotra,5,Verified Purchase,2024-01-15,So soothing and cute! Pura room ka vibe change ho gaya. Bedtime feels calmer now." | split: "," %}
+    {% assign related_products = "pink-flamingo-led-table-lamp,pink-flamingo-led-night-light,mini-garment-steamer,oil-dispenser-silicone-brush-250ml" | split: "," %}
+
+  {% when 'stainless-steel-bowl-colander-grater-4-in-1' %}
+    {% assign product_rating = 4.7 %}
+    {% assign product_review_count = 3110 %}
+    {% assign product_description = "Meet your all-in-one prep partner for every kitchen! This smart set nests a deep mixing bowl, a perforated colander, and a grater lid." %}
+    {% assign product_key_features = "Multi-tasking set: wash, soak, strain, mix, grate, and serve,Clean countertop,Versatile perforations,Smooth, rolled rims,Low maintenance" | split: "," %}
+    {% assign product_how_to_use = "Rinse & Soak - Nest the colander inside the bowl,Strain, Mess-Free - Lift the colander,Grate Directly Into the Bowl,Mix, Toss & Serve,Clean & Store" | split: "," %}
+    {% assign product_reviews = "Aarushi Sharma,5,Verified Purchase,2024-01-15,Solid stainless steel, no flimsy feel. Rinsed rice, strained pasta, then used the grater lid for salad." | split: "," %}
+    {% assign related_products = "heart-grater-slicer-set-4pc,handheld-vegetable-slicer-4-in-1,mini-hand-press-chopper-3-blade,vegetable-cleaning-brush" | split: "," %}
+
+  {% when 'pink-flamingo-led-night-light' %}
+    {% assign product_rating = 4.7 %}
+    {% assign product_review_count = 2398 %}
+    {% assign product_description = "Add a touch of whimsy to your space with this adorable pink flamingo LED night light. Perfect for bedrooms, kids' rooms." %}
+    {% assign product_key_features = "Cute pink flamingo design,Soft LED lighting,Perfect for bedrooms and kids' rooms,Energy-efficient operation,Safe for children" | split: "," %}
+    {% assign product_how_to_use = "Plug into any standard electrical outlet,Switch on for instant soft lighting,Perfect for night-time use,Safe to leave on overnight,Clean with a soft, dry cloth when needed" | split: "," %}
+    {% assign product_reviews = "Ava N.,5,Verified Purchase,2024-01-07,So adorable! My daughter loves the pink flamingo and it provides perfect night lighting." | split: "," %}
+    {% assign related_products = "led-angel-night-light,pink-flamingo-led-table-lamp,mini-garment-steamer,oil-dispenser-silicone-brush-250ml" | split: "," %}
+
+  {% when 'pink-flamingo-led-table-lamp' %}
+    {% assign product_rating = 4.7 %}
+    {% assign product_review_count = 2398 %}
+    {% assign product_description = "🦩 Meet your cozy glow buddy. After a long day, switch on the Flamingo LED Night Light and let that soft, warm shimmer settle the room." %}
+    {% assign product_key_features = "Versatile Decor,Portable & Cord-Free,Dual Display Options,Bright & Long-Lasting,Durable Build" | split: "," %}
+    {% assign product_how_to_use = "📦 Unbox & prep,🔋 Insert batteries,💡 Turn on & place,🎛️ Set the vibe,🧼 Care" | split: "," %}
+    {% assign product_reviews = "Ishleen Kaur,5,Verified Purchase,2024-01-15,Sets a cozy bedtime mood. Warm, gentle glow—no glare. Battery power means I can move it anywhere." | split: "," %}
+    {% assign related_products = "led-angel-night-light,pink-flamingo-led-night-light,mini-garment-steamer,oil-dispenser-silicone-brush-250ml" | split: "," %}
+
+  {% else %}
+    {% comment %} Default product data for products not in the system {% endcomment %}
+    {% assign product_rating = 4.5 %}
+    {% assign product_review_count = 2000 %}
+    {% assign product_description = product.description %}
+    {% assign product_key_features = "Premium quality materials,Easy to use and maintain,Durable and long-lasting,Perfect for daily use" | split: "," %}
+    {% assign product_how_to_use = "Follow the included manual for proper setup and usage,Ensure all components are properly assembled before use,Clean thoroughly after each use,Store in a dry, safe location" | split: "," %}
+    {% assign product_reviews = "Customer,4,Verified Purchase,2024-01-01,Great product! Works exactly as expected." | split: "," %}
+    {% assign related_products = "oil-dispenser-silicone-brush-250ml,mini-hand-press-chopper-3-blade,led-angel-night-light,handheld-vegetable-slicer-4-in-1" | split: "," %}
+
+{% endcase %}
+
+{% comment %} Make the data available globally {% endcomment %}
+<script>
+  window.productData = {
+    "id": "{{ product.handle }}",
+    "title": "{{ product.title }}",
+    "handle": "{{ product.handle }}",
+    "price": {{ product.price }},
+    "compare_at_price": {{ product.compare_at_price }},
+    "rating": {{ product_rating }},
+    "review_count": {{ product_review_count }},
+    "description": "{{ product_description }}",
+    "key_features": {{ product_key_features | json }},
+    "how_to_use": {{ product_how_to_use | json }},
+    "reviews": {{ product_reviews | json }},
+    "related_products": {{ related_products | json }}
+  };
+</script>

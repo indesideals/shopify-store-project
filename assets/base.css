@@ -1,0 +1,214 @@
+/**
+ * SHARED STYLES ONLY
+ * This file now contains only truly shared styles between mobile and desktop.
+ * Device-specific styles are in mobile.css and desktop.css
+ */
+
+/* Global reset and base styles - applies to all devices */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  min-height: 100vh;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure all elements use the same font family */
+* {
+  font-family: inherit;
+}
+
+/* Basic link styles */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Button reset */
+button {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+/* Input reset */
+input, textarea, select {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+}
+
+/* Image styles */
+img {
+  max-width: 100%;
+  height: auto;
+    display: block;
+}
+
+/* Screen reader only content */
+.sr-only {
+    position: absolute;
+  width: 1px;
+  height: 1px;
+    padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Focus styles for accessibility */
+*:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+*:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+}
+
+/* Ensure content doesn't overlap with fixed headers */
+main {
+    position: relative;
+  z-index: 1;
+}
+
+/* Common utility classes - used by both mobile and desktop */
+.hidden {
+      display: none !important;
+}
+
+.visible {
+  display: block !important;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Common animation keyframes */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+  opacity: 0;
+    transform: translateY(20px);
+}
+  to {
+  opacity: 1;
+  transform: translateY(0);
+}
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Common loading spinner */
+.loading-spinner {
+  animation: spin 1s linear infinite;
+}
+
+
+/* Print styles - common to all devices */
+@media print {
+  * {
+    color: black !important;
+    background: white !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  
+  body {
+    font-size: 12pt;
+    line-height: 1.5;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+    margin-bottom: 0.5em;
+  }
+  
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+  
+  img {
+    max-width: 100%;
+    page-break-inside: avoid;
+  }
+  
+  a[href]:after {
+    content: " (" attr(href) ")";
+    font-size: 10pt;
+  color: #666;
+  }
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  * {
+    border-color: currentColor;
+  }
+}
+
+/* Common color variables used by both mobile and desktop */
+  :root {
+  --color-white: #ffffff;
+  --color-black: #000000;
+  
+  /* Common status colors */
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  
+  
+}
+
+/* Device-specific styles are loaded via the layout files:
+   - Mobile styles: mobile.css (loaded by theme-mobile.liquid)
+   - Desktop styles: desktop.css (loaded by theme-desktop.liquid)
+*/

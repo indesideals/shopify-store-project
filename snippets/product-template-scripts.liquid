@@ -1,0 +1,194 @@
+<script>
+// Product Image Gallery Functionality
+let currentImageIndex = 0;
+let productImages = [];
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Initialize product images
+  const thumbnailItems = document.querySelectorAll('.thumbnail-item');
+  
+  if (thumbnailItems.length > 0) {
+    productImages = Array.from(thumbnailItems).map(item => {
+      return {
+        url: item.getAttribute('data-image-url'),
+        index: parseInt(item.getAttribute('data-image-index'))
+      };
+    });
+    
+    productImages.sort((a, b) => a.index - b.index);
+    console.log('Product images loaded:', productImages.length);
+  }
+  
+  // Initialize accordions
+  initProductAccordions();
+});
+
+function selectProductImage(index) {
+  if (index >= 0 && index < productImages.length) {
+    currentImageIndex = index;
+    updateMainImage(index);
+    updateThumbnailActive(index);
+  }
+}
+
+function updateMainImage(index) {
+  const mainImage = document.getElementById('main-product-image');
+  if (mainImage && productImages[index]) {
+    mainImage.src = productImages[index].url;
+  }
+}
+
+function updateThumbnailActive(index) {
+  const thumbnails = document.querySelectorAll('.thumbnail-item');
+  thumbnails.forEach(thumb => thumb.classList.remove('active'));
+  
+  const currentThumbnail = document.querySelector(`[data-image-index="${index}"]`);
+  if (currentThumbnail) {
+    currentThumbnail.classList.add('active');
+  }
+}
+
+function navigateImage(direction) {
+  const newIndex = currentImageIndex + direction;
+  if (newIndex >= 0 && newIndex < productImages.length) {
+    selectProductImage(newIndex);
+  }
+}
+
+function initProductAccordions() {
+  const accordionHeaders = document.querySelectorAll('.product-accordions .accordion-header');
+  
+  accordionHeaders.forEach(header => {
+    header.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      const accordionItem = this.closest('.accordion-item');
+      const isActive = accordionItem.classList.contains('active');
+      
+      // Close all accordions first
+      document.querySelectorAll('.product-accordions .accordion-item').forEach(item => {
+        item.classList.remove('active');
+      });
+      
+      // Open clicked accordion if it wasn't active
+      if (!isActive) {
+        accordionItem.classList.add('active');
+      }
+    });
+  });
+}
+
+function updateQuantity(change) {
+  const quantityInput = document.getElementById('quantity');
+  let currentQty = parseInt(quantityInput.value);
+  
+  if (change === 0) {
+    // Direct input change
+    currentQty = parseInt(quantityInput.value);
+  } else {
+    // Button click
+    currentQty += change;
+  }
+  
+  // Ensure quantity is within bounds
+  currentQty = Math.max(1, Math.min(10, currentQty));
+  
+  quantityInput.value = currentQty;
+}
+
+function addToCart() {
+  const quantity = parseInt(document.getElementById('quantity').value);
+  const variantId = {{ product.selected_or_first_available_variant.id }};
+  
+  fetch('/cart/add.js', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      items: [{
+        id: variantId,
+        quantity: quantity
+      }]
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.status === 422) {
+      alert('Product is out of stock or unavailable.');
+    } else {
+      alert('Product added to cart successfully!');
+      // Update cart count if you have a cart counter
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('Error adding product to cart.');
+  });
+}
+
+// Image Modal Functions
+function openImageModal() {
+  const modal = document.getElementById('imageModal');
+  const modalImage = document.getElementById('modalImage');
+  
+  if (productImages[currentImageIndex]) {
+    modalImage.src = productImages[currentImageIndex].url;
+  }
+  
+  modal.style.display = 'block';
+  document.body.style.overflow = 'hidden';
+  
+  // Add event listeners for closing modal
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal || e.target.classList.contains('modal-content')) {
+      closeImageModal();
+    }
+  });
+  
+  // Handle back button
+  window.addEventListener('popstate', closeImageModal);
+  history.pushState(null, null, window.location.href);
+}
+
+function closeImageModal() {
+  const modal = document.getElementById('imageModal');
+  modal.style.display = 'none';
+  document.body.style.overflow = 'auto';
+}
+
+function navigateModalImage(direction) {
+  const newIndex = currentImageIndex + direction;
+  if (newIndex >= 0 && newIndex < productImages.length) {
+    currentImageIndex = newIndex;
+    updateModalImage(newIndex);
+    updateModalThumbnailActive(newIndex);
+  }
+}
+
+function updateModalImage(index) {
+  const modalImage = document.getElementById('modalImage');
+  if (modalImage && productImages[index]) {
+    modalImage.src = productImages[index].url;
+  }
+}
+
+function updateModalThumbnailActive(index) {
+  const modalThumbnails = document.querySelectorAll('.modal-thumbnail');
+  modalThumbnails.forEach(thumb => thumb.classList.remove('active'));
+  
+  const currentThumbnail = document.querySelector(`.modal-thumbnail:nth-child(${index + 1})`);
+  if (currentThumbnail) {
+    currentThumbnail.classList.add('active');
+  }
+}
+
+function selectModalImage(index) {
+  currentImageIndex = index;
+  updateModalImage(index);
+  updateModalThumbnailActive(index);
+}
+</script>
+
+<!-- Include wishlist functionality -->
+<script src="{{ 'pdp-wishlist.js' | asset_url }}"></script>
