@@ -513,6 +513,14 @@ main {
   background: #ff0000;
 }
 
+.bestseller-tag {
+  background: #ff0000;
+}
+
+.limited-time-tag {
+  background: #ff0000;
+}
+
 /* Desktop Utilities */
 .text-center {
   text-align: center;

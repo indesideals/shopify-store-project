@@ -769,6 +769,14 @@ body.mobile-experience .hero-pause-btn .play-icon {
   background: #ff0000;
 }
 
+.bestseller-tag {
+  background: #ff0000;
+}
+
+.limited-time-tag {
+  background: #ff0000;
+}
+
 /* Touch Optimizations */
 button:not(.hero-dot):not(.hero-pause-btn), .btn, [role="button"] {
   min-height: var(--mobile-touch-target);

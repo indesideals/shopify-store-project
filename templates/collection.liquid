@@ -193,12 +193,21 @@
                   {% comment %} HOT tag for popular products {% endcomment %}
                   {% if product_title_lower contains 'vacuum' or product_title_lower contains 'chopper' or product_title_lower contains 'steamer' or product_title_lower contains 'flamingo' %}
                     <span class="product-tag hot-tag">🔥HOT</span>
-                  {% comment %} Trending tag for lifestyle products {% endcomment %}
-                  {% elsif product_title_lower contains 'bamboo' or product_title_lower contains 'yantra' or product_title_lower contains 'diya' or product_title_lower contains 'led' %}
-                    <span class="product-tag trending-tag">Trending</span>
-                  {% comment %} Limited Stocks for kitchen/utility items {% endcomment %}
-                  {% elsif product_title_lower contains 'strainer' or product_title_lower contains 'brush' or product_title_lower contains 'grater' or product_title_lower contains 'hook' or product_title_lower contains 'seeds' %}
+                  {% comment %} Bestseller tag for top products {% endcomment %}
+                  {% elsif product_title_lower contains 'bamboo' or product_title_lower contains 'yantra' or product_title_lower contains 'diya' %}
+                    <span class="product-tag bestseller-tag">Bestseller</span>
+                  {% comment %} Limited Time Offer for special products {% endcomment %}
+                  {% elsif product_title_lower contains 'lizard' and product_title_lower contains 'repellent' %}
+                    <span class="product-tag limited-time-tag">Limited Time Offer</span>
+                  {% comment %} New tag for hook hangers and grass seeds {% endcomment %}
+                  {% elsif product_title_lower contains 'hook' or product_title_lower contains 'seeds' %}
+                    <span class="product-tag new-tag">New</span>
+                  {% comment %} Limited Stocks for other kitchen/utility items {% endcomment %}
+                  {% elsif product_title_lower contains 'strainer' or product_title_lower contains 'brush' or product_title_lower contains 'grater' %}
                     <span class="product-tag limited-tag">Limited Stocks</span>
+                  {% comment %} Trending tag for LED products {% endcomment %}
+                  {% elsif product_title_lower contains 'led' %}
+                    <span class="product-tag trending-tag">Trending</span>
                   {% comment %} New tag for other products {% endcomment %}
                   {% else %}
                     <span class="product-tag new-tag">New</span>
