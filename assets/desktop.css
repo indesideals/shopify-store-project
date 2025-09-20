@@ -434,6 +434,69 @@ body.desktop-experience {
   transform: translateX(5px);
 }
 
+/* Desktop Category Dropdown Styles */
+.desktop-burger-menu-dropdown {
+  position: relative;
+  margin: 0.5rem 0;
+}
+
+.desktop-burger-menu-dropdown-btn {
+  width: 100%;
+  padding: 1rem;
+  background: none;
+  border: none;
+  color: var(--desktop-text);
+  text-align: left;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.desktop-burger-menu-dropdown-btn:hover {
+  background: var(--desktop-bg-light);
+  color: var(--desktop-primary);
+}
+
+.dropdown-arrow {
+  transition: transform 0.2s ease;
+  font-size: 0.8rem;
+}
+
+.desktop-burger-menu-dropdown-btn.active .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+.desktop-burger-menu-dropdown-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  background-color: var(--desktop-bg-light);
+  border-radius: 8px;
+  margin-top: 4px;
+}
+
+.desktop-burger-menu-dropdown-content.open {
+  max-height: 300px;
+}
+
+.desktop-burger-menu-dropdown-content .desktop-burger-menu-link {
+  padding: 0.75rem 1.5rem;
+  font-size: 0.9rem;
+  color: var(--desktop-text-light);
+  border-radius: 0;
+}
+
+.desktop-burger-menu-dropdown-content .desktop-burger-menu-link:hover {
+  background-color: #e9ecef;
+  color: var(--desktop-primary);
+  transform: translateX(8px);
+}
+
 /* Desktop Main Content */
 main {
   padding-top: 92px; /* Banner + Header height */

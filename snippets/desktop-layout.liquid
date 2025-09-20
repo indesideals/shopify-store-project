@@ -101,6 +101,22 @@
     <nav class="desktop-burger-menu-nav">
       <a href="/" class="desktop-burger-menu-link">🏠 Home</a>
       <a href="/collections/all" class="desktop-burger-menu-link">🛍️ All Products</a>
+      
+      <!-- Shop by Category Dropdown -->
+      <div class="desktop-burger-menu-dropdown">
+        <button class="desktop-burger-menu-dropdown-btn" onclick="toggleCategoryDropdown()">
+          🏷️ Shop by Category <span class="dropdown-arrow">▼</span>
+        </button>
+        <div class="desktop-burger-menu-dropdown-content" id="categoryDropdown">
+          <a href="/collections/best-sellers" class="desktop-burger-menu-link">⭐ Best Sellers</a>
+          <a href="/collections/festive-essentials" class="desktop-burger-menu-link">🎉 Festive Essentials</a>
+          <a href="/collections/kitchen-essentials" class="desktop-burger-menu-link">🍳 Kitchen Essentials</a>
+          <a href="/collections/home-essentials" class="desktop-burger-menu-link">🏠 Home Essentials</a>
+          <a href="/collections/car-care" class="desktop-burger-menu-link">🚗 Car Care</a>
+          <a href="/collections/gardening-needs" class="desktop-burger-menu-link">🌱 Gardening Needs</a>
+        </div>
+      </div>
+      
       <a href="/pages/about-us" class="desktop-burger-menu-link">ℹ️ About Us</a>
       <a href="/pages/contact" class="desktop-burger-menu-link">📞 Contact</a>
       <a href="/pages/favorites" class="desktop-burger-menu-link">💖 Wishlist</a>

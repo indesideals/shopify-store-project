@@ -257,6 +257,27 @@
       }
     }
 
+    // Category dropdown functions
+    function toggleCategoryDropdown() {
+      const dropdown = document.getElementById('categoryDropdown');
+      const button = document.querySelector('.desktop-burger-menu-dropdown-btn');
+      
+      if (dropdown && button) {
+        dropdown.classList.toggle('open');
+        button.classList.toggle('active');
+      }
+    }
+
+    function toggleMobileCategoryDropdown() {
+      const dropdown = document.getElementById('mobileCategoryDropdown');
+      const button = document.querySelector('.mobile-menu-dropdown-btn');
+      
+      if (dropdown && button) {
+        dropdown.classList.toggle('open');
+        button.classList.toggle('active');
+      }
+    }
+
     // Cart functions - FIXED: Don't call window.openDesktopCart to avoid recursion
     function openDesktopCart() {
       console.log('openDesktopCart called - calling DesktopCart.openDrawer()');
