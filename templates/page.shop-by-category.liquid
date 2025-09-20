@@ -1,0 +1,1328 @@
+{% comment %}
+  Shop by Category Page Template
+  Shows all 6 categories with horizontal scrolling product sections
+{% endcomment %}
+
+<div class="shop-by-category-page">
+  <div class="container">
+    <!-- Page Header -->
+    <div class="page-header">
+      <h1 class="page-title">Shop by Category</h1>
+      <p class="page-description">Discover our amazing products organized by category</p>
+    </div>
+
+    <!-- Best Sellers Category -->
+    {% assign best_sellers_collection = collections['best-sellers'] %}
+    {% if best_sellers_collection.products.size > 0 %}
+      <section class="category-section">
+        <div class="category-header">
+          <h2 class="category-title">⭐ Best Sellers</h2>
+          <a href="{{ best_sellers_collection.url }}" class="view-all-btn">View All</a>
+        </div>
+        <div class="products-scroll-container">
+          <div class="products-scroll">
+            {% for product in best_sellers_collection.products limit: 10 %}
+              <div class="product-card">
+                <div class="product-image-container">
+                  <a href="{{ product.url }}">
+                    <img src="{{ product.featured_image | image_url: width: 300 }}" 
+                         alt="{{ product.title }}" 
+                         class="product-image"
+                         loading="lazy">
+                  </a>
+                  <div class="product-actions">
+                    <button class="action-btn wishlist-btn" 
+                            onclick="addToWishlist('{{ product.id }}', '{{ product.title | escape }}', '{{ product.price | divided_by: 100.0 }}', '{{ product.featured_image | image_url: width: 300 }}', '{{ product.url }}')" 
+                            aria-label="Add to wishlist"
+                            data-product-id="{{ product.id }}">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                      </svg>
+                    </button>
+                    <button class="action-btn quick-view-btn" 
+                            onclick="openQuickView('{{ product.id }}', '{{ product.title | escape }}', '{{ product.price | divided_by: 100.0 }}', '{{ product.featured_image | image_url: width: 300 }}', '{{ product.url }}', '{{ product.description | strip_html | truncate: 100 }}')" 
+                            aria-label="Quick view"
+                            data-product-id="{{ product.id }}">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                <div class="product-info">
+                  <h3 class="product-title">
+                    <a href="{{ product.url }}">{{ product.title }}</a>
+                  </h3>
+                  <div class="product-rating">
+                    <div class="stars">
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                    </div>
+                    <span class="rating-text">4.8 stars</span>
+                  </div>
+                  <div class="product-price">
+                    {% assign selling_price = product.price | divided_by: 100 | round %}
+                    {% assign compare_price = selling_price | divided_by: 0.6 | round %}
+                    <span class="original-price">₹{{ compare_price }}</span>
+                    <span class="sale-price">₹{{ selling_price }}</span>
+                    <span class="discount-pill">40% OFF</span>
+                  </div>
+                  <button type="button" class="add-to-cart-btn" 
+                          onclick="addToCartDirect('{{ product.id }}', '{{ product.selected_or_first_available_variant.id }}', '{{ product.title | escape }}', '{{ product.price | divided_by: 100.0 }}', '{{ product.featured_image | image_url: width: 300 }}', '{{ product.url }}')"
+                          data-variant-id="{{ product.selected_or_first_available_variant.id }}" 
+                          data-product-title="{{ product.title | escape }}">
+                    <svg class="cart-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m0 0h9m-9 0a2 2 0 100 4 2 2 0 000-4zm9 0a2 2 0 100 4 2 2 0 000-4z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </section>
+    {% endif %}
+
+    <!-- Festive Essentials Category -->
+    {% assign festive_collection = collections['festive-essentials'] %}
+    {% if festive_collection.products.size > 0 %}
+      <section class="category-section">
+        <div class="category-header">
+          <h2 class="category-title">🎉 Festive Essentials</h2>
+          <a href="{{ festive_collection.url }}" class="view-all-btn">View All</a>
+        </div>
+        <div class="products-scroll-container">
+          <div class="products-scroll">
+            {% for product in festive_collection.products limit: 10 %}
+              <div class="product-card">
+                <div class="product-image-container">
+                  <a href="{{ product.url }}">
+                    <img src="{{ product.featured_image | image_url: width: 300 }}" 
+                         alt="{{ product.title }}" 
+                         class="product-image"
+                         loading="lazy">
+                  </a>
+                  <div class="product-actions">
+                    <button class="action-btn wishlist-btn" 
+                            onclick="addToWishlist('{{ product.id }}', '{{ product.title | escape }}', '{{ product.price | divided_by: 100.0 }}', '{{ product.featured_image | image_url: width: 300 }}', '{{ product.url }}')" 
+                            aria-label="Add to wishlist"
+                            data-product-id="{{ product.id }}">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                      </svg>
+                    </button>
+                    <button class="action-btn quick-view-btn" 
+                            onclick="openQuickView('{{ product.id }}', '{{ product.title | escape }}', '{{ product.price | divided_by: 100.0 }}', '{{ product.featured_image | image_url: width: 300 }}', '{{ product.url }}', '{{ product.description | strip_html | truncate: 100 }}')" 
+                            aria-label="Quick view"
+                            data-product-id="{{ product.id }}">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                <div class="product-info">
+                  <h3 class="product-title">
+                    <a href="{{ product.url }}">{{ product.title }}</a>
+                  </h3>
+                  <div class="product-rating">
+                    <div class="stars">
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                    </div>
+                    <span class="rating-text">4.7 stars</span>
+                  </div>
+                  <div class="product-price">
+                    {% assign selling_price = product.price | divided_by: 100 | round %}
+                    {% assign compare_price = selling_price | divided_by: 0.6 | round %}
+                    <span class="original-price">₹{{ compare_price }}</span>
+                    <span class="sale-price">₹{{ selling_price }}</span>
+                    <span class="discount-pill">40% OFF</span>
+                  </div>
+                  <button type="button" class="add-to-cart-btn" 
+                          onclick="addToCartDirect('{{ product.id }}', '{{ product.selected_or_first_available_variant.id }}', '{{ product.title | escape }}', '{{ product.price | divided_by: 100.0 }}', '{{ product.featured_image | image_url: width: 300 }}', '{{ product.url }}')"
+                          data-variant-id="{{ product.selected_or_first_available_variant.id }}" 
+                          data-product-title="{{ product.title | escape }}">
+                    <svg class="cart-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m0 0h9m-9 0a2 2 0 100 4 2 2 0 000-4zm9 0a2 2 0 100 4 2 2 0 000-4z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </section>
+    {% endif %}
+
+    <!-- Kitchen Essentials Category -->
+    {% assign kitchen_collection = collections['kitchen-essentials'] %}
+    {% if kitchen_collection.products.size > 0 %}
+      <section class="category-section">
+        <div class="category-header">
+          <h2 class="category-title">🍳 Kitchen Essentials</h2>
+          <a href="{{ kitchen_collection.url }}" class="view-all-btn">View All</a>
+        </div>
+        <div class="products-scroll-container">
+          <div class="products-scroll">
+            {% for product in kitchen_collection.products limit: 10 %}
+              <div class="product-card">
+                <div class="product-image-container">
+                  <a href="{{ product.url }}">
+                    <img src="{{ product.featured_image | image_url: width: 300 }}" 
+                         alt="{{ product.title }}" 
+                         class="product-image"
+                         loading="lazy">
+                  </a>
+                  <div class="product-actions">
+                    <button class="action-btn wishlist-btn" 
+                            onclick="addToWishlist('{{ product.id }}', '{{ product.title | escape }}', '{{ product.price | divided_by: 100.0 }}', '{{ product.featured_image | image_url: width: 300 }}', '{{ product.url }}')" 
+                            aria-label="Add to wishlist"
+                            data-product-id="{{ product.id }}">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                      </svg>
+                    </button>
+                    <button class="action-btn quick-view-btn" 
+                            onclick="openQuickView('{{ product.id }}', '{{ product.title | escape }}', '{{ product.price | divided_by: 100.0 }}', '{{ product.featured_image | image_url: width: 300 }}', '{{ product.url }}', '{{ product.description | strip_html | truncate: 100 }}')" 
+                            aria-label="Quick view"
+                            data-product-id="{{ product.id }}">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                <div class="product-info">
+                  <h3 class="product-title">
+                    <a href="{{ product.url }}">{{ product.title }}</a>
+                  </h3>
+                  <div class="product-rating">
+                    <div class="stars">
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                    </div>
+                    <span class="rating-text">4.6 stars</span>
+                  </div>
+                  <div class="product-price">
+                    {% assign selling_price = product.price | divided_by: 100 | round %}
+                    {% assign compare_price = selling_price | divided_by: 0.6 | round %}
+                    <span class="original-price">₹{{ compare_price }}</span>
+                    <span class="sale-price">₹{{ selling_price }}</span>
+                    <span class="discount-pill">40% OFF</span>
+                  </div>
+                  <button type="button" class="add-to-cart-btn" 
+                          onclick="addToCartDirect('{{ product.id }}', '{{ product.selected_or_first_available_variant.id }}', '{{ product.title | escape }}', '{{ product.price | divided_by: 100.0 }}', '{{ product.featured_image | image_url: width: 300 }}', '{{ product.url }}')"
+                          data-variant-id="{{ product.selected_or_first_available_variant.id }}" 
+                          data-product-title="{{ product.title | escape }}">
+                    <svg class="cart-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m0 0h9m-9 0a2 2 0 100 4 2 2 0 000-4zm9 0a2 2 0 100 4 2 2 0 000-4z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </section>
+    {% endif %}
+
+    <!-- Home Essentials Category -->
+    {% assign home_collection = collections['home-essentials'] %}
+    {% if home_collection.products.size > 0 %}
+      <section class="category-section">
+        <div class="category-header">
+          <h2 class="category-title">🏠 Home Essentials</h2>
+          <a href="{{ home_collection.url }}" class="view-all-btn">View All</a>
+        </div>
+        <div class="products-scroll-container">
+          <div class="products-scroll">
+            {% for product in home_collection.products limit: 10 %}
+              <div class="product-card">
+                <div class="product-image-container">
+                  <a href="{{ product.url }}">
+                    <img src="{{ product.featured_image | image_url: width: 300 }}" 
+                         alt="{{ product.title }}" 
+                         class="product-image"
+                         loading="lazy">
+                  </a>
+                  <div class="product-actions">
+                    <button class="action-btn wishlist-btn" 
+                            onclick="addToWishlist('{{ product.id }}', '{{ product.title | escape }}', '{{ product.price | divided_by: 100.0 }}', '{{ product.featured_image | image_url: width: 300 }}', '{{ product.url }}')" 
+                            aria-label="Add to wishlist"
+                            data-product-id="{{ product.id }}">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                      </svg>
+                    </button>
+                    <button class="action-btn quick-view-btn" 
+                            onclick="openQuickView('{{ product.id }}', '{{ product.title | escape }}', '{{ product.price | divided_by: 100.0 }}', '{{ product.featured_image | image_url: width: 300 }}', '{{ product.url }}', '{{ product.description | strip_html | truncate: 100 }}')" 
+                            aria-label="Quick view"
+                            data-product-id="{{ product.id }}">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                <div class="product-info">
+                  <h3 class="product-title">
+                    <a href="{{ product.url }}">{{ product.title }}</a>
+                  </h3>
+                  <div class="product-rating">
+                    <div class="stars">
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                    </div>
+                    <span class="rating-text">4.5 stars</span>
+                  </div>
+                  <div class="product-price">
+                    {% assign selling_price = product.price | divided_by: 100 | round %}
+                    {% assign compare_price = selling_price | divided_by: 0.6 | round %}
+                    <span class="original-price">₹{{ compare_price }}</span>
+                    <span class="sale-price">₹{{ selling_price }}</span>
+                    <span class="discount-pill">40% OFF</span>
+                  </div>
+                  <button type="button" class="add-to-cart-btn" 
+                          onclick="addToCartDirect('{{ product.id }}', '{{ product.selected_or_first_available_variant.id }}', '{{ product.title | escape }}', '{{ product.price | divided_by: 100.0 }}', '{{ product.featured_image | image_url: width: 300 }}', '{{ product.url }}')"
+                          data-variant-id="{{ product.selected_or_first_available_variant.id }}" 
+                          data-product-title="{{ product.title | escape }}">
+                    <svg class="cart-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m0 0h9m-9 0a2 2 0 100 4 2 2 0 000-4zm9 0a2 2 0 100 4 2 2 0 000-4z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </section>
+    {% endif %}
+
+    <!-- Car Care Category -->
+    {% assign car_collection = collections['car-care'] %}
+    {% if car_collection.products.size > 0 %}
+      <section class="category-section">
+        <div class="category-header">
+          <h2 class="category-title">🚗 Car Care</h2>
+          <a href="{{ car_collection.url }}" class="view-all-btn">View All</a>
+        </div>
+        <div class="products-scroll-container">
+          <div class="products-scroll">
+            {% for product in car_collection.products limit: 10 %}
+              <div class="product-card">
+                <div class="product-image-container">
+                  <a href="{{ product.url }}">
+                    <img src="{{ product.featured_image | image_url: width: 300 }}" 
+                         alt="{{ product.title }}" 
+                         class="product-image"
+                         loading="lazy">
+                  </a>
+                  <div class="product-actions">
+                    <button class="action-btn wishlist-btn" 
+                            onclick="addToWishlist('{{ product.id }}', '{{ product.title | escape }}', '{{ product.price | divided_by: 100.0 }}', '{{ product.featured_image | image_url: width: 300 }}', '{{ product.url }}')" 
+                            aria-label="Add to wishlist"
+                            data-product-id="{{ product.id }}">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                      </svg>
+                    </button>
+                    <button class="action-btn quick-view-btn" 
+                            onclick="openQuickView('{{ product.id }}', '{{ product.title | escape }}', '{{ product.price | divided_by: 100.0 }}', '{{ product.featured_image | image_url: width: 300 }}', '{{ product.url }}', '{{ product.description | strip_html | truncate: 100 }}')" 
+                            aria-label="Quick view"
+                            data-product-id="{{ product.id }}">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                <div class="product-info">
+                  <h3 class="product-title">
+                    <a href="{{ product.url }}">{{ product.title }}</a>
+                  </h3>
+                  <div class="product-rating">
+                    <div class="stars">
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                    </div>
+                    <span class="rating-text">4.9 stars</span>
+                  </div>
+                  <div class="product-price">
+                    {% assign selling_price = product.price | divided_by: 100 | round %}
+                    {% assign compare_price = selling_price | divided_by: 0.6 | round %}
+                    <span class="original-price">₹{{ compare_price }}</span>
+                    <span class="sale-price">₹{{ selling_price }}</span>
+                    <span class="discount-pill">40% OFF</span>
+                  </div>
+                  <button type="button" class="add-to-cart-btn" 
+                          onclick="addToCartDirect('{{ product.id }}', '{{ product.selected_or_first_available_variant.id }}', '{{ product.title | escape }}', '{{ product.price | divided_by: 100.0 }}', '{{ product.featured_image | image_url: width: 300 }}', '{{ product.url }}')"
+                          data-variant-id="{{ product.selected_or_first_available_variant.id }}" 
+                          data-product-title="{{ product.title | escape }}">
+                    <svg class="cart-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m0 0h9m-9 0a2 2 0 100 4 2 2 0 000-4zm9 0a2 2 0 100 4 2 2 0 000-4z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </section>
+    {% endif %}
+
+    <!-- Gardening Needs Category -->
+    {% assign gardening_collection = collections['gardening-needs'] %}
+    {% if gardening_collection.products.size > 0 %}
+      <section class="category-section">
+        <div class="category-header">
+          <h2 class="category-title">🌱 Gardening Needs</h2>
+          <a href="{{ gardening_collection.url }}" class="view-all-btn">View All</a>
+        </div>
+        <div class="products-scroll-container">
+          <div class="products-scroll">
+            {% for product in gardening_collection.products limit: 10 %}
+              <div class="product-card">
+                <div class="product-image-container">
+                  <a href="{{ product.url }}">
+                    <img src="{{ product.featured_image | image_url: width: 300 }}" 
+                         alt="{{ product.title }}" 
+                         class="product-image"
+                         loading="lazy">
+                  </a>
+                  <div class="product-actions">
+                    <button class="action-btn wishlist-btn" 
+                            onclick="addToWishlist('{{ product.id }}', '{{ product.title | escape }}', '{{ product.price | divided_by: 100.0 }}', '{{ product.featured_image | image_url: width: 300 }}', '{{ product.url }}')" 
+                            aria-label="Add to wishlist"
+                            data-product-id="{{ product.id }}">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                      </svg>
+                    </button>
+                    <button class="action-btn quick-view-btn" 
+                            onclick="openQuickView('{{ product.id }}', '{{ product.title | escape }}', '{{ product.price | divided_by: 100.0 }}', '{{ product.featured_image | image_url: width: 300 }}', '{{ product.url }}', '{{ product.description | strip_html | truncate: 100 }}')" 
+                            aria-label="Quick view"
+                            data-product-id="{{ product.id }}">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                <div class="product-info">
+                  <h3 class="product-title">
+                    <a href="{{ product.url }}">{{ product.title }}</a>
+                  </h3>
+                  <div class="product-rating">
+                    <div class="stars">
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                    </div>
+                    <span class="rating-text">4.8 stars</span>
+                  </div>
+                  <div class="product-price">
+                    {% assign selling_price = product.price | divided_by: 100 | round %}
+                    {% assign compare_price = selling_price | divided_by: 0.6 | round %}
+                    <span class="original-price">₹{{ compare_price }}</span>
+                    <span class="sale-price">₹{{ selling_price }}</span>
+                    <span class="discount-pill">40% OFF</span>
+                  </div>
+                  <button type="button" class="add-to-cart-btn" 
+                          onclick="addToCartDirect('{{ product.id }}', '{{ product.selected_or_first_available_variant.id }}', '{{ product.title | escape }}', '{{ product.price | divided_by: 100.0 }}', '{{ product.featured_image | image_url: width: 300 }}', '{{ product.url }}')"
+                          data-variant-id="{{ product.selected_or_first_available_variant.id }}" 
+                          data-product-title="{{ product.title | escape }}">
+                    <svg class="cart-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m0 0h9m-9 0a2 2 0 100 4 2 2 0 000-4zm9 0a2 2 0 100 4 2 2 0 000-4z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </section>
+    {% endif %}
+  </div>
+</div>
+
+<!-- Quick View Modal (reusing from best-sellers) -->
+<div id="quick-view-modal" class="quick-view-modal">
+  <div class="quick-view-overlay" onclick="closeQuickView()"></div>
+  <div class="quick-view-content">
+    <button class="quick-view-close" onclick="closeQuickView()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M18 6L6 18M6 6l12 12"/>
+      </svg>
+    </button>
+    
+    <div class="quick-view-body">
+      <div class="quick-view-image">
+        <img id="quick-view-img" src="" alt="" class="product-img">
+      </div>
+      
+      <div class="quick-view-details">
+        <h2 id="quick-view-title" class="quick-view-title"></h2>
+        <p id="quick-view-description" class="quick-view-description"></p>
+        
+        <div class="quick-view-price">
+          <span id="quick-view-price" class="price"></span>
+        </div>
+        
+        <div class="quick-view-actions">
+          <button class="quick-view-wishlist-btn" onclick="addToWishlistFromQuickView()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+            Add to Wishlist
+          </button>
+          
+          <button class="quick-view-cart-btn" onclick="addToCartFromQuickView()" type="button">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m0 0h9m-9 0a2 2 0 100 4 2 2 0 000-4zm9 0a2 2 0 100 4 2 2 0 000-4z"/>
+            </svg>
+            Add to Cart
+          </button>
+        </div>
+        
+        <a href="" id="quick-view-link" class="quick-view-link">View Full Details</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+/* Shop by Category Page Styles */
+.shop-by-category-page {
+  padding: 60px 0;
+  background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Page Header */
+.page-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.page-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0 0 20px 0;
+  letter-spacing: 0.5px;
+  line-height: 1.1;
+}
+
+.page-description {
+  font-size: 1.2rem;
+  color: #6b7280;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Category Section */
+.category-section {
+  margin-bottom: 80px;
+}
+
+.category-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding: 0 10px;
+}
+
+.category-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  color: #1f2937;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.view-all-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
+}
+
+.view-all-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+  color: white;
+  text-decoration: none;
+}
+
+/* Products Scroll Container */
+.products-scroll-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.products-scroll {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 10px 0 20px 0;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-padding: 0 20px;
+}
+
+.products-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Product Card */
+.product-card {
+  flex: 0 0 280px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  scroll-snap-align: start;
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  border-color: #6366f1;
+}
+
+.product-image-container {
+  position: relative;
+  background: white;
+  height: 200px;
+  overflow: hidden;
+}
+
+.product-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.05);
+}
+
+.product-actions {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.product-card:hover .product-actions {
+  opacity: 1;
+}
+
+.action-btn {
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(15px);
+  color: #6b7280;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.action-btn:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: scale(1.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  color: #6366f1;
+}
+
+.wishlist-btn.active {
+  background: #ef4444;
+  color: white;
+}
+
+.wishlist-btn.active svg {
+  fill: white !important;
+  stroke: white !important;
+}
+
+.wishlist-btn:hover {
+  background: #ef4444;
+  color: white;
+  transform: scale(1.1);
+}
+
+.quick-view-btn:hover {
+  background: #3b82f6;
+  color: white;
+  transform: scale(1.1);
+}
+
+.product-info {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+  background: white;
+}
+
+.product-title {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  min-height: 2.4rem;
+  display: flex;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.product-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.product-title a:hover {
+  color: #6366f1;
+}
+
+.product-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: nowrap;
+  min-height: 1.5rem;
+  justify-content: flex-start;
+}
+
+.stars {
+  display: flex;
+  gap: 0.125rem;
+  flex-shrink: 0;
+}
+
+.star {
+  color: #fbbf24;
+  font-size: 0.875rem;
+}
+
+.star.filled {
+  color: #fbbf24;
+}
+
+.rating-text {
+  font-size: 0.8rem;
+  color: #6b7280;
+  white-space: nowrap;
+}
+
+.product-price {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  min-height: 2rem;
+  justify-content: flex-start;
+}
+
+.original-price {
+  text-decoration: line-through;
+  color: #9ca3af;
+  font-size: 0.9rem;
+}
+
+.sale-price {
+  font-weight: 700;
+  color: #667eea;
+  font-size: 1.1rem;
+}
+
+.discount-pill {
+  display: inline-block;
+  background: #dc2626;
+  color: #fff;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.add-to-cart-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 16px 24px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3);
+}
+
+.add-to-cart-btn:hover {
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4);
+}
+
+.cart-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 4px;
+}
+
+/* Quick View Modal Styles */
+.quick-view-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10000;
+}
+
+.quick-view-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.quick-view-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border-radius: 16px;
+  max-width: 800px;
+  width: 90%;
+  max-height: 90vh;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.quick-view-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: white;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.quick-view-close:hover {
+  background: #ef4444;
+  color: white;
+  transform: scale(1.1);
+}
+
+.quick-view-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.quick-view-image {
+  text-align: center;
+}
+
+.quick-view-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.quick-view-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.quick-view-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.quick-view-description {
+  color: #6b7280;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.quick-view-price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #667eea;
+}
+
+.quick-view-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.quick-view-wishlist-btn,
+.quick-view-cart-btn {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.quick-view-wishlist-btn {
+  background: #f3f4f6;
+  color: #374151;
+  border: 2px solid #e5e7eb;
+}
+
+.quick-view-wishlist-btn:hover {
+  background: #ef4444;
+  color: white;
+  border-color: #ef4444;
+  transform: translateY(-2px);
+}
+
+.quick-view-cart-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.quick-view-cart-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+.quick-view-link {
+  text-align: center;
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.75rem;
+  border: 2px solid #667eea;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+.quick-view-link:hover {
+  background: #667eea;
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .shop-by-category-page {
+    padding: 40px 0;
+  }
+  
+  .page-title {
+    font-size: 2.5rem;
+  }
+  
+  .page-description {
+    font-size: 1rem;
+  }
+  
+  .category-title {
+    font-size: 2rem;
+  }
+  
+  .category-header {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+  
+  .product-card {
+    flex: 0 0 250px;
+  }
+  
+  .product-image-container {
+    height: 180px;
+  }
+  
+  .product-image {
+    height: 180px;
+  }
+  
+  .product-info {
+    padding: 12px 16px 16px;
+  }
+  
+  .quick-view-body {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    padding: 1rem;
+  }
+  
+  .quick-view-content {
+    width: 90%;
+    max-height: 80vh;
+    top: 10%;
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 480px) {
+  .page-title {
+    font-size: 2rem;
+  }
+  
+  .category-title {
+    font-size: 1.5rem;
+  }
+  
+  .product-card {
+    flex: 0 0 220px;
+  }
+  
+  .product-image-container {
+    height: 160px;
+  }
+  
+  .product-image {
+    height: 160px;
+  }
+  
+  .product-info {
+    padding: 8px 12px 12px;
+  }
+}
+</style>
+
+<script>
+// Wishlist functionality (reusing from best-sellers)
+function addToWishlist(productId, title, price, image, url) {
+  console.log('addToWishlist called with:', { productId, title, price, image, url });
+  console.log('Customer logged in:', {% if customer %}true{% else %}false{% endif %});
+  console.log('Wishlist app installed:', window.wishlistAppInstalled);
+  
+  {% if customer %}
+    if (window.wishlistAppInstalled) {
+      console.log('Using app wishlist functionality');
+      toggleWishlistViaApp(productId, title, price, image, url);
+    } else {
+      console.log('Using localStorage wishlist functionality');
+      toggleWishlistViaStorage(productId, title, price, image, url);
+    }
+  {% else %}
+    console.log('Customer not logged in, redirecting to login');
+    window.location.href = '/account?return_url=' + encodeURIComponent(window.location.pathname);
+  {% endif %}
+}
+
+function toggleWishlistViaApp(productId, title, price, image, url) {
+  const isInWishlist = checkIfInWishlist(productId);
+  
+  if (isInWishlist) {
+    if (window.wishlistApp && window.wishlistApp.removeFromWishlist) {
+      window.wishlistApp.removeFromWishlist(productId);
+    }
+    showNotification('Product removed from wishlist!', 'info');
+    updateWishlistButton(productId, false);
+  } else {
+    if (window.wishlistApp && window.wishlistApp.addToWishlist) {
+      window.wishlistApp.addToWishlist({
+        id: productId,
+        title: title,
+        price: price,
+        image: image,
+        url: url
+      });
+    }
+    showNotification('Product added to wishlist!', 'success');
+    updateWishlistButton(productId, true);
+  }
+}
+
+function toggleWishlistViaStorage(productId, title, price, image, url) {
+  const customerId = '{{ customer.id }}';
+  const wishlistKey = `wishlist_${customerId}`;
+  let favorites = JSON.parse(localStorage.getItem(wishlistKey) || '[]');
+  
+  const existingProductIndex = favorites.findIndex(product => product.id === productId);
+  
+  if (existingProductIndex !== -1) {
+    favorites.splice(existingProductIndex, 1);
+    localStorage.setItem(wishlistKey, JSON.stringify(favorites));
+    showNotification('Product removed from wishlist!', 'info');
+    updateWishlistButton(productId, false);
+  } else {
+    favorites.push({
+      id: productId,
+      title: title,
+      price: price,
+      image: image,
+      url: url
+    });
+    localStorage.setItem(wishlistKey, JSON.stringify(favorites));
+    showNotification('Product added to wishlist!', 'success');
+    updateWishlistButton(productId, true);
+  }
+  
+  if (typeof updateWishlistCount === 'function') {
+    updateWishlistCount();
+  }
+  window.dispatchEvent(new CustomEvent('wishlist-updated'));
+}
+
+function checkIfInWishlist(productId) {
+  {% if customer %}
+    if (window.wishlistAppInstalled) {
+      if (window.wishlistApp && window.wishlistApp.isInWishlist) {
+        const result = window.wishlistApp.isInWishlist(productId);
+        console.log(`App check for product ${productId}: ${result}`);
+        return result;
+      }
+      console.log(`App not available for product ${productId}, returning false`);
+      return false;
+    } else {
+      const customerId = '{{ customer.id }}';
+      const wishlistKey = `wishlist_${customerId}`;
+      const favorites = JSON.parse(localStorage.getItem(wishlistKey) || '[]');
+      const result = favorites.some(product => product.id === productId);
+      console.log(`localStorage check for product ${productId}: ${result} (total items: ${favorites.length})`);
+      return result;
+    }
+  {% else %}
+    console.log(`Customer not logged in for product ${productId}, returning false`);
+    return false;
+  {% endif %}
+}
+
+function updateWishlistButton(productId, isInWishlist) {
+  const button = document.querySelector(`[data-product-id="${productId}"]`);
+  if (button) {
+    if (isInWishlist) {
+      button.classList.add('active');
+      button.querySelector('svg').style.fill = 'white';
+    } else {
+      button.classList.remove('active');
+      button.querySelector('svg').style.fill = 'none';
+    }
+  }
+}
+
+function showNotification(message, type = 'info') {
+  const notification = document.createElement('div');
+  notification.className = `notification notification-${type}`;
+  notification.textContent = message;
+  
+  notification.style.cssText = `
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#3b82f6'};
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    z-index: 10000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+  `;
+  
+  document.body.appendChild(notification);
+  
+  setTimeout(() => {
+    notification.style.transform = 'translateX(0)';
+  }, 100);
+  
+  setTimeout(() => {
+    notification.style.transform = 'translateX(100%)';
+    setTimeout(() => {
+      document.body.removeChild(notification);
+    }, 300);
+  }, 3000);
+}
+
+// Quick View functionality
+let currentQuickViewProduct = null;
+
+function openQuickView(productId, title, price, image, url, description) {
+  currentQuickViewProduct = {
+    id: productId,
+    title: title,
+    price: price,
+    image: image,
+    url: url,
+    description: description
+  };
+  
+  document.getElementById('quick-view-img').src = image;
+  document.getElementById('quick-view-img').alt = title;
+  document.getElementById('quick-view-title').textContent = title;
+  document.getElementById('quick-view-description').textContent = description;
+  document.getElementById('quick-view-price').textContent = '₹' + price;
+  document.getElementById('quick-view-link').href = url;
+  
+  document.getElementById('quick-view-modal').dataset.productId = productId;
+  document.getElementById('quick-view-modal').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeQuickView() {
+  document.getElementById('quick-view-modal').style.display = 'none';
+  document.body.style.overflow = 'auto';
+  currentQuickViewProduct = null;
+}
+
+function addToWishlistFromQuickView() {
+  if (currentQuickViewProduct) {
+    addToWishlist(
+      currentQuickViewProduct.id,
+      currentQuickViewProduct.title,
+      currentQuickViewProduct.price,
+      currentQuickViewProduct.image,
+      currentQuickViewProduct.url
+    );
+  }
+}
+
+function addToCartFromQuickView() {
+  if (currentQuickViewProduct) {
+    console.log('Adding to cart from quick view:', currentQuickViewProduct);
+    
+    addToCartDirect(
+      currentQuickViewProduct.id, 
+      currentQuickViewProduct.id, 
+      currentQuickViewProduct.title || 'Product',
+      currentQuickViewProduct.price || '0',
+      currentQuickViewProduct.image || '',
+      currentQuickViewProduct.url || ''
+    );
+    
+    closeQuickView();
+  }
+}
+
+// Close modal when clicking outside
+document.addEventListener('click', function(event) {
+  const modal = document.getElementById('quick-view-modal');
+  if (event.target === modal) {
+    closeQuickView();
+  }
+});
+
+// Close modal with Escape key
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'Escape') {
+    closeQuickView();
+  }
+});
+
+// Initialize when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('Shop by Category page loaded');
+});
+</script>
