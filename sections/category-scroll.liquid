@@ -2,7 +2,7 @@
 /* Category Scroll Section */
 .category-scroll-section {
   background: #ffffff;
-  padding: 2rem 0;
+  padding: 1rem 0 0.5rem 0;
   margin: 0;
 }
 
@@ -109,10 +109,59 @@
   color: #667eea;
 }
 
+/* Slide For More Indicator */
+.slide-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 2px 0 0 auto;
+  width: fit-content;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.slide-indicator:hover {
+  opacity: 0.8;
+}
+
+.slide-text {
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: #667eea;
+  font-family: 'Poppins', sans-serif;
+  white-space: nowrap;
+}
+
+.slide-arrow {
+  color: #667eea;
+  animation: slideRight 1.5s ease-in-out infinite;
+}
+
+.slide-arrow svg {
+  width: 6px;
+  height: 6px;
+}
+
+@keyframes slideRight {
+  0% {
+    transform: translateX(0);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateX(4px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 0.7;
+  }
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .category-scroll-section {
-    padding: 1.5rem 0;
+    padding: 0.75rem 0 0.25rem 0;
   }
   
   .category-scroll-container {
@@ -265,6 +314,16 @@
           </div>
           <span class="category-text">{{ section.settings.show_all_category_text | default: 'Show All Category' }}</span>
         </a>
+      </div>
+    </div>
+    
+    <!-- Slide For More Indicator -->
+    <div class="slide-indicator" onclick="slideCategories()">
+      <span class="slide-text">Slide For More</span>
+      <div class="slide-arrow">
+        <svg width="6" height="6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 18l6-6-6-6"/>
+        </svg>
       </div>
     </div>
   </div>
@@ -457,3 +516,16 @@
   ]
 }
 {% endschema %}
+
+<script>
+function slideCategories() {
+  const scrollContainer = document.getElementById('categoryScroll');
+  if (scrollContainer) {
+    const scrollAmount = 200; // Adjust scroll amount as needed
+    scrollContainer.scrollBy({
+      left: scrollAmount,
+      behavior: 'smooth'
+    });
+  }
+}
+</script>
