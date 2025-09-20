@@ -57,7 +57,7 @@
           </div>
           <div class="product-info">
             <h3 class="product-title">
-              <a href="{{ section.settings.product_1.url }}">{{ section.settings.product_1.title }}</a>
+              <a href="{{ section.settings.product_1.url }}">{{ section.settings.display_name_1 | default: section.settings.product_1.title }}</a>
             </h3>
             
             <div class="product-rating">
@@ -135,7 +135,7 @@
           </div>
           <div class="product-info">
             <h3 class="product-title">
-              <a href="{{ section.settings.product_2.url }}">{{ section.settings.product_2.title }}</a>
+              <a href="{{ section.settings.product_2.url }}">{{ section.settings.display_name_2 | default: section.settings.product_2.title }}</a>
             </h3>
             
             <div class="product-rating">
@@ -213,7 +213,7 @@
           </div>
           <div class="product-info">
             <h3 class="product-title">
-              <a href="{{ section.settings.product_3.url }}">{{ section.settings.product_3.title }}</a>
+              <a href="{{ section.settings.product_3.url }}">{{ section.settings.display_name_3 | default: section.settings.product_3.title }}</a>
             </h3>
             
             <div class="product-rating">
@@ -1569,6 +1569,12 @@ document.addEventListener('DOMContentLoaded', function() {
       "default": "BEST SELLER"
     },
     {
+      "type": "text",
+      "id": "display_name_1",
+      "label": "Display Name 1",
+      "info": "Custom display name for the product (leave empty to use original product name)"
+    },
+    {
       "type": "range",
       "id": "rating_1",
       "label": "Star Rating 1",
@@ -1599,6 +1605,12 @@ document.addEventListener('DOMContentLoaded', function() {
       "id": "stock_text_2",
       "label": "Stock Text 2",
       "default": "SELLING FAST - ONLY 4 LEFT!"
+    },
+    {
+      "type": "text",
+      "id": "display_name_2",
+      "label": "Display Name 2",
+      "info": "Custom display name for the product (leave empty to use original product name)"
     },
     {
       "type": "range",
@@ -1633,6 +1645,12 @@ document.addEventListener('DOMContentLoaded', function() {
       "default": "TRENDING TODAY"
     },
     {
+      "type": "text",
+      "id": "display_name_3",
+      "label": "Display Name 3",
+      "info": "Custom display name for the product (leave empty to use original product name)"
+    },
+    {
       "type": "range",
       "id": "rating_3",
       "label": "Star Rating 3",
@@ -1663,6 +1681,12 @@ document.addEventListener('DOMContentLoaded', function() {
       "id": "stock_text_4",
       "label": "Stock Text 4",
       "default": "HOT DEAL"
+    },
+    {
+      "type": "text",
+      "id": "display_name_4",
+      "label": "Display Name 4",
+      "info": "Custom display name for the product (leave empty to use original product name)"
     },
     {
       "type": "range",
