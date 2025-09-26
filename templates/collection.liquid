@@ -202,6 +202,9 @@
                   {% comment %} New tag for hook hangers and grass seeds {% endcomment %}
                   {% elsif product_title_lower contains 'hook' or product_title_lower contains 'seeds' %}
                     <span class="product-tag new-tag">New</span>
+                  {% comment %} Trending tag for Japanese Bonsai Lotus Seeds {% endcomment %}
+                  {% elsif product_title_lower contains 'japanese' and product_title_lower contains 'bonsai' and product_title_lower contains 'lotus' %}
+                    <span class="product-tag trending-tag">🌸 Trending</span>
                   {% comment %} Limited Stocks for other kitchen/utility items {% endcomment %}
                   {% elsif product_title_lower contains 'strainer' or product_title_lower contains 'brush' or product_title_lower contains 'grater' %}
                     <span class="product-tag limited-tag">Limited Stocks</span>
@@ -259,6 +262,8 @@
                     Lizard Repellent for Home Spray Pest Control (Buy 1 Get 1 Free)
                   {% elsif product_title_lower contains 'hook' and product_title_lower contains 'wall' and product_title_lower contains 'hanger' %}
                     Cute Pet Wall Hanger Hooks (Pack of 2)
+                  {% elsif product_title_lower contains 'japanese' and product_title_lower contains 'bonsai' and product_title_lower contains 'lotus' %}
+                    Japanese Bonsai Lotus Seeds (7 Days Germination) - Buy 1 Get 1 Free
                   {% else %}
                     {{ product.title }}
                   {% endif %}
@@ -295,6 +300,10 @@
                       <span class="star filled" style="color: #fbbf24;">★</span><span class="star filled" style="color: #fbbf24;">★</span><span class="star filled" style="color: #fbbf24;">★</span><span class="star filled" style="color: #fbbf24;">★</span><span class="star filled" style="color: #fbbf24;">★</span>
                       <span class="rating-text">4.7 stars</span>
                       <span class="reviews-text">(1893 reviews)</span>
+                    {% elsif product_title_lower contains 'japanese' and product_title_lower contains 'bonsai' and product_title_lower contains 'lotus' %}
+                      <span class="star filled" style="color: #fbbf24;">★</span><span class="star filled" style="color: #fbbf24;">★</span><span class="star filled" style="color: #fbbf24;">★</span><span class="star filled" style="color: #fbbf24;">★</span><span class="star partial" style="color: #fbbf24;">★</span>
+                      <span class="rating-text">4.8 stars</span>
+                      <span class="reviews-text">(3492 reviews)</span>
                     {% elsif product.title contains '4-in-1' or product.title contains 'Bowl' %}
                       <span class="star filled" style="color: #fbbf24;">★</span><span class="star filled" style="color: #fbbf24;">★</span><span class="star filled" style="color: #fbbf24;">★</span><span class="star filled" style="color: #fbbf24;">★</span><span class="star filled" style="color: #fbbf24;">★</span>
                       <span class="rating-text">4.8 stars</span>
