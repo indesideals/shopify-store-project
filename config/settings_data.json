@@ -52,20 +52,24 @@
         "settings": {
           "callout_title": "Shop Our Best Sellers",
           "show_stock_indicators": true,
-          "product_1": "vegetable-cleaning-brush",
+          "product_1": "hook-wall-hangers-key-hook-for-wall-cute-hooks-for-key-pack-of-2",
           "stock_text_1": "BEST SELLER",
+          "display_name_1": "Cute Pet Wall Hanger Hooks (Pack of 2)",
           "rating_1": 4.7,
           "review_count_1": 3847,
-          "product_2": "brazilian-lucky-bamboo-live-plant-pack-of-1",
+          "product_2": "lizard-repellent-for-home-spray-pest-control-pack-of-2",
           "stock_text_2": "Best Seller",
+          "display_name_2": "Lizard Repellent for Home Spray Pest Control (Buy 1 Get 1 Free)",
           "rating_2": 4.5,
           "review_count_2": 5938,
           "product_3": "shri-yantra-gomti-chakra-laxmi-pyramid",
           "stock_text_3": "TRENDING TODAY",
+          "display_name_3": "",
           "rating_3": 4.8,
           "review_count_3": 3292,
-          "product_4": "pink-flamingo-led-night-light",
+          "product_4": "akhand-jyot-diya-pack-of-6",
           "stock_text_4": "HOT DEAL",
+          "display_name_4": "",
           "rating_4": 4.6,
           "review_count_4": 4567
         }
@@ -75,7 +79,7 @@
         "settings": {
           "section_title": "Today's Trending Products",
           "section_subtitle": "Most sold products today - Add to cart directly!",
-          "featured_product": "kitchen-sink-strainer-basket",
+          "featured_product": "brazilian-lucky-bamboo-live-plant-pack-of-1",
           "love_text": "LOVED BY OUR CUSTOMERS",
           "shipping_text": "Shipping and taxes included.",
           "manual_rating": 4.6,
@@ -137,6 +141,36 @@
           "testimonial_9_location": "Lucknow, Uttar Pradesh",
           "testimonial_9_text": "Outstanding after-sales support! When I had an issue with my order, they resolved it immediately and even offered a discount on my next purchase. This level of service is rare these days!",
           "testimonial_9_rating": 5
+        }
+      },
+      "category-scroll": {
+        "type": "category-scroll",
+        "settings": {
+          "section_title": "Shop by Category",
+          "shop_all_icon": "shopify://shop_images/Screenshot_2025-09-20_at_4.23.43_PM.png",
+          "shop_all_text": "Shop All",
+          "shop_all_url": "",
+          "best_sellers_icon": "shopify://shop_images/Screenshot_2025-09-20_at_4.24.43_PM.png",
+          "best_sellers_text": "Best Sellers",
+          "best_sellers_url": "",
+          "festive_icon": "shopify://shop_images/shireah-ragnar-wZq4Rqzx31o-unsplash.jpg",
+          "festive_text": "Festive Finds",
+          "festive_url": "",
+          "kitchen_icon": "shopify://shop_images/tangerine-newt-q2PMPo8gBBk-unsplash.jpg",
+          "kitchen_text": "Kitchen Needs",
+          "kitchen_url": "",
+          "home_icon": "shopify://shop_images/spacejoy-sh6Aj176NAQ-unsplash_1.jpg",
+          "home_text": "Home Essentials",
+          "home_url": "",
+          "car_icon": "shopify://shop_images/taylor-smith-dkDK4wPfh6A-unsplash.jpg",
+          "car_text": "Car Care",
+          "car_url": "",
+          "gardening_icon": "shopify://shop_images/daniel-oberg-sEApBUS4fIk-unsplash.jpg",
+          "gardening_text": "Gardening Needs",
+          "gardening_url": "",
+          "show_all_category_icon": "shopify://shop_images/Screenshot_2025-09-20_at_4.26.01_PM.png",
+          "show_all_category_text": "Show All Category",
+          "show_all_category_url": ""
         }
       }
     },
