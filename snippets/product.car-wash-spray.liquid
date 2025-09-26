@@ -3,14 +3,14 @@
   Manual star ratings and product data that you can control
 {% endcomment %}
 
-{% comment %} MANUAL PRODUCT DATA - Direct assignment {% endcomment %}
-{% if product.handle == 'japanese-bonsai-multicolour-bowl-lotus-seeds-7-days-germination-buy-1-get-1-packet-free' %}
-  {% assign product_rating = 4.8 %}
-  {% assign product_review_count = 3492 %}
-  {% assign product_description = "🌸 Create your own mini lotus garden at home! These high-quality <strong>Japanese Bonsai Lotus Seeds</strong> germinate in just 7 days, giving you beautiful multi-coloured lotus blooms in bowls, pots, or mini water gardens. Perfect for balconies, terraces, and indoor décor – bring peace, beauty, and positivity into your home.<br><br>🌟 <strong>Product Highlights</strong><br>• <strong>Fast Germination</strong> – Sprouts in just 7 days<br>• <strong>Multicolour Lotus Blooms</strong> – White, pink, red, and mixed shades<br>• <strong>Grow in Bowls or Pots</strong> – Ideal for small spaces and home gardens<br>• <strong>Easy to Grow & Maintain</strong> – No special tools or soil needed" %}
-  {% assign product_key_features = "Premium Quality Seeds – Imported Japanese bonsai lotus seeds with high germination rate|Compact Growth – Perfect for bowls, small pots, and indoor water setups|Evergreen Beauty – Beautiful green leaves with vibrant flowers all year round|Spiritual & Decorative – Brings peace, positivity, and charm to any space|Low Maintenance – Requires only water, sunlight, and basic care" | split: "|" %}
-  {% assign how_to_use = "Prepare Seeds – Soak seeds in water until they crack.|Plant in Bowl – Place in a bowl or pot with water and small stones.|Sunlight – Keep in a sunny location for faster growth.|Maintain – Change water every 2–3 days for healthy plants." | split: "|" %}
-  {% assign faqs = "Q1: How many days for seeds to sprout?<br>👉 Usually 7–10 days with proper soaking and sunlight.|Q2: Do I need soil to grow them?<br>👉 No, they can be grown in bowls with water and decorative stones.|Q3: Can I grow them indoors?<br>👉 Yes, as long as they get sunlight or indirect bright light.|Q4: How many flowers will one seed produce?<br>👉 Each seed grows into a full lotus plant with multiple blooms.|Q5: What colours are included?<br>👉 A mix of white, pink, red, and multi-shade lotus flowers." | split: "|" %}
+{% comment %} MANUAL PRODUCT DANK - Direct assignment {% endcomment %}
+{% if product.handle == 'car-wash-spray' %}
+  {% assign product_rating = 4.3 %}
+  {% assign product_review_count = 1981 %}
+  {% assign product_description = "🚗 Give your vehicle a <strong>showroom-like shine</strong> with this powerful <strong>Car Coating Spray (Pack of 3)</strong>. It cleans, polishes, and protects in one simple step. Suitable for cars, bikes, SUVs, and even boats – this spray removes dirt, restores shine, and forms a protective coating against dust, scratches, and UV rays.<br><br>🌟 <strong>Product Highlights</strong><br>• <strong>3-in-1 Formula</strong> – Cleans, polishes, and protects<br>• <strong>Visible Results</strong> – Removes dirt, stains & scratches instantly<br>• <strong>Long-Lasting Shine</strong> – Keeps your car glossy & smooth<br>• <strong>Pack of 3</strong> – Great value for multiple uses<br>• <strong>Multi-Vehicle Use</strong> – Works on cars, bikes, SUVs, and boats" %}
+  {% assign product_key_features = "Quick Cleaning – Removes stubborn dirt, bird droppings, and stains|Polish & Repair – Restores dull paint, giving a glossy finish|UV Protection – Prevents fading and oxidation|Universal Use – Safe for all paint types and vehicle surfaces" | split: "|" %}
+  {% assign how_to_use = "Shake the bottle well before use|Spray directly on the car's surface|Wipe evenly with a clean microfiber cloth|Buff gently to reveal a shiny, polished finish" | split: "|" %}
+  {% assign faqs = "Q1: How often should I use it?<br>👉 Once every 2 weeks for best shine and protection.|Q2: Can it remove scratches?<br>👉 Yes, it helps reduce the appearance of minor scratches.|Q3: Is it safe for all car colors?<br>👉 100% safe for all paint finishes and colors.|Q4: Can I use it on bike helmets or boats?<br>👉 Yes, it works on multiple surfaces including glass, metal, and fiber.|Q5: Does it protect against UV rays?<br>👉 Yes, it forms a protective UV-resistant layer." | split: "|" %}
 {% elsif product.handle == 'kitchen-sink-strainer-basket' %}
   {% assign product_rating = 4.8 %}
   {% assign product_review_count = 1247 %}
@@ -38,7 +38,7 @@
     <!-- Product Info Section -->
     <div class="product-info-section">
       <!-- Product Name -->
-      <h1 class="product-title">Japanese Bonsai Multicolour Bowl Lotus Seeds (Buy 1 Get 1)</h1>
+      <h1 class="product-title">Car Coating Spray (Pack of 3)</h1>
       
       <!-- Rating -->
       <div class="product-rating">
@@ -50,11 +50,11 @@
       <!-- Price & Quantity Row -->
       <div class="price-quantity-row">
         <div class="product-price">
-          <span class="current-price">₹{{ product.price | money_without_currency | replace: '.00', '' }}</span>
-          {% if product.compare_at_price > product.price %}
-            <span class="compare-price">₹{{ product.compare_at_price | money_without_currency | replace: '.00', '' }}</span>
+          {% assign selling_price = product.price | divided_by: 100 | round %}
+          {% assign compare_price = product.price | divided_by: 0.6 | divided_by: 100 | round %}
+          <span class="compare-price">₹{{ compare_price }}</span>
+          <span class="current-price">₹{{ selling_price }}</span>
           <span class="discount-badge">40% OFF</span>
-          {% endif %}
         </div>
         
         <div class="quantity-selector">
@@ -69,7 +69,7 @@
       
       <!-- Product Action Buttons -->
       <div class="product-actions">
-        <button class="add-to-cart-btn" onclick="addToCartDirect('{{ product.id }}', '{{ product.selected_or_first_available_variant.id }}', 'Japanese Bonsai Multicolour Bowl Lotus Seeds (Buy 1 Get 1)', '{{ product.price | divided_by: 100.0 }}', '{{ product.featured_image | image_url: width: 300 }}', '{{ product.url }}')">
+        <button class="add-to-cart-btn" onclick="addToCartDirect('{{ product.id }}', '{{ product.selected_or_first_available_variant.id }}', 'Car Coating Spray (Pack of 3)', '{{ product.price | divided_by: 100.0 }}', '{{ product.featured_image | image_url: width: 300 }}', '{{ product.url }}')">
           <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
             <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12L8.1 13h7.45c.75 0 1.41-.41 1.75-1.03L21.7 4H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
           </svg>
@@ -201,7 +201,7 @@
             
   <!-- Product Callout Section -->
   <div class="fun-functional-section">
-    <h2 class="fun-functional-title">Premium Quality, Easy to Grow & Perfect for Home Gardens</h2>
+        <h2 class="fun-functional-title">Car Coating Spray, Easy to Use & Perfect for All Vehicles</h2>
             </div>
             
 
@@ -223,8 +223,8 @@
     <h2 class="section-title">You Might Also Like</h2>
     <div class="products-carousel">
       <div class="products-container">
-        {% assign product1 = all_products['grass-seeds-hybrid-best-for-your-beautiful-home-gardening-pack-of-100-seeds'] %}
-        {% assign product2 = all_products['brazilian-lucky-bamboo-live-plant-pack-of-1'] %}
+        {% assign product1 = all_products['2-in-1-vacuum-cleaner-dust-collection'] %}
+        {% assign product2 = all_products['plastic-revitalizing-polishing-agent-pack-of-2'] %}
         {% assign product3 = all_products['mini-steam-iron-garment-steamer'] %}
         {% assign product4 = blank %}
         
@@ -363,11 +363,11 @@
         <div class="review-header">
           <div class="reviewer-info">
             <div class="reviewer-avatar">
-              <span>SR</span>
+              <span>RN</span>
             </div>
             <div class="reviewer-details">
-              <span class="reviewer-name">Sumanth Reddy</span>
-              <span class="reviewer-location">Bangalore, Karnataka</span>
+              <span class="reviewer-name">Akash Mehra</span>
+              <span class="reviewer-location">Mumbai, Maharashtra</span>
             </div>
           </div>
           <div class="review-rating">
@@ -375,7 +375,7 @@
             <span class="review-date">Today</span>
           </div>
         </div>
-        <p class="review-text">"These lotus seeds sprouted in just a week! I placed them in a glass bowl with stones and now I have mini lotus leaves already. Can't wait for the blooms."</p>
+        <p class="review-text">"Excellent product It brought back the shine to my car's dashboard and bumpers Looks brand new again. This is my 3rd purchase"</p>
         <div class="review-footer">
           <span class="verified-badge">
             <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
@@ -398,10 +398,10 @@
         <div class="review-header">
           <div class="reviewer-info">
             <div class="reviewer-avatar">
-              <span>PM</span>
+              <span>AD</span>
             </div>
             <div class="reviewer-details">
-              <span class="reviewer-name">Pooja Mehra</span>
+              <span class="reviewer-name">Anjali Deshmukh</span>
               <span class="reviewer-location">Delhi, NCR</span>
             </div>
           </div>
@@ -410,7 +410,7 @@
             <span class="review-date">3 days ago</span>
           </div>
         </div>
-        <p class="review-text">"Good quality seeds. Easy to grow and perfect for small balcony gardens. The buy 1 get 1 offer is totally worth it."</p>
+        <p class="review-text">"Bahut hi easy to use hai. Maine apne scooter pe use kiya aur woh bilkul new jaisa lag raha hai."</p>
         <div class="review-footer">
           <span class="verified-badge">
             <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
@@ -433,11 +433,11 @@
         <div class="review-header">
           <div class="reviewer-info">
             <div class="reviewer-avatar">
-              <span>AK</span>
+              <span>RN</span>
             </div>
             <div class="reviewer-details">
-              <span class="reviewer-name">Arvind Krishnan</span>
-              <span class="reviewer-location">Chennai, Tamil Nadu</span>
+              <span class="reviewer-name">Manish Kapoor</span>
+              <span class="reviewer-location">Bangalore, Karnataka</span>
             </div>
           </div>
           <div class="review-rating">
@@ -445,7 +445,7 @@
             <span class="review-date">1 week ago</span>
           </div>
         </div>
-        <p class="review-text">"Truly beautiful. Within 10 days I could see tiny plants growing. My kids are excited to watch them daily."</p>
+        <p class="review-text">"Best coating spray I have tried. Cleans dirt instantly and adds a glossy shine. My black car shines like glass now."</p>
         <div class="review-footer">
           <span class="verified-badge">
             <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
@@ -464,23 +464,23 @@
         </div>
       </div>
       
-      <div class="review-card" data-rating="4" data-helpful="14">
+      <div class="review-card" data-rating="5" data-helpful="14">
         <div class="review-header">
           <div class="reviewer-info">
             <div class="reviewer-avatar">
-              <span>AS</span>
+              <span>NS</span>
             </div>
             <div class="reviewer-details">
-              <span class="reviewer-name">Anjali Sinha</span>
-              <span class="reviewer-location">Mumbai, Maharashtra</span>
+              <span class="reviewer-name">Neeraj Sinha</span>
+              <span class="reviewer-location">Pune, Maharashtra</span>
             </div>
           </div>
           <div class="review-rating">
-            <span class="review-stars">★★★★☆</span>
+            <span class="review-stars">★★★★★</span>
             <span class="review-date">1 week ago</span>
           </div>
         </div>
-        <p class="review-text">"Simple instructions and fast germination. Works well in bowls. I'm planning to gift a packet to my mom."</p>
+        <p class="review-text">"Good product. Pack of 3 is convenient, ek ghar pe rakha aur ek gaadi mein."</p>
         <div class="review-footer">
           <span class="verified-badge">
             <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
@@ -499,23 +499,23 @@
         </div>
       </div>
       
-      <div class="review-card" data-rating="5" data-helpful="16">
+      <div class="review-card" data-rating="4" data-helpful="16">
         <div class="review-header">
           <div class="reviewer-info">
             <div class="reviewer-avatar">
-              <span>RC</span>
+              <span>PR</span>
             </div>
             <div class="reviewer-details">
-              <span class="reviewer-name">Rohit Chaturvedi</span>
-              <span class="reviewer-location">Delhi, NCR</span>
+              <span class="reviewer-name">Priya Raghavan</span>
+              <span class="reviewer-location">Ahmedabad, Gujarat</span>
             </div>
           </div>
           <div class="review-rating">
-            <span class="review-stars">★★★★★</span>
+            <span class="review-stars">★★★★☆</span>
             <span class="review-date">1 week ago</span>
           </div>
         </div>
-        <p class="review-text">"Excellent seeds with good germination. I soaked 10 seeds and 9 sprouted quickly. Very happy with the purchase."</p>
+        <p class="review-text">"I used it on my SUV before a long road trip. The shine lasted for weeks, even after dusty roads."</p>
         <div class="review-footer">
           <span class="verified-badge">
             <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
@@ -534,23 +534,23 @@
         </div>
       </div>
       
-      <div class="review-card" data-rating="4" data-helpful="13">
+      <div class="review-card" data-rating="5" data-helpful="13">
         <div class="review-header">
           <div class="reviewer-info">
             <div class="reviewer-avatar">
-              <span>SB</span>
+              <span>KA</span>
             </div>
             <div class="reviewer-details">
-              <span class="reviewer-name">Sneha Bhatia</span>
-              <span class="reviewer-location">Mumbai, Maharashtra</span>
+              <span class="reviewer-name">Karan Arora</span>
+              <span class="reviewer-location">Chennai, Tamil Nadu</span>
             </div>
           </div>
           <div class="review-rating">
-            <span class="review-stars">★★★★☆</span>
+            <span class="review-stars">★★★★★</span>
             <span class="review-date">1 week ago</span>
           </div>
         </div>
-        <p class="review-text">"Lovely product. I placed them in my drawing room in a decorative pot and it already looks so fresh."</p>
+        <p class="review-text">"Bahut handy product hai. Bas spray karo aur microfiber cloth se wipe karo. Kaam ho gaya."</p>
         <div class="review-footer">
           <span class="verified-badge">
             <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
@@ -569,23 +569,23 @@
         </div>
       </div>
       
-      <div class="review-card" data-rating="5" data-helpful="17">
+      <div class="review-card" data-rating="4" data-helpful="17">
         <div class="review-header">
           <div class="reviewer-info">
             <div class="reviewer-avatar">
-              <span>KD</span>
+              <span>RB</span>
             </div>
             <div class="reviewer-details">
-              <span class="reviewer-name">Karan Desai</span>
-              <span class="reviewer-location">Ahmedabad, Gujarat</span>
+              <span class="reviewer-name">Rajesh Bhatia</span>
+              <span class="reviewer-location">Hyderabad, Telangana</span>
             </div>
           </div>
           <div class="review-rating">
-            <span class="review-stars">★★★★★</span>
+            <span class="review-stars">★★★★☆</span>
             <span class="review-date">1 week ago</span>
           </div>
         </div>
-        <p class="review-text">"Best lotus seeds I've tried. Strong growth, colourful plants, and perfect for home décor."</p>
+        <p class="review-text">"Makes the car shine like showroom condition. Value for money with 3 bottles included."</p>
         <div class="review-footer">
           <span class="verified-badge">
             <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
@@ -604,23 +604,23 @@
         </div>
       </div>
       
-      <div class="review-card" data-rating="4" data-helpful="11">
+      <div class="review-card" data-rating="5" data-helpful="11">
         <div class="review-header">
           <div class="reviewer-info">
             <div class="reviewer-avatar">
-              <span>NS</span>
+              <span>NK</span>
             </div>
             <div class="reviewer-details">
-              <span class="reviewer-name">Neelam Sharma</span>
-              <span class="reviewer-location">Delhi, NCR</span>
+              <span class="reviewer-name">Neha Kulkarni</span>
+              <span class="reviewer-location">Kolkata, West Bengal</span>
             </div>
           </div>
           <div class="review-rating">
-            <span class="review-stars">★★★★☆</span>
+            <span class="review-stars">★★★★★</span>
             <span class="review-date">1 week ago</span>
           </div>
         </div>
-        <p class="review-text">"Very easy to use. Just soak, place in a bowl, and they start sprouting. Perfect for beginners like me."</p>
+        <p class="review-text">"Really impressed The black trims of my car looked faded now they're glossy and dark again"</p>
         <div class="review-footer">
           <span class="verified-badge">
             <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
@@ -639,23 +639,23 @@
         </div>
       </div>
       
-      <div class="review-card" data-rating="5" data-helpful="19">
+      <div class="review-card" data-rating="4" data-helpful="19">
         <div class="review-header">
           <div class="reviewer-info">
             <div class="reviewer-avatar">
-              <span>SN</span>
+              <span>RN</span>
             </div>
             <div class="reviewer-details">
-              <span class="reviewer-name">Suresh Nair</span>
-              <span class="reviewer-location">Mumbai, Maharashtra</span>
+              <span class="reviewer-name">Ramesh Nair</span>
+              <span class="reviewer-location">Jaipur, Rajasthan</span>
             </div>
           </div>
           <div class="review-rating">
-            <span class="review-stars">★★★★★</span>
+            <span class="review-stars">★★★★☆</span>
             <span class="review-date">1 week ago</span>
           </div>
         </div>
-        <p class="review-text">"I was amazed to see how fast they germinated. The multicolour blooms look stunning in my garden."</p>
+        <p class="review-text">"Excellent for quick cleaning. Bird droppings aur dust easily remove ho jaate hain."</p>
         <div class="review-footer">
           <span class="verified-badge">
             <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
@@ -674,23 +674,23 @@
         </div>
       </div>
       
-      <div class="review-card" data-rating="4" data-helpful="12">
+      <div class="review-card" data-rating="5" data-helpful="12">
         <div class="review-header">
           <div class="reviewer-info">
             <div class="reviewer-avatar">
-              <span>MG</span>
+              <span>PS</span>
             </div>
             <div class="reviewer-details">
-              <span class="reviewer-name">Meena Gupta</span>
-              <span class="reviewer-location">Delhi, NCR</span>
+              <span class="reviewer-name">Pooja Sethi</span>
+              <span class="reviewer-location">Lucknow, Uttar Pradesh</span>
             </div>
           </div>
           <div class="review-rating">
-            <span class="review-stars">★★★★☆</span>
+            <span class="review-stars">★★★★★</span>
             <span class="review-date">1 week ago</span>
           </div>
         </div>
-        <p class="review-text">"The seeds are fresh and authentic. My terrace garden looks amazing with these mini lotus plants."</p>
+        <p class="review-text">"Affordable and effective. I even tried it on my glass windows and the shine was amazing."</p>
         <div class="review-footer">
           <span class="verified-badge">
             <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
@@ -713,11 +713,11 @@
         <div class="review-header">
           <div class="reviewer-info">
             <div class="reviewer-avatar">
-              <span>PY</span>
+              <span>VC</span>
             </div>
             <div class="reviewer-details">
-              <span class="reviewer-name">Pradeep Yadav</span>
-              <span class="reviewer-location">Lucknow, Uttar Pradesh</span>
+              <span class="reviewer-name">Varun Choudhary</span>
+              <span class="reviewer-location">Chandigarh, Punjab</span>
             </div>
           </div>
           <div class="review-rating">
@@ -725,7 +725,7 @@
             <span class="review-date">1 week ago</span>
           </div>
         </div>
-        <p class="review-text">"Highly recommended. I got double the seeds with the offer, and almost all of them sprouted."</p>
+        <p class="review-text">"One of the best plastic restorers I've used No sticky residue just clean shine"</p>
         <div class="review-footer">
           <span class="verified-badge">
             <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
@@ -748,11 +748,11 @@
         <div class="review-header">
           <div class="reviewer-info">
             <div class="reviewer-avatar">
-              <span>RM</span>
+              <span>MR</span>
             </div>
             <div class="reviewer-details">
-              <span class="reviewer-name">Ritu Malhotra</span>
-              <span class="reviewer-location">Chandigarh, Punjab</span>
+              <span class="reviewer-name">Meena Reddy</span>
+              <span class="reviewer-location">Surat, Gujarat</span>
             </div>
           </div>
           <div class="review-rating">
@@ -760,7 +760,7 @@
             <span class="review-date">1 week ago</span>
           </div>
         </div>
-        <p class="review-text">"Good product for home gardening lovers. Adds a peaceful vibe to my living space."</p>
+        <p class="review-text">"Spray is simple to use. Just wipe with microfiber and it gives instant shine."</p>
         <div class="review-footer">
           <span class="verified-badge">
             <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
@@ -783,10 +783,10 @@
         <div class="review-header">
           <div class="reviewer-info">
             <div class="reviewer-avatar">
-              <span>NJ</span>
+              <span>AG</span>
             </div>
             <div class="reviewer-details">
-              <span class="reviewer-name">Nikhil Joshi</span>
+              <span class="reviewer-name">Ashish Gupta</span>
               <span class="reviewer-location">Kochi, Kerala</span>
             </div>
           </div>
@@ -795,7 +795,7 @@
             <span class="review-date">1 week ago</span>
           </div>
         </div>
-        <p class="review-text">"This product exceeded my expectations. Quick germination and healthy plants."</p>
+        <p class="review-text">"The protective layer is the best part. Water droplets just slide off. Perfect for rainy days."</p>
         <div class="review-footer">
           <span class="verified-badge">
             <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
@@ -818,10 +818,10 @@
         <div class="review-header">
           <div class="reviewer-info">
             <div class="reviewer-avatar">
-              <span>AS</span>
+              <span>SM</span>
             </div>
             <div class="reviewer-details">
-              <span class="reviewer-name">Anjali Singh</span>
+              <span class="reviewer-name">Sneha Malhotra</span>
               <span class="reviewer-location">Indore, Madhya Pradesh</span>
             </div>
           </div>
@@ -830,7 +830,7 @@
             <span class="review-date">1 week ago</span>
           </div>
         </div>
-        <p class="review-text">"Very nice for bowl gardening. I used a ceramic pot and it looks like a mini pond in my house."</p>
+        <p class="review-text">"I love this spray. Quick shine mil jata hai, specially jab koi function ya party ho."</p>
         <div class="review-footer">
           <span class="verified-badge">
             <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
@@ -853,10 +853,10 @@
         <div class="review-header">
           <div class="reviewer-info">
             <div class="reviewer-avatar">
-              <span>DC</span>
+              <span>RA</span>
             </div>
             <div class="reviewer-details">
-              <span class="reviewer-name">Deepak Chauhan</span>
+              <span class="reviewer-name">Rohit Agarwal</span>
               <span class="reviewer-location">Mumbai, Maharashtra</span>
             </div>
           </div>
@@ -865,7 +865,7 @@
             <span class="review-date">1 week ago</span>
           </div>
         </div>
-        <p class="review-text">"Perfect decorative plants. The flowers are bright and add so much positivity at home."</p>
+        <p class="review-text">"My red car looks brighter and shinier. Logon ne pucha ki polish karvayi hai kya."</p>
         <div class="review-footer">
           <span class="verified-badge">
             <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
@@ -888,10 +888,10 @@
         <div class="review-header">
           <div class="reviewer-info">
             <div class="reviewer-avatar">
-              <span>RS</span>
+              <span>RN</span>
             </div>
             <div class="reviewer-details">
-              <span class="reviewer-name">Ritu Saxena</span>
+              <span class="reviewer-name">Alok Verma</span>
               <span class="reviewer-location">Delhi, NCR</span>
             </div>
           </div>
@@ -900,7 +900,7 @@
             <span class="review-date">1 week ago</span>
           </div>
         </div>
-        <p class="review-text">"Affordable, easy to use, and beautiful results. Will buy again."</p>
+        <p class="review-text">"Great product. Pack of 3 is economical and lasts long."</p>
         <div class="review-footer">
           <span class="verified-badge">
             <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
@@ -923,10 +923,10 @@
         <div class="review-header">
           <div class="reviewer-info">
             <div class="reviewer-avatar">
-              <span>HP</span>
+              <span>DS</span>
             </div>
             <div class="reviewer-details">
-              <span class="reviewer-name">Harsh Patel</span>
+              <span class="reviewer-name">Divya Sharma</span>
               <span class="reviewer-location">Bangalore, Karnataka</span>
             </div>
           </div>
@@ -935,7 +935,7 @@
             <span class="review-date">1 week ago</span>
           </div>
         </div>
-        <p class="review-text">"Loved the quality. Almost every seed I planted has sprouted. A must-buy for garden lovers."</p>
+        <p class="review-text">"I used it on my SUV's plastic trims Restored them completely Very useful product"</p>
         <div class="review-footer">
           <span class="verified-badge">
             <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
@@ -958,10 +958,10 @@
         <div class="review-header">
           <div class="reviewer-info">
             <div class="reviewer-avatar">
-              <span>KM</span>
+              <span>AS</span>
             </div>
             <div class="reviewer-details">
-              <span class="reviewer-name">Kavya Menon</span>
+              <span class="reviewer-name">Anup Singh</span>
               <span class="reviewer-location">Chennai, Tamil Nadu</span>
             </div>
           </div>
@@ -970,7 +970,7 @@
             <span class="review-date">1 week ago</span>
           </div>
         </div>
-        <p class="review-text">"Very happy with this product. My office desk now has a small lotus bowl and it looks amazing."</p>
+        <p class="review-text">"Good for both cars and bikes. Maine apne dost ki boat pe bhi try kiya, worked well."</p>
         <div class="review-footer">
           <span class="verified-badge">
             <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
@@ -993,10 +993,10 @@
         <div class="review-header">
           <div class="reviewer-info">
             <div class="reviewer-avatar">
-              <span>AY</span>
+              <span>VI</span>
             </div>
             <div class="reviewer-details">
-              <span class="reviewer-name">Abhishek Yadav</span>
+              <span class="reviewer-name">Vandana Iyer</span>
               <span class="reviewer-location">Hyderabad, Telangana</span>
             </div>
           </div>
@@ -1005,7 +1005,7 @@
             <span class="review-date">1 week ago</span>
           </div>
         </div>
-        <p class="review-text">"Beautiful multicolour blooms. The plants look exactly like shown in the pictures."</p>
+        <p class="review-text">"Excellent shine and smooth finish. Bilkul showroom jaisi chamak."</p>
         <div class="review-footer">
           <span class="verified-badge">
             <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
@@ -1029,10 +1029,10 @@
         <div class="review-header">
           <div class="reviewer-info">
             <div class="reviewer-avatar">
-              <span>SD</span>
+              <span>RD</span>
             </div>
             <div class="reviewer-details">
-              <span class="reviewer-name">Shalini Deshmukh</span>
+              <span class="reviewer-name">Rohan Deshpande</span>
               <span class="reviewer-location">Pune, Maharashtra</span>
             </div>
           </div>
@@ -1041,7 +1041,7 @@
             <span class="review-date">1 week ago</span>
           </div>
         </div>
-        <p class="review-text">"Good quality seeds and fast germination. Perfect for gifting as well."</p>
+        <p class="review-text">"Happy with this purchase. Car looks polished and stays clean longer."</p>
         <div class="review-footer">
           <span class="verified-badge">
             <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
@@ -2780,7 +2780,7 @@ function addToCart() {
   const quantity = parseInt(document.getElementById('quantity').value);
   const variantId = {{ product.selected_or_first_available_variant.id }};
   const productId = {{ product.id }};
-  const productTitle = 'Japanese Bonsai Multicolour Bowl Lotus Seeds (Buy 1 Get 1)';
+  const productTitle = 'Car Coating Spray (Pack of 3)';
   const productPrice = {{ product.price | divided_by: 100.0 }};
   const productImage = '{{ product.featured_image | image_url: width: 300 }}';
   const productUrl = '{{ product.url }}';
@@ -2881,8 +2881,8 @@ function addToCart() {
 }
 
 // Supabase configuration
-const SUPABASE_URL = 'https://lrraynrhsrijxeiwzals.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxycmF5bnJoc3JpanhlaXd6YWxzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTgzNDQzODcsImV4cCI6MjA3MzkyMDM4N30.iL3BnfqY4FDVxumeVqBCjKVUSm6eH5K6EOHVQLU-z2k';
+const SUPABSME_URL = 'https://lrraynrhsrijxeiwzals.supabase.co';
+const SUPABSME_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxycmF5bnJoc3JpanhlaXd6YWxzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTgzNDQzODcsImV4cCI6MjA3MzkyMDM4N30.iL3BnfqY4FDVxumeVqBCjKVUSm6eH5K6EOHVQLU-z2k';
 
 // Initialize Supabase client
 let supabaseClient;
@@ -2908,7 +2908,7 @@ async function checkPincode() {
     // Initialize Supabase client if not already done
     if (!supabaseClient) {
       if (typeof supabase !== 'undefined') {
-        supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        supabaseClient = supabase.createClient(SUPABSME_URL, SUPABSME_ANON_KEY);
       } else {
         throw new Error('Supabase library not loaded');
       }
