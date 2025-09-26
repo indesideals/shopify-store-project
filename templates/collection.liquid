@@ -208,6 +208,9 @@
                   {% comment %} New tag for LED Tealight Candles {% endcomment %}
                   {% elsif product_title_lower contains 'plastic' and product_title_lower contains 'flameless' and product_title_lower contains 'led' and product_title_lower contains 'tealight' %}
                     <span class="product-tag new-tag">🕯️ New</span>
+                  {% comment %} New tag for Silicone Facial Cleansing Brush {% endcomment %}
+                  {% elsif product_title_lower contains 'silicone' and product_title_lower contains 'facial' and product_title_lower contains 'cleansing' and product_title_lower contains 'brush' %}
+                    <span class="product-tag new-tag">🧼 New</span>
                   {% comment %} Limited Stocks for other kitchen/utility items {% endcomment %}
                   {% elsif product_title_lower contains 'strainer' or product_title_lower contains 'brush' or product_title_lower contains 'grater' %}
                     <span class="product-tag limited-tag">Limited Stocks</span>
@@ -269,6 +272,8 @@
                     Japanese Bonsai Lotus Seeds (7 Days Germination) - Buy 1 Get 1 Free
                   {% elsif product_title_lower contains 'plastic' and product_title_lower contains 'flameless' and product_title_lower contains 'led' and product_title_lower contains 'tealight' %}
                     Plastic Flameless LED Tealight White Candles Smokeless Candles - Pack of 12
+                  {% elsif product_title_lower contains 'silicone' and product_title_lower contains 'facial' and product_title_lower contains 'cleansing' and product_title_lower contains 'brush' %}
+                    Silicone Facial Cleansing Face Scrubber and Cleanser Massage (Pack of 2)
                   {% else %}
                     {{ product.title }}
                   {% endif %}
@@ -309,10 +314,14 @@
                       <span class="star filled" style="color: #fbbf24;">★</span><span class="star filled" style="color: #fbbf24;">★</span><span class="star filled" style="color: #fbbf24;">★</span><span class="star filled" style="color: #fbbf24;">★</span><span class="star partial" style="color: #fbbf24;">★</span>
                       <span class="rating-text">4.8 stars</span>
                       <span class="reviews-text">(3492 reviews)</span>
-                    {% elsif product_title_lower contains 'plastic' and product_title_lower contains 'flameless' and product_title_lower contains 'led' and product_title_lower contains 'tealight' %}
-                      <span class="star filled" style="color: #fbbf24;">★</span><span class="star filled" style="color: #fbbf24;">★</span><span class="star filled" style="color: #fbbf24;">★</span><span class="star filled" style="color: #fbbf24;">★</span><span class="star partial" style="color: #fbbf24;">★</span>
-                      <span class="rating-text">4.6 stars</span>
-                      <span class="reviews-text">(5844 reviews)</span>
+                      {% elsif product_title_lower contains 'plastic' and product_title_lower contains 'flameless' and product_title_lower contains 'led' and product_title_lower contains 'tealight' %}
+                        <span class="star filled" style="color: #fbbf24;">★</span><span class="star filled" style="color: #fbbf24;">★</span><span class="star filled" style="color: #fbbf24;">★</span><span class="star filled" style="color: #fbbf24;">★</span><span class="star partial" style="color: #fbbf24;">★</span>
+                        <span class="rating-text">4.6 stars</span>
+                        <span class="reviews-text">(5844 reviews)</span>
+                      {% elsif product_title_lower contains 'silicone' and product_title_lower contains 'facial' and product_title_lower contains 'cleansing' and product_title_lower contains 'brush' %}
+                        <span class="star filled" style="color: #fbbf24;">★</span><span class="star filled" style="color: #fbbf24;">★</span><span class="star filled" style="color: #fbbf24;">★</span><span class="star filled" style="color: #fbbf24;">★</span><span class="star partial" style="color: #fbbf24;">★</span>
+                        <span class="rating-text">4.3 stars</span>
+                        <span class="reviews-text">(4322 reviews)</span>
                     {% elsif product.title contains '4-in-1' or product.title contains 'Bowl' %}
                       <span class="star filled" style="color: #fbbf24;">★</span><span class="star filled" style="color: #fbbf24;">★</span><span class="star filled" style="color: #fbbf24;">★</span><span class="star filled" style="color: #fbbf24;">★</span><span class="star filled" style="color: #fbbf24;">★</span>
                       <span class="rating-text">4.8 stars</span>
