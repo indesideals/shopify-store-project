@@ -205,6 +205,9 @@
                   {% comment %} Trending tag for Japanese Bonsai Lotus Seeds {% endcomment %}
                   {% elsif product_title_lower contains 'japanese' and product_title_lower contains 'bonsai' and product_title_lower contains 'lotus' %}
                     <span class="product-tag trending-tag">🌸 Trending</span>
+                  {% comment %} New tag for LED Tealight Candles {% endcomment %}
+                  {% elsif product_title_lower contains 'plastic' and product_title_lower contains 'flameless' and product_title_lower contains 'led' and product_title_lower contains 'tealight' %}
+                    <span class="product-tag new-tag">🕯️ New</span>
                   {% comment %} Limited Stocks for other kitchen/utility items {% endcomment %}
                   {% elsif product_title_lower contains 'strainer' or product_title_lower contains 'brush' or product_title_lower contains 'grater' %}
                     <span class="product-tag limited-tag">Limited Stocks</span>
@@ -264,6 +267,8 @@
                     Cute Pet Wall Hanger Hooks (Pack of 2)
                   {% elsif product_title_lower contains 'japanese' and product_title_lower contains 'bonsai' and product_title_lower contains 'lotus' %}
                     Japanese Bonsai Lotus Seeds (7 Days Germination) - Buy 1 Get 1 Free
+                  {% elsif product_title_lower contains 'plastic' and product_title_lower contains 'flameless' and product_title_lower contains 'led' and product_title_lower contains 'tealight' %}
+                    Plastic Flameless LED Tealight White Candles Smokeless Candles - Pack of 12
                   {% else %}
                     {{ product.title }}
                   {% endif %}
@@ -304,6 +309,10 @@
                       <span class="star filled" style="color: #fbbf24;">★</span><span class="star filled" style="color: #fbbf24;">★</span><span class="star filled" style="color: #fbbf24;">★</span><span class="star filled" style="color: #fbbf24;">★</span><span class="star partial" style="color: #fbbf24;">★</span>
                       <span class="rating-text">4.8 stars</span>
                       <span class="reviews-text">(3492 reviews)</span>
+                    {% elsif product_title_lower contains 'plastic' and product_title_lower contains 'flameless' and product_title_lower contains 'led' and product_title_lower contains 'tealight' %}
+                      <span class="star filled" style="color: #fbbf24;">★</span><span class="star filled" style="color: #fbbf24;">★</span><span class="star filled" style="color: #fbbf24;">★</span><span class="star filled" style="color: #fbbf24;">★</span><span class="star partial" style="color: #fbbf24;">★</span>
+                      <span class="rating-text">4.6 stars</span>
+                      <span class="reviews-text">(5844 reviews)</span>
                     {% elsif product.title contains '4-in-1' or product.title contains 'Bowl' %}
                       <span class="star filled" style="color: #fbbf24;">★</span><span class="star filled" style="color: #fbbf24;">★</span><span class="star filled" style="color: #fbbf24;">★</span><span class="star filled" style="color: #fbbf24;">★</span><span class="star filled" style="color: #fbbf24;">★</span>
                       <span class="rating-text">4.8 stars</span>
