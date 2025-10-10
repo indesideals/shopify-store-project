@@ -1,0 +1,94 @@
+{% comment %}
+  Simple Shipment Tracking Page Template
+{% endcomment %}
+
+{% layout 'theme' %}
+
+<div class="tracking-page">
+  <div class="container">
+    <h1>Track Your Shipment</h1>
+    <p>Enter your AWB number to track your shipment</p>
+    
+    <div class="tracking-form">
+      <input type="text" id="awb-input" placeholder="Enter AWB number" />
+      <button id="track-btn">Track</button>
+    </div>
+    
+    <div id="results" style="display: none;">
+      <h2>Tracking Results</h2>
+      <div id="tracking-data"></div>
+    </div>
+  </div>
+</div>
+
+<style>
+.tracking-page {
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.tracking-form {
+  display: flex;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.tracking-form input {
+  flex: 1;
+  padding: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+}
+
+.tracking-form button {
+  padding: 1rem 2rem;
+  background: #6366f1;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#results {
+  background: #f8f9fa;
+  padding: 2rem;
+  border-radius: 8px;
+  margin-top: 2rem;
+}
+</style>
+
+<script>
+const API_URL = 'https://api.dropdash.co/shipmenttracking/get';
+const API_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiRGVzaSBEZWFscyIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VvYmlsZXBob25lIjoiOTkwMjMxNTQxOCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6ImluLmRlc2lkZWFsc0BnbWFpbC5jb20iLCJqdGkiOiIzZTE1OWFjNy00MTFiLTQ0OGItYjE1NS0wNTA0OWNhMDBlMjAiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJEcm9wU2hpcHBlciIsImV4cCI6MTc2MDIwNzM4NCwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo2MTk1NSIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NDIwMCJ9.Sat9rj0bccVIncAmQw6RS3-f2O2v8-IU2MQYAvfjkVc';
+
+document.getElementById('track-btn').addEventListener('click', async function() {
+  const awb = document.getElementById('awb-input').value;
+  if (!awb) return;
+  
+  try {
+    const response = await fetch(`${API_URL}?awb=${awb}`, {
+      headers: {
+        'Authorization': `Bearer ${API_TOKEN}`,
+        'Content-Type': 'application/json'
+      }
+    });
+    
+    const data = await response.json();
+    
+    if (data.success) {
+      document.getElementById('tracking-data').innerHTML = `
+        <p><strong>Status:</strong> ${data.data.status}</p>
+        <p><strong>Location:</strong> ${data.data.location}</p>
+        <p><strong>Order ID:</strong> ${data.data.orderId}</p>
+        <p><strong>Service Provider:</strong> ${data.data.fullfilledBy}</p>
+      `;
+      document.getElementById('results').style.display = 'block';
+    } else {
+      alert('No tracking data found');
+    }
+  } catch (error) {
+    alert('Error fetching tracking data');
+  }
+});
+</script>

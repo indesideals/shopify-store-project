@@ -94,7 +94,7 @@
       "customer-testimonials": {
         "type": "customer-testimonials",
         "settings": {
-          "section_title": "Real Customers, Real Reviews",
+          "section_title": "What Our Customers Say About Us",
           "section_subtitle": "See what our customers are saying about their shopping experience",
           "testimonial_1_image": "shopify://shop_images/amitav-hira-6e3Zbp3ADOY-unsplash.jpg",
           "testimonial_1_name": "Rajesh Kumar",
