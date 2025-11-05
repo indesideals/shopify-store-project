@@ -1,0 +1,352 @@
+{% comment %}
+  CLEAN THEME LAYOUT - OPTIMIZED FOR MOBILE/DESKTOP SEPARATION
+{% endcomment %}
+
+{% comment %} FORCE MOBILE ONLY {% endcomment %}
+{% assign is_mobile = true %}
+
+<!DOCTYPE html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#6366f1">
+  <link rel="canonical" href="{{ canonical_url }}">
+  
+  <link rel="icon" type="image/svg+xml" href="{{ 'favicon.svg' | asset_url }}">
+  <link rel="manifest" href="{{ 'site.webmanifest' | asset_url }}">
+  
+  <title>
+    {{ page_title }}
+    {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+    {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+    {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+  </title>
+
+  {% if page_description %}
+    <meta name="description" content="{{ page_description | escape }}">
+  {% endif %}
+
+  {{ content_for_header }}
+
+  <!-- Load Mobile CSS -->
+  {{ 'base.css' | asset_url | stylesheet_tag }}
+  {{ 'mobile.css' | asset_url | stylesheet_tag }}
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "svko93hbj6");
+  </script>
+
+  <!-- Supabase CDN -->
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+</head>
+
+<body class="mobile-experience" data-theme-type="mobile">
+  
+  {% render 'mobile-layout' %}
+
+  <!-- Main Content -->
+  <main class="mobile-main">
+    {{ content_for_layout }}
+  </main>
+
+  <!-- Simple Mobile Footer -->
+  <footer style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 2rem 0 5rem 0; margin-top: 0;">
+    <div class="container">
+      <div style="max-width: 600px; margin: 0 auto; padding: 0 1rem;">
+                                <!-- Quick Links and Contact Us -->
+            <div style="margin-bottom: 1.5rem;">
+              <!-- Quick Links -->
+              <div style="margin-bottom: 1.5rem;">
+                <h4 style="margin: 0 0 0.7rem 0; font-size: 1rem; color: white; font-weight: 600; text-align: center;">Quick Links</h4>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.6rem; max-width: 350px; margin: 0 auto;">
+                  <a href="/" style="display: flex; align-items: center; justify-content: center; gap: 0.4rem; padding: 0.6rem 0.4rem; background: rgba(255,255,255,0.1); border-radius: 6px; color: rgba(255,255,255,0.9); font-size: 0.8rem; text-decoration: none; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">
+                    <span style="font-size: 1rem;">🏠</span>
+                    <span>Home</span>
+                  </a>
+                  <a href="/collections/all" style="display: flex; align-items: center; justify-content: center; gap: 0.4rem; padding: 0.6rem 0.4rem; background: rgba(255,255,255,0.1); border-radius: 6px; color: rgba(255,255,255,0.9); font-size: 0.8rem; text-decoration: none; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">
+                    <span style="font-size: 1rem;">🛍️</span>
+                    <span>Products</span>
+                  </a>
+                  <a href="/pages/about-us" style="display: flex; align-items: center; justify-content: center; gap: 0.4rem; padding: 0.6rem 0.4rem; background: rgba(255,255,255,0.1); border-radius: 6px; color: rgba(255,255,255,0.9); font-size: 0.8rem; text-decoration: none; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">
+                    <span style="font-size: 1rem;">ℹ️</span>
+                    <span>About Us</span>
+                  </a>
+                  <a href="/pages/contact" style="display: flex; align-items: center; justify-content: center; gap: 0.4rem; padding: 0.6rem 0.4rem; background: rgba(255,255,255,0.1); border-radius: 6px; color: rgba(255,255,255,0.9); font-size: 0.8rem; text-decoration: none; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">
+                    <span style="font-size: 1rem;">📞</span>
+                    <span>Contact</span>
+                  </a>
+                </div>
+              </div>
+              
+              <!-- Contact Us -->
+              <div>
+                <h4 style="margin: 0 0 0.7rem 0; font-size: 1rem; color: white; font-weight: 600; text-align: center;">Contact Us</h4>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.6rem; max-width: 350px; margin: 0 auto;">
+                  <div style="display: flex; align-items: center; justify-content: center; gap: 0.4rem; padding: 0.6rem 0.4rem; background: rgba(255,255,255,0.1); border-radius: 6px;">
+                    <span style="font-size: 1rem;">💌</span>
+                    <span style="color: rgba(255,255,255,0.9); font-size: 0.65rem;">support@desideals.app</span>
+                  </div>
+                  <div style="display: flex; align-items: center; justify-content: center; gap: 0.4rem; padding: 0.6rem 0.4rem; background: rgba(255,255,255,0.1); border-radius: 6px;">
+                    <span style="font-size: 1rem;">📦</span>
+                    <a href="/pages/track-your-shipment" style="color: rgba(255,255,255,0.9); font-size: 0.65rem; text-decoration: none; transition: all 0.3s ease;" onmouseover="this.style.color='white'; this.style.textDecoration='underline'" onmouseout="this.style.color='rgba(255,255,255,0.9)'; this.style.textDecoration='none'">Track Your Order</a>
+                  </div>
+                  <div style="display: flex; align-items: center; justify-content: center; gap: 0.4rem; padding: 0.6rem 0.4rem; background: rgba(255,255,255,0.1); border-radius: 6px;">
+                    <span style="font-size: 1rem;">🇮🇳</span>
+                    <span style="color: rgba(255,255,255,0.9); font-size: 0.65rem;">Made with ❤️ in India</span>
+                  </div>
+                  <div style="display: flex; align-items: center; justify-content: center; gap: 0.4rem; padding: 0.6rem 0.4rem; background: rgba(255,255,255,0.1); border-radius: 6px;">
+                    <span style="font-size: 1rem;">🔄</span>
+                    <span style="color: rgba(255,255,255,0.9); font-size: 0.65rem;">24/7 Support</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+        
+        <!-- Horizontal Line -->
+        <div style="border-top: 1px solid rgba(255,255,255,0.3); margin-bottom: 1.5rem;"></div>
+        
+                     <!-- Follow Us -->
+             <div style="text-align: center;">
+               <h4 style="margin: 0 0 0.4rem 0; font-size: 1rem; color: white; font-weight: 600;">Follow Us</h4>
+               <div style="display: flex; gap: 0.8rem; margin-bottom: 0.4rem; justify-content: center;">
+                 <a href="https://www.facebook.com/profile.php?id=61579363773141" target="_blank" style="color: white; opacity: 0.9; transition: all 0.3s ease; display: inline-block; padding: 0.5rem; border-radius: 50%; background: rgba(255,255,255,0.1); width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; text-decoration: none;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'">
+                   <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                     <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                   </svg>
+                 </a>
+                 <a href="https://x.com/DesidealsIn" target="_blank" style="color: white; opacity: 0.9; transition: all 0.3s ease; display: inline-block; padding: 0.5rem; border-radius: 50%; background: rgba(255,255,255,0.1); width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; text-decoration: none;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'">
+                   <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                   </svg>
+                 </a>
+                 <a href="https://www.instagram.com/desideals_in/" target="_blank" style="color: white; opacity: 0.9; transition: all 0.3s ease; display: inline-block; padding: 0.5rem; border-radius: 50%; background: rgba(255,255,255,0.1); width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; text-decoration: none;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'">
+                   <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                     <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                   </svg>
+                 </a>
+                 <a href="https://www.youtube.com/@Desideals_In" target="_blank" style="color: white; opacity: 0.9; transition: all 0.3s ease; display: inline-block; padding: 0.5rem; border-radius: 50%; background: rgba(255,255,255,0.1); width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; text-decoration: none;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'">
+                   <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                     <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                   </svg>
+                 </a>
+               </div>
+               <p style="font-size: 0.75rem; color: white; opacity: 0.8; font-style: italic; line-height: 1.3; margin: 0;">Stay connected for updates & offers</p>
+             </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Load Mobile JavaScript -->
+  {{ 'mobile.js' | asset_url | script_tag }}
+
+  <!-- Global Functions -->
+  <script>
+    // Add to cart function
+    function addToCartDirect(productId, variantId, title, price, image, url, quantity = 1) {
+      console.log('addToCartDirect called:', { productId, variantId, title, price, image, url, quantity });
+      
+      // Get quantity from quantity input if not provided
+      if (quantity === 1) {
+        const quantityInput = document.getElementById('quantity');
+        if (quantityInput) {
+          quantity = parseInt(quantityInput.value) || 1;
+        }
+      }
+      
+      if (document.body.classList.contains('mobile-experience')) {
+        if (window.addToMobileCart) {
+          window.addToMobileCart(productId, variantId, title, price, image, url, quantity);
+        } else {
+          console.error('Mobile cart system not ready');
+        }
+      } else {
+        if (window.addToDesktopCart) {
+          window.addToDesktopCart(productId, variantId, title, price, image, url, quantity);
+        } else {
+          console.error('Desktop cart system not ready');
+        }
+      }
+    }
+
+    // Buy Now function - Direct checkout
+    function buyNowDirect(variantId) {
+      console.log('buyNowDirect called for variant:', variantId);
+      
+      // Get quantity from quantity input
+      const quantityInput = document.getElementById('quantity');
+      const quantity = quantityInput ? parseInt(quantityInput.value) || 1 : 1;
+      
+      // First clear the cart, then add the new product
+      fetch('/cart/clear.js', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      })
+      .then(response => response.json())
+      .then(() => {
+        console.log('Cart cleared successfully');
+        
+        // Create form data for Shopify cart API
+        const formData = {
+          'items': [{
+            'id': variantId,
+            'quantity': quantity
+          }]
+        };
+        
+        // Add the new product to cart and redirect to checkout
+        return fetch('/cart/add.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData)
+        });
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Product added to cart for checkout:', data);
+        // Redirect to checkout
+        window.location.href = '/checkout';
+      })
+      .catch(error => {
+        console.error('Error in buy now process:', error);
+        alert('Error processing buy now. Please try again.');
+      });
+    }
+
+    // Search function - FIXED: Don't call window.toggleSearch to avoid recursion
+    function toggleSearch() {
+      console.log('toggleSearch called - calling DesktopSearch.showSearchInput()');
+      if (window.DesktopSearch && window.DesktopSearch.showSearchInput) {
+        window.DesktopSearch.showSearchInput();
+      } else {
+        console.error('DesktopSearch not available');
+      }
+    }
+
+    // Burger menu functions - FIXED: Don't call window.toggleBurgerMenu to avoid recursion
+    function toggleBurgerMenu() {
+      console.log('toggleBurgerMenu called - calling DesktopMenu.toggleBurgerMenu()');
+      if (window.DesktopMenu && window.DesktopMenu.toggleBurgerMenu) {
+        window.DesktopMenu.toggleBurgerMenu();
+      } else {
+        console.error('DesktopMenu not available');
+      }
+    }
+
+    function closeBurgerMenu() {
+      console.log('closeBurgerMenu called - calling DesktopMenu.closeBurgerMenu()');
+      if (window.DesktopMenu && window.DesktopMenu.closeBurgerMenu) {
+        window.DesktopMenu.closeBurgerMenu();
+      } else {
+        console.error('DesktopMenu not available');
+      }
+    }
+
+    // Category dropdown functions
+    function toggleCategoryDropdown() {
+      const dropdown = document.getElementById('categoryDropdown');
+      const button = document.querySelector('.desktop-burger-menu-dropdown-btn');
+      
+      if (dropdown && button) {
+        dropdown.classList.toggle('open');
+        button.classList.toggle('active');
+      }
+    }
+
+    function toggleMobileCategoryDropdown() {
+      const dropdown = document.getElementById('mobileCategoryDropdown');
+      const button = document.querySelector('.mobile-menu-dropdown-btn');
+      
+      if (dropdown && button) {
+        dropdown.classList.toggle('open');
+        button.classList.toggle('active');
+      }
+    }
+
+    // Cart functions - FIXED: Don't call window.openDesktopCart to avoid recursion
+    function openDesktopCart() {
+      console.log('openDesktopCart called - calling DesktopCart.openDrawer()');
+      if (window.DesktopCart && window.DesktopCart.openDrawer) {
+        window.DesktopCart.openDrawer();
+      } else {
+        console.error('DesktopCart not available');
+      }
+    }
+
+    // Wishlist count update function
+    function updateWishlistCount() {
+      console.log('updateWishlistCount called');
+      
+      {% if customer %}
+        const customerId = '{{ customer.id }}';
+        const wishlistKey = `wishlist_${customerId}`;
+        const favorites = JSON.parse(localStorage.getItem(wishlistKey) || '[]');
+        const count = favorites.length;
+        
+        console.log('Wishlist count:', count);
+        
+        // Update mobile wishlist count
+        const mobileWishlistCount = document.querySelector('.mobile-wishlist-count');
+        if (mobileWishlistCount) {
+          mobileWishlistCount.textContent = count;
+          mobileWishlistCount.style.display = count > 0 ? 'block' : 'none';
+        }
+        
+        // Update desktop wishlist count
+        const desktopWishlistCount = document.querySelector('.desktop-wishlist-count');
+        if (desktopWishlistCount) {
+          desktopWishlistCount.textContent = count;
+          desktopWishlistCount.style.display = count > 0 ? 'flex' : 'none';
+        }
+        
+        console.log('Wishlist count updated:', count);
+      {% else %}
+        console.log('Customer not logged in, hiding wishlist count');
+        
+        // Hide counts for non-logged in users
+        const mobileWishlistCount = document.querySelector('.mobile-wishlist-count');
+        if (mobileWishlistCount) {
+          mobileWishlistCount.style.display = 'none';
+        }
+        
+        const desktopWishlistCount = document.querySelector('.desktop-wishlist-count');
+        if (desktopWishlistCount) {
+          desktopWishlistCount.style.display = 'none';
+        }
+      {% endif %}
+    }
+
+    // Wait for desktop.js to load
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('Theme.liquid DOMContentLoaded');
+      
+      // Initialize wishlist count
+      updateWishlistCount();
+      
+      // Check if functions are available after a short delay
+      setTimeout(function() {
+        console.log('Checking function availability:');
+        console.log('DesktopSearch:', typeof window.DesktopSearch);
+        console.log('DesktopMenu:', typeof window.DesktopMenu);
+        console.log('DesktopCart:', typeof window.DesktopCart);
+      }, 1000);
+    });
+  </script>
+
+</body>
+</html>

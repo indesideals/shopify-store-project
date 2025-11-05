@@ -1,0 +1,173 @@
+<!-- Pincode Checker Component -->
+<div class="pincode-checker">
+  <div class="pincode-input-container">
+    <input type="text" 
+           id="pincode-input" 
+           placeholder="Enter your pincode" 
+           maxlength="6" 
+           pattern="[0-9]{6}"
+           class="pincode-input">
+    <button id="check-pincode-btn" class="check-pincode-btn">
+      Check Delivery
+    </button>
+  </div>
+  
+  <div id="pincode-result" class="pincode-result" style="display: none;">
+    <div class="result-content">
+      <span class="result-icon">✅</span>
+      <span class="result-text"></span>
+    </div>
+  </div>
+</div>
+
+<style>
+.pincode-checker {
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #f9fafb;
+}
+
+.pincode-input-container {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.pincode-input {
+  flex: 1;
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.check-pincode-btn {
+  padding: 0.75rem 1.5rem;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.check-pincode-btn:hover {
+  background: #2563eb;
+}
+
+.check-pincode-btn:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+.pincode-result {
+  padding: 0.75rem;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+.pincode-result.deliverable {
+  background: #dcfce7;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+}
+
+.pincode-result.not-deliverable {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+}
+
+.result-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+</style>
+
+<script>
+// Supabase configuration
+const SUPABASE_URL = 'https://lrraynrhsrijxeiwzals.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxycmF5bnJoc3JpanhlaXd6YWxzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTgzNDQzODcsImV4cCI6MjA3MzkyMDM4N30.iL3BnfqY4FDVxumeVqBCjKVUSm6eH5K6EOHVQLU-z2k';
+
+// Initialize Supabase client
+const { createClient } = supabase;
+const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// Pincode checker function
+async function checkPincode() {
+  const pincodeInput = document.getElementById('pincode-input');
+  const checkBtn = document.getElementById('check-pincode-btn');
+  const resultDiv = document.getElementById('pincode-result');
+  
+  const pincode = pincodeInput.value.trim();
+  
+  if (!pincode || pincode.length !== 6) {
+    alert('Please enter a valid 6-digit pincode');
+    return;
+  }
+  
+  // Disable button and show loading
+  checkBtn.disabled = true;
+  checkBtn.textContent = 'Checking...';
+  
+  try {
+    // Query Supabase
+    const { data, error } = await supabaseClient
+      .from('pincodes')
+      .select('pincode, officename')
+      .eq('pincode', pincode)
+      .single();
+    
+    if (error) {
+      throw error;
+    }
+    
+    if (data) {
+      // Pincode found - deliverable
+      resultDiv.className = 'pincode-result deliverable';
+      resultDiv.querySelector('.result-text').textContent = 
+        `✅ Delivery available to ${data.officename}`;
+    } else {
+      // Pincode not found - not deliverable
+      resultDiv.className = 'pincode-result not-deliverable';
+      resultDiv.querySelector('.result-text').textContent = 
+        '❌ Delivery not available to this pincode';
+    }
+    
+    resultDiv.style.display = 'block';
+    
+  } catch (error) {
+    console.error('Error checking pincode:', error);
+    resultDiv.className = 'pincode-result not-deliverable';
+    resultDiv.querySelector('.result-text').textContent = 
+      '❌ Error checking pincode. Please try again.';
+    resultDiv.style.display = 'block';
+  } finally {
+    // Re-enable button
+    checkBtn.disabled = false;
+    checkBtn.textContent = 'Check Delivery';
+  }
+}
+
+// Add event listeners
+document.addEventListener('DOMContentLoaded', function() {
+  const checkBtn = document.getElementById('check-pincode-btn');
+  const pincodeInput = document.getElementById('pincode-input');
+  
+  if (checkBtn) {
+    checkBtn.addEventListener('click', checkPincode);
+  }
+  
+  if (pincodeInput) {
+    pincodeInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        checkPincode();
+      }
+    });
+  }
+});
+</script>

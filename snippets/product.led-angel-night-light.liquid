@@ -1,0 +1,1036 @@
+{% comment %}
+  LED Angel Night Light Product Template - Optimized
+  Clean, focused template for LED Angel Night Light only
+{% endcomment %}
+
+{% comment %} LED Angel Night Light Product Data {% endcomment %}
+{% assign product_rating = 4.9 %}
+{% assign product_review_count = 3247 %}
+{% assign product_description = "Illuminate your nights with this enchanting LED angel night light! This beautiful and peaceful night light features a gentle angel design that creates a warm, soothing glow perfect for bedrooms, nurseries, and meditation spaces. The soft LED lighting provides just the right amount of illumination without being harsh, helping children and adults alike feel safe and comforted during the night. Features energy-efficient LED technology, touch-sensitive controls, and a beautiful angel silhouette design." %}
+{% assign product_key_features = "Gentle angel design creates peaceful and comforting atmosphere for night time,Energy-efficient LED technology provides soft, warm glow without harsh lighting,Touch-sensitive controls for easy operation and brightness adjustment,Perfect for bedrooms, nurseries, meditation spaces, and children's rooms,Beautiful angel silhouette design adds elegant aesthetic to any room decor" | split: "," %}
+{% assign how_to_use = "Place in desired location,Plug into electrical outlet,Touch to turn on/off and adjust brightness,Enjoy peaceful night-time illumination" | split: "," %}
+{% assign faqs = "How bright is the light?|Provides gentle, soft glow perfect for night-time use without being harsh. Ideal for peaceful sleep.,Is it safe for children?|Yes, designed with child safety in mind with gentle LED lighting and no hot surfaces.,How do I adjust brightness?|Simply touch the light to cycle through different brightness levels.,What's the power consumption?|Energy-efficient LED technology uses minimal power for all-night operation.,Is it easy to clean?|Yes, wipe clean with a soft, dry cloth to maintain the beautiful appearance." | split: "," %}
+
+<div class="product-page">
+  <!-- Product Header -->
+  <div class="product-header">
+    <h1 class="product-title">{{ product.title }}</h1>
+    <div class="product-rating">
+      <div class="stars">
+        {% for i in (1..5) %}
+          {% if i <= product_rating %}
+            <span class="star filled">★</span>
+          {% else %}
+            <span class="star">★</span>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <span class="rating-text">{{ product_rating }} ({{ product_review_count }} reviews)</span>
+    </div>
+  </div>
+
+  <!-- Product Images -->
+  <div class="product-images">
+    <div class="main-image">
+      <img src="{{ product.featured_image | img_url: '600x600' }}" alt="{{ product.title }}" class="product-image">
+    </div>
+  </div>
+
+  <!-- Product Info -->
+  <div class="product-info">
+    <div class="price-section">
+      <div class="current-price">₹{{ product.price | divided_by: 100 | round }}</div>
+      <div class="original-price">₹{{ product.price | divided_by: 0.6 | divided_by: 100 | round }}</div>
+      <div class="discount-badge">40% OFF</div>
+    </div>
+
+    <div class="product-actions">
+      <button class="add-to-cart-btn" onclick="addToCart()">Add to Cart</button>
+      <button class="buy-now-btn" onclick="buyNow()">Buy Now</button>
+    </div>
+  </div>
+
+  <!-- Product Details Accordions -->
+  <div class="product-details">
+    <div class="accordion">
+      <button class="accordion-header active" onclick="toggleAccordion('description')">
+        <span>Product Description</span>
+        <span class="accordion-icon">-</span>
+      </button>
+      <div id="description" class="accordion-content active">
+        <div class="description-content">
+          {{ product_description | replace: '\n\n', '<br><br>' | replace: '\n', '<br>' }}
+        </div>
+      </div>
+    </div>
+    
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion('features')">
+        <span>Key Features</span>
+        <span class="accordion-icon">+</span>
+      </button>
+      <div id="features" class="accordion-content">
+        <ul class="features-list">
+          {% for feature in product_key_features %}
+            <li>{{ feature }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion('how-to-use')">
+        <span>How to Use</span>
+        <span class="accordion-icon">+</span>
+      </button>
+      <div id="how-to-use" class="accordion-content">
+        <ol class="how-to-list">
+          {% for step in how_to_use %}
+            <li>{{ step }}</li>
+          {% endfor %}
+        </ol>
+      </div>
+    </div>
+    
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion('faqs')">
+        <span>FAQs</span>
+        <span class="accordion-icon">+</span>
+      </button>
+      <div id="faqs" class="accordion-content">
+        <div class="faqs-list">
+          {% for faq in faqs %}
+            {% assign faq_parts = faq | split: "|" %}
+            <div class="faq-item">
+              <h4>{{ faq_parts[0] }}</h4>
+              <p>{{ faq_parts[1] }}</p>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion('shipping')">
+        <span>Shipping & Returns</span>
+        <span class="accordion-icon">+</span>
+      </button>
+      <div id="shipping" class="accordion-content">
+        <div class="shipping-info">
+          <p style="margin-top: 15px; font-size: 14px; color: #666;">
+            🚚 Fast delivery in 5-7 days! 💯 No-fuss returns guaranteed. 
+            <a href="https://desideals.app/pages/shipping-and-returns-policy" style="color: #007bff; text-decoration: underline;">Check out our full policy here</a> ✨
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Simple Pincode Checker -->
+  <div class="pincode-checker-box">
+    <h3 class="pincode-heading">Check Delivery Availability</h3>
+    <div class="pincode-row">
+      <input type="text" 
+             id="pincode-input" 
+             placeholder="Enter pincode" 
+             maxlength="6" 
+             pattern="[0-9]{6}"
+             class="pincode-input-simple">
+      <button id="check-pincode-btn" class="pincode-btn-simple">Check</button>
+    </div>
+    <div id="pincode-result" class="pincode-result-simple" style="display: none;"></div>
+  </div>
+
+  <!-- Product Reviews -->
+  <div class="reviews-section">
+    <h2 class="reviews-title">Customer Reviews</h2>
+    <div class="reviews-summary">
+      <div class="rating-overview">
+        <div class="rating-number">{{ product_rating }}</div>
+        <div class="stars-large">
+          {% for i in (1..5) %}
+            {% if i <= product_rating %}
+              <span class="star filled">★</span>
+            {% else %}
+              <span class="star">★</span>
+            {% endif %}
+          {% endfor %}
+        </div>
+        <div class="rating-count">{{ product_review_count }} reviews</div>
+      </div>
+    </div>
+
+    <div class="reviews-sort">
+      <select id="sort-reviews" onchange="sortReviews()">
+        <option value="newest">Newest First</option>
+        <option value="oldest">Oldest First</option>
+        <option value="highest">Highest Rating</option>
+        <option value="lowest">Lowest Rating</option>
+      </select>
+    </div>
+
+    <div class="reviews-grid" id="reviews-container">
+      <!-- Review 1 -->
+      <div class="review-card" data-rating="5" data-helpful="41">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <div class="reviewer-name">Sarah M.</div>
+            <div class="review-rating">
+              <span class="stars">★★★★★</span>
+            </div>
+          </div>
+          <div class="review-date" data-date="2024-01-15">Today</div>
+        </div>
+        <div class="review-content">
+          <p>Absolutely love this angel night light! The gentle glow is perfect for my daughter's room. She feels so safe and comforted at night. The touch controls are easy to use and the design is beautiful. Highly recommend!</p>
+        </div>
+        <div class="review-helpful">
+          <button class="helpful-btn" onclick="toggleHelpful(this)">👍 Helpful (41)</button>
+        </div>
+      </div>
+
+      <!-- Review 2 -->
+      <div class="review-card" data-rating="5" data-helpful="28">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <div class="reviewer-name">Michael R.</div>
+            <div class="review-rating">
+              <span class="stars">★★★★★</span>
+            </div>
+          </div>
+          <div class="review-date" data-date="2024-01-13">2 days ago</div>
+        </div>
+        <div class="review-content">
+          <p>Perfect for meditation space. The soft light creates such a peaceful atmosphere.</p>
+        </div>
+        <div class="review-helpful">
+          <button class="helpful-btn" onclick="toggleHelpful(this)">👍 Helpful (28)</button>
+        </div>
+      </div>
+
+      <!-- Review 3 -->
+      <div class="review-card" data-rating="4" data-helpful="35">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <div class="reviewer-name">Emma L.</div>
+            <div class="review-rating">
+              <span class="stars">★★★★☆</span>
+            </div>
+          </div>
+          <div class="review-date" data-date="2024-01-10">1 week ago</div>
+        </div>
+        <div class="review-content">
+          <p>Great night light! The angel design is beautiful and the light is just right - not too bright, not too dim. My toddler loves it and it helps her sleep better. The touch controls work perfectly and it's very energy efficient. Only minor issue is the cord could be a bit longer, but overall very satisfied with this purchase.</p>
+        </div>
+        <div class="review-helpful">
+          <button class="helpful-btn" onclick="toggleHelpful(this)">👍 Helpful (35)</button>
+        </div>
+      </div>
+
+      <!-- Review 4 -->
+      <div class="review-card" data-rating="5" data-helpful="22">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <div class="reviewer-name">David K.</div>
+            <div class="review-rating">
+              <span class="stars">★★★★★</span>
+            </div>
+          </div>
+          <div class="review-date" data-date="2024-01-08">3 months ago</div>
+        </div>
+        <div class="review-content">
+          <p>Excellent quality and beautiful design. Perfect for our nursery!</p>
+        </div>
+        <div class="review-helpful">
+          <button class="helpful-btn" onclick="toggleHelpful(this)">👍 Helpful (22)</button>
+        </div>
+      </div>
+
+      <!-- Review 5 -->
+      <div class="review-card" data-rating="5" data-helpful="19">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <div class="reviewer-name">Lisa P.</div>
+            <div class="review-rating">
+              <span class="stars">★★★★★</span>
+            </div>
+          </div>
+          <div class="review-date" data-date="2024-01-05">1 week ago</div>
+        </div>
+        <div class="review-content">
+          <p>Love this night light! The angel design is so peaceful and the light is perfect for nighttime. My daughter sleeps much better with it on. The touch controls are very responsive and it's very well made. Highly recommend for anyone looking for a quality night light!</p>
+        </div>
+        <div class="review-helpful">
+          <button class="helpful-btn" onclick="toggleHelpful(this)">👍 Helpful (19)</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+/* Base Styles */
+.product-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.product-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.product-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 15px;
+}
+
+.product-rating {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.stars {
+  display: flex;
+  gap: 2px;
+}
+
+.star {
+  color: #ddd;
+  font-size: 1.2rem;
+}
+
+.star.filled {
+  color: #ffc107;
+}
+
+.rating-text {
+  font-size: 1rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.product-images {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.product-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.product-info {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.price-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+}
+
+.current-price {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.original-price {
+  font-size: 1.4rem;
+  color: #999;
+  text-decoration: line-through;
+}
+
+.discount-badge {
+  background: #ff0000;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.product-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.add-to-cart-btn, .buy-now-btn {
+  padding: 15px 30px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+}
+
+.add-to-cart-btn {
+  background: #f8f9fa;
+  color: #1a1a1a;
+  border: 2px solid #e9ecef;
+}
+
+.add-to-cart-btn:hover {
+  background: #e9ecef;
+  transform: translateY(-2px);
+}
+
+.buy-now-btn {
+  background: #6b46c1;
+  color: white;
+}
+
+.buy-now-btn:hover {
+  background: #5b35b1;
+  transform: translateY(-2px);
+}
+
+/* Accordion Styles */
+.product-details {
+  margin-bottom: 40px;
+}
+
+.accordion {
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 8px;
+}
+
+.accordion-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 0;
+  cursor: pointer;
+  background: none;
+  border: none;
+  width: 100%;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  position: relative;
+  transition: color 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+}
+
+.accordion-header:hover {
+  color: #6b46c1;
+}
+
+.accordion-header span:first-child {
+  flex-grow: 1;
+}
+
+.accordion-icon {
+  position: absolute;
+  right: 0;
+  font-size: 1rem;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.accordion-header.active .accordion-icon {
+  transform: rotate(180deg);
+}
+
+.accordion-content {
+  display: none;
+  padding-top: 8px;
+  animation: fadeIn 0.3s ease;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.accordion-content.active {
+  display: block;
+  max-height: 1000px;
+}
+
+.description-content {
+  line-height: 1.6;
+  color: #4a5568;
+  font-size: 1rem;
+}
+
+.features-list {
+  list-style: none;
+  padding: 0;
+}
+
+.features-list li {
+  padding: 8px 0;
+  border-bottom: 1px solid #f1f3f4;
+  font-size: 1rem;
+  color: #4a5568;
+}
+
+.features-list li:last-child {
+  border-bottom: none;
+}
+
+.how-to-list {
+  padding-left: 20px;
+}
+
+.how-to-list li {
+  padding: 8px 0;
+  color: #4a5568;
+  font-size: 1rem;
+}
+
+.faqs-list {
+  padding: 0;
+}
+
+.faq-item {
+  padding: 15px 0;
+  border-bottom: 1px solid #f1f3f4;
+}
+
+.faq-item:last-child {
+  border-bottom: none;
+}
+
+.faq-item h4 {
+  margin: 0 0 8px 0;
+  font-size: 1.1rem;
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+.faq-item p {
+  margin: 0;
+  color: #4a5568;
+  line-height: 1.5;
+  font-size: 1rem;
+}
+
+.shipping-info {
+  padding: 15px 0;
+}
+
+/* Simple Pincode Checker */
+.pincode-checker-box {
+  margin: 20px 0;
+  padding: 20px;
+  background: #f5f5f5;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.pincode-heading {
+  font-size: 1.1rem;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  color: #333;
+  margin: 0 0 15px 0;
+}
+
+.pincode-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 10px;
+  justify-content: center;
+}
+
+.pincode-input-simple {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-family: 'Poppins', sans-serif;
+  color: #1a1a1a;
+  background: white;
+  transition: border-color 0.2s ease;
+}
+
+.pincode-input-simple:focus {
+  outline: none;
+  border-color: #6b46c1;
+}
+
+.pincode-input-simple::placeholder {
+  color: #9ca3af;
+}
+
+.pincode-btn-simple {
+  padding: 10px 16px;
+  background: #6b46c1;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  white-space: nowrap;
+}
+
+.pincode-btn-simple:hover {
+  background: #5b35b1;
+}
+
+.pincode-btn-simple:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+.pincode-result-simple {
+  font-size: 0.85rem;
+  font-weight: 500;
+  font-family: 'Poppins', sans-serif;
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin-top: 8px;
+}
+
+.pincode-result-simple.deliverable {
+  background: #dcfce7;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+}
+
+.pincode-result-simple.not-deliverable {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+}
+
+/* Reviews Section */
+.reviews-section {
+  margin-top: 50px;
+}
+
+.reviews-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.reviews-summary {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.rating-overview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.rating-number {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.stars-large {
+  display: flex;
+  gap: 4px;
+}
+
+.stars-large .star {
+  font-size: 1.5rem;
+}
+
+.rating-count {
+  font-size: 1.1rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.reviews-sort {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.reviews-sort select {
+  padding: 10px 15px;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: 'Poppins', sans-serif;
+  background: white;
+  cursor: pointer;
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.review-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.review-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.reviewer-info {
+  flex: 1;
+}
+
+.reviewer-name {
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 5px;
+}
+
+.review-rating .stars {
+  color: #ffc107;
+  font-size: 1rem;
+}
+
+.review-date {
+  font-size: 0.9rem;
+  color: #666;
+  white-space: nowrap;
+}
+
+.review-content {
+  margin-bottom: 15px;
+}
+
+.review-content p {
+  margin: 0;
+  line-height: 1.6;
+  color: #4a5568;
+  font-size: 1rem;
+}
+
+.review-helpful {
+  text-align: right;
+}
+
+.helpful-btn {
+  background: none;
+  border: 1px solid #e5e7eb;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Poppins', sans-serif;
+}
+
+.helpful-btn:hover {
+  background: #f8f9fa;
+  border-color: #6b46c1;
+  color: #6b46c1;
+}
+
+.helpful-btn.helpful {
+  background: #6b46c1;
+  color: white;
+  border-color: #6b46c1;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .product-page {
+    padding: 15px;
+  }
+  
+  .product-title {
+    font-size: 2rem;
+  }
+  
+  .price-section {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .product-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .add-to-cart-btn, .buy-now-btn {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .reviews-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .review-header {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .review-date {
+    align-self: flex-start;
+  }
+}
+</style>
+
+<script>
+// Accordion functionality
+function toggleAccordion(sectionId) {
+  const content = document.getElementById(sectionId);
+  const header = content.previousElementSibling;
+  
+  // If this accordion is already open, just close it
+  if (content.classList.contains('active')) {
+    content.classList.remove('active');
+    header.classList.remove('active');
+    header.querySelector('.accordion-icon').textContent = '+';
+    return;
+  }
+  
+  // Close all other accordions
+  document.querySelectorAll('.accordion-content').forEach(acc => {
+    acc.classList.remove('active');
+    acc.previousElementSibling.classList.remove('active');
+    acc.previousElementSibling.querySelector('.accordion-icon').textContent = '+';
+  });
+  
+  // Open current accordion
+  content.classList.add('active');
+  header.classList.add('active');
+  header.querySelector('.accordion-icon').textContent = '-';
+  
+  // Scroll to the opened accordion smoothly
+  setTimeout(() => {
+    const headerRect = header.getBoundingClientRect();
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+    const targetScroll = currentScroll + headerRect.top - 100; // 100px offset from top
+    window.scrollTo({
+      top: targetScroll,
+      behavior: 'smooth'
+    });
+  }, 100);
+}
+
+// Review sorting functionality
+let currentSort = 'newest';
+
+function sortReviews() {
+  const sortSelect = document.getElementById('sort-reviews');
+  currentSort = sortSelect.value;
+  
+  const reviewsContainer = document.getElementById('reviews-container');
+  const reviewCards = Array.from(reviewsContainer.children);
+  
+  reviewCards.sort((a, b) => {
+    switch(currentSort) {
+      case 'newest':
+        return new Date(b.dataset.date || '2024-01-01') - new Date(a.dataset.date || '2024-01-01');
+      case 'oldest':
+        return new Date(a.dataset.date || '2024-01-01') - new Date(b.dataset.date || '2024-01-01');
+      case 'highest':
+        return parseInt(b.dataset.rating) - parseInt(a.dataset.rating);
+      case 'lowest':
+        return parseInt(a.dataset.rating) - parseInt(b.dataset.rating);
+      default:
+        return 0;
+    }
+  });
+  
+  // Clear container and re-append sorted reviews
+  reviewsContainer.innerHTML = '';
+  reviewCards.forEach(card => {
+    reviewsContainer.appendChild(card);
+  });
+  
+  // Update dates after sorting
+  calculateDynamicDates(true);
+}
+
+// Dynamic date calculation
+function calculateDynamicDates(preserveOrder = false) {
+  const reviewCards = document.querySelectorAll('.review-card');
+  const now = new Date();
+  
+  // Define date offsets for realistic progression
+  let dateOffsets = [0, 2, 7, 90, 7]; // Today, 2 days ago, 1 week ago, 3 months ago, 1 week ago
+  let displayTexts = ['Today', '2 days ago', '1 week ago', '3 months ago', '1 week ago'];
+  
+  // If preserving order and current sort is oldest, reverse the arrays
+  if (preserveOrder && currentSort === 'oldest') {
+    dateOffsets = dateOffsets.reverse();
+    displayTexts = displayTexts.reverse();
+  }
+  
+  reviewCards.forEach((card, index) => {
+    const dateElement = card.querySelector('.review-date');
+    if (dateElement) {
+      const offsetIndex = index % dateOffsets.length;
+      const targetDate = new Date(now);
+      targetDate.setDate(targetDate.getDate() - dateOffsets[offsetIndex]);
+      
+      dateElement.setAttribute('data-date', targetDate.toISOString().split('T')[0]);
+      dateElement.textContent = displayTexts[offsetIndex];
+    }
+  });
+}
+
+// Helpful button functionality
+function toggleHelpful(button) {
+  const isHelpful = button.classList.contains('helpful');
+  const countSpan = button.textContent.match(/\((\d+)\)/);
+  let count = countSpan ? parseInt(countSpan[1]) : 0;
+  
+  if (isHelpful) {
+    button.classList.remove('helpful');
+    count--;
+    button.textContent = `👍 Helpful (${count})`;
+  } else {
+    button.classList.add('helpful');
+    count++;
+    button.textContent = `👍 Helpful (${count})`;
+  }
+}
+
+// Cart functionality
+function addToCart() {
+  // Add to cart logic here
+  alert('Added to cart!');
+}
+
+function buyNow() {
+  // Buy now logic here
+  alert('Proceeding to checkout!');
+}
+
+// Supabase configuration
+const SUPABASE_URL = 'https://lrraynrhsrijxeiwzals.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxycmF5bnJoc3JpanhlaXd6YWxzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTgzNDQzODcsImV4cCI6MjA3MzkyMDM4N30.iL3BnfqY4FDVxumeVqBCjKVUSm6eH5K6EOHVQLU-z2k';
+
+// Initialize Supabase client
+let supabaseClient;
+
+// Pincode checker functionality
+async function checkPincode() {
+  const pincodeInput = document.getElementById('pincode-input');
+  const checkBtn = document.getElementById('check-pincode-btn');
+  const resultDiv = document.getElementById('pincode-result');
+  
+  const pincode = pincodeInput.value.trim();
+  
+  if (!pincode || pincode.length !== 6) {
+    alert('Please enter a valid 6-digit pincode');
+    return;
+  }
+  
+  // Disable button and show loading
+  checkBtn.disabled = true;
+  checkBtn.textContent = 'Checking...';
+  
+  try {
+    // Initialize Supabase client if not already done
+    if (!supabaseClient) {
+      if (typeof supabase !== 'undefined') {
+        supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      } else {
+        throw new Error('Supabase library not loaded');
+      }
+    }
+    
+    console.log('Checking pincode:', pincode);
+    
+    // Query Supabase
+    const { data, error } = await supabaseClient
+      .from('pincodes')
+      .select('pincode, officename')
+      .eq('pincode', pincode)
+      .limit(1);
+    
+    console.log('Supabase response:', { data, error });
+    
+    if (error) {
+      throw error;
+    }
+    
+    if (data && data.length > 0) {
+      // Pincode found - deliverable
+      resultDiv.className = 'pincode-result-simple deliverable';
+      resultDiv.textContent = `✅ Delivery in 5-7 days to ${data[0].officename}`;
+    } else {
+      // Pincode not found - not deliverable
+      resultDiv.className = 'pincode-result-simple not-deliverable';
+      resultDiv.textContent = '❌ Delivery not available to this pincode';
+    }
+    
+    resultDiv.style.display = 'block';
+    
+  } catch (error) {
+    console.error('Error checking pincode:', error);
+    resultDiv.className = 'pincode-result-simple not-deliverable';
+    resultDiv.textContent = `❌ Error: ${error.message}`;
+    resultDiv.style.display = 'block';
+  } finally {
+    // Re-enable button
+    checkBtn.disabled = false;
+    checkBtn.textContent = 'Check';
+  }
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', function() {
+  // Set up dynamic dates
+  calculateDynamicDates();
+  
+  // Set up pincode checker
+  const checkBtn = document.getElementById('check-pincode-btn');
+  const pincodeInput = document.getElementById('pincode-input');
+  
+  if (checkBtn) {
+    checkBtn.addEventListener('click', checkPincode);
+  }
+  
+  if (pincodeInput) {
+    pincodeInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        checkPincode();
+      }
+    });
+  }
+});
+</script>

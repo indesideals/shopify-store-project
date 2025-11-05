@@ -1,0 +1,1104 @@
+{% comment %}
+  Modern Shipment Tracking Page Template
+  Features: Awesome journey visualization with animated package path
+{% endcomment %}
+
+{% layout 'theme' %}
+
+<div class="shipment-tracking-page">
+  <div class="tracking-container">
+    <!-- Header Section -->
+    <div class="tracking-header">
+      <h1 class="tracking-title">Track Your Shipment</h1>
+      <p class="tracking-subtitle">Enter your AWB number to see your package's amazing journey</p>
+    </div>
+
+    <!-- Input Section -->
+    <div class="tracking-input-section">
+      <div class="input-container">
+        <input type="text" id="awbInput" class="awb-input" placeholder="Enter AWB Number (e.g., 14344953032908)">
+        <button id="trackButton" class="track-button">
+          <span id="buttonText">Track Journey</span>
+          <div id="spinner" class="spinner" style="display: none;"></div>
+        </button>
+      </div>
+      <div id="errorMessage" class="error-message" style="display: none;"></div>
+    </div>
+
+
+    <!-- Results Section -->
+    <div id="trackingResults" class="tracking-results" style="display: none;">
+      <!-- Progress Bar -->
+      <div class="shipment-progress">
+        <div class="progress-container">
+          <div class="progress-step" data-status="booked">
+            <div class="step-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M7 18C5.9 18 5.01 18.9 5.01 20S5.9 22 7 22 8.99 21.1 8.99 20 8.1 18 7 18ZM1 2V4H3L6.6 11.59L5.25 14.04C5.09 14.32 5 14.65 5 15C5 16.1 5.9 17 7 17H19V15H7.42C7.28 15 7.17 14.89 7.17 14.75L7.2 14.63L8.1 13H15.55C16.3 13 16.96 12.59 17.3 11.97L20.88 5H5.21L4.27 3H1V2ZM17 18C15.9 18 15.01 18.9 15.01 20S15.9 22 17 22 18.99 21.1 18.99 20 18.1 18 17 18Z"/>
+              </svg>
+            </div>
+            <div class="step-label">Order Booked</div>
+          </div>
+          <div class="progress-step" data-status="picked">
+            <div class="step-icon">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7.50626 15.2647C7.61657 15.6639 8.02965 15.8982 8.4289 15.7879C8.82816 15.6776 9.06241 15.2645 8.9521 14.8652L7.50626 15.2647ZM6.07692 7.27442L6.79984 7.0747V7.0747L6.07692 7.27442ZM4.7037 5.91995L4.50319 6.64265L4.7037 5.91995ZM3.20051 4.72457C2.80138 4.61383 2.38804 4.84762 2.2773 5.24675C2.16656 5.64589 2.40035 6.05923 2.79949 6.16997L3.20051 4.72457ZM20.1886 15.7254C20.5895 15.6213 20.8301 15.2118 20.7259 14.8109C20.6217 14.41 20.2123 14.1695 19.8114 14.2737L20.1886 15.7254ZM10.1978 17.5588C10.5074 18.6795 9.82778 19.8618 8.62389 20.1747L9.00118 21.6265C10.9782 21.1127 12.1863 19.1239 11.6436 17.1594L10.1978 17.5588ZM8.62389 20.1747C7.41216 20.4896 6.19622 19.7863 5.88401 18.6562L4.43817 19.0556C4.97829 21.0107 7.03196 22.1383 9.00118 21.6265L8.62389 20.1747ZM5.88401 18.6562C5.57441 17.5355 6.254 16.3532 7.4579 16.0403L7.08061 14.5885C5.10356 15.1023 3.89544 17.0911 4.43817 19.0556L5.88401 18.6562ZM7.4579 16.0403C8.66962 15.7254 9.88556 16.4287 10.1978 17.5588L11.6436 17.1594C11.1035 15.2043 9.04982 14.0768 7.08061 14.5885L7.4579 16.0403ZM8.9521 14.8652L6.79984 7.0747L5.354 7.47414L7.50626 15.2647L8.9521 14.8652ZM4.90421 5.19725L3.20051 4.72457L2.79949 6.16997L4.50319 6.64265L4.90421 5.19725ZM6.79984 7.0747C6.54671 6.15847 5.8211 5.45164 4.90421 5.19725L4.50319 6.64265C4.92878 6.76073 5.24573 7.08223 5.354 7.47414L6.79984 7.0747ZM11.1093 18.085L20.1886 15.7254L19.8114 14.2737L10.732 16.6332L11.1093 18.085Z" fill="currentColor"></path>
+                <path d="M19.1647 6.2358C18.6797 4.48023 18.4372 3.60244 17.7242 3.20319C17.0113 2.80394 16.1062 3.03915 14.2962 3.50955L12.3763 4.00849C10.5662 4.47889 9.66119 4.71409 9.24954 5.40562C8.8379 6.09714 9.0804 6.97492 9.56541 8.73049L10.0798 10.5926C10.5648 12.3481 10.8073 13.2259 11.5203 13.6252C12.2333 14.0244 13.1384 13.7892 14.9484 13.3188L16.8683 12.8199C18.6784 12.3495 19.5834 12.1143 19.995 11.4227C20.2212 11.0429 20.2499 10.6069 20.1495 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+              </svg>
+            </div>
+            <div class="step-label">Pickup Completed</div>
+          </div>
+          <div class="progress-step" data-status="in-transit">
+            <div class="step-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M21 16V14L13 9V3.5C13 2.67 12.33 2 11.5 2S10 2.67 10 3.5V9L2 14V16L10 13.5V19L8 20.5V22L11.5 21L15 22V20.5L13 19V13.5L21 16Z"/>
+              </svg>
+            </div>
+            <div class="step-label">In-Transit</div>
+          </div>
+          <div class="progress-step" data-status="out-for-delivery">
+            <div class="step-icon">
+              <svg fill="currentColor" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                  <title>bike1</title>
+                  <path d="M24 9h-4v-2h4c0.552 0 1 0.447 1 1 0 0.552-0.448 1-1 1zM21 0c0-1.657-1.343-3-3-3h-5c-1.657 0-3 1.343-3 3v6h-1v-6c0-2.209 1.791-4 4-4h5c2.209 0 4 1.791 4 4v6h-1v-6zM11 9h-4c-0.553 0-1-0.448-1-1 0-0.553 0.447-1 1-1h4v2zM15.5 11.5c-1.934 0-3.5-1.567-3.5-3.5 0-1.934 1.566-3.5 3.5-3.5s3.5 1.566 3.5 3.5c0 1.933-1.567 3.5-3.5 3.5zM15.5 6c-1.104 0-2 0.896-2 2s0.896 2 2 2 2-0.896 2-2-0.896-2-2-2zM12.112 10.106c0.706 1.133 1.954 1.894 3.388 1.894s2.681-0.761 3.388-1.894c1.78 0.405 3.112 1.991 3.112 3.894v10c0 1.861-1.278 3.412-3 3.858v-5.421c0-1.933-1.567-3.5-3.5-3.5s-3.5 1.567-3.5 3.5v5.421c-1.723-0.446-3-1.997-3-3.858v-10c0-1.903 1.332-3.489 3.112-3.894zM15.5 20c1.381 0 2.5 1.119 2.5 2.5v7c0 1.381-1.119 2.5-2.5 2.5s-2.5-1.119-2.5-2.5v-7c0-1.381 1.119-2.5 2.5-2.5z"></path>
+                </g>
+              </svg>
+            </div>
+            <div class="step-label">Out For Delivery</div>
+          </div>
+          <div class="progress-step" data-status="delivered">
+            <div class="step-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M10 20V14H14V20H19V12H22L12 3L2 12H5V20H10Z"/>
+              </svg>
+            </div>
+            <div class="step-label">Delivered</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Shipment Overview -->
+      <div class="shipment-overview">
+        <div class="overview-header">
+          <h2>Shipment Details</h2>
+          <span id="statusBadge" class="status-badge"></span>
+        </div>
+        <div class="overview-grid">
+          <div class="detail-item">
+            <span class="detail-label">Order ID</span>
+            <span id="orderId" class="detail-value"></span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">AWB Number</span>
+            <span id="awbNumber" class="detail-value"></span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Expected Delivery</span>
+            <span id="expectedDelivery" class="detail-value"></span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Current Status</span>
+            <span id="currentStatus" class="detail-value"></span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Last Scanned</span>
+            <span id="lastScanned" class="detail-value"></span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Fulfilled By</span>
+            <span id="fullfilledBy" class="detail-value"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tracking Timeline -->
+      <div class="tracking-timeline">
+        <h3>Detailed Timeline</h3>
+        <div id="timelineContainer" class="timeline-container">
+          <!-- Timeline items will be injected here by JavaScript -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modern Tracking Styles -->
+<style>
+/* Universal Box Sizing */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Shipment Tracking Page Styles */
+.shipment-tracking-page {
+  min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height for mobile browsers */
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  padding: 2rem 1rem;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.tracking-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Header Section */
+.tracking-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.tracking-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.5rem;
+}
+
+.tracking-subtitle {
+  font-size: 1.1rem;
+  color: #64748b;
+  font-weight: 400;
+}
+
+/* Input Section */
+.tracking-input-section {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  margin-bottom: 3rem;
+  width: 100%;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.input-container {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.awb-input {
+  flex: 1;
+  min-width: 300px;
+  padding: 1rem 1.5rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  background: #f8fafc;
+}
+
+.awb-input:focus {
+  outline: none;
+  border-color: #6366f1;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.track-button {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-width: 150px;
+  flex-shrink: 0;
+}
+
+.track-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+}
+
+.track-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Spinner */
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Error Message */
+.error-message {
+  background: linear-gradient(135deg, #fef3e2, #fed7aa);
+  color: #92400e;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  margin-top: 1rem;
+  font-weight: 500;
+  border-left: 4px solid #f59e0b;
+}
+
+
+/* Results Section */
+.tracking-results {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Progress Bar */
+.shipment-progress {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.progress-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 25px;
+}
+
+.progress-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  min-width: 0;
+}
+
+.step-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.75rem;
+  transition: all 0.3s ease;
+  border: 3px solid #e2e8f0;
+  color: #64748b;
+}
+
+.step-icon svg {
+  width: 24px;
+  height: 24px;
+  color: #64748b;
+}
+
+.step-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #64748b;
+  text-align: center;
+  transition: all 0.3s ease;
+  line-height: 1.2;
+  margin-top: 0.5rem;
+  width: 100%;
+}
+
+/* Progress line */
+.progress-container::before {
+  content: '';
+  position: absolute;
+  top: 25px;
+  left: 12.5%;
+  right: 12.5%;
+  height: 4px;
+  background: #e2e8f0;
+  z-index: 1;
+  border-radius: 2px;
+}
+
+/* Active/Completed states */
+.progress-step.active .step-icon,
+.progress-step.completed .step-icon {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  border-color: #6366f1;
+  color: white;
+  transform: scale(1.1);
+}
+
+.progress-step.active .step-icon svg,
+.progress-step.completed .step-icon svg {
+  color: white;
+}
+
+.progress-step.active .step-label,
+.progress-step.completed .step-label {
+  color: #6366f1;
+  font-weight: 700;
+}
+
+/* Progress line fill */
+.progress-container::after {
+  content: '';
+  position: absolute;
+  top: 25px;
+  left: 12.5%;
+  height: 4px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  z-index: 1;
+  border-radius: 2px;
+  transition: width 0.8s ease;
+  width: var(--progress-width, 0%);
+  max-width: 75%;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Shipment Overview */
+.shipment-overview {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.overview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.overview-header h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.status-badge {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-delivered {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+}
+
+.status-in-transit {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: white;
+}
+
+.status-out-for-delivery {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: white;
+}
+
+.status-pending {
+  background: linear-gradient(135deg, #6b7280, #4b5563);
+  color: white;
+}
+
+.status-exception {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: white;
+}
+
+.status-booked {
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+  color: white;
+}
+
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.detail-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.detail-value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1e293b;
+  word-break: break-all;
+}
+
+/* Tracking Timeline */
+.tracking-timeline {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.tracking-timeline h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 2rem;
+}
+
+.timeline-container {
+  position: relative;
+}
+
+.timeline-item {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+.timeline-marker {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.marker-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  border: 3px solid white;
+  box-shadow: 0 0 0 2px #e2e8f0;
+  position: relative;
+  z-index: 2;
+}
+
+.timeline-item.active .marker-dot {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  box-shadow: 0 0 0 2px #6366f1;
+}
+
+.timeline-line {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: calc(100% + 1rem);
+  background: #e2e8f0;
+  z-index: 1;
+}
+
+.timeline-content {
+  flex: 1;
+  padding-top: 0.25rem;
+}
+
+.timeline-status {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 0.25rem;
+  text-transform: capitalize;
+}
+
+.timeline-location {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #6366f1;
+  margin-bottom: 0.25rem;
+}
+
+.timeline-remarks {
+  font-size: 0.875rem;
+  color: #64748b;
+  margin-bottom: 0.5rem;
+  font-style: italic;
+}
+
+.timeline-date {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.no-history {
+  text-align: center;
+  color: #64748b;
+  font-style: italic;
+  padding: 2rem;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .shipment-tracking-page {
+    padding: 1rem 0.5rem;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  .tracking-container {
+    padding: 0;
+  }
+
+  .tracking-title {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+
+  .tracking-subtitle {
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+
+  .input-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .awb-input {
+    min-width: auto;
+    width: 100%;
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+
+  .track-button {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .tracking-input-section,
+  .shipment-progress,
+  .shipment-overview,
+  .tracking-timeline {
+    padding: 1.5rem;
+    border-radius: 16px;
+    margin: 0 0 1.5rem 0;
+    width: 100%;
+  }
+
+  .progress-container {
+    padding: 0 20px;
+    gap: 0;
+    justify-content: space-between;
+  }
+
+  .progress-container::before {
+    left: 12.5%;
+    right: 12.5%;
+    top: 20px;
+  }
+
+  .progress-container::after {
+    left: 12.5%;
+    top: 20px;
+    max-width: 75%;
+  }
+
+  .progress-step {
+    min-width: 60px;
+    flex: 1;
+    position: relative;
+    z-index: 2;
+  }
+
+  .step-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .step-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .step-label {
+    font-size: 0.75rem;
+    text-align: center;
+    line-height: 1.2;
+  }
+
+  .overview-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .overview-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .timeline-item {
+    gap: 0.75rem;
+    padding: 1rem;
+  }
+
+  .timeline-content {
+    padding-top: 0;
+  }
+
+  /* Better touch targets */
+  .track-button,
+  .awb-input {
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 480px) {
+  .shipment-tracking-page {
+    padding: 0.5rem 0.25rem;
+  }
+
+  .tracking-title {
+    font-size: 1.75rem;
+    line-height: 1.1;
+  }
+
+  .tracking-subtitle {
+    font-size: 0.9rem;
+    padding: 0 1rem;
+  }
+
+  .tracking-input-section,
+  .shipment-progress,
+  .shipment-overview,
+  .tracking-timeline {
+    padding: 1rem;
+    margin: 0 0.25rem 1rem 0.25rem;
+    border-radius: 12px;
+  }
+
+  .progress-container {
+    padding: 0 17.5px;
+    gap: 0;
+    justify-content: space-between;
+  }
+
+  .progress-container::before {
+    left: 12.5%;
+    right: 12.5%;
+    top: 17.5px;
+  }
+
+  .progress-container::after {
+    left: 12.5%;
+    top: 17.5px;
+    max-width: 75%;
+  }
+
+  .progress-step {
+    min-width: 50px;
+    flex: 1;
+    position: relative;
+    z-index: 2;
+  }
+
+  .step-icon {
+    width: 35px;
+    height: 35px;
+  }
+
+  .step-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .step-label {
+    font-size: 0.7rem;
+  }
+
+  .detail-value {
+    font-size: 0.875rem;
+  }
+
+  .awb-input {
+    font-size: 16px;
+    padding: 0.875rem 1rem;
+  }
+
+  .track-button {
+    padding: 0.875rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 360px) {
+  .shipment-tracking-page {
+    padding: 0.25rem;
+  }
+
+  .tracking-title {
+    font-size: 1.5rem;
+  }
+
+  .tracking-input-section,
+  .shipment-progress,
+  .shipment-overview,
+  .tracking-timeline {
+    padding: 0.75rem;
+    margin: 0 0 0.75rem 0;
+  }
+
+  .progress-step {
+    min-width: 50px;
+  }
+
+  .step-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .step-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .step-label {
+    font-size: 0.65rem;
+  }
+
+  .progress-container {
+    padding: 0 15px;
+    gap: 0;
+    justify-content: space-between;
+  }
+
+  .progress-container::before {
+    left: 12.5%;
+    right: 12.5%;
+    top: 15px;
+  }
+
+  .progress-container::after {
+    left: 12.5%;
+    top: 15px;
+    max-width: 75%;
+  }
+
+  .progress-step {
+    min-width: 40px;
+    flex: 1;
+    position: relative;
+    z-index: 2;
+  }
+}
+
+/* Landscape orientation on mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+  .shipment-tracking-page {
+    padding: 0.5rem;
+  }
+
+  .tracking-header {
+    margin-bottom: 1rem;
+  }
+
+  .tracking-title {
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .tracking-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .tracking-input-section,
+  .shipment-progress,
+  .shipment-overview,
+  .tracking-timeline {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+}
+
+/* Large screens optimization */
+@media (min-width: 1400px) {
+  .tracking-container {
+    max-width: 1400px;
+  }
+
+  .tracking-title {
+    font-size: 3rem;
+  }
+
+  .tracking-subtitle {
+    font-size: 1.25rem;
+  }
+}
+
+/* Ultra-wide screens */
+@media (min-width: 1920px) {
+  .tracking-container {
+    max-width: 1600px;
+  }
+}
+</style>
+
+<!-- Tracking Scripts -->
+<script>
+// API Configuration
+const TRACKING_API_URL = 'https://api.dropdash.co/shipmenttracking/get';
+const AUTH_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiRGVzaSBEZWFscyIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL21vYmlsZXBob25lIjoiOTkwMjMxNTQxOCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6ImluLmRlc2lkZWFsc0BnbWFpbC5jb20iLCJqdGkiOiIzZTE1OWFjNy00MTFiLTQ0OGItYjE1NS0wNTA0OWNhMDBlMjAiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJEcm9wU2hpcHBlciIsImV4cCI6MTc2MDIwNzM4NCwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo2MTk1NSIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NDIwMCJ9.Sat9rj0bccVIncAmQw6RS3-f2O2v8-IU2MQYAvfjkVc';
+
+// DOM Elements
+const awbInput = document.getElementById('awbInput');
+const trackButton = document.getElementById('trackButton');
+const buttonText = document.getElementById('buttonText');
+const spinner = document.getElementById('spinner');
+const errorMessage = document.getElementById('errorMessage');
+const trackingResults = document.getElementById('trackingResults');
+
+// Overview Elements
+const statusBadge = document.getElementById('statusBadge');
+const orderId = document.getElementById('orderId');
+const awbNumber = document.getElementById('awbNumber');
+const currentStatus = document.getElementById('currentStatus');
+const lastScanned = document.getElementById('lastScanned');
+const expectedDelivery = document.getElementById('expectedDelivery');
+const fullfilledBy = document.getElementById('fullfilledBy');
+const timelineContainer = document.getElementById('timelineContainer');
+
+// Helper to format date
+function formatDate(dateString) {
+  if (!dateString) return 'N/A';
+  const options = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+  return new Date(dateString).toLocaleDateString('en-US', options);
+}
+
+// Helper to get status badge class
+function getStatusBadgeClass(status) {
+  const lowerStatus = status.toLowerCase();
+  if (lowerStatus.includes('delivered')) return 'status-delivered';
+  if (lowerStatus.includes('out for delivery')) return 'status-out-for-delivery';
+  if (lowerStatus.includes('in transit') || lowerStatus.includes('picked') || lowerStatus.includes('reached at destination')) return 'status-in-transit';
+  if (lowerStatus.includes('exception')) return 'status-exception';
+  if (lowerStatus.includes('booked')) return 'status-booked';
+  return 'status-pending';
+}
+
+// Function to display error message
+function displayError(message) {
+  errorMessage.textContent = message;
+  errorMessage.style.display = 'block';
+  trackingResults.style.display = 'none';
+}
+
+// Function to clear error message
+function clearError() {
+  errorMessage.style.display = 'none';
+}
+
+// Function to update progress bar
+function updateProgressBar(status) {
+  const steps = document.querySelectorAll('.progress-step');
+  const progressLine = document.querySelector('.progress-container::after');
+  
+  // Reset all steps
+  steps.forEach(step => {
+    step.classList.remove('active', 'completed');
+  });
+  
+  // Map status to progress step
+  const statusMap = {
+    'booked': 0,
+    'picked': 1,
+    'in transit': 2,
+    'out for delivery': 3,
+    'delivered': 4
+  };
+  
+  const lowerStatus = (status || '').toLowerCase();
+  let currentStep = 0;
+  
+  // Find matching status
+  for (const [key, stepIndex] of Object.entries(statusMap)) {
+    if (lowerStatus.includes(key)) {
+      currentStep = stepIndex;
+      break;
+    }
+  }
+  
+  // Update progress steps
+  steps.forEach((step, index) => {
+    if (index < currentStep) {
+      step.classList.add('completed');
+    } else if (index === currentStep) {
+      step.classList.add('active');
+    }
+  });
+  
+  // Update progress line
+  const progressLineWidth = currentStep > 0 ? (currentStep / (steps.length - 1)) * 100 : 0;
+  document.documentElement.style.setProperty('--progress-width', `${progressLineWidth}%`);
+}
+
+// Function to render tracking data
+function renderTrackingData(data) {
+  clearError();
+  trackingResults.style.display = 'block';
+
+  const detail = data.orderDetailId ? data : data.data;
+
+  // Update Progress Bar
+  updateProgressBar(detail.status);
+
+  // Update Overview
+  statusBadge.textContent = detail.status || 'N/A';
+  statusBadge.className = `status-badge ${getStatusBadgeClass(detail.status || '')}`;
+  orderId.textContent = detail.orderId || 'N/A';
+  awbNumber.textContent = detail.awb || 'N/A';
+  currentStatus.textContent = detail.status || 'N/A';
+  lastScanned.textContent = formatDate(detail.lastScanned);
+  expectedDelivery.textContent = formatDate(detail.expectedDelivertDate);
+  fullfilledBy.textContent = detail.fullfilledBy || 'N/A';
+
+  // Render Timeline
+  timelineContainer.innerHTML = '';
+  if (detail.history && detail.history.length > 0) {
+    const sortedHistory = detail.history.sort((a, b) => new Date(b.scannedOn) - new Date(a.scannedOn));
+
+    sortedHistory.forEach((item, index) => {
+      const timelineItem = document.createElement('div');
+      timelineItem.className = `timeline-item ${index === 0 ? 'active' : ''}`;
+
+      timelineItem.innerHTML = `
+        <div class="timeline-marker">
+          <div class="marker-dot"></div>
+          ${index < sortedHistory.length - 1 ? '<div class="timeline-line"></div>' : ''}
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-status">${item.status || 'N/A'}</div>
+          <div class="timeline-location">${item.location || 'N/A'}</div>
+          <div class="timeline-remarks">${item.remarks || ''}</div>
+          <div class="timeline-date">${formatDate(item.scannedOn)}</div>
+        </div>
+      `;
+      timelineContainer.appendChild(timelineItem);
+    });
+  } else {
+    timelineContainer.innerHTML = '<p class="no-history">No tracking history available.</p>';
+  }
+}
+
+// Event Listener for Track Button
+trackButton.addEventListener('click', async () => {
+  const awbNo = awbInput.value.trim();
+  if (!awbNo) {
+    displayError('Please enter an AWB number.');
+    return;
+  }
+
+  // Update URL with AWB parameter
+  const url = new URL(window.location);
+  url.searchParams.set('awb', awbNo);
+  window.history.pushState({}, '', url);
+
+  // Show loading state
+  trackButton.disabled = true;
+  buttonText.style.display = 'none';
+  spinner.style.display = 'block';
+  clearError();
+  trackingResults.style.display = 'none';
+
+  try {
+    const response = await fetch(`${TRACKING_API_URL}?awb=${awbNo}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${AUTH_TOKEN}`,
+        'Content-Type': 'application/json'
+      }
+    });
+
+    const result = await response.json();
+
+    if (response.ok && result.success && result.data) {
+      renderTrackingData(result.data);
+    } else {
+      displayError(result.errorMessages || 'Failed to fetch tracking information. Please check the AWB number.');
+    }
+  } catch (error) {
+    console.error('Error fetching tracking data:', error);
+    displayError('An error occurred while fetching tracking information. Please try again.');
+  } finally {
+    // Hide loading state
+    trackButton.disabled = false;
+    buttonText.style.display = 'block';
+    spinner.style.display = 'none';
+  }
+});
+
+// Optional: Trigger tracking on Enter key press
+awbInput.addEventListener('keypress', (event) => {
+  if (event.key === 'Enter') {
+    trackButton.click();
+  }
+});
+
+// Optional: Pre-fill AWB from URL parameter
+document.addEventListener('DOMContentLoaded', () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const awbFromUrl = urlParams.get('awb');
+  if (awbFromUrl) {
+    awbInput.value = awbFromUrl;
+    trackButton.click();
+  }
+});
+</script>

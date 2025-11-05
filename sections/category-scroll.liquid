@@ -1,0 +1,531 @@
+{% stylesheet %}
+/* Category Scroll Section */
+.category-scroll-section {
+  background: #ffffff;
+  padding: 1rem 0 0.5rem 0;
+  margin: 0;
+}
+
+.category-scroll-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+}
+
+.category-scroll-wrapper {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.category-scroll {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 1rem 0;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.category-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.category-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  min-width: 80px;
+}
+
+.category-item:hover {
+  transform: translateY(-4px);
+}
+
+.category-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.category-item:hover .category-circle {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  transform: scale(1.05);
+  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+}
+
+.category-icon-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+  image-rendering: high-quality;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+.category-item:hover .category-circle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.1) 100%);
+  border-radius: 50%;
+}
+
+.category-text {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #374151;
+  text-align: center;
+  line-height: 1.2;
+  transition: color 0.3s ease;
+}
+
+.category-item:hover .category-text {
+  color: #667eea;
+}
+
+/* Slide For More Indicator */
+.slide-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 2px 0 0 auto;
+  width: fit-content;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.slide-indicator:hover {
+  opacity: 0.8;
+}
+
+.slide-text {
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: #667eea;
+  font-family: 'Poppins', sans-serif;
+  white-space: nowrap;
+}
+
+.slide-arrow {
+  color: #667eea;
+  animation: slideRight 1.5s ease-in-out infinite;
+}
+
+.slide-arrow svg {
+  width: 6px;
+  height: 6px;
+}
+
+@keyframes slideRight {
+  0% {
+    transform: translateX(0);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateX(4px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 0.7;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .category-scroll-section {
+    padding: 0.75rem 0 0.25rem 0;
+  }
+  
+  .category-scroll-container {
+    padding: 0 15px;
+  }
+  
+  .scroll-arrow {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .category-circle {
+    width: 70px;
+    height: 70px;
+    font-size: 1.75rem;
+  }
+  
+  .category-text {
+    font-size: 0.8rem;
+  }
+  
+  .category-scroll {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .category-scroll-wrapper {
+    gap: 0.5rem;
+  }
+  
+  .scroll-arrow {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .category-circle {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+  
+  .category-text {
+    font-size: 0.75rem;
+  }
+  
+  .category-scroll {
+    gap: 0.75rem;
+  }
+}
+{% endstylesheet %}
+
+<div class="category-scroll-section">
+  <div class="category-scroll-container">
+    <div class="category-scroll-wrapper">
+      <!-- Category Scroll -->
+      <div class="category-scroll" id="categoryScroll">
+        <!-- Shop All Products -->
+        <a href="{{ section.settings.shop_all_url | default: '/collections/all' }}" class="category-item">
+          <div class="category-circle">
+            {% if section.settings.shop_all_icon %}
+              <img src="{{ section.settings.shop_all_icon | image_url: width: 160 }}" alt="{{ section.settings.shop_all_text | default: 'Shop All' }}" class="category-icon-img">
+            {% else %}
+              🛍️
+            {% endif %}
+          </div>
+          <span class="category-text">{{ section.settings.shop_all_text | default: 'Shop All' }}</span>
+        </a>
+        
+        <!-- Best Sellers -->
+        <a href="{{ section.settings.best_sellers_url | default: '/collections/best-sellers' }}" class="category-item">
+          <div class="category-circle">
+            {% if section.settings.best_sellers_icon %}
+              <img src="{{ section.settings.best_sellers_icon | image_url: width: 160 }}" alt="{{ section.settings.best_sellers_text | default: 'Best Sellers' }}" class="category-icon-img">
+            {% else %}
+              ⭐
+            {% endif %}
+          </div>
+          <span class="category-text">{{ section.settings.best_sellers_text | default: 'Best Sellers' }}</span>
+        </a>
+        
+        <!-- Festive Essentials -->
+        <a href="{{ section.settings.festive_url | default: '/collections/festive-essentials' }}" class="category-item">
+          <div class="category-circle">
+            {% if section.settings.festive_icon %}
+              <img src="{{ section.settings.festive_icon | image_url: width: 160 }}" alt="{{ section.settings.festive_text | default: 'Festive' }}" class="category-icon-img">
+            {% else %}
+              🎉
+            {% endif %}
+          </div>
+          <span class="category-text">{{ section.settings.festive_text | default: 'Festive' }}</span>
+        </a>
+        
+        <!-- Kitchen Essentials -->
+        <a href="{{ section.settings.kitchen_url | default: '/collections/kitchen-essentials' }}" class="category-item">
+          <div class="category-circle">
+            {% if section.settings.kitchen_icon %}
+              <img src="{{ section.settings.kitchen_icon | image_url: width: 160 }}" alt="{{ section.settings.kitchen_text | default: 'Kitchen' }}" class="category-icon-img">
+            {% else %}
+              🍳
+            {% endif %}
+          </div>
+          <span class="category-text">{{ section.settings.kitchen_text | default: 'Kitchen' }}</span>
+        </a>
+        
+        <!-- Home Essentials -->
+        <a href="{{ section.settings.home_url | default: '/collections/home-essentials' }}" class="category-item">
+          <div class="category-circle">
+            {% if section.settings.home_icon %}
+              <img src="{{ section.settings.home_icon | image_url: width: 160 }}" alt="{{ section.settings.home_text | default: 'Home' }}" class="category-icon-img">
+            {% else %}
+              🏠
+            {% endif %}
+          </div>
+          <span class="category-text">{{ section.settings.home_text | default: 'Home' }}</span>
+        </a>
+        
+        <!-- Car Care -->
+        <a href="{{ section.settings.car_url | default: '/collections/car-care' }}" class="category-item">
+          <div class="category-circle">
+            {% if section.settings.car_icon %}
+              <img src="{{ section.settings.car_icon | image_url: width: 160 }}" alt="{{ section.settings.car_text | default: 'Car Care' }}" class="category-icon-img">
+            {% else %}
+              🚗
+            {% endif %}
+          </div>
+          <span class="category-text">{{ section.settings.car_text | default: 'Car Care' }}</span>
+        </a>
+        
+        <!-- Gardening Needs -->
+        <a href="{{ section.settings.gardening_url | default: '/collections/gardening-needs' }}" class="category-item">
+          <div class="category-circle">
+            {% if section.settings.gardening_icon %}
+              <img src="{{ section.settings.gardening_icon | image_url: width: 160 }}" alt="{{ section.settings.gardening_text | default: 'Gardening' }}" class="category-icon-img">
+            {% else %}
+              🌱
+            {% endif %}
+          </div>
+          <span class="category-text">{{ section.settings.gardening_text | default: 'Gardening' }}</span>
+        </a>
+        
+        <!-- Show All Category -->
+        <a href="{{ section.settings.show_all_category_url | default: '/pages/shop-by-category' }}" class="category-item">
+          <div class="category-circle">
+            {% if section.settings.show_all_category_icon %}
+              <img src="{{ section.settings.show_all_category_icon | image_url: width: 160 }}" alt="{{ section.settings.show_all_category_text | default: 'Show All Category' }}" class="category-icon-img">
+            {% else %}
+              🏷️
+            {% endif %}
+          </div>
+          <span class="category-text">{{ section.settings.show_all_category_text | default: 'Show All Category' }}</span>
+        </a>
+      </div>
+    </div>
+    
+    <!-- Slide For More Indicator -->
+    <div class="slide-indicator" onclick="slideCategories()">
+      <span class="slide-text">Slide For More</span>
+      <div class="slide-arrow">
+        <svg width="6" height="6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 18l6-6-6-6"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+{
+  "name": "Category Scroll",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Shop by Category"
+    },
+    {
+      "type": "header",
+      "content": "Shop All Products"
+    },
+    {
+      "type": "image_picker",
+      "id": "shop_all_icon",
+      "label": "Shop All Icon",
+      "info": "Upload a custom icon for Shop All Products"
+    },
+    {
+      "type": "text",
+      "id": "shop_all_text",
+      "label": "Shop All Text",
+      "default": "Shop All"
+    },
+    {
+      "type": "url",
+      "id": "shop_all_url",
+      "label": "Shop All URL"
+    },
+    {
+      "type": "header",
+      "content": "Best Sellers"
+    },
+    {
+      "type": "image_picker",
+      "id": "best_sellers_icon",
+      "label": "Best Sellers Icon",
+      "info": "Upload a custom icon for Best Sellers"
+    },
+    {
+      "type": "text",
+      "id": "best_sellers_text",
+      "label": "Best Sellers Text",
+      "default": "Best Sellers"
+    },
+    {
+      "type": "url",
+      "id": "best_sellers_url",
+      "label": "Best Sellers URL"
+    },
+    {
+      "type": "header",
+      "content": "Festive Essentials"
+    },
+    {
+      "type": "image_picker",
+      "id": "festive_icon",
+      "label": "Festive Essentials Icon",
+      "info": "Upload a custom icon for Festive Essentials"
+    },
+    {
+      "type": "text",
+      "id": "festive_text",
+      "label": "Festive Essentials Text",
+      "default": "Festive"
+    },
+    {
+      "type": "url",
+      "id": "festive_url",
+      "label": "Festive Essentials URL"
+    },
+    {
+      "type": "header",
+      "content": "Kitchen Essentials"
+    },
+    {
+      "type": "image_picker",
+      "id": "kitchen_icon",
+      "label": "Kitchen Essentials Icon",
+      "info": "Upload a custom icon for Kitchen Essentials"
+    },
+    {
+      "type": "text",
+      "id": "kitchen_text",
+      "label": "Kitchen Essentials Text",
+      "default": "Kitchen"
+    },
+    {
+      "type": "url",
+      "id": "kitchen_url",
+      "label": "Kitchen Essentials URL"
+    },
+    {
+      "type": "header",
+      "content": "Home Essentials"
+    },
+    {
+      "type": "image_picker",
+      "id": "home_icon",
+      "label": "Home Essentials Icon",
+      "info": "Upload a custom icon for Home Essentials"
+    },
+    {
+      "type": "text",
+      "id": "home_text",
+      "label": "Home Essentials Text",
+      "default": "Home"
+    },
+    {
+      "type": "url",
+      "id": "home_url",
+      "label": "Home Essentials URL"
+    },
+    {
+      "type": "header",
+      "content": "Car Care"
+    },
+    {
+      "type": "image_picker",
+      "id": "car_icon",
+      "label": "Car Care Icon",
+      "info": "Upload a custom icon for Car Care"
+    },
+    {
+      "type": "text",
+      "id": "car_text",
+      "label": "Car Care Text",
+      "default": "Car Care"
+    },
+    {
+      "type": "url",
+      "id": "car_url",
+      "label": "Car Care URL"
+    },
+    {
+      "type": "header",
+      "content": "Gardening Needs"
+    },
+    {
+      "type": "image_picker",
+      "id": "gardening_icon",
+      "label": "Gardening Needs Icon",
+      "info": "Upload a custom icon for Gardening Needs"
+    },
+    {
+      "type": "text",
+      "id": "gardening_text",
+      "label": "Gardening Needs Text",
+      "default": "Gardening"
+    },
+    {
+      "type": "url",
+      "id": "gardening_url",
+      "label": "Gardening Needs URL"
+    },
+    {
+      "type": "header",
+      "content": "Show All Category"
+    },
+    {
+      "type": "image_picker",
+      "id": "show_all_category_icon",
+      "label": "Show All Category Icon",
+      "info": "Upload a custom icon for Show All Category"
+    },
+    {
+      "type": "text",
+      "id": "show_all_category_text",
+      "label": "Show All Category Text",
+      "default": "Show All Category"
+    },
+    {
+      "type": "url",
+      "id": "show_all_category_url",
+      "label": "Show All Category URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Category Scroll"
+    }
+  ]
+}
+{% endschema %}
+
+<script>
+function slideCategories() {
+  const scrollContainer = document.getElementById('categoryScroll');
+  if (scrollContainer) {
+    const scrollAmount = 200; // Adjust scroll amount as needed
+    scrollContainer.scrollBy({
+      left: scrollAmount,
+      behavior: 'smooth'
+    });
+  }
+}
+</script>

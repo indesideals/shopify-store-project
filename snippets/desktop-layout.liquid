@@ -1,0 +1,130 @@
+<!-- Desktop Top Banner -->
+<div class="desktop-top-banner">
+  <div class="desktop-banner-marquee">
+    <div class="desktop-marquee-content">
+      <span>🚚 FREE SHIPPING ABOVE ₹299</span>
+      <span>💳 CASH ON DELIVERY AVAILABLE</span>
+      <span>🚀 FAST DELIVERY ACROSS INDIA</span>
+      <span>🔥 40% OFF SITE WIDE</span>
+      <span>🚚 FREE SHIPPING ABOVE ₹299</span>
+      <span>💳 CASH ON DELIVERY AVAILABLE</span>
+      <span>🚀 FAST DELIVERY ACROSS INDIA</span>
+      <span>🔥 40% OFF SITE WIDE</span>
+      <span>🚚 FREE SHIPPING ABOVE ₹299</span>
+      <span>💳 CASH ON DELIVERY AVAILABLE</span>
+      <span>🚀 FAST DELIVERY ACROSS INDIA</span>
+      <span>🔥 40% OFF SITE WIDE</span>
+      <span>🚚 FREE SHIPPING ABOVE ₹299</span>
+      <span>💳 CASH ON DELIVERY AVAILABLE</span>
+      <span>🚀 FAST DELIVERY ACROSS INDIA</span>
+      <span>🔥 40% OFF SITE WIDE</span>
+      <span>🚚 FREE SHIPPING ABOVE ₹299</span>
+      <span>💳 CASH ON DELIVERY AVAILABLE</span>
+      <span>🚀 FAST DELIVERY ACROSS INDIA</span>
+      <span>🔥 40% OFF SITE WIDE</span>
+    </div>
+  </div>
+</div>
+
+<!-- Desktop Header -->
+<header class="desktop-header">
+  <div class="desktop-header-content">
+    <div class="desktop-header-left">
+      <button class="desktop-menu-toggle" onclick="toggleBurgerMenu()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+    
+    <div class="desktop-header-center">
+      <div class="desktop-logo">
+        <a href="/">
+          {% if settings.logo %}
+            <img src="{{ settings.logo | image_url: width: 600 }}" alt="{{ shop.name }}" loading="eager">
+          {% else %}
+            <span>{{ shop.name }}</span>
+          {% endif %}
+        </a>
+      </div>
+    </div>
+    
+    <div class="desktop-header-right">
+      <div class="desktop-header-actions">
+        <button class="desktop-search-toggle" onclick="toggleSearch()" title="Search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="M21 21L16.65 16.65"/>
+          </svg>
+          <span>Search</span>
+        </button>
+        
+        <a href="/account" title="Account">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+          <span>Account</span>
+        </a>
+        
+        <a href="/pages/favorites" title="Wishlist" class="desktop-wishlist-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
+          <span>Wishlist</span>
+          <span class="desktop-wishlist-count">0</span>
+        </a>
+        
+        <button class="desktop-cart-btn" onclick="openDesktopCart()" title="Cart">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 22c.55 0 1-.45 1-1s-.45-1-1-1-1 .45-1 1 .45 1 1 1z"/>
+            <path d="M20 22c.55 0 1-.45 1-1s-.45-1-1-1-1 .45-1 1 .45 1 1 1z"/>
+            <path d="M1 1h4l2.68 13.39c.09.46.46.78.92.78h9.4c.46 0 .83-.32.92-.78L23 6H6"/>
+          </svg>
+          <span>Cart</span>
+          <span class="desktop-cart-count">0</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Desktop Burger Menu -->
+<div class="desktop-burger-menu" id="burgerMenu">
+  <div class="desktop-burger-menu-content">
+    <div class="desktop-burger-menu-header">
+      <h3>Navigation</h3>
+      <button class="desktop-burger-menu-close" onclick="closeBurgerMenu()">×</button>
+    </div>
+    <nav class="desktop-burger-menu-nav">
+      <a href="/" class="desktop-burger-menu-link">🏠 Home</a>
+      <a href="/collections/all" class="desktop-burger-menu-link">🛍️ All Products</a>
+      
+      <!-- Shop by Category Dropdown -->
+      <div class="desktop-burger-menu-dropdown">
+        <button class="desktop-burger-menu-dropdown-btn" onclick="toggleCategoryDropdown()">
+          🏷️ Shop by Category <span class="dropdown-arrow">▼</span>
+        </button>
+        <div class="desktop-burger-menu-dropdown-content" id="categoryDropdown">
+          <a href="/collections/best-sellers" class="desktop-burger-menu-link">⭐ Best Sellers</a>
+          <a href="/collections/festive-essentials" class="desktop-burger-menu-link">🎉 Festive Essentials</a>
+          <a href="/collections/kitchen-essentials" class="desktop-burger-menu-link">🍳 Kitchen Essentials</a>
+          <a href="/collections/home-essentials" class="desktop-burger-menu-link">🏠 Home Essentials</a>
+          <a href="/collections/car-care" class="desktop-burger-menu-link">🚗 Car Care</a>
+          <a href="/collections/gardening-needs" class="desktop-burger-menu-link">🌱 Gardening Needs</a>
+        </div>
+      </div>
+      
+      <a href="/pages/about-us" class="desktop-burger-menu-link">ℹ️ About Us</a>
+      <a href="/pages/contact" class="desktop-burger-menu-link">📞 Contact</a>
+      <a href="/pages/favorites" class="desktop-burger-menu-link">💖 Wishlist</a>
+      <a href="/pages/shipping-and-returns-policy" class="desktop-burger-menu-link">🚚 Shipping & Returns</a>
+      <a href="/pages/track-your-shipment" class="desktop-burger-menu-link">📦 Track your order</a>
+      <a href="/account" class="desktop-burger-menu-link">👤 {% if customer %}My Account{% else %}Login{% endif %}</a>
+    </nav>
+  </div>
+</div>
+
+<div class="desktop-burger-menu-overlay" id="burgerOverlay" onclick="closeBurgerMenu()"></div>

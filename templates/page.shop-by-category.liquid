@@ -1,0 +1,607 @@
+{% comment %}
+  Shop by Category Page Template
+  Shows all 6 categories with horizontal scrolling product sections
+{% endcomment %}
+
+<div class="shop-by-category-page">
+  <div class="container">
+    <!-- Simple Page Title -->
+    <h1 class="simple-page-title">Shop by Category</h1>
+
+    <!-- Best Sellers Category -->
+    {% assign best_sellers_collection = collections['best-sellers'] %}
+    {% if best_sellers_collection.products.size > 0 %}
+      <section class="category-section">
+        <div class="category-header">
+          <h3 class="category-title">⭐ Best Sellers</h3>
+        </div>
+        <div class="products-scroll-container">
+          <div class="products-scroll">
+            {% for product in best_sellers_collection.products limit: 10 %}
+              <div class="product-card">
+                <div class="product-image-container">
+                  <a href="{{ product.url }}">
+                    <img src="{{ product.featured_image | image_url: width: 300 }}" 
+                         alt="{{ product.title }}" 
+                         class="product-image"
+                         loading="lazy">
+                  </a>
+                </div>
+                <div class="product-info">
+                  <h3 class="product-title">
+                    <a href="{{ product.url }}">{{ product.title }}</a>
+                  </h3>
+                  <div class="product-price">
+                    {% assign selling_price = product.price | divided_by: 100 | round %}
+                    {% assign compare_price = selling_price | divided_by: 0.6 | round %}
+                    <span class="original-price">₹{{ compare_price }}</span>
+                    <span class="sale-price">₹{{ selling_price }}</span>
+                    <span class="discount-pill">40% OFF</span>
+                  </div>
+                  <button type="button" class="add-to-cart-btn" 
+                          onclick="addToCartDirect('{{ product.id }}', '{{ product.selected_or_first_available_variant.id }}', '{{ product.title | escape }}', '{{ product.price | divided_by: 100.0 }}', '{{ product.featured_image | image_url: width: 300 }}', '{{ product.url }}')"
+                          data-variant-id="{{ product.selected_or_first_available_variant.id }}" 
+                          data-product-title="{{ product.title | escape }}">
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            {% endfor %}
+            <!-- View All Button at the end -->
+            <div class="view-all-card">
+              <a href="{{ best_sellers_collection.url }}" class="view-all-btn">View All</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    {% endif %}
+
+    <!-- Festive Essentials Category -->
+    {% assign festive_collection = collections['festive-essentials'] %}
+    {% if festive_collection.products.size > 0 %}
+      <section class="category-section">
+        <div class="category-header">
+          <h3 class="category-title">🎉 Festive Essentials</h3>
+        </div>
+        <div class="products-scroll-container">
+          <div class="products-scroll">
+            {% for product in festive_collection.products limit: 10 %}
+              <div class="product-card">
+                <div class="product-image-container">
+                  <a href="{{ product.url }}">
+                    <img src="{{ product.featured_image | image_url: width: 300 }}" 
+                         alt="{{ product.title }}" 
+                         class="product-image"
+                         loading="lazy">
+                  </a>
+                </div>
+                <div class="product-info">
+                  <h3 class="product-title">
+                    <a href="{{ product.url }}">{{ product.title }}</a>
+                  </h3>
+                  <div class="product-price">
+                    {% assign selling_price = product.price | divided_by: 100 | round %}
+                    {% assign compare_price = selling_price | divided_by: 0.6 | round %}
+                    <span class="original-price">₹{{ compare_price }}</span>
+                    <span class="sale-price">₹{{ selling_price }}</span>
+                    <span class="discount-pill">40% OFF</span>
+                  </div>
+                  <button type="button" class="add-to-cart-btn" 
+                          onclick="addToCartDirect('{{ product.id }}', '{{ product.selected_or_first_available_variant.id }}', '{{ product.title | escape }}', '{{ product.price | divided_by: 100.0 }}', '{{ product.featured_image | image_url: width: 300 }}', '{{ product.url }}')"
+                          data-variant-id="{{ product.selected_or_first_available_variant.id }}" 
+                          data-product-title="{{ product.title | escape }}">
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            {% endfor %}
+            <!-- View All Button at the end -->
+            <div class="view-all-card">
+              <a href="{{ festive_collection.url }}" class="view-all-btn">View All</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    {% endif %}
+
+    <!-- Kitchen Essentials Category -->
+    {% assign kitchen_collection = collections['kitchen-essentials'] %}
+    {% if kitchen_collection.products.size > 0 %}
+      <section class="category-section">
+        <div class="category-header">
+          <h3 class="category-title">🍳 Kitchen Essentials</h3>
+        </div>
+        <div class="products-scroll-container">
+          <div class="products-scroll">
+            {% for product in kitchen_collection.products limit: 10 %}
+              <div class="product-card">
+                <div class="product-image-container">
+                  <a href="{{ product.url }}">
+                    <img src="{{ product.featured_image | image_url: width: 300 }}" 
+                         alt="{{ product.title }}" 
+                         class="product-image"
+                         loading="lazy">
+                  </a>
+                </div>
+                <div class="product-info">
+                  <h3 class="product-title">
+                    <a href="{{ product.url }}">{{ product.title }}</a>
+                  </h3>
+                  <div class="product-price">
+                    {% assign selling_price = product.price | divided_by: 100 | round %}
+                    {% assign compare_price = selling_price | divided_by: 0.6 | round %}
+                    <span class="original-price">₹{{ compare_price }}</span>
+                    <span class="sale-price">₹{{ selling_price }}</span>
+                    <span class="discount-pill">40% OFF</span>
+                  </div>
+                  <button type="button" class="add-to-cart-btn" 
+                          onclick="addToCartDirect('{{ product.id }}', '{{ product.selected_or_first_available_variant.id }}', '{{ product.title | escape }}', '{{ product.price | divided_by: 100.0 }}', '{{ product.featured_image | image_url: width: 300 }}', '{{ product.url }}')"
+                          data-variant-id="{{ product.selected_or_first_available_variant.id }}" 
+                          data-product-title="{{ product.title | escape }}">
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            {% endfor %}
+            <!-- View All Button at the end -->
+            <div class="view-all-card">
+              <a href="{{ kitchen_collection.url }}" class="view-all-btn">View All</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    {% endif %}
+
+    <!-- Home Essentials Category -->
+    {% assign home_collection = collections['home-essentials'] %}
+    {% if home_collection.products.size > 0 %}
+      <section class="category-section">
+        <div class="category-header">
+          <h3 class="category-title">🏠 Home Essentials</h3>
+        </div>
+        <div class="products-scroll-container">
+          <div class="products-scroll">
+            {% for product in home_collection.products limit: 10 %}
+              <div class="product-card">
+                <div class="product-image-container">
+                  <a href="{{ product.url }}">
+                    <img src="{{ product.featured_image | image_url: width: 300 }}" 
+                         alt="{{ product.title }}" 
+                         class="product-image"
+                         loading="lazy">
+                  </a>
+                </div>
+                <div class="product-info">
+                  <h3 class="product-title">
+                    <a href="{{ product.url }}">{{ product.title }}</a>
+                  </h3>
+                  <div class="product-price">
+                    {% assign selling_price = product.price | divided_by: 100 | round %}
+                    {% assign compare_price = selling_price | divided_by: 0.6 | round %}
+                    <span class="original-price">₹{{ compare_price }}</span>
+                    <span class="sale-price">₹{{ selling_price }}</span>
+                    <span class="discount-pill">40% OFF</span>
+                  </div>
+                  <button type="button" class="add-to-cart-btn" 
+                          onclick="addToCartDirect('{{ product.id }}', '{{ product.selected_or_first_available_variant.id }}', '{{ product.title | escape }}', '{{ product.price | divided_by: 100.0 }}', '{{ product.featured_image | image_url: width: 300 }}', '{{ product.url }}')"
+                          data-variant-id="{{ product.selected_or_first_available_variant.id }}" 
+                          data-product-title="{{ product.title | escape }}">
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            {% endfor %}
+            <!-- View All Button at the end -->
+            <div class="view-all-card">
+              <a href="{{ home_collection.url }}" class="view-all-btn">View All</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    {% endif %}
+
+    <!-- Car Care Category -->
+    {% assign car_collection = collections['car-care'] %}
+    {% if car_collection.products.size > 0 %}
+      <section class="category-section">
+        <div class="category-header">
+          <h3 class="category-title">🚗 Car Care</h3>
+        </div>
+        <div class="products-scroll-container">
+          <div class="products-scroll">
+            {% for product in car_collection.products limit: 10 %}
+              <div class="product-card">
+                <div class="product-image-container">
+                  <a href="{{ product.url }}">
+                    <img src="{{ product.featured_image | image_url: width: 300 }}" 
+                         alt="{{ product.title }}" 
+                         class="product-image"
+                         loading="lazy">
+                  </a>
+                </div>
+                <div class="product-info">
+                  <h3 class="product-title">
+                    <a href="{{ product.url }}">{{ product.title }}</a>
+                  </h3>
+                  <div class="product-price">
+                    {% assign selling_price = product.price | divided_by: 100 | round %}
+                    {% assign compare_price = selling_price | divided_by: 0.6 | round %}
+                    <span class="original-price">₹{{ compare_price }}</span>
+                    <span class="sale-price">₹{{ selling_price }}</span>
+                    <span class="discount-pill">40% OFF</span>
+                  </div>
+                  <button type="button" class="add-to-cart-btn" 
+                          onclick="addToCartDirect('{{ product.id }}', '{{ product.selected_or_first_available_variant.id }}', '{{ product.title | escape }}', '{{ product.price | divided_by: 100.0 }}', '{{ product.featured_image | image_url: width: 300 }}', '{{ product.url }}')"
+                          data-variant-id="{{ product.selected_or_first_available_variant.id }}" 
+                          data-product-title="{{ product.title | escape }}">
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            {% endfor %}
+            <!-- View All Button at the end -->
+            <div class="view-all-card">
+              <a href="{{ car_collection.url }}" class="view-all-btn">View All</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    {% endif %}
+
+    <!-- Gardening Needs Category -->
+    {% assign gardening_collection = collections['gardening-needs'] %}
+    {% if gardening_collection.products.size > 0 %}
+      <section class="category-section">
+        <div class="category-header">
+          <h3 class="category-title">🌱 Gardening Needs</h3>
+        </div>
+        <div class="products-scroll-container">
+          <div class="products-scroll">
+            {% for product in gardening_collection.products limit: 10 %}
+              <div class="product-card">
+                <div class="product-image-container">
+                  <a href="{{ product.url }}">
+                    <img src="{{ product.featured_image | image_url: width: 300 }}" 
+                         alt="{{ product.title }}" 
+                         class="product-image"
+                         loading="lazy">
+                  </a>
+                </div>
+                <div class="product-info">
+                  <h3 class="product-title">
+                    <a href="{{ product.url }}">{{ product.title }}</a>
+                  </h3>
+                  <div class="product-price">
+                    {% assign selling_price = product.price | divided_by: 100 | round %}
+                    {% assign compare_price = selling_price | divided_by: 0.6 | round %}
+                    <span class="original-price">₹{{ compare_price }}</span>
+                    <span class="sale-price">₹{{ selling_price }}</span>
+                    <span class="discount-pill">40% OFF</span>
+                  </div>
+                  <button type="button" class="add-to-cart-btn" 
+                          onclick="addToCartDirect('{{ product.id }}', '{{ product.selected_or_first_available_variant.id }}', '{{ product.title | escape }}', '{{ product.price | divided_by: 100.0 }}', '{{ product.featured_image | image_url: width: 300 }}', '{{ product.url }}')"
+                          data-variant-id="{{ product.selected_or_first_available_variant.id }}" 
+                          data-product-title="{{ product.title | escape }}">
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            {% endfor %}
+            <!-- View All Button at the end -->
+            <div class="view-all-card">
+              <a href="{{ gardening_collection.url }}" class="view-all-btn">View All</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    {% endif %}
+  </div>
+</div>
+
+<style>
+/* Shop by Category Page Styles */
+.shop-by-category-page {
+  padding: 60px 0;
+  background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.simple-page-title {
+  font-size: 2rem;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0 0 1rem 0;
+  text-align: center;
+}
+
+.category-section {
+  margin-bottom: 40px;
+}
+
+.category-header {
+  margin-bottom: 20px;
+  padding: 0 10px;
+}
+
+.category-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  color: #1f2937;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* View All Card */
+.view-all-card {
+  flex: 0 0 200px;
+  height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+  border: 2px dashed #e5e7eb;
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  scroll-snap-align: start;
+}
+
+.view-all-card:hover {
+  border-color: #667eea;
+  background: linear-gradient(135deg, #f0f4ff 0%, #ffffff 100%);
+  transform: translateY(-2px);
+}
+
+.view-all-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
+}
+
+.view-all-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+  color: white;
+  text-decoration: none;
+}
+
+.products-scroll-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.products-scroll {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 10px 0 20px 0;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-padding: 0 20px;
+}
+
+.products-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.product-card {
+  flex: 0 0 200px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 320px;
+  position: relative;
+  scroll-snap-align: start;
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  border-color: #6366f1;
+}
+
+.product-image-container {
+  position: relative;
+  background: white;
+  height: 200px;
+  overflow: hidden;
+}
+
+.product-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.05);
+}
+
+.product-info {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+  background: white;
+  min-height: 180px;
+}
+
+.product-title {
+  margin: 0 0 0.4rem 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  min-height: 2.4rem;
+  display: flex;
+  align-items: flex-start;
+  text-align: left;
+  overflow: visible;
+  line-height: 1.2;
+}
+
+.product-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.product-title a:hover {
+  color: #6366f1;
+}
+
+.product-price {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  min-height: 2rem;
+  justify-content: flex-start;
+}
+
+.original-price {
+  text-decoration: line-through;
+  color: #9ca3af;
+  font-size: 0.9rem;
+}
+
+.sale-price {
+  font-weight: 700;
+  color: #667eea;
+  font-size: 1.1rem;
+}
+
+.discount-pill {
+  display: inline-block;
+  background: #dc2626;
+  color: #fff;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.add-to-cart-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 500;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: uppercase;
+  letter-spacing: 0.2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  box-shadow: 0 1px 3px rgba(99, 102, 241, 0.2);
+  margin-top: auto;
+  min-height: 28px;
+  max-height: 32px;
+}
+
+.add-to-cart-btn:hover {
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .shop-by-category-page {
+    padding: 40px 0;
+  }
+  
+  .page-title {
+    font-size: 2.5rem;
+  }
+  
+  .page-description {
+    font-size: 1rem;
+  }
+  
+  .category-title {
+    font-size: 2rem;
+  }
+  
+  .category-header {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+  
+  .product-card {
+    flex: 0 0 250px;
+  }
+  
+  .product-image-container {
+    height: 180px;
+  }
+  
+  .product-image {
+    height: 180px;
+  }
+  
+  .product-info {
+    padding: 12px 16px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-title {
+    font-size: 2rem;
+  }
+  
+  .category-title {
+    font-size: 1.5rem;
+  }
+  
+  .product-card {
+    flex: 0 0 220px;
+  }
+  
+  .product-image-container {
+    height: 160px;
+  }
+  
+  .product-image {
+    height: 160px;
+  }
+  
+  .product-info {
+    padding: 8px 12px 12px;
+  }
+}
+</style>

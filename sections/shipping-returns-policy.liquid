@@ -1,0 +1,405 @@
+{% comment %}
+  Shipping and Returns Policy Section
+  This section displays the shipping and returns policy content
+{% endcomment %}
+
+<div class="shipping-returns-policy">
+  <div class="page-width">
+    <!-- Page Header -->
+    <div class="policy-header">
+      <h1 class="policy-title">{{ page.title }}</h1>
+    </div>
+
+    <div class="policy-content">
+      <!-- Shipping Policy Accordion -->
+      <div class="accordion-section">
+        <button class="accordion-header" onclick="toggleAccordion('shipping')">
+          <span class="accordion-title">Shipping Policy</span>
+          <span class="accordion-icon">+</span>
+        </button>
+        <div class="accordion-content" id="shipping-content">
+          <div class="policy-subsection">
+            <h3>Processing Time</h3>
+            <p>100% of orders are shipped from our warehouse within <strong>1-2 business days</strong>. Orders placed over the weekend are dispatched on Mondays.</p>
+          </div>
+
+          <div class="policy-subsection">
+            <h3>Shipping Options</h3>
+            <div class="shipping-options">
+              <div class="shipping-option">
+                <h4>Standard Shipping (Gujarat)</h4>
+                <p><strong>Delivery:</strong> 6-7 business days after dispatch</p>
+              </div>
+              <div class="shipping-option">
+                <h4>Standard Shipping (All Other States)</h4>
+                <p><strong>Delivery:</strong> 7-10 business days after dispatch</p>
+                <p class="note">(except few pincodes where the delivery time given by courier company can be up to 15 business days)</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="policy-subsection">
+            <h3>Order Tracking</h3>
+            <p>Once your order has been shipped, we will update the tracking details in your order information. Please contact our customer service team if you do not receive the details.</p>
+          </div>
+
+          <div class="policy-subsection">
+            <h3>Delivery Costs</h3>
+            <p>Delivery costs depend on your delivery location. Please check your order summary to understand the delivery charges for individual products.</p>
+          </div>
+
+          <div class="policy-subsection">
+            <h3>Our Carriers</h3>
+            <p>We use <strong>DTDC</strong>, <strong>Blue Dart</strong>, and <strong>Ecom Express</strong> for deliveries which can be changed depending upon the servicable pincodes from the courier partners.</p>
+          </div>
+
+          <div class="policy-subsection">
+            <h3>Upon Receipt of Your Order</h3>
+            <p>You are advised to carefully inspect the package and goods to ensure they are intact and complete before signing for receipt of delivery. Should you find the parcel to be damaged or incomplete you must refuse delivery of the goods or sign "Damaged" then contact us on the day of delivery.</p>
+          </div>
+
+          <div class="policy-subsection">
+            <h3>Bank Holidays</h3>
+            <p>We do not deliver on a Bank Holiday so your parcel will be delivered on the next working day.</p>
+          </div>
+
+          <div class="policy-subsection">
+            <h3>Shipping Delays and Transit Issues</h3>
+            <p>We are committed to delivering your orders in a timely manner. However, there are instances where shipments may experience delays or be temporarily stuck in transit. While we strive for swift deliveries, there are certain factors that can lead to delays, such as weather conditions, customs processing, and other circumstances beyond our control.</p>
+            
+            <p>In the event that your shipment is delayed or remains in transit for longer than expected, please be aware that it may take up to <strong>45 days</strong> for the courier service to resolve the issue and complete the delivery. During this time, the courier company is responsible for managing any transit-related problems, including delays or lost shipments.</p>
+            
+            <p>Please note that we are not responsible for any delays caused by the courier company once the package leaves our facility. As such, any issues that arise after dispatch, including shipping delays, are beyond our direct control.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Returns Policy Accordion -->
+      <div class="accordion-section">
+        <button class="accordion-header" onclick="toggleAccordion('returns')">
+          <span class="accordion-title">Returns Policy</span>
+          <span class="accordion-icon">+</span>
+        </button>
+        <div class="accordion-content" id="returns-content">
+          <div class="policy-subsection">
+            <h3>Return Request Period</h3>
+            <p>We accept return requests within <strong>24 hours</strong> of delivery. To ensure we can properly assess any issues with the product, you must notify us within 24 hours of receiving the product.</p>
+            <p><strong>Important:</strong> Requests submitted after 24 hours may not be accepted.</p>
+          </div>
+
+          <div class="policy-subsection">
+            <h3>Return Eligibility</h3>
+            <p>To be eligible for a return, your item must meet the following criteria:</p>
+            <ul>
+              <li><strong>Damaged or Defective Products:</strong> If the product is damaged or defective upon arrival, you must provide an unboxing video showing the damage. This video is required to assess the situation and determine the appropriate action.</li>
+              <li><strong>Missing Items:</strong> If any items are missing from the order, an unboxing video must be provided showing the contents of the package clearly.</li>
+              <li>Unused and in the same condition as received</li>
+              <li>In the original packaging</li>
+              <li>Not a final sale item</li>
+            </ul>
+          </div>
+
+          <div class="policy-subsection">
+            <h3>Non-Returnable Items</h3>
+            <p>The following items are not eligible for returns:</p>
+            <ul>
+              <li>Products that have been used, opened, or damaged by the customer</li>
+              <li>Products marked as non-returnable in the product description</li>
+              <li><strong>Electronic Products</strong> (no return or refund can be processed for defective electronics items)</li>
+              <li>Personal care items (for hygiene reasons)</li>
+              <li>Perishable goods</li>
+              <li>Custom or personalized items</li>
+            </ul>
+          </div>
+
+          <div class="policy-subsection">
+            <h3>Return Process</h3>
+            <p>To initiate a return:</p>
+            <ol>
+              <li>Contact our customer service team within <strong>24 hours</strong> of delivery</li>
+              <li>Provide your order number and reason for return</li>
+              <li>Submit an unboxing video showing the damage or missing items (if applicable)</li>
+              <li>We will assess the situation and provide you with return authorization</li>
+              <li>Package the item securely in its original packaging</li>
+              <li>Ship the item back using a reliable shipping service with tracking</li>
+            </ol>
+          </div>
+
+          <div class="policy-subsection">
+            <h3>Return Shipping</h3>
+            <p><strong>Customer's Responsibility:</strong> The customer will be responsible for the cost of return shipping. We recommend using a reliable shipping service with tracking to ensure the safe return of the product.</p>
+            <p><strong>Important:</strong> Shipping charges are non-refundable under all circumstances, regardless of the reason for the return. This includes both the initial shipping fees and any costs incurred for returning the product.</p>
+          </div>
+
+          <div class="policy-subsection">
+            <h3>Refund Process</h3>
+            <p>Once the return is received and inspected:</p>
+            <ul>
+              <li>We will notify you about the approval or rejection of the refund</li>
+              <li>If approved, the refund will be processed and applied to the original method of payment within <strong>7 days</strong> of approval</li>
+              <li>You will receive an email confirmation when the refund is processed</li>
+              <li>It may take 5-10 business days for the refund to appear in your account</li>
+            </ul>
+            <p><strong>Note:</strong> The refund will be issued only if the product is unused, undamaged, and in its original condition with the original packaging.</p>
+          </div>
+
+          <div class="policy-subsection">
+            <h3>Exchanges</h3>
+            <p>We offer exchanges for different sizes or colors of the same item, subject to availability. Exchanges follow the same process as returns and must be initiated within the 24-hour return window.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Information Accordion -->
+      <div class="accordion-section">
+        <button class="accordion-header" onclick="toggleAccordion('contact')">
+          <span class="accordion-title">Contact Information</span>
+          <span class="accordion-icon">+</span>
+        </button>
+        <div class="accordion-content" id="contact-content">
+          <p>If you have any questions about our shipping or return policies, please contact us:</p>
+          <div class="contact-info">
+            <div class="contact-item">
+              <strong>Track Order:</strong> <a href="https://desideals.app/apps/track123" target="_blank" style="color: #8b5cf6; text-decoration: none;">Track Your Order</a>
+            </div>
+            <div class="contact-item">
+              <strong>Email:</strong> support@desideals.app
+            </div>
+            <div class="contact-item">
+              <strong>Support:</strong> Available on our website
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+
+<script>
+function toggleAccordion(id) {
+  const content = document.getElementById(id + '-content');
+  const icon = content.previousElementSibling.querySelector('.accordion-icon');
+  
+  if (content.style.display === 'block') {
+    content.style.display = 'none';
+    icon.textContent = '+';
+  } else {
+    content.style.display = 'block';
+    icon.textContent = '−';
+  }
+}
+</script>
+
+{% stylesheet %}
+.shipping-returns-policy {
+  background: #ffffff;
+  color: #333;
+  line-height: 1.6;
+  padding: 3rem 0;
+}
+
+.page-width {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Page Header */
+.policy-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.policy-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 0.5rem 0;
+}
+
+.policy-date {
+  color: #6b7280;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* Content */
+.policy-content {
+  background: #ffffff;
+}
+
+/* Accordion Styles */
+.accordion-section {
+  margin-bottom: 2rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.accordion-header {
+  width: 100%;
+  background: #f9fafb;
+  border: none;
+  padding: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.accordion-header:hover {
+  background: #f3f4f6;
+}
+
+.accordion-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.accordion-icon {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #6b7280;
+  transition: transform 0.3s ease;
+}
+
+.accordion-content {
+  display: none;
+  padding: 1.5rem;
+  background: white;
+  border-top: 1px solid #e5e7eb;
+}
+
+.policy-subsection {
+  margin-bottom: 2rem;
+}
+
+.policy-subsection h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #374151;
+  margin: 0 0 1rem 0;
+}
+
+.policy-subsection h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #374151;
+  margin: 0 0 0.5rem 0;
+}
+
+.policy-subsection p {
+  margin-bottom: 1rem;
+  color: #374151;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.policy-subsection p:last-child {
+  margin-bottom: 0;
+}
+
+.policy-subsection ul, .policy-subsection ol {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+}
+
+.policy-subsection li {
+  margin-bottom: 0.5rem;
+  color: #374151;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.shipping-options {
+  display: grid;
+  gap: 1rem;
+}
+
+.shipping-option {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 1.5rem;
+}
+
+.shipping-option h4 {
+  margin: 0 0 0.5rem 0;
+  color: #1f2937;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.shipping-option p {
+  margin: 0.5rem 0;
+  color: #6b7280;
+}
+
+.note {
+  font-size: 0.9rem;
+  color: #9ca3af;
+  font-style: italic;
+}
+
+.contact-info {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.contact-item {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.contact-item:last-child {
+  border-bottom: none;
+}
+
+.contact-item strong {
+  color: #1f2937;
+  min-width: 80px;
+  display: inline-block;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .policy-title {
+    font-size: 2rem;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+  }
+  
+  .policy-subsection h3 {
+    font-size: 1rem;
+  }
+  
+  .policy-subsection p, .policy-subsection li {
+    font-size: 0.95rem;
+  }
+  
+  .page-width {
+    padding: 0 1rem;
+  }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Shipping Policy",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Shipping Policy"
+    }
+  ]
+}
+{% endschema %} 

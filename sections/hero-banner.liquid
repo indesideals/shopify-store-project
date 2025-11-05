@@ -1,0 +1,801 @@
+{% stylesheet %}
+/* Modern Hero Banner Styles */
+.hero-banner {
+  position: relative;
+  height: clamp(300px, 40vh, 500px);
+  overflow: hidden;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 50%, #1a1a1a 100%);
+  margin-bottom: 5px;
+  box-shadow: var(--shadow-large);
+}
+
+.hero-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-slide.active {
+  opacity: 1;
+}
+
+.hero-slide::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(26, 26, 26, 0.4) 0%, rgba(212, 175, 55, 0.2) 50%, rgba(26, 26, 26, 0.4) 100%);
+  z-index: 1;
+}
+
+.hero-slide-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  cursor: pointer;
+}
+
+/* Modern Dot Navigation */
+.hero-dots {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 2px;
+  z-index: 10;
+}
+
+.hero-dot {
+  width: 8px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 0.5px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+
+
+.hero-dot:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.hero-dot.active {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.progress-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-teal));
+  border-radius: 3px;
+  width: 0%;
+  transition: width 0.1s linear;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+/* Modern Pause Button */
+.hero-pause-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  color: white;
+  z-index: 10;
+}
+
+
+
+.hero-pause-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.hero-pause-btn.paused .pause-icon {
+  display: none;
+}
+
+.hero-pause-btn.paused .play-icon {
+  display: block !important;
+}
+
+.hero-pause-btn .pause-icon,
+.hero-pause-btn .play-icon {
+  width: 10px;
+  height: 10px;
+}
+
+/* Modern Callout Section */
+.callout-section {
+  background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+  padding: 60px 0 4px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.callout-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 40px;
+}
+
+.callout-text {
+  max-width: 800px;
+}
+
+.callout-subtitle {
+  font-size: var(--font-size-base);
+  font-weight: 700;
+  color: #667eea;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0 0 16px 0;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.callout-title {
+  font-size: var(--font-size-2xl);
+  font-weight: 800;
+  line-height: 1.2;
+  color: #1a202c;
+  margin: 0;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.callout-icons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 40px;
+  gap: 0;
+}
+
+.callout-icon-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  transition: transform 0.3s ease;
+  min-height: 100px;
+  justify-content: flex-start;
+  flex: 1;
+  text-align: center;
+}
+
+.callout-icon-item:hover {
+  transform: translateY(-4px);
+}
+
+.icon-wrapper {
+  width: clamp(48px, 6vw, 64px);
+  height: clamp(48px, 6vw, 64px);
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: clamp(12px, 1.5vw, 16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: visible;
+}
+
+.callout-icon-item:hover .icon-wrapper {
+  transform: scale(1.1);
+  box-shadow: 0 12px 40px rgba(102, 126, 234, 0.4);
+}
+
+.icon-text {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: #4a5568;
+  text-align: center;
+  line-height: 1.4;
+  margin: 0;
+  white-space: pre-line;
+  min-height: 2.8em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Responsive Design - Viewport-aware */
+@media (max-width: 1024px) {
+  .hero-banner {
+    height: clamp(250px, 35vh, 400px);
+  }
+  
+  .callout-icons {
+    gap: clamp(25px, 4vw, 50px);
+  }
+  
+  .icon-wrapper {
+    width: clamp(44px, 5vw, 60px);
+    height: clamp(44px, 5vw, 60px);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-banner {
+    height: 200px;
+  }
+  
+  .callout-section {
+    padding: var(--section-padding) 0;
+  }
+  
+  .callout-content {
+    gap: clamp(20px, 3vw, 30px);
+  }
+  
+  .callout-title {
+    font-size: var(--font-size-xl);
+  }
+  
+  .callout-icons {
+    max-width: 100%;
+    padding: 0 20px;
+    gap: 0;
+  }
+  
+  .callout-icon-item {
+    flex: 1;
+    min-height: 80px;
+  }
+  
+  .icon-wrapper {
+    width: clamp(40px, 4vw, 56px);
+    height: clamp(40px, 4vw, 56px);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-banner {
+    height: 200px;
+  }
+  
+  .callout-title {
+    font-size: var(--font-size-large);
+  }
+  
+  .callout-icons {
+    max-width: 100%;
+    padding: 0 15px;
+    gap: 0;
+  }
+  
+  .callout-icon-item {
+    flex: 1;
+    min-height: 70px;
+  }
+  
+  .icon-wrapper {
+    width: clamp(36px, 3vw, 48px);
+    height: clamp(36px, 3vw, 48px);
+  }
+  
+  .icon-text {
+    font-size: var(--font-size-base);
+  }
+}
+
+/* Large screens */
+@media (min-width: 1440px) {
+  .hero-banner {
+    height: clamp(400px, 45vh, 600px);
+  }
+  
+  .callout-icons {
+    gap: clamp(50px, 6vw, 80px);
+  }
+  
+  .icon-wrapper {
+    width: clamp(60px, 7vw, 80px);
+    height: clamp(60px, 7vw, 80px);
+  }
+}
+
+@media (min-width: 1920px) {
+  .hero-banner {
+    height: clamp(500px, 50vh, 700px);
+  }
+  
+  .callout-icons {
+    gap: clamp(60px, 7vw, 100px);
+  }
+  
+  .icon-wrapper {
+    width: clamp(70px, 8vw, 90px);
+    height: clamp(70px, 8vw, 90px);
+  }
+}
+{% endstylesheet %}
+
+
+<div class="hero-banner">
+  {% if section.settings.hero_image_1 %}
+    <div class="hero-slide active" 
+         style="background-image: url('{{ section.settings.hero_image_1 | image_url: width: 1920, height: 320 }}');"
+         data-desktop-image="url('{{ section.settings.hero_image_1 | image_url: width: 1920, height: 320 }}')"
+         data-mobile-image="{% if section.settings.hero_image_1_mobile %}{{ section.settings.hero_image_1_mobile | image_url: width: 768, height: 200 }}{% else %}{{ section.settings.hero_image_1 | image_url: width: 768, height: 200 }}{% endif %}"
+         data-link="{{ section.settings.hero_link_1 }}">
+      {% if section.settings.hero_link_1 %}
+        <a href="{{ section.settings.hero_link_1 }}" class="hero-slide-link" aria-label="Click to visit {{ section.settings.hero_link_text_1 | default: 'this page' }}"></a>
+      {% endif %}
+    </div>
+  {% endif %}
+  {% if section.settings.hero_image_2 %}
+    <div class="hero-slide" 
+         style="background-image: url('{{ section.settings.hero_image_2 | image_url: width: 1920, height: 320 }}');"
+         data-desktop-image="url('{{ section.settings.hero_image_2 | image_url: width: 1920, height: 320 }}')"
+         data-mobile-image="{% if section.settings.hero_image_2_mobile %}{{ section.settings.hero_image_2_mobile | image_url: width: 768, height: 200 }}{% else %}{{ section.settings.hero_image_2 | image_url: width: 768, height: 200 }}{% endif %}"
+         data-link="{{ section.settings.hero_link_2 }}">
+      {% if section.settings.hero_link_2 %}
+        <a href="{{ section.settings.hero_link_2 }}" class="hero-slide-link" aria-label="Click to visit {{ section.settings.hero_link_text_2 | default: 'this page' }}"></a>
+      {% endif %}
+    </div>
+  {% endif %}
+  {% if section.settings.hero_image_3 %}
+    <div class="hero-slide" 
+         style="background-image: url('{{ section.settings.hero_image_3 | image_url: width: 1920, height: 320 }}');"
+         data-desktop-image="url('{{ section.settings.hero_image_3 | image_url: width: 1920, height: 320 }}')"
+         data-mobile-image="{% if section.settings.hero_image_3_mobile %}{{ section.settings.hero_image_3_mobile | image_url: width: 768, height: 200 }}{% else %}{{ section.settings.hero_image_3 | image_url: width: 768, height: 200 }}{% endif %}"
+         data-link="{{ section.settings.hero_link_3 }}">
+      {% if section.settings.hero_link_3 %}
+        <a href="{{ section.settings.hero_link_3 }}" class="hero-slide-link" aria-label="Click to visit {{ section.settings.hero_link_text_3 | default: 'this page' }}"></a>
+      {% endif %}
+    </div>
+  {% endif %}
+  {% if section.settings.hero_image_4 %}
+    <div class="hero-slide" 
+         style="background-image: url('{{ section.settings.hero_image_4 | image_url: width: 1920, height: 320 }}');"
+         data-desktop-image="url('{{ section.settings.hero_image_4 | image_url: width: 1920, height: 320 }}')"
+         data-mobile-image="{% if section.settings.hero_image_4_mobile %}{{ section.settings.hero_image_4_mobile | image_url: width: 768, height: 200 }}{% else %}{{ section.settings.hero_image_4 | image_url: width: 768, height: 200 }}{% endif %}"
+         data-link="{{ section.settings.hero_link_4 }}">
+      {% if section.settings.hero_link_4 %}
+        <a href="{{ section.settings.hero_link_4 }}" class="hero-slide-link" aria-label="Click to visit {{ section.settings.hero_link_text_4 | default: 'this page' }}"></a>
+      {% endif %}
+    </div>
+  {% endif %}
+  
+
+  
+  <!-- Dot Indicators - Now positioned inside the hero banner -->
+  <div class="hero-dots">
+    {% if section.settings.hero_image_1 %}
+      <button class="hero-dot active" data-slide="0">
+        <div class="progress-fill"></div>
+      </button>
+    {% endif %}
+    {% if section.settings.hero_image_2 %}
+      <button class="hero-dot" data-slide="1">
+        <div class="progress-fill"></div>
+      </button>
+    {% endif %}
+    {% if section.settings.hero_image_3 %}
+      <button class="hero-dot" data-slide="2">
+        <div class="progress-fill"></div>
+      </button>
+    {% endif %}
+    {% if section.settings.hero_image_4 %}
+      <button class="hero-dot" data-slide="3">
+        <div class="progress-fill"></div>
+      </button>
+    {% endif %}
+  </div>
+  
+  <!-- Pause Button - Only show if multiple slides -->
+  {% assign slide_count = 0 %}
+  {% if section.settings.hero_image_1 %}{% assign slide_count = slide_count | plus: 1 %}{% endif %}
+  {% if section.settings.hero_image_2 %}{% assign slide_count = slide_count | plus: 1 %}{% endif %}
+  {% if section.settings.hero_image_3 %}{% assign slide_count = slide_count | plus: 1 %}{% endif %}
+  {% if section.settings.hero_image_4 %}{% assign slide_count = slide_count | plus: 1 %}{% endif %}
+  
+  {% if slide_count > 1 %}
+    <button class="hero-pause-btn" aria-label="Pause slideshow">
+      <svg class="pause-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="6" y="4" width="4" height="16" fill="currentColor"/>
+        <rect x="14" y="4" width="4" height="16" fill="currentColor"/>
+      </svg>
+      <svg class="play-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <polygon points="5,3 19,12 5,21" fill="currentColor"/>
+      </svg>
+    </button>
+  {% endif %}
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const heroBanner = document.querySelector('.hero-banner');
+  const dotsContainer = document.querySelector('.hero-dots');
+  if (!heroBanner || !dotsContainer) return;
+  
+  const slides = heroBanner.querySelectorAll('.hero-slide');
+  const dots = dotsContainer.querySelectorAll('.hero-dot');
+  
+  if (slides.length <= 1) return;
+  
+  let currentSlide = 0;
+  const slideDuration = {{ section.settings.slide_duration | default: 3 }} * 1000;
+  let progressInterval;
+  let autoAdvanceInterval;
+  let isPaused = false;
+  
+  // Function to update background images based on screen size
+  function updateBackgroundImages() {
+    const isMobile = window.innerWidth <= 768 || document.body.classList.contains('mobile-experience');
+    slides.forEach(slide => {
+      const mobileImage = slide.getAttribute('data-mobile-image');
+      const desktopImage = slide.getAttribute('data-desktop-image');
+      
+      if (isMobile && mobileImage) {
+        slide.style.backgroundImage = `url('${mobileImage}')`;
+      } else if (desktopImage) {
+        slide.style.backgroundImage = desktopImage;
+      }
+    });
+  }
+  
+  function showSlide(slideIndex) {
+    // Clear any existing progress animation
+    if (progressInterval) {
+      clearInterval(progressInterval);
+    }
+    
+    // Remove active class from all slides and dots
+    slides.forEach(slide => slide.classList.remove('active'));
+    dots.forEach(dot => {
+      dot.classList.remove('active');
+      const progressFill = dot.querySelector('.progress-fill');
+      if (progressFill) {
+        progressFill.style.width = '0%';
+      }
+    });
+    
+    // Add active class to current slide and dot
+    slides[slideIndex].classList.add('active');
+    dots[slideIndex].classList.add('active');
+    
+    currentSlide = slideIndex;
+    
+    // Start progress animation for the active dot
+    startProgressAnimation(slideIndex);
+  }
+  
+  function startProgressAnimation(slideIndex) {
+    const activeDot = dots[slideIndex];
+    const progressFill = activeDot.querySelector('.progress-fill');
+    if (!progressFill) return;
+    
+    const startTime = Date.now();
+    const duration = slideDuration;
+    
+    progressInterval = setInterval(() => {
+      if (isPaused) return; // Don't progress if paused
+      
+      const elapsed = Date.now() - startTime;
+      const progress = Math.min((elapsed / duration) * 100, 100);
+      
+      progressFill.style.width = progress + '%';
+      
+      if (progress >= 100) {
+        clearInterval(progressInterval);
+      }
+    }, 50); // Update every 50ms for smooth animation
+  }
+  
+  function startAutoAdvance() {
+    if (autoAdvanceInterval) {
+      clearInterval(autoAdvanceInterval);
+    }
+    autoAdvanceInterval = setInterval(() => {
+      if (!isPaused) {
+        const nextIndex = (currentSlide + 1) % slides.length;
+        showSlide(nextIndex);
+      }
+    }, slideDuration);
+  }
+  
+  function nextSlide() {
+    const nextIndex = (currentSlide + 1) % slides.length;
+    showSlide(nextIndex);
+  }
+  
+  // Add click event listeners to dots
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      // Clear any existing progress animation
+      if (progressInterval) {
+        clearInterval(progressInterval);
+      }
+      showSlide(index);
+    });
+  });
+  
+  // Add pause button functionality
+  const pauseBtn = document.querySelector('.hero-pause-btn');
+  if (pauseBtn) {
+    pauseBtn.addEventListener('click', () => {
+      isPaused = !isPaused;
+      pauseBtn.classList.toggle('paused', isPaused);
+      
+      if (isPaused) {
+        // Pause the slideshow
+        if (autoAdvanceInterval) {
+          clearInterval(autoAdvanceInterval);
+        }
+        if (progressInterval) {
+          clearInterval(progressInterval);
+        }
+      } else {
+        // Resume the slideshow
+        showSlide(currentSlide); // Restart current slide
+        startAutoAdvance();
+      }
+    });
+  }
+  
+  // Update images on window resize
+  window.addEventListener('resize', updateBackgroundImages);
+  
+  // Initial image update
+  updateBackgroundImages();
+  
+  // Start initial progress animation
+  startProgressAnimation(0);
+  
+  // Start auto-advance slides
+  startAutoAdvance();
+});
+</script>
+
+<!-- Callout Section -->
+<div class="callout-section">
+  <div class="container">
+    <div class="callout-content">
+      <div class="callout-text">
+        <p class="callout-subtitle">{{ section.settings.callout_subtitle | default: "🌟 PREMIUM QUALITY" }}</p>
+        <h2 class="callout-title">{{ section.settings.callout_title | default: "Discover Amazing Products at Unbeatable Prices" }}</h2>
+      </div>
+      
+      <div class="callout-icons">
+        <div class="callout-icon-item">
+          <div class="icon-wrapper">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 3H15V13H1V3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M15 8H20L23 11V13H15V8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="5" cy="18" r="2" stroke="currentColor" stroke-width="2"/>
+              <circle cx="19" cy="18" r="2" stroke="currentColor" stroke-width="2"/>
+            </svg>
+          </div>
+          <p class="icon-text">{{ section.settings.icon_1_text | default: "Fast<br>Shipping" }}</p>
+        </div>
+        
+        <div class="callout-icon-item">
+          <div class="icon-wrapper">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <p class="icon-text">{{ section.settings.icon_2_text | default: "Quality\nAssured" }}</p>
+        </div>
+        
+        <div class="callout-icon-item">
+          <div class="icon-wrapper">
+            <div style="font-size: 24px; font-weight: bold; color: currentColor;">₹</div>
+          </div>
+          <p class="icon-text">{{ section.settings.icon_3_text | default: "Cash on\nDelivery" }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+{
+  "name": "Hero Banner",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Desktop Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image_1",
+      "label": "Hero Image 1 (Desktop)"
+    },
+    {
+      "type": "url",
+      "id": "hero_link_1",
+      "label": "Hero Image 1 Link (Optional)"
+    },
+    {
+      "type": "text",
+      "id": "hero_link_text_1",
+      "label": "Hero Image 1 Link Text (for accessibility)"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image_2",
+      "label": "Hero Image 2 (Desktop)"
+    },
+    {
+      "type": "url",
+      "id": "hero_link_2",
+      "label": "Hero Image 2 Link (Optional)"
+    },
+    {
+      "type": "text",
+      "id": "hero_link_text_2",
+      "label": "Hero Image 2 Link Text (for accessibility)"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image_3",
+      "label": "Hero Image 3 (Desktop)"
+    },
+    {
+      "type": "url",
+      "id": "hero_link_3",
+      "label": "Hero Image 3 Link (Optional)"
+    },
+    {
+      "type": "text",
+      "id": "hero_link_text_3",
+      "label": "Hero Image 3 Link Text (for accessibility)"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image_4",
+      "label": "Hero Image 4 (Desktop)"
+    },
+    {
+      "type": "url",
+      "id": "hero_link_4",
+      "label": "Hero Image 4 Link (Optional)"
+    },
+    {
+      "type": "text",
+      "id": "hero_link_text_4",
+      "label": "Hero Image 4 Link Text (for accessibility)"
+    },
+    {
+      "type": "header",
+      "content": "Mobile Images (Optional)"
+    },
+    {
+      "type": "paragraph",
+      "content": "Upload mobile-specific images for better mobile experience. If not provided, desktop images will be used."
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image_1_mobile",
+      "label": "Hero Image 1 (Mobile)"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image_2_mobile",
+      "label": "Hero Image 2 (Mobile)"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image_3_mobile",
+      "label": "Hero Image 3 (Mobile)"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image_4_mobile",
+      "label": "Hero Image 4 (Mobile)"
+    },
+    {
+      "type": "header",
+      "content": "Settings"
+    },
+    {
+      "type": "range",
+      "id": "slide_duration",
+      "label": "Slide Duration (seconds)",
+      "min": 2,
+      "max": 10,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "header",
+      "content": "Callout Section"
+    },
+    {
+      "type": "text",
+      "id": "callout_subtitle",
+      "label": "Callout Subtitle",
+      "default": "🌟 PREMIUM QUALITY"
+    },
+    {
+      "type": "text",
+      "id": "callout_title",
+      "label": "Callout Title",
+      "default": "Discover Amazing Products at Unbeatable Prices"
+    },
+    {
+      "type": "header",
+      "content": "Icons"
+    },
+    {
+      "type": "text",
+      "id": "icon_1_text",
+      "label": "Icon 1 Text",
+      "default": "Fast Shipping"
+    },
+    {
+      "type": "text",
+      "id": "icon_2_text",
+      "label": "Icon 2 Text",
+      "default": "Quality\nAssured"
+    },
+    {
+      "type": "text",
+      "id": "icon_3_text",
+      "label": "Icon 3 Text",
+      "default": "Cash on\nDelivery"
+    }
+
+  ],
+  "presets": [
+    {
+      "name": "Hero Banner"
+    }
+  ]
+}
+{% endschema %}

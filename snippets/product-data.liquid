@@ -1,0 +1,74 @@
+{% comment %}
+  Simple Manual Product Data System
+  Usage: {% render 'product-data', product: product %}
+  You can manually set ratings, review counts, and descriptions for each product
+{% endcomment %}
+
+<!-- DEBUG: Show the actual product handle and title -->
+<!-- Product Handle: {{ product.handle }} -->
+<!-- Product Title: {{ product.title }} -->
+
+{% comment %} MANUAL PRODUCT DATA - Using product titles for more flexible matching {% endcomment %}
+
+{% if product.title contains 'Oil Brush' or product.title contains 'Oil Dispenser' %}
+  {% assign product_rating = 4.6 %}
+  {% assign product_review_count = 2453 %}
+  {% assign product_description = "Effortless oil control for perfect cooking! This premium oil dispenser with silicone brush gives you precise control over oil application. Perfect for greasing pans, applying marinades, and cooking with precision." %}
+  {% assign product_key_features = "250ml glass container with leak-proof seal,Food-grade silicone brush for precise application,Dishwasher safe and easy to clean,Perfect for greasing pans and applying marinades,Compact design fits any kitchen counter" | split: "," %}
+{% elsif product.title contains '360' or product.title contains 'Rotating Hook' %}
+  {% assign product_rating = 4.7 %}
+  {% assign product_review_count = 1893 %}
+  {% assign product_description = "Transform your storage space with this innovative 360° rotating hook hanger! Perfect for organizing clothes, bags, accessories, and more. The smooth rotating mechanism allows you to access items from any angle without removing the hanger." %}
+  {% assign product_key_features = "360° smooth rotation for easy access,Sturdy metal construction with anti-slip coating,Multiple hanging points for maximum organization,Space-saving design perfect for small areas,Universal compatibility with most closet rods" | split: "," %}
+{% elsif product.title contains '4-in-1' or product.title contains 'Bowl Colander' %}
+  {% assign product_rating = 4.8 %}
+  {% assign product_review_count = 2156 %}
+  {% assign product_description = "Revolutionize your kitchen prep with this versatile 4-in-1 stainless steel bowl colander grater! This multi-functional kitchen essential combines a large mixing bowl, colander, grater, and storage container in one space-saving design." %}
+  {% assign product_key_features = "4-in-1 multi-functional design: bowl, colander, grater, and storage,Premium 304 stainless steel construction for durability,Perfect size for family cooking and meal prep,Food-safe material with easy cleaning,Space-saving design replaces multiple kitchen tools" | split: "," %}
+{% elsif product.title contains 'Electric' and product.title contains 'Chopper' %}
+  {% assign product_rating = 4.7 %}
+  {% assign product_review_count = 2876 %}
+  {% assign product_description = "Revolutionize your food preparation with this powerful mini electric food chopper! This compact kitchen appliance makes chopping, mincing, and pureeing effortless with its high-speed motor and sharp stainless steel blades." %}
+  {% assign product_key_features = "200W powerful motor for efficient chopping and mincing,Sharp stainless steel blades for precise cutting and long-lasting performance,Compact design perfect for small kitchens and limited counter space,Safety lock mechanism ensures safe operation and prevents accidents,Easy-to-clean removable parts and dishwasher safe components" | split: "," %}
+{% elsif product.title contains 'Heart' and product.title contains 'Grater' %}
+  {% assign product_rating = 4.8 %}
+  {% assign product_review_count = 1954 %}
+  {% assign product_description = "Transform your kitchen with this adorable and functional heart grater slicer set! This 4-piece kitchen essential combines cute heart-shaped design with professional-grade functionality." %}
+  {% assign product_key_features = "4-piece heart-shaped grater and slicer set for versatile food preparation,Premium stainless steel construction ensures durability and rust resistance,Multiple grating sizes for different textures and cooking needs,Heart-shaped design adds cute aesthetic to kitchen while maintaining functionality,Compact storage case keeps tools organized and easily accessible" | split: "," %}
+{% elsif product.title contains 'Angel' and product.title contains 'Night Light' %}
+  {% assign product_rating = 4.9 %}
+  {% assign product_review_count = 3247 %}
+  {% assign product_description = "Illuminate your nights with this enchanting LED angel night light! This beautiful and peaceful night light features a gentle angel design that creates a warm, soothing glow perfect for bedrooms, nurseries, and meditation spaces." %}
+  {% assign product_key_features = "Gentle angel design creates peaceful and comforting atmosphere for night time,Energy-efficient LED technology provides soft, warm glow without harsh lighting,Touch-sensitive controls for easy operation and brightness adjustment,Perfect for bedrooms, nurseries, meditation spaces, and children's rooms,Beautiful angel silhouette design adds elegant aesthetic to any room decor" | split: "," %}
+{% elsif product.title contains 'Steam' and product.title contains 'Steamer' %}
+  {% assign product_rating = 4.7 %}
+  {% assign product_review_count = 1892 %}
+  {% assign product_description = "Professional garment care made simple! This mini steam iron and garment steamer combines the power of steam ironing with the convenience of a handheld steamer." %}
+  {% assign product_key_features = "Dual function steam iron and garment steamer in one compact device,Powerful steam output for quick wrinkle removal,Compact and portable design perfect for travel and home use,Adjustable steam settings for different fabric types,Quick heat-up time and continuous steam flow" | split: "," %}
+{% elsif product.title contains 'Hand Press' and product.title contains 'Chopper' %}
+  {% assign product_rating = 4.8 %}
+  {% assign product_review_count = 2156 %}
+  {% assign product_description = "Effortless vegetable chopping with manual power! This mini hand press chopper features a unique 3-blade system that quickly and evenly chops vegetables, herbs, and fruits." %}
+  {% assign product_key_features = "3-blade system for efficient and uniform chopping,Hand press mechanism requires no electricity or batteries,Compact design perfect for small kitchens and storage,Stainless steel blades for durability and sharp cutting,Easy to clean and dishwasher safe" | split: "," %}
+{% elsif product.title contains 'Flamingo' and product.title contains 'Night Light' %}
+  {% assign product_rating = 4.9 %}
+  {% assign product_review_count = 1987 %}
+  {% assign product_description = "Illuminate your nights with this adorable pink flamingo LED night light! This charming and playful night light features a cute flamingo design that creates a warm, pink glow perfect for bedrooms, nurseries, and kids' rooms." %}
+  {% assign product_key_features = "Adorable pink flamingo design creates fun and playful atmosphere,Energy-efficient LED technology provides soft, warm pink glow,Touch-sensitive controls for easy operation and brightness adjustment,Perfect for bedrooms, nurseries, and children's rooms,Cute flamingo silhouette design adds whimsical aesthetic to any room decor" | split: "," %}
+{% elsif product.title contains 'Sink Strainer' or product.title contains 'Strainer Basket' %}
+  {% assign product_rating = 4.8 %}
+  {% assign product_review_count = 1247 %}
+  {% assign product_description = "Keep your sink drain clean and clog-free with this easy-press kitchen sink strainer basket. Perfect for catching food particles and preventing plumbing issues. Features a convenient press-down design for easy cleaning." %}
+  {% assign product_key_features = "Easy-press design for simple cleaning,Fits most standard sink drains,Catches food particles effectively,Durable construction,Prevents drain clogs" | split: "," %}
+{% elsif product.title contains 'Vegetable' and product.title contains 'Brush' %}
+  {% assign product_rating = 4.8 %}
+  {% assign product_review_count = 3221 %}
+  {% assign product_description = "Clean your vegetables thoroughly with this gentle yet effective cleaning brush. Perfect for removing dirt and debris from root vegetables, fruits, and other produce. The soft bristles ensure your vegetables remain undamaged while getting perfectly clean." %}
+  {% assign product_key_features = "Soft bristles for gentle cleaning,Effective dirt removal,Safe for all vegetables,Easy to clean and maintain,Ergonomic handle design" | split: "," %}
+{% else %}
+  {% comment %} Default values for products not listed above {% endcomment %}
+  {% assign product_rating = 4.5 %}
+  {% assign product_review_count = 1500 %}
+  {% assign product_description = product.description %}
+  {% assign product_key_features = "Premium quality materials,Easy to use and maintain,Durable and long-lasting,Perfect for daily use" | split: "," %}
+{% endif %}

@@ -1,0 +1,30 @@
+{% comment %}
+  Simple Manual Star Rating System
+  Usage: {% render 'star-rating', rating: 4.5 %}
+  You can manually set the rating for each product
+{% endcomment %}
+
+{% comment %}
+  Show stars based on actual rating
+{% endcomment %}
+
+{% assign rating = rating | default: 5 %}
+{% assign full_stars = rating | floor %}
+{% assign has_half_star = rating | modulo: 1 | round: 1 %}
+
+{% for i in (1..full_stars) %}
+  <span class="star filled" style="color: #fbbf24;">★</span>
+{% endfor %}
+
+{% if has_half_star > 0 %}
+  <span class="star partial" style="color: #fbbf24;">☆</span>
+{% endif %}
+
+{% assign remaining_stars = 5 | minus: full_stars %}
+{% if has_half_star > 0 %}
+  {% assign remaining_stars = remaining_stars | minus: 1 %}
+{% endif %}
+
+{% for i in (1..remaining_stars) %}
+  <span class="star empty" style="color: #e5e7eb;">★</span>
+{% endfor %}

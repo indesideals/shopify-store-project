@@ -1,0 +1,97 @@
+{% comment %}
+  SIMPLE REVIEWS DISPLAY
+  Shows reviews from the product-reviews-data snippet
+{% endcomment %}
+
+{% include 'product-reviews-data' %}
+
+<!-- Reviews Section -->
+<div class="reviews-section">
+  <div class="reviews-header">
+    <h3>Customer Reviews</h3>
+    <div class="reviews-summary">
+      <div class="rating-display">
+        <span class="stars">{% for i in (1..5) %}{% if i <= product_rating %}★{% else %}☆{% endif %}{% endfor %}</span>
+        <span class="rating-text">{{ product_rating }} out of 5</span>
+      </div>
+      <div class="review-count">{{ product_review_count }} reviews</div>
+    </div>
+  </div>
+
+  <!-- Reviews Sorting -->
+  <div class="reviews-sorting">
+    <div class="sort-dropdown">
+      <label for="sort-select">Sort by:</label>
+      <select id="sort-select" onchange="sortReviews(this.value, this)">
+        <option value="newest">Newest First</option>
+        <option value="oldest">Oldest First</option>
+        <option value="rating">Highest Rated</option>
+        <option value="lowest">Lowest Rated</option>
+        <option value="helpful">Most Helpful</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="reviews-grid" id="reviews-container">
+    {% for review in product_reviews limit: 30 %}
+      {% assign review_data = review | split: "|" %}
+      {% assign reviewer_name = review_data[0] %}
+      {% assign reviewer_location = review_data[1] %}
+      {% assign rating = review_data[2] %}
+      {% assign date = review_data[3] %}
+      {% assign helpful_count = review_data[4] %}
+      {% assign review_text = review_data[5] %}
+      
+      <div class="review-card" data-rating="{{ rating }}" data-date="{{ date }}" data-helpful="{{ helpful_count }}">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">
+              <span>{{ reviewer_name | slice: 0, 2 | upcase }}</span>
+            </div>
+            <div class="reviewer-details">
+              <span class="reviewer-name">{{ reviewer_name }}</span>
+              {% if reviewer_location != blank %}
+                <span class="reviewer-location">{{ reviewer_location }}</span>
+              {% endif %}
+            </div>
+          </div>
+          <div class="review-rating">
+            <span class="review-stars">
+              {% for i in (1..5) %}
+                {% if i <= rating %}★{% else %}☆{% endif %}
+              {% endfor %}
+            </span>
+            <span class="review-date">{{ date }}</span>
+          </div>
+        </div>
+        <p class="review-text">"{{ review_text }}"</p>
+        <div class="review-footer">
+          <span class="verified-badge">
+            <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            Verified Buyer
+          </span>
+          <div class="review-helpful">
+            <button class="helpful-btn" onclick="markHelpful(this, {{ helpful_count }})">
+              <svg class="helpful-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/>
+              </svg>
+              Helpful ({{ helpful_count }})
+            </button>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- Show More Button -->
+  <div class="show-more-container">
+    <button class="show-more-btn" onclick="showMoreReviews()">
+      <span class="show-more-text">Show More Reviews</span>
+      <svg class="show-more-icon" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M7 10l5 5 5-5z"/>
+      </svg>
+    </button>
+  </div>
+</div>

@@ -1,0 +1,398 @@
+{% comment %}
+  ADMIN BACKEND SYSTEM
+  This snippet handles admin dashboard actions and file updates
+  Usage: {% render 'admin-backend' %}
+{% endcomment %}
+
+<script>
+// Admin Backend System
+class AdminBackend {
+  constructor() {
+    this.baseUrl = window.location.origin;
+    this.apiEndpoint = '/admin/api';
+  }
+
+  // Save product data to the central system
+  async saveProductData(productHandle, data) {
+    try {
+      const response = await fetch(`${this.apiEndpoint}/save-product`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          productHandle: productHandle,
+          data: data
+        })
+      });
+
+      if (response.ok) {
+        return { success: true, message: 'Product data saved successfully!' };
+      } else {
+        throw new Error('Failed to save product data');
+      }
+    } catch (error) {
+      console.error('Error saving product data:', error);
+      return { success: false, message: 'Error saving product data: ' + error.message };
+    }
+  }
+
+  // Upload logo file
+  async uploadLogo(file) {
+    try {
+      const formData = new FormData();
+      formData.append('logo', file);
+
+      const response = await fetch(`${this.apiEndpoint}/upload-logo`, {
+        method: 'POST',
+        body: formData
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        return { success: true, message: 'Logo uploaded successfully!', url: result.url };
+      } else {
+        throw new Error('Failed to upload logo');
+      }
+    } catch (error) {
+      console.error('Error uploading logo:', error);
+      return { success: false, message: 'Error uploading logo: ' + error.message };
+    }
+  }
+
+  // Save store settings
+  async saveStoreSettings(settings) {
+    try {
+      const response = await fetch(`${this.apiEndpoint}/save-settings`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(settings)
+      });
+
+      if (response.ok) {
+        return { success: true, message: 'Store settings saved successfully!' };
+      } else {
+        throw new Error('Failed to save store settings');
+      }
+    } catch (error) {
+      console.error('Error saving store settings:', error);
+      return { success: false, message: 'Error saving store settings: ' + error.message };
+    }
+  }
+
+  // Export system data
+  async exportSystemData() {
+    try {
+      const response = await fetch(`${this.apiEndpoint}/export-data`);
+      
+      if (response.ok) {
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `system-export-${new Date().toISOString().split('T')[0]}.json`;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+        
+        return { success: true, message: 'System data exported successfully!' };
+      } else {
+        throw new Error('Failed to export system data');
+      }
+    } catch (error) {
+      console.error('Error exporting system data:', error);
+      return { success: false, message: 'Error exporting system data: ' + error.message };
+    }
+  }
+
+  // Import system data
+  async importSystemData(file) {
+    try {
+      const formData = new FormData();
+      formData.append('data', file);
+
+      const response = await fetch(`${this.apiEndpoint}/import-data`, {
+        method: 'POST',
+        body: formData
+      });
+
+      if (response.ok) {
+        return { success: true, message: 'System data imported successfully!' };
+      } else {
+        throw new Error('Failed to import system data');
+      }
+    } catch (error) {
+      console.error('Error importing system data:', error);
+      return { success: false, message: 'Error importing system data: ' + error.message };
+    }
+  }
+
+  // Backup system
+  async backupSystem() {
+    try {
+      const response = await fetch(`${this.apiEndpoint}/backup`);
+      
+      if (response.ok) {
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `system-backup-${new Date().toISOString().split('T')[0]}.zip`;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+        
+        return { success: true, message: 'System backup created successfully!' };
+      } else {
+        throw new Error('Failed to create system backup');
+      }
+    } catch (error) {
+      console.error('Error creating system backup:', error);
+      return { success: false, message: 'Error creating system backup: ' + error.message };
+    }
+  }
+
+  // Get system status
+  async getSystemStatus() {
+    try {
+      const response = await fetch(`${this.apiEndpoint}/status`);
+      
+      if (response.ok) {
+        const status = await response.json();
+        return { success: true, data: status };
+      } else {
+        throw new Error('Failed to get system status');
+      }
+    } catch (error) {
+      console.error('Error getting system status:', error);
+      return { success: false, message: 'Error getting system status: ' + error.message };
+    }
+  }
+
+  // Show notification
+  showNotification(message, type = 'info') {
+    const notification = document.createElement('div');
+    notification.className = `admin-notification admin-notification-${type}`;
+    notification.style.cssText = `
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 16px 24px;
+      border-radius: 8px;
+      color: white;
+      font-weight: 600;
+      z-index: 10000;
+      max-width: 300px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+    `;
+
+    // Set background color based on type
+    switch (type) {
+      case 'success':
+        notification.style.background = 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)';
+        break;
+      case 'error':
+        notification.style.background = 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)';
+        break;
+      case 'warning':
+        notification.style.background = 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)';
+        break;
+      default:
+        notification.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+    }
+
+    notification.textContent = message;
+    document.body.appendChild(notification);
+
+    // Animate in
+    setTimeout(() => {
+      notification.style.transform = 'translateX(0)';
+    }, 100);
+
+    // Auto remove after 5 seconds
+    setTimeout(() => {
+      notification.style.transform = 'translateX(100%)';
+      setTimeout(() => {
+        if (notification.parentNode) {
+          notification.parentNode.removeChild(notification);
+        }
+      }, 300);
+    }, 5000);
+
+    // Click to dismiss
+    notification.addEventListener('click', () => {
+      notification.style.transform = 'translateX(100%)';
+      setTimeout(() => {
+        if (notification.parentNode) {
+          notification.parentNode.removeChild(notification);
+        }
+      }, 300);
+    });
+  }
+
+  // Loading indicator
+  showLoading(element) {
+    const loading = document.createElement('div');
+    loading.className = 'admin-loading';
+    loading.innerHTML = `
+      <div style="
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid #f3f3f3;
+        border-top: 3px solid #667eea;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-right: 8px;
+      "></div>
+      Loading...
+    `;
+    loading.style.cssText = `
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 16px;
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      color: #4a5568;
+    `;
+
+    element.appendChild(loading);
+    return loading;
+  }
+
+  hideLoading(element, loadingElement) {
+    if (loadingElement && loadingElement.parentNode) {
+      loadingElement.parentNode.removeChild(loadingElement);
+    }
+  }
+}
+
+// Global admin backend instance
+window.adminBackend = new AdminBackend();
+
+// Enhanced dashboard functions
+async function saveProductData() {
+  const selectedProduct = document.getElementById('productSelector').value;
+  if (!selectedProduct) {
+    adminBackend.showNotification('Please select a product first!', 'warning');
+    return;
+  }
+
+  const saveButton = document.querySelector('button[onclick="saveProductData()"]');
+  const loading = adminBackend.showLoading(saveButton);
+
+  const data = {
+    rating: parseFloat(document.getElementById('productRating').value),
+    reviewCount: parseInt(document.getElementById('reviewCount').value),
+    description: document.getElementById('productDescription').value,
+    keyFeatures: document.getElementById('keyFeatures').value.split('\n').filter(line => line.trim()),
+    howToUse: document.getElementById('howToUse').value.split('\n').filter(line => line.trim())
+  };
+
+  const result = await adminBackend.saveProductData(selectedProduct, data);
+  adminBackend.hideLoading(saveButton, loading);
+  adminBackend.showNotification(result.message, result.success ? 'success' : 'error');
+}
+
+async function uploadLogo() {
+  const fileInput = document.getElementById('logoUpload');
+  const file = fileInput.files[0];
+
+  if (!file) {
+    adminBackend.showNotification('Please select a logo file first!', 'warning');
+    return;
+  }
+
+  const uploadButton = document.querySelector('button[onclick="uploadLogo()"]');
+  const loading = adminBackend.showLoading(uploadButton);
+
+  const result = await adminBackend.uploadLogo(file);
+  adminBackend.hideLoading(uploadButton, loading);
+  adminBackend.showNotification(result.message, result.success ? 'success' : 'error');
+
+  if (result.success && result.url) {
+    // Update the current logo display
+    const currentLogo = document.getElementById('currentLogo');
+    currentLogo.innerHTML = `<img src="${result.url}" style="max-width: 100%; max-height: 100%; object-fit: contain;">`;
+  }
+}
+
+async function saveStoreSettings() {
+  const saveButton = document.querySelector('button[onclick="saveStoreSettings()"]');
+  const loading = adminBackend.showLoading(saveButton);
+
+  const settings = {
+    storeName: document.getElementById('storeName').value,
+    currency: document.getElementById('currency').value,
+    shippingDays: parseInt(document.getElementById('shippingDays').value),
+    freeShippingThreshold: parseInt(document.getElementById('freeShippingThreshold').value)
+  };
+
+  const result = await adminBackend.saveStoreSettings(settings);
+  adminBackend.hideLoading(saveButton, loading);
+  adminBackend.showNotification(result.message, result.success ? 'success' : 'error');
+}
+
+async function exportProductData() {
+  const exportButton = document.querySelector('button[onclick="exportProductData()"]');
+  const loading = adminBackend.showLoading(exportButton);
+
+  const result = await adminBackend.exportSystemData();
+  adminBackend.hideLoading(exportButton, loading);
+  adminBackend.showNotification(result.message, result.success ? 'success' : 'error');
+}
+
+async function importProductData() {
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = '.json';
+  input.onchange = async function(e) {
+    const file = e.target.files[0];
+    if (file) {
+      const importButton = document.querySelector('button[onclick="importProductData()"]');
+      const loading = adminBackend.showLoading(importButton);
+
+      const result = await adminBackend.importSystemData(file);
+      adminBackend.hideLoading(importButton, loading);
+      adminBackend.showNotification(result.message, result.success ? 'success' : 'error');
+    }
+  };
+  input.click();
+}
+
+async function backupSystem() {
+  const backupButton = document.querySelector('button[onclick="backupSystem()"]');
+  const loading = adminBackend.showLoading(backupButton);
+
+  const result = await adminBackend.backupSystem();
+  adminBackend.hideLoading(backupButton, loading);
+  adminBackend.showNotification(result.message, result.success ? 'success' : 'error');
+}
+
+// Add CSS for loading animation
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .admin-notification {
+    cursor: pointer;
+  }
+  
+  .admin-notification:hover {
+    transform: translateX(0) scale(1.02) !important;
+  }
+`;
+document.head.appendChild(style);
+</script>
