@@ -96,10 +96,12 @@
   left: 0;
   width: 100%;
   height: 100%;
+  pointer-events: none; /* Prevent clicks on hidden images */
 }
 
 .image-slide.active {
   opacity: 1;
+  pointer-events: auto; /* Allow clicks only on active/visible image */
 }
 
 .image-slide img {
@@ -320,49 +322,88 @@ class ProductImageSwipe {
     // Add click handler with proper touch/click distinction
     // BULLETPROOF CLICK HANDLER - Always opens the clicked image
     container.addEventListener('click', (e) => {
+      // Prevent clicks on arrows or indicators
+      if (e.target.closest('.main-image-arrow') || 
+          e.target.closest('.indicator') ||
+          e.target.closest('.thumbnail')) {
+        return;
+      }
+      
+      // Only handle clicks if it wasn't a drag/swipe
+      if (this.isDragging) {
+        console.log('Ignoring click - was a drag');
+        return;
+      }
+      
       console.log('=== CLICK EVENT ===');
       console.log('Click target:', e.target);
       
-      // Find the clicked image
-      const img = e.target.closest('.image-slide img');
+      // Find the clicked image - prioritize the ACTIVE/visible image
+      let img = null;
+      const activeSlide = container.querySelector('.image-slide.active');
+      if (activeSlide && activeSlide.contains(e.target)) {
+        // Clicked on the active/visible slide
+        img = activeSlide.querySelector('img');
+      } else {
+        // Fallback: find any image that was clicked
+        img = e.target.closest('.image-slide img');
+      }
+      
       const enlargeHint = e.target.closest('.enlarge-hint');
       
       if (img) {
-        console.log('IMAGE CLICKED:', img.src);
+        console.log('=== IMAGE CLICKED ===');
+        console.log('Image src:', img.src);
         console.log('Image alt:', img.alt);
         
-        // Get the clicked image's source directly
-        const clickedImageSrc = img.src;
-        const clickedImageAlt = img.alt;
+        // Get the image index from the data attribute (most reliable method)
+        const dataImageIndex = img.getAttribute('data-image-index');
+        const slide = img.closest('.image-slide');
+        const slideDataIndex = slide?.getAttribute('data-index');
         
-        // Find this image in the product images array
+        console.log('data-image-index attribute:', dataImageIndex);
+        console.log('parent slide data-index:', slideDataIndex);
+        console.log('Is slide active?', slide?.classList.contains('active'));
+        
+        const clickedImageIndex = dataImageIndex !== null ? parseInt(dataImageIndex) : 
+                                   (slideDataIndex !== null ? parseInt(slideDataIndex) : -1);
+        
+        console.log('✅ FOUND CLICKED IMAGE AT INDEX:', clickedImageIndex);
+        
+        // Verify this image exists in the DOM
         const allImages = document.querySelectorAll('.image-slide img');
-        let clickedImageIndex = -1;
+        console.log('Total images in gallery:', allImages.length);
+        allImages.forEach((imageEl, i) => {
+          const imgDataIndex = imageEl.getAttribute('data-image-index');
+          const slideEl = imageEl.closest('.image-slide');
+          const slideIndex = slideEl?.getAttribute('data-index');
+          const isActive = slideEl?.classList.contains('active');
+          console.log(`  Image ${i}: data-image-index="${imgDataIndex}", slide data-index="${slideIndex}", active=${isActive}, src: ${imageEl.src.substring(0, 50)}...`);
+        });
         
-        for (let i = 0; i < allImages.length; i++) {
-          if (allImages[i].src === clickedImageSrc) {
-            clickedImageIndex = i;
-            break;
-          }
-        }
-        
-        console.log('FOUND CLICKED IMAGE AT INDEX:', clickedImageIndex);
-        
-        if (clickedImageIndex !== -1) {
+        if (clickedImageIndex !== -1 && clickedImageIndex >= 0) {
+          // Update current index first
+          this.currentIndex = clickedImageIndex;
+          this.updateImage();
+          
           // Open lightbox with the clicked image
           window.currentSlide = clickedImageIndex;
-          this.currentIndex = clickedImageIndex;
           
-          console.log('OPENING LIGHTBOX WITH IMAGE:', clickedImageIndex);
-          openLightbox(clickedImageIndex);
+          console.log('🚀 OPENING LIGHTBOX WITH INDEX:', clickedImageIndex);
+          // Use setTimeout to ensure DOM is updated
+          setTimeout(() => {
+            openLightbox(clickedImageIndex);
+          }, 0);
         } else {
-          console.error('Could not find clicked image in gallery');
+          console.error('❌ Could not find clicked image index in gallery');
+          console.error('data-image-index was:', dataImageIndex);
+          console.error('slide data-index was:', slideDataIndex);
         }
       } else if (enlargeHint) {
         console.log('Enlarge hint clicked');
         openLightbox(this.currentIndex);
       }
-    });
+    }, true); // Use capture phase to handle clicks before other handlers
   }
   
   handleTouchStart(e) {
@@ -441,26 +482,30 @@ class ProductImageSwipe {
   
   handleMouseDown(e) {
     this.startX = e.clientX;
-    this.isDragging = true;
+    this.isDragging = false; // Don't set to true until we detect actual movement
     e.preventDefault();
   }
   
   handleMouseMove(e) {
-    if (!this.isDragging) return;
+    if (!this.startX) return;
     
     this.currentX = e.clientX;
     const diffX = this.startX - this.currentX;
     
-    // Add visual feedback during drag
-    const container = document.getElementById('swipe-main-image-container');
+    // Only set dragging if there's significant movement
     if (Math.abs(diffX) > 10) {
+      this.isDragging = true;
+      
+      // Add visual feedback during drag
+      const container = document.getElementById('swipe-main-image-container');
       container.style.transform = `translateX(${-diffX * 0.1}px)`;
     }
   }
   
   handleMouseUp(e) {
-    if (!this.isDragging) return;
+    if (!this.startX) return;
     
+    const wasDragging = this.isDragging;
     this.isDragging = false;
     const diffX = this.startX - this.currentX;
     const container = document.getElementById('swipe-main-image-container');
@@ -468,13 +513,16 @@ class ProductImageSwipe {
     console.log('=== handleMouseUp ===');
     console.log('diffX:', diffX, 'threshold:', this.threshold);
     console.log('Math.abs(diffX):', Math.abs(diffX));
+    console.log('wasDragging:', wasDragging);
     
     // Reset transform
     container.style.transform = '';
     
     // Perform drag swipe if exceeded threshold
-    if (Math.abs(diffX) > 80) {
+    if (wasDragging && Math.abs(diffX) > 80) {
       console.log('MOUSE DRAG DETECTED - calling nextImage/prevImage');
+      e.preventDefault();
+      e.stopPropagation();
       if (diffX > 0) {
         // Drag left - next image
         this.nextImage();
@@ -485,6 +533,10 @@ class ProductImageSwipe {
     } else {
       console.log('Mouse drag too small - ignoring to prevent interference with clicks');
     }
+    
+    // Reset drag state
+    this.startX = null;
+    this.currentX = null;
   }
   
   nextImage() {
@@ -503,26 +555,29 @@ class ProductImageSwipe {
     console.log('=== updateImage called ===');
     console.log('this.currentIndex:', this.currentIndex);
     
-    // Update active slide
+    // Update active slide - USE DATA-INDEX to match, not array position
     const slides = document.querySelectorAll('.image-slide');
     console.log('Total slides found:', slides.length);
     
-    slides.forEach((slide, index) => {
-      const isActive = index === this.currentIndex;
+    slides.forEach((slide) => {
+      const slideDataIndex = parseInt(slide.getAttribute('data-index'));
+      const isActive = slideDataIndex === this.currentIndex;
       slide.classList.toggle('active', isActive);
-      console.log(`Slide ${index}: active=${isActive}, classes=${slide.className}`);
+      console.log(`Slide data-index="${slideDataIndex}": active=${isActive}, currentIndex=${this.currentIndex}`);
     });
     
-    // Update indicators
+    // Update indicators - match by data-index
     const indicators = document.querySelectorAll('.indicator');
-    indicators.forEach((indicator, index) => {
-      indicator.classList.toggle('active', index === this.currentIndex);
+    indicators.forEach((indicator) => {
+      const indicatorIndex = parseInt(indicator.getAttribute('data-index'));
+      indicator.classList.toggle('active', indicatorIndex === this.currentIndex);
     });
     
-    // Update thumbnails
+    // Update thumbnails - match by data-index
     const thumbnails = document.querySelectorAll('.thumbnail');
-    thumbnails.forEach((thumbnail, index) => {
-      thumbnail.classList.toggle('active', index === this.currentIndex);
+    thumbnails.forEach((thumbnail) => {
+      const thumbnailIndex = parseInt(thumbnail.getAttribute('data-index'));
+      thumbnail.classList.toggle('active', thumbnailIndex === this.currentIndex);
     });
     
     // Update global currentSlide for lightbox
@@ -781,14 +836,37 @@ function openLightbox(index = 0) {
   console.log('Close button element:', closeBtn);
   
   if (lightbox) {
-    // Ensure index is within bounds
+    // Use the passed index directly - don't recalculate based on array position
+    // The index should match the data-image-index attribute
     const productImages = document.querySelectorAll('.image-slide img');
     const maxIndex = productImages.length - 1;
-    const validIndex = Math.max(0, Math.min(index, maxIndex));
+    
+    // Ensure index is within valid range, but don't change it unnecessarily
+    let validIndex = index;
+    if (index < 0) {
+      validIndex = 0;
+    } else if (index > maxIndex) {
+      validIndex = maxIndex;
+    }
     
     console.log('Product images found:', productImages.length);
     console.log('Max index:', maxIndex);
+    console.log('Requested index:', index);
     console.log('Valid index:', validIndex);
+    
+    // Verify the image exists at this data-index before proceeding
+    const targetImage = document.querySelector(`.image-slide img[data-image-index="${validIndex}"]`) ||
+                       document.querySelector(`.image-slide[data-index="${validIndex}"] img`);
+    
+    if (!targetImage) {
+      console.error('❌ Image not found at data-index:', validIndex);
+      console.log('Available images:');
+      productImages.forEach((img, i) => {
+        const dataIndex = img.getAttribute('data-image-index') || img.closest('.image-slide')?.getAttribute('data-index');
+        console.log(`  Array index ${i}, data-index: ${dataIndex}, src: ${img.src}`);
+      });
+      return;
+    }
     
     lightbox.style.display = 'flex';
     console.log('Lightbox display set to flex');
@@ -797,15 +875,10 @@ function openLightbox(index = 0) {
       console.log('Close button display set to flex');
     }
     
-    // Set the current slide to the clicked image index
+    // Set the current slide to the clicked image index (use the exact index passed)
     window.currentSlide = validIndex;
-    console.log('Set window.currentSlide to:', validIndex);
+    console.log('✅ Set window.currentSlide to:', validIndex);
     console.log('Total images available:', productImages.length);
-    
-    // Log all available images
-    productImages.forEach((img, i) => {
-      console.log(`Image ${i}:`, img.src, img.alt);
-    });
     
     updateLightboxImage();
   } else {
@@ -832,14 +905,27 @@ function updateLightboxImage() {
   console.log('updateLightboxImage called, currentSlide:', window.currentSlide);
   
   if (lightboxImage && window.currentSlide !== undefined) {
-    // Get all product images from the gallery
-    const productImages = document.querySelectorAll('.image-slide img');
-    const currentImage = productImages[window.currentSlide];
+    // Find the image by data attribute instead of array index (more reliable)
+    const currentImage = document.querySelector(`.image-slide img[data-image-index="${window.currentSlide}"]`) ||
+                        document.querySelector(`.image-slide[data-index="${window.currentSlide}"] img`);
     
     if (currentImage) {
-      const newImageSrc = currentImage.src.replace('_800x', '_1200x');
+      // Get high-res version - handle different Shopify URL formats
+      let newImageSrc = currentImage.src;
+      if (newImageSrc.includes('_800x')) {
+        newImageSrc = newImageSrc.replace('_800x', '_1200x');
+      } else if (newImageSrc.includes('800x')) {
+        newImageSrc = newImageSrc.replace('800x', '1200x');
+      } else if (newImageSrc.includes('width=800')) {
+        newImageSrc = newImageSrc.replace('width=800', 'width=1200');
+      } else {
+        // Fallback: try to get larger size by removing size constraints
+        newImageSrc = newImageSrc.split('?')[0] + '?width=1200';
+      }
+      
       console.log('Updating lightbox image to:', newImageSrc);
       console.log('Current image alt:', currentImage.alt);
+      console.log('✅ Using image with data-image-index:', window.currentSlide);
       
       // Show loading skeleton
       if (lightboxLoadingSkeleton) {
@@ -852,7 +938,8 @@ function updateLightboxImage() {
           lightboxImage.src = newImageSrc;
           lightboxImage.alt = currentImage.alt;
           console.log('Lightbox image loaded successfully');
-          console.log('✅ DISPLAYING IMAGE INDEX:', window.currentSlide, 'OF', productImages.length);
+          const totalImages = document.querySelectorAll('.image-slide img').length;
+          console.log('✅ DISPLAYING IMAGE INDEX:', window.currentSlide, 'OF', totalImages);
           
           // Hide loading skeleton after image loads
           if (lightboxLoadingSkeleton) {
